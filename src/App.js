@@ -11,16 +11,16 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div className='notes-containe'>
+      <div className='notes-container'>
         <SideMenu />
-        <Switch>
-          <main>
+        <main>
+          <Switch>
             <Route path='/:label'>
               <Main />
             </Route>
             <Redirect to='/home' />
-          </main>
-        </Switch>
+          </Switch>
+        </main>
       </div>
     </BrowserRouter>
   );
