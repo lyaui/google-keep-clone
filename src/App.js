@@ -1,5 +1,19 @@
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Main from 'pages/Main.js';
+
 function App() {
-  return <div className='App'></div>;
+  return (
+    <BrowserRouter>
+      <Switch>
+        <main>
+          <Route path='/:label'>
+            <Main />
+          </Route>
+          <Redirect to='/home' />
+        </main>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
