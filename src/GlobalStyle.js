@@ -21,6 +21,18 @@ export const GlobalStyle = createGlobalStyle`
 
   }
 
+  input{  
+    border: none;
+    outline: none;
+  }
+
+  button{
+    flex-shrink: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
   .notes-container {
     display:flex;
   }
