@@ -58,6 +58,9 @@ import { BsViewStacked as Stacked } from 'react-icons/bs';
 import { BiMoon as Moon } from 'react-icons/bi';
 import { BiMoon as Sun } from 'react-icons/bi';
 
+// Logout
+import { RiLogoutCircleRLine as Logout } from 'react-icons/ri';
+
 export {
   Menu,
   Bulb,
@@ -84,4 +87,5 @@ export {
   Stacked,
   Moon,
   Sun,
+  Logout,
 };
