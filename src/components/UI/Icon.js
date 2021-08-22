@@ -4,6 +4,8 @@ import { MdMenu as Menu } from 'react-icons/md';
 // bulb
 import { MdLightbulbOutline as Bulb } from 'react-icons/md';
 
+import { MdSearch as Search } from 'react-icons/md';
+
 // checkbox
 import { IoIosCheckbox as Checkbox } from 'react-icons/io';
 import { IoIosCheckboxOutline as CheckboxOutline } from 'react-icons/io';
@@ -49,6 +51,7 @@ import { BsViewStacked as Stacked } from 'react-icons/bs';
 export {
   Menu,
   Bulb,
+  Search,
   Checkbox,
   CheckboxOutline,
   Edit,
