@@ -32,6 +32,12 @@ import { RiPushpin2Line as PinOutline } from 'react-icons/ri';
 // add
 import { MdAdd as Add } from 'react-icons/md';
 
+// check
+import { MdCheck as Check } from 'react-icons/md';
+
+// clear
+import { MdClear as Clear } from 'react-icons/md';
+
 // select
 import { MdCheckCircle as SelectCircle } from 'react-icons/md';
 
@@ -64,6 +70,8 @@ export {
   Pin,
   PinOutline,
   Add,
+  Check,
+  Clear,
   SelectCircle,
   More,
   Palette,
