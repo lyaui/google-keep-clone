@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import NavItem from 'components/layout/SideMenu/NavItem/index.js';
+import { SSideMenu, SSideMenuList } from 'components/layout/SideMenu/style.js';
 
 const DUMMY_DATA = [
   { id: '1', label: '提醒' },
@@ -11,24 +12,17 @@ const DUMMY_DATA = [
 
 const SideMenu = () => {
   return (
-    <aside>
-      <ul>
-        <li>
-          <Link to={'/home'}>記事</Link>
-        </li>
-        {DUMMY_DATA.map((label) => (
-          <li key={label.id}>
-            <Link to={`/label/${label.label}`}>{label.label}</Link>
-          </li>
+    <SSideMenu>
+      <SSideMenuList>
+        <NavItem id='memo' label='記事' type='memo' />
+        {/* labels */}
+        {DUMMY_DATA.map((item) => (
+          <NavItem key={item.id} id={item.id} label={item.label} type='label' />
         ))}
-        <li>
-          <Link to='/archive'>封存</Link>
-        </li>
-        <li>
-          <Link to='/trash'>垃圾桶</Link>
-        </li>
-      </ul>
-    </aside>
+        <NavItem id='archive' label='封存' type='archive' />
+        <NavItem id='trash' label='垃圾桶' type='trash' />
+      </SSideMenuList>
+    </SSideMenu>
   );
 };
 
