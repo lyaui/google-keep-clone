@@ -1,5 +1,7 @@
+import Cards from 'components/Cards';
+
 const main = () => {
-  return <div>main</div>;
+  return <Cards />;
 };
 
 export default main;
