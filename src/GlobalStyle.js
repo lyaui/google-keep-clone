@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
+
   }
 
   a{
@@ -40,6 +41,11 @@ export const GlobalStyle = createGlobalStyle`
   .notes-container {
     display:flex;
     height: calc(100vh - 64px);
+
+    main{
+      width: 100%;
+      overflow: scroll;
+    }
   }
   
 `;
