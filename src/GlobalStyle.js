@@ -18,8 +18,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
-
   }
+
+  a{
+    text-decoration: none;
+  }
+
 
   input{  
     border: none;
@@ -35,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .notes-container {
     display:flex;
+    height: calc(100vh - 64px);
   }
   
 `;
