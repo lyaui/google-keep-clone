@@ -7,6 +7,8 @@ function NavItem({ id, label, type = 'tag' }) {
   const icon =
     type === 'memo' ? (
       <Icon.Bulb />
+    ) : type === 'edit' ? (
+      <Icon.EditOutline />
     ) : type === 'trash' ? (
       <Icon.DeleteOutline />
     ) : type === 'archive' ? (

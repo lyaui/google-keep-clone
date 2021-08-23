@@ -7,7 +7,6 @@ const DUMMY_DATA = [
   { id: '3', label: '徵才' },
   { id: '4', label: '遊戲攻略' },
   { id: '5', label: '點子' },
-  { id: '6', label: '編輯標籤' },
 ];
 
 const SideMenu = () => {
@@ -19,6 +18,7 @@ const SideMenu = () => {
         {DUMMY_DATA.map((item) => (
           <NavItem key={item.id} id={item.id} label={item.label} type='label' />
         ))}
+        <NavItem id='edit' label='編輯標籤' type='edit' />
         <NavItem id='archive' label='封存' type='archive' />
         <NavItem id='trash' label='垃圾桶' type='trash' />
       </SSideMenuList>

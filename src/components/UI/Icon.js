@@ -12,7 +12,7 @@ import { IoIosCheckboxOutline as CheckboxOutline } from 'react-icons/io';
 
 // edit
 import { HiPencil as Edit } from 'react-icons/hi';
-import { HiOutlinePencil as EditOutline } from 'react-icons/hi';
+import { BiPencil as EditOutline } from 'react-icons/bi';
 
 // label
 import { MdLabel as Label } from 'react-icons/md';
