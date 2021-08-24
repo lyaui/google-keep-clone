@@ -8,11 +8,11 @@ export const SButtonRound = styled.button`
   background-color: transparent;
   transition: all 0.3s;
   svg {
-    width: 24px;
-    height: 24px;
+    width: 80%;
+    height: 80%;
     fill: #5f6368;
   }
   :hover {
-    background-color: #dee1e2;
+    background-color: rgba(95, 99, 104, 0.157);
   }
 `;
