@@ -4,7 +4,6 @@ export const SCard = styled.div`
   background-color: ${(props) => props.color || '#FFFFFF'};
   flex-basis: calc(25% - 16px);
   margin: 8px;
-  padding: 16px;
   border: 1px solid ${(props) => props.color || '#e0e0e0'};
   border-radius: 8px;
   cursor: pointer;
