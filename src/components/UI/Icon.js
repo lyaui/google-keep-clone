@@ -4,7 +4,11 @@ import { MdMenu as Menu } from 'react-icons/md';
 // bulb
 import { MdLightbulbOutline as Bulb } from 'react-icons/md';
 
+// search
 import { MdSearch as Search } from 'react-icons/md';
+
+// copy
+import { MdContentCopy as Copy } from 'react-icons/md';
 
 // checkbox
 import { IoIosCheckbox as Checkbox } from 'react-icons/io';
@@ -65,6 +69,7 @@ export {
   Menu,
   Bulb,
   Search,
+  Copy,
   Checkbox,
   CheckboxOutline,
   Edit,
