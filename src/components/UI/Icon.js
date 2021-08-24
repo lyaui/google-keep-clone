@@ -11,16 +11,14 @@ import { MdSearch as Search } from 'react-icons/md';
 import { MdContentCopy as Copy } from 'react-icons/md';
 
 // checkbox
-import { IoIosCheckbox as Checkbox } from 'react-icons/io';
-import { IoIosCheckboxOutline as CheckboxOutline } from 'react-icons/io';
+import { IoIosCheckbox as Checkbox, IoIosCheckboxOutline as CheckboxOutline } from 'react-icons/io';
 
 // edit
 import { HiPencil as Edit } from 'react-icons/hi';
 import { BiPencil as EditOutline } from 'react-icons/bi';
 
 // label
-import { MdLabel as Label } from 'react-icons/md';
-import { MdLabelOutline as LabelOutline } from 'react-icons/md';
+import { MdLabel as Label, MdLabelOutline as LabelOutline } from 'react-icons/md';
 
 // archive
 import { RiInboxArchiveLine as Archive } from 'react-icons/ri';
@@ -30,8 +28,7 @@ import { MdDelete as Delete } from 'react-icons/md';
 import { RiDeleteBin6Line as DeleteOutline } from 'react-icons/ri';
 
 // pin
-import { RiPushpin2Fill as Pin } from 'react-icons/ri';
-import { RiPushpin2Line as PinOutline } from 'react-icons/ri';
+import { RiPushpin2Fill as Pin, RiPushpin2Line as PinOutline } from 'react-icons/ri';
 
 // add
 import { MdAdd as Add } from 'react-icons/md';
@@ -59,11 +56,13 @@ import { RiLayoutGridLine as Grid } from 'react-icons/ri';
 import { BsViewStacked as Stacked } from 'react-icons/bs';
 
 // dark mode
-import { BiMoon as Moon } from 'react-icons/bi';
-import { BiMoon as Sun } from 'react-icons/bi';
+import { BiMoon as Moon, BiMoon as Sun } from 'react-icons/bi';
 
 // Logout
 import { RiLogoutCircleRLine as Logout } from 'react-icons/ri';
+
+// undo/redo
+import { GrUndo as Undo, GrRedo as Redo } from 'react-icons/gr';
 
 export {
   Menu,
@@ -93,4 +92,6 @@ export {
   Moon,
   Sun,
   Logout,
+  Undo,
+  Redo,
 };
