@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
+import composeRefs from '@seznam/compose-react-refs';
 import Card from 'components/UI/Card';
 import { SCards } from 'components/Cards/style.js';
 
@@ -103,19 +105,30 @@ const Cards = () => {
   useEffect(() => {
     setMasonryDom(masonryRef.current);
   }, []);
+  console.log(masonryRef.current);
 
   return (
-    <SCards className='masonry' ref={masonryRef}>
-      {DUMMY_DATA.map((card) => (
-        <Card
-          key={card.id}
-          color={card.color}
-          title={card.title}
-          content={card.content}
-          masonryDom={masonryDom}
-        />
-      ))}
-    </SCards>
+    <Droppable droppableId='cards'>
+      {(provided) => (
+        <div ref={composeRefs(masonryRef, provided.innerRef)} {...provided.droppableProps}>
+          <SCards className='masonry'>
+            {DUMMY_DATA.map((card, index) => (
+              <Card
+                key={card.id}
+                id={card.id}
+                color={card.color}
+                title={card.title}
+                content={card.content}
+                masonryDom={masonryDom}
+                droppableId='cards'
+                index={index}
+              />
+            ))}
+            {provided.placeholder}
+          </SCards>
+        </div>
+      )}
+    </Droppable>
   );
 };
 
