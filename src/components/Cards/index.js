@@ -41,6 +41,7 @@ const Cards = () => {
                 images={card.images}
                 content={card.content}
                 labels={card.labels}
+                links={card.links}
                 masonryDom={masonryDom}
                 droppableId='cards'
                 index={index}

@@ -35,7 +35,35 @@ const memos = [
     // 'Red is a 2010 American action comedy film loosely inspired by the Homage Comics limited series of the same name.',
     images: ['https://imgur.com/nbMcwxu.jpg', 'https://imgur.com/nbMcwxu.jpg'],
     labels: [],
-    links: [],
+    links: [
+      {
+        title: 'iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天',
+        url: 'www.ithelp.ithome.com.tw',
+        image: 'https://ithelp.ithome.com.tw/storage/image/fbpic.jpg',
+      },
+      {
+        title: 'React – 用來實作使用者介面的 JavaScript 函式庫',
+        url: 'www.zh-hant.reactjs.org',
+        image: 'https://reactjs.org/logo-og.png',
+      },
+      {
+        title: 'NIPPON COLORS - 日本の伝統色',
+        url: 'www.nipponcolors.com/',
+        image: 'https://nipponcolors.com/images/site_thumb.jpg',
+      },
+      {
+        title: 'Google',
+        url: 'www.google.com.tw/',
+        image:
+          'https://lh4.googleusercontent.com/proxy/9lfpyk2O4JaM9aNQ_rO1gMFKxuTtUfJxR6z08uW0bAemMZu2wQN1CYxcCDOSUOUY3356f8xZ75GbRtimxZNARMCgoLxgL4I38cL21ty6r29JLBQICJR3cZ52xvpO67hrJng7yikhDPU',
+      },
+      {
+        title: 'Google',
+        url: 'www.google.com.tw/',
+        image:
+          'https://lh4.googleusercontent.com/proxy/9lfpyk2O4JaM9aNQ_rO1gMFKxuTtUfJxR6z08uW0bAemMZu2wQN1CYxcCDOSUOUY3356f8xZ75GbRtimxZNARMCgoLxgL4I38cL21ty6r29JLBQICJR3cZ52xvpO67hrJng7yikhDPU',
+      },
+    ],
   },
   {
     author: 'Iris',
@@ -118,7 +146,7 @@ const memos = [
     updateTime: null,
     id: 'c6',
     color: '#a7ffeb',
-    title: 'teal',
+    title: '',
     content: '',
     // 'Teal is a cyan-green color. Its name comes from that of a bird — the Eurasian teal (Anas crecca) — which presents a similarly colored stripe on its head. The word is often used colloquially to refer to shades of cyan in general.',
     images: [
@@ -130,18 +158,41 @@ const memos = [
       'https://imgur.com/gPVa9yq.jpg',
     ],
     labels: [
-      { labelId: 'test', name: 'moremoremoremoremoremoremoremoremoremoremoremoremoremoremore' },
-      { labelId: 'l1', name: 'cyan' },
-      { labelId: 'l2', name: 'teal' },
-      { labelId: 'l3', name: 'magenta' },
-      { labelId: 'l4', name: 'teal' },
-      { labelId: 'l5', name: 'coral' },
-      { labelId: 'l6', name: 'salmon' },
-      { labelId: 'l7', name: 'olive' },
-      { labelId: 'l8', name: 'aqua' },
-      { labelId: 'l9', name: 'coral' },
+      // { labelId: 'test', name: 'moremoremoremoremoremoremoremoremoremoremoremoremoremoremore' },
+      // { labelId: 'l1', name: 'cyan' },
+      // { labelId: 'l2', name: 'teal' },
+      // { labelId: 'l3', name: 'magenta' },
+      // { labelId: 'l4', name: 'teal' },
+      // { labelId: 'l5', name: 'coral' },
+      // { labelId: 'l6', name: 'salmon' },
+      // { labelId: 'l7', name: 'olive' },
+      // { labelId: 'l8', name: 'aqua' },
+      // { labelId: 'l9', name: 'coral' },
     ],
-    links: [],
+    links: [
+      {
+        title: 'NIPPON COLORS - 日本の伝統色',
+        url: 'www.nipponcolors.com/',
+        image: 'https://nipponcolors.com/images/site_thumb.jpg',
+      },
+      {
+        title: 'Vue.js',
+        url: 'www.vuejs.org',
+        image: 'https://vuejs.org/images/logo.png',
+      },
+      {
+        title: 'Google',
+        url: 'www.google.com.tw/',
+        image:
+          'https://lh4.googleusercontent.com/proxy/9lfpyk2O4JaM9aNQ_rO1gMFKxuTtUfJxR6z08uW0bAemMZu2wQN1CYxcCDOSUOUY3356f8xZ75GbRtimxZNARMCgoLxgL4I38cL21ty6r29JLBQICJR3cZ52xvpO67hrJng7yikhDPU',
+      },
+      {
+        title: 'Google',
+        url: 'www.google.com.tw/',
+        image:
+          'https://lh4.googleusercontent.com/proxy/9lfpyk2O4JaM9aNQ_rO1gMFKxuTtUfJxR6z08uW0bAemMZu2wQN1CYxcCDOSUOUY3356f8xZ75GbRtimxZNARMCgoLxgL4I38cL21ty6r29JLBQICJR3cZ52xvpO67hrJng7yikhDPU',
+      },
+    ],
   },
   {
     author: 'Iris',
@@ -175,7 +226,7 @@ const memos = [
     color: '#aecbfa',
     title: 'dark-blue',
     content:
-      "Los Angeles, 1992. The film opens in medias res to LAPD Sergeant Eldon Perry, who is pacing in a motel room with a shotgun and pistol. Five days earlier, four people are killed and one wounded when two men, Darryl Orchard and Gary Sidwell, rob a convenience store in order to gain access to a safe in the office. Meanwhile, Perry defends his partner, Detective Bobby Keough, before an internal hearing concerning Keough's use of deadly force in a previous case; Keough is later exonerated. Perry and Keough later celebrate the former's impending promotion with their superior, Jack Van Meter, who is also Keough's uncle. Van Meter, a corrupt cop who often encourages his subordinates to fabricate evidence, visits Orchard and Sidwell's house later that night and takes the money stolen from the safe, admonishing them for behaving recklessly during the robbery.",
+      "Los Angeles, 1992. The film opens in medias res to LAPD Sergeant Eldon Perry, who is pacing in a motel room with a shotgun and pistol. Five days earlier, four people are killed and one wounded when two men, Darryl Orchard and Gary Sidwell, rob a convenience store in order to gain access to a safe in the office. Meanwhile, Perry defends his partner, Detective Bobby Keough, before an internal hearing concerning Keough's use of deadly force in a previous case; Keough is later exonerated.",
     images: ['https://imgur.com/nbMcwxu.jpg', 'https://imgur.com/nbMcwxu.jpg'],
     labels: [
       { labelId: 'test', name: 'moremoremoremoremoremoremoremoremoremoremoremoremoremoremore' },
@@ -306,7 +357,63 @@ const memos = [
       { labelId: 'l8', name: 'aqua' },
       { labelId: 'l9', name: 'coral' },
     ],
-    links: [],
+    links: [
+      {
+        title: 'Google',
+        url: 'www.google.com.tw/',
+        image:
+          'https://lh4.googleusercontent.com/proxy/9lfpyk2O4JaM9aNQ_rO1gMFKxuTtUfJxR6z08uW0bAemMZu2wQN1CYxcCDOSUOUY3356f8xZ75GbRtimxZNARMCgoLxgL4I38cL21ty6r29JLBQICJR3cZ52xvpO67hrJng7yikhDPU',
+      },
+      {
+        title: 'Google',
+        url: 'www.google.com.tw/',
+        image:
+          'https://lh4.googleusercontent.com/proxy/9lfpyk2O4JaM9aNQ_rO1gMFKxuTtUfJxR6z08uW0bAemMZu2wQN1CYxcCDOSUOUY3356f8xZ75GbRtimxZNARMCgoLxgL4I38cL21ty6r29JLBQICJR3cZ52xvpO67hrJng7yikhDPU',
+      },
+    ],
+  },
+
+  {
+    author: 'Iris',
+    createdTime: Date.now(),
+    updateTime: null,
+    id: 'c13',
+    color: '#e8eaed',
+    title: '',
+    content: '',
+    images: [
+      // 'https://imgur.com/gPVa9yq.jpg',
+      // 'https://imgur.com/gPVa9yq.jpg',
+      // 'https://imgur.com/gPVa9yq.jpg',
+      // 'https://imgur.com/gPVa9yq.jpg',
+      // 'https://imgur.com/gPVa9yq.jpg',
+      // 'https://imgur.com/gPVa9yq.jpg',
+    ],
+    labels: [
+      // { labelId: 'test', name: 'moremoremoremoremoremoremoremoremoremoremoremoremoremoremore' },
+      // { labelId: 'l1', name: 'cyan' },
+      // { labelId: 'l2', name: 'teal' },
+      // { labelId: 'l3', name: 'magenta' },
+      // { labelId: 'l4', name: 'teal' },
+      // { labelId: 'l5', name: 'coral' },
+      // { labelId: 'l6', name: 'salmon' },
+      // { labelId: 'l7', name: 'olive' },
+      // { labelId: 'l8', name: 'aqua' },
+      // { labelId: 'l9', name: 'coral' },
+    ],
+    links: [
+      {
+        title: 'iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天',
+        url: 'www.ithelp.ithome.com.tw',
+        image: 'https://ithelp.ithome.com.tw/storage/image/fbpic.jpg',
+      },
+      {
+        title: 'Google',
+        url: 'www.google.com.tw/',
+        image:
+          'https://lh4.googleusercontent.com/proxy/9lfpyk2O4JaM9aNQ_rO1gMFKxuTtUfJxR6z08uW0bAemMZu2wQN1CYxcCDOSUOUY3356f8xZ75GbRtimxZNARMCgoLxgL4I38cL21ty6r29JLBQICJR3cZ52xvpO67hrJng7yikhDPU',
+      },
+    ],
   },
 ];
 
