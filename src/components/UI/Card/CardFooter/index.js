@@ -2,9 +2,9 @@ import * as Icon from 'components/UI/Icon.js';
 import { SCardFooter } from 'components/UI/Card/CardFooter/style.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 
-function CardFooter() {
+function CardFooter({ isOnlyImages }) {
   return (
-    <SCardFooter>
+    <SCardFooter isOnlyImages={isOnlyImages}>
       {/* palette */}
       <ButtonRound size={34}>
         <Icon.Palette />{' '}
