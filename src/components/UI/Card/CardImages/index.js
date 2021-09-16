@@ -1,28 +1,30 @@
 import { Fragment } from 'react';
-import { SCardImages, SCardImage } from 'components/UI/Card/CardImages/style.js';
+import {
+  SCardImages,
+  SCardImage1,
+  SCardImage2,
+  SCardImage3,
+  SCardImage4,
+  SCardImage5,
+  SCardImage6,
+} from 'components/UI/Card/CardImages/style.js';
 
 const CardImages = ({ images, isOnlyImages }) => {
-  // isOnlyImages 純圖片
-
-  // !isOnlyImages 圖+文
-  // 1 張圖
-  // 2 張圖
-  // 3 張圖
-
-  // const imagesHeight = () => {
-  //   switch (images) {
-  //     case isOnlyImages:
-  //       return 135;
-  //     case images.length > 3:
-  //     default:
-  //       return 140;
-  //   }
-  // };
+  const imageComponents = [
+    SCardImage1,
+    SCardImage2,
+    SCardImage3,
+    SCardImage4,
+    SCardImage5,
+    SCardImage6,
+  ];
+  const imgNum = images.slice(0, 6).length;
+  const SCardImage = imageComponents[imgNum - 1];
   return (
     <Fragment>
-      <SCardImages>
-        {images.slice(0, 5).map((image, index) => (
-          <SCardImage key={index} src={image} alt='' />
+      <SCardImages isOnlyImages={isOnlyImages}>
+        {images.slice(0, 6).map((image, index) => (
+          <SCardImage key={index} className={`img-${index}`} src={image} alt='' />
         ))}
       </SCardImages>
     </Fragment>

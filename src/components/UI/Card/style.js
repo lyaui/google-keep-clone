@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 export const SCard = styled.div`
   position: relative;
   overflow: hidden;
+  height: fit-content;
   background-color: ${(props) => props.color || '#FFFFFF'};
   border: 1px solid ${(props) => props.color || '#e0e0e0'};
   border-radius: 8px;

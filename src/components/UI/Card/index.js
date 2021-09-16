@@ -45,7 +45,7 @@ const Card = ({ id, index, color, images, title, content, labels, masonryDom }) 
       window.removeEventListener('resize', getRowSpan);
     };
   });
-  const isOnlyImages = !title && !content && !labels.length && images.length;
+  const isOnlyImages = !title && !content && labels.length === 0 && images.length > 0;
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -59,7 +59,7 @@ const Card = ({ id, index, color, images, title, content, labels, masonryDom }) 
         >
           <div className='growing-content'>
             {/* images */}
-            {images.length && <CardImages images={images} />}
+            {images.length && <CardImages images={images} isOnlyImages={isOnlyImages} />}
             {/* header */}
             {title && <CardHeader>{title}</CardHeader>}
             {/* content */}
