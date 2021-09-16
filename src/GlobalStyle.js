@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
-
+    color: #202124;
   }
 
   div{
