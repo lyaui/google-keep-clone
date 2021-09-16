@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const SCardImages = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: ${(props) => (props.isOnlyImages ? '40px' : '50px')};
+  grid-auto-rows: 40px;
   grid-gap: 1px;
 `;
 
@@ -18,7 +18,7 @@ const SCardImage = styled.img`
 export const SCardImage1 = styled(SCardImage)`
   &.img-0 {
     grid-column: 1/7;
-    grid-row: 1/4;
+    grid-row: 1/5;
   }
 `;
 
@@ -51,19 +51,19 @@ export const SCardImage3 = styled(SCardImage)`
 export const SCardImage4 = styled(SCardImage)`
   &.img-0 {
     grid-column: 1/7;
-    grid-row: 1/8;
+    grid-row: 1/7;
   }
   &.img-1 {
     grid-column: 1/3;
-    grid-row: 8/10;
+    grid-row: 7/9;
   }
   &.img-2 {
     grid-column: 3/5;
-    grid-row: 8/10;
+    grid-row: 7/9;
   }
   &.img-3 {
     grid-column: 5/7;
-    grid-row: 8/10;
+    grid-row: 7/9;
   }
 `;
 

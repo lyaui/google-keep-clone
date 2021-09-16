@@ -9,7 +9,7 @@ import {
   SCardImage6,
 } from 'components/UI/Card/CardImages/style.js';
 
-const CardImages = ({ images, isOnlyImages }) => {
+const CardImages = ({ images, isOnlyImagesAndLinks }) => {
   const imageComponents = [
     SCardImage1,
     SCardImage2,
@@ -22,7 +22,7 @@ const CardImages = ({ images, isOnlyImages }) => {
   const SCardImage = imageComponents[imgNum - 1];
   return (
     <Fragment>
-      <SCardImages isOnlyImages={isOnlyImages}>
+      <SCardImages>
         {images.slice(0, 6).map((image, index) => (
           <SCardImage key={index} className={`img-${index}`} src={image} alt='' />
         ))}
