@@ -67,6 +67,9 @@ import { RiLogoutCircleRLine as Logout } from 'react-icons/ri';
 // undo/redo
 import { GrUndo as Undo, GrRedo as Redo } from 'react-icons/gr';
 
+// share
+import { RiShareBoxLine as Share } from 'react-icons/ri';
+
 export {
   Menu,
   Bulb,
@@ -98,4 +101,5 @@ export {
   Logout,
   Undo,
   Redo,
+  Share,
 };
