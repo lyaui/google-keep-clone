@@ -6,8 +6,8 @@ const CardLabels = ({ labels }) => {
   const numOfMoreLabel = labels.length - showLabelsNum - 1;
   return (
     <SCardLabels>
-      {labels.slice(0, 3).map((label) => (
-        <Label key={label.id}>{label.name}</Label>
+      {labels.slice(0, 3).map((label, index) => (
+        <Label key={index}>{label.name}</Label>
       ))}
 
       <Label>還有個 {numOfMoreLabel} 項目</Label>
