@@ -2,12 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import composeRefs from '@seznam/compose-react-refs';
 import { SCard } from 'components/UI/Card/style.js';
+import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardContent from 'components/UI/Card/CardContent';
 import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
 
-const Card = ({ id, index, color, title, content, labels, masonryDom }) => {
+const Card = ({ id, index, color, images, title, content, labels, masonryDom }) => {
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
 
@@ -44,7 +45,7 @@ const Card = ({ id, index, color, title, content, labels, masonryDom }) => {
       window.removeEventListener('resize', getRowSpan);
     };
   });
-  console.log(labels.length);
+  const isOnlyImages = !title && !content && !labels.length && images.length;
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -58,15 +59,15 @@ const Card = ({ id, index, color, title, content, labels, masonryDom }) => {
         >
           <div className='growing-content'>
             {/* images */}
-            {/* <CardImages /> */}
+            {images.length && <CardImages images={images} />}
             {/* header */}
-            <CardHeader>{title}</CardHeader>
+            {title && <CardHeader>{title}</CardHeader>}
             {/* content */}
-            <CardContent>{content}</CardContent>
+            {content && <CardContent>{content}</CardContent>}
             {/* labels */}
             {labels.length > 0 && <CardLabels labels={labels} />}
             {/* footer */}
-            <CardFooter />
+            {<CardFooter isOnlyImages={isOnlyImages} />}
             {/* links */}
             {/* <CardLinks /> */}
           </div>
