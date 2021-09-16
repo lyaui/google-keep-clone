@@ -21,6 +21,10 @@ export const GlobalStyle = createGlobalStyle`
 
   }
 
+  div{
+    outline:none;
+  }
+
   a{
     text-decoration: none;
   }
