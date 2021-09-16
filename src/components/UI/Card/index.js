@@ -4,9 +4,10 @@ import composeRefs from '@seznam/compose-react-refs';
 import { SCard } from 'components/UI/Card/style.js';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardContent from 'components/UI/Card/CardContent';
+import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
 
-const Crad = ({ id, index, color, title, content, masonryDom }) => {
+const Card = ({ id, index, color, title, content, labels, masonryDom }) => {
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
 
@@ -43,7 +44,7 @@ const Crad = ({ id, index, color, title, content, masonryDom }) => {
       window.removeEventListener('resize', getRowSpan);
     };
   });
-
+  console.log(labels.length);
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -56,9 +57,18 @@ const Crad = ({ id, index, color, title, content, masonryDom }) => {
           {...provided.dragHandleProps}
         >
           <div className='growing-content'>
+            {/* images */}
+            {/* <CardImages /> */}
+            {/* header */}
             <CardHeader>{title}</CardHeader>
+            {/* content */}
             <CardContent>{content}</CardContent>
+            {/* labels */}
+            {labels.length > 0 && <CardLabels labels={labels} />}
+            {/* footer */}
             <CardFooter />
+            {/* links */}
+            {/* <CardLinks /> */}
           </div>
         </SCard>
       )}
@@ -66,4 +76,4 @@ const Crad = ({ id, index, color, title, content, masonryDom }) => {
   );
 };
 
-export default Crad;
+export default Card;
