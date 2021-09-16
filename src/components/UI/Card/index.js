@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import composeRefs from '@seznam/compose-react-refs';
-import { SCard } from 'components/UI/Card/style.js';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardContent from 'components/UI/Card/CardContent';
 import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
+import CardLinks from 'components/UI/Card/CardLinks';
+import { SCard } from 'components/UI/Card/style.js';
 
-const Card = ({ id, index, color, images, title, content, labels, masonryDom }) => {
+const Card = ({ id, index, color, images, title, content, labels, links, masonryDom }) => {
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
 
@@ -45,7 +46,13 @@ const Card = ({ id, index, color, images, title, content, labels, masonryDom }) 
       window.removeEventListener('resize', getRowSpan);
     };
   });
-  const isOnlyImages = !title && !content && labels.length === 0 && images.length > 0;
+  const isOnlyImages =
+    !title && !content && labels.length === 0 && links.length === 0 && images.length > 0;
+  const isOnlyLinks =
+    !title && !content && labels.length === 0 && images.length === 0 && links.length > 0;
+  const isOnlyImagesAndLinks =
+    !title && !content && labels.length === 0 && images.length > 0 && links.length > 0;
+
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -59,7 +66,7 @@ const Card = ({ id, index, color, images, title, content, labels, masonryDom }) 
         >
           <div className='growing-content'>
             {/* images */}
-            {images.length && <CardImages images={images} isOnlyImages={isOnlyImages} />}
+            {images.length > 0 && <CardImages images={images} />}
             {/* header */}
             {title && <CardHeader>{title}</CardHeader>}
             {/* content */}
@@ -67,9 +74,13 @@ const Card = ({ id, index, color, images, title, content, labels, masonryDom }) 
             {/* labels */}
             {labels.length > 0 && <CardLabels labels={labels} />}
             {/* footer */}
-            {<CardFooter isOnlyImages={isOnlyImages} />}
+            <CardFooter
+              isOnlyImages={isOnlyImages}
+              isOnlyLinks={isOnlyLinks}
+              isOnlyImagesAndLinks={isOnlyImagesAndLinks}
+            />
             {/* links */}
-            {/* <CardLinks /> */}
+            {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
           </div>
         </SCard>
       )}
