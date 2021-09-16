@@ -38,6 +38,7 @@ const Cards = () => {
                 id={card.id}
                 color={card.color}
                 title={card.title}
+                images={card.images}
                 content={card.content}
                 labels={card.labels}
                 masonryDom={masonryDom}
