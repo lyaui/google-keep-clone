@@ -3,7 +3,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 // contexts
 import MemoContextProvider, { useMemoContextVal } from 'contexts/memo-context.js';
-
+import UIContextProvider from 'contexts/ui-context.js';
 // pages
 import Main from 'pages/Main.js';
 
@@ -29,22 +29,24 @@ function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <MemoContextProvider>
-        <BrowserRouter>
-          <Header />
-          <div className='notes-container'>
-            <SideMenu />
-            <main>
-              <Switch>
-                <Route path='/:label'>
-                  <Main />
-                </Route>
-                <Redirect to='/home' />
-              </Switch>
-            </main>
-          </div>
-        </BrowserRouter>
-      </MemoContextProvider>
+      <UIContextProvider>
+        <MemoContextProvider>
+          <BrowserRouter>
+            <Header />
+            <div className='notes-container'>
+              <SideMenu />
+              <main>
+                <Switch>
+                  <Route path='/:label'>
+                    <Main />
+                  </Route>
+                  <Redirect to='/home' />
+                </Switch>
+              </main>
+            </div>
+          </BrowserRouter>
+        </MemoContextProvider>
+      </UIContextProvider>
     </DragDropContext>
   );
 }
