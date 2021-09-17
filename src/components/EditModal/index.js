@@ -1,8 +1,7 @@
-import { Fragment } from 'react';
-import Backdrop from 'components/UI/Backdrop';
+import Modal from 'components/UI/Modal';
 
-const EditModal = ({ showModal, closeModal }) => {
-  return <Fragment>{showModal && <Backdrop onClick={closeModal} />}</Fragment>;
+const EditModal = (props) => {
+  return <Modal {...props}>Hello Modal!</Modal>;
 };
 
 export default EditModal;

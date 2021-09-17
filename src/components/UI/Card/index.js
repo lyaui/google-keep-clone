@@ -95,7 +95,7 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
           </SCard>
         )}
       </Draggable>
-      {showEditModal && <EditModal showModal={showEditModal} closeModal={closeEditModalHandler} />}
+      <EditModal showModal={showEditModal} closeModal={closeEditModalHandler}></EditModal>
     </Fragment>
   );
 };
