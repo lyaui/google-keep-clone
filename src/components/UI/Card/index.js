@@ -15,7 +15,7 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
   const [gridRowSpan, setGridRowSpan] = useState(0);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  const openEditModalHandler = () => {
+  const openEditModalHandler = (e) => {
     setShowEditModal(true);
   };
   const closeEditModalHandler = () => {
@@ -67,6 +67,7 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
       <Draggable draggableId={id} index={index}>
         {(provided) => (
           <SCard
+            showEditModal={showEditModal}
             color={color}
             className='card'
             ref={composeRefs(cardRef, provided.innerRef)}

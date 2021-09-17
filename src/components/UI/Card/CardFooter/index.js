@@ -4,33 +4,37 @@ import { ButtonRound } from 'components/UI/Buttons/index.js';
 
 function CardFooter({ isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
   const isOnlyImagesOrLinks = isOnlyImages || isOnlyLinks;
+  const test = (e) => {
+    e.stopPropagation();
+    alert('alert');
+  };
   return (
     <SCardFooter
       isOnlyImagesOrLinks={isOnlyImagesOrLinks}
       isOnlyImagesAndLinks={isOnlyImagesAndLinks}
     >
       {/* palette */}
-      <ButtonRound size={34}>
-        <Icon.Palette />{' '}
+      <ButtonRound onClick={test} size={34}>
+        <Icon.Palette />
       </ButtonRound>
       {/* image */}
-      <ButtonRound size={34}>
+      <ButtonRound onClick={test} size={34}>
         <Icon.Image />
       </ButtonRound>
       {/* copy */}
-      <ButtonRound size={34}>
+      <ButtonRound onClick={test} size={34}>
         <Icon.Copy />
       </ButtonRound>
       {/* archive */}
-      <ButtonRound size={34}>
+      <ButtonRound onClick={test} size={34}>
         <Icon.Archive />
       </ButtonRound>
       {/* delete */}
-      <ButtonRound size={34}>
+      <ButtonRound onClick={test} size={34}>
         <Icon.DeleteOutline />
       </ButtonRound>
       {/* delete */}
-      <ButtonRound size={34}>
+      <ButtonRound onClick={test} size={34}>
         <Icon.More />
       </ButtonRound>
     </SCardFooter>
