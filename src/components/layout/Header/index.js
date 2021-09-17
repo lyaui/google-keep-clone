@@ -1,8 +1,9 @@
 import * as Icon from 'components/UI/Icon.js';
 import logo from 'assets/images/logo.png';
 import SearchInput from 'components/UI/SearchInput';
-import { SHeader, SHeaderLogo, SHeaderTitle } from 'components/layout/Header/style.js';
+import ViewMode from 'components/layout/Header/ViewMode';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
+import { SHeader, SHeaderLogo, SHeaderTitle } from 'components/layout/Header/style.js';
 
 const Header = () => {
   const logoPath = logo;
@@ -17,9 +18,7 @@ const Header = () => {
       <SearchInput />
       {/* operators */}
       <div>
-        <ButtonRound size={40}>
-          <Icon.Grid />
-        </ButtonRound>
+        <ViewMode />
         <ButtonRound size={40}>
           <Icon.Moon />
         </ButtonRound>
