@@ -1,4 +1,6 @@
 import { Fragment } from 'react';
+import * as Icon from 'components/UI/Icon.js';
+import { ButtonSquare } from 'components/UI/Buttons';
 import {
   SCardImages,
   SCardImage1,
@@ -9,7 +11,7 @@ import {
   SCardImage6,
 } from 'components/UI/Card/CardImages/style.js';
 
-const CardImages = ({ images, isOnlyImagesAndLinks }) => {
+const CardImages = ({ images, isEditMode }) => {
   const imageComponents = [
     SCardImage1,
     SCardImage2,
@@ -22,9 +24,16 @@ const CardImages = ({ images, isOnlyImagesAndLinks }) => {
   const SCardImage = imageComponents[imgNum - 1];
   return (
     <Fragment>
-      <SCardImages>
+      <SCardImages isEditMode={isEditMode}>
         {images.slice(0, 6).map((image, index) => (
-          <SCardImage key={index} className={`img-${index}`} src={image} alt='' />
+          <SCardImage key={index} className={`img-${index}`}>
+            <img src={image} alt='' />
+            {isEditMode && (
+              <ButtonSquare size='30'>
+                <Icon.Delete />
+              </ButtonSquare>
+            )}
+          </SCardImage>
         ))}
       </SCardImages>
     </Fragment>

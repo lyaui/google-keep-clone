@@ -3,16 +3,27 @@ import styled from 'styled-components/macro';
 export const SCardImages = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-auto-rows: 40px;
-  grid-gap: 1px;
+  grid-auto-rows: ${(props) => (props.isEditMode ? '60px' : '40px')};
+  grid-gap: ${(props) => (props.isEditMode ? '3px' : '1px')};
 `;
 
-const SCardImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  padding: 0;
-  margin: 0;
+const SCardImage = styled.div`
+  position: relative;
+  cursor: pointer;
+  :hover button {
+    opacity: 1;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+  }
 `;
 
 export const SCardImage1 = styled(SCardImage)`
