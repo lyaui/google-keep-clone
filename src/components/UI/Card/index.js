@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { Fragment, useState, useEffect, useRef } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import composeRefs from '@seznam/compose-react-refs';
+import EditModal from 'components/EditModal';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardContent from 'components/UI/Card/CardContent';
@@ -12,6 +13,14 @@ import { SCard } from 'components/UI/Card/style.js';
 const Card = ({ id, index, color, images, title, content, labels, links, masonryDom }) => {
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const openEditModalHandler = () => {
+    setShowEditModal(true);
+  };
+  const closeEditModalHandler = () => {
+    setShowEditModal(false);
+  };
 
   // 計算每張卡片跨列 span
   const getRowSpan = () => {
@@ -54,37 +63,40 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
     !title && !content && labels.length === 0 && images.length > 0 && links.length > 0;
 
   return (
-    <Draggable draggableId={id} index={index}>
-      {(provided) => (
-        <SCard
-          color={color}
-          className='card'
-          ref={composeRefs(cardRef, provided.innerRef)}
-          gridRowSpan={gridRowSpan}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          <div className='growing-content'>
-            {/* images */}
-            {images.length > 0 && <CardImages images={images} />}
-            {/* header */}
-            {title && <CardHeader>{title}</CardHeader>}
-            {/* content */}
-            {content && <CardContent>{content}</CardContent>}
-            {/* labels */}
-            {labels.length > 0 && <CardLabels labels={labels} />}
-            {/* footer */}
-            <CardFooter
-              isOnlyImages={isOnlyImages}
-              isOnlyLinks={isOnlyLinks}
-              isOnlyImagesAndLinks={isOnlyImagesAndLinks}
-            />
-            {/* links */}
-            {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
-          </div>
-        </SCard>
-      )}
-    </Draggable>
+    <Fragment>
+      <Draggable draggableId={id} index={index}>
+        {(provided) => (
+          <SCard
+            color={color}
+            className='card'
+            ref={composeRefs(cardRef, provided.innerRef)}
+            gridRowSpan={gridRowSpan}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <div className='growing-content' onClick={openEditModalHandler}>
+              {/* images */}
+              {images.length > 0 && <CardImages images={images} />}
+              {/* header */}
+              {title && <CardHeader>{title}</CardHeader>}
+              {/* content */}
+              {content && <CardContent>{content}</CardContent>}
+              {/* labels */}
+              {labels.length > 0 && <CardLabels labels={labels} />}
+              {/* footer */}
+              <CardFooter
+                isOnlyImages={isOnlyImages}
+                isOnlyLinks={isOnlyLinks}
+                isOnlyImagesAndLinks={isOnlyImagesAndLinks}
+              />
+              {/* links */}
+              {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
+            </div>
+          </SCard>
+        )}
+      </Draggable>
+      {showEditModal && <EditModal showModal={showEditModal} closeModal={closeEditModalHandler} />}
+    </Fragment>
   );
 };
 
