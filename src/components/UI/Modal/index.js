@@ -3,9 +3,8 @@ import ReactDom from 'react-dom';
 import Backdrop from 'components/UI/Backdrop';
 import { SModalOverlay } from 'components/UI/Modal/style.js';
 
-const ModalOverlay = ({ showModal, children }) => {
+const ModalOverlay = ({ children }) => {
   const content = <SModalOverlay>{children}</SModalOverlay>;
-
   return ReactDom.createPortal(content, document.getElementById('modal-root'));
 };
 
