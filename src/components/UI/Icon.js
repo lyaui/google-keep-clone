@@ -56,7 +56,7 @@ import { BiImage as Image } from 'react-icons/bi';
 
 // view by
 import { RiLayoutGridLine as Grid } from 'react-icons/ri';
-import { BsViewStacked as Stacked } from 'react-icons/bs';
+import { TiThMenuOutline as List } from 'react-icons/ti';
 
 // dark mode
 import { BiMoon as Moon, BiMoon as Sun } from 'react-icons/bi';
@@ -95,7 +95,7 @@ export {
   Palette,
   Image,
   Grid,
-  Stacked,
+  List,
   Moon,
   Sun,
   Logout,
