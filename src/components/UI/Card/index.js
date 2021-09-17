@@ -15,7 +15,7 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
   const [gridRowSpan, setGridRowSpan] = useState(0);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  const openEditModalHandler = (e) => {
+  const openEditModalHandler = () => {
     setShowEditModal(true);
   };
   const closeEditModalHandler = () => {

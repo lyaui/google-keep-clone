@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import * as Icon from 'components/UI/Icon.js';
+import { useUIContextVal } from 'contexts/ui-context.js';
 import { ButtonSquare } from 'components/UI/Buttons';
 import {
   SCardImages,
@@ -12,6 +13,7 @@ import {
 } from 'components/UI/Card/CardImages/style.js';
 
 const CardImages = ({ images, isEditMode }) => {
+  const { viewMode } = useUIContextVal();
   const imageComponents = [
     SCardImage1,
     SCardImage2,
@@ -24,7 +26,7 @@ const CardImages = ({ images, isEditMode }) => {
   const SCardImage = imageComponents[imgNum - 1];
   return (
     <Fragment>
-      <SCardImages isEditMode={isEditMode}>
+      <SCardImages isEditMode={isEditMode} viewMode={viewMode}>
         {images.slice(0, 6).map((image, index) => (
           <SCardImage key={index} className={`img-${index}`}>
             <img src={image} alt='' />
