@@ -12,7 +12,7 @@ import {
   SCardImage6,
 } from 'components/UI/Card/CardImages/style.js';
 
-const CardImages = ({ images, isEditMode }) => {
+const CardImages = ({ images, isEditMode, deletImageHandler }) => {
   const { viewMode } = useUIContextVal();
   const imageComponents = [
     SCardImage1,
@@ -31,7 +31,7 @@ const CardImages = ({ images, isEditMode }) => {
           <SCardImage key={index} className={`img-${index}`}>
             <img src={image} alt='' />
             {isEditMode && (
-              <ButtonSquare size='30'>
+              <ButtonSquare size='30' onClick={() => deletImageHandler(index)}>
                 <Icon.Delete />
               </ButtonSquare>
             )}

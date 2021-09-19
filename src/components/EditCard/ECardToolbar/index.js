@@ -1,10 +1,10 @@
 import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
-import { SAddNewCardToolbar } from 'components/AddNewCard/AddNewCardToolbar/style.js';
+import { SEditCardToolbar } from 'components/EditCard/ECardToolbar/style.js';
 
-const AddNewCardToolbar = () => {
+const EditCardToolbar = () => {
   return (
-    <SAddNewCardToolbar>
+    <SEditCardToolbar>
       <div>
         {/* palette */}
         <ButtonRound size={34}>
@@ -36,8 +36,8 @@ const AddNewCardToolbar = () => {
         </ButtonRound>
       </div>
       {/* <div className=''>關閉</div> */}
-    </SAddNewCardToolbar>
+    </SEditCardToolbar>
   );
 };
 
-export default AddNewCardToolbar;
+export default EditCardToolbar;

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-export const SAddNewCard = styled.div`
+export const SEditCard = styled.div`
   overflow: hidden;
   width: 600px;
   margin: 32px auto 16px auto;
@@ -10,12 +10,12 @@ export const SAddNewCard = styled.div`
   border: 1px solid #fff;
 `;
 
-export const SAddNewCardBody = styled.div`
+export const SEditCardBody = styled.div`
   overflow: scroll;
   max-height: 500px;
 `;
 
-export const SAddNewCardTitle = styled.div`
+export const SEditCardTitle = styled.div`
   width: 100%;
   padding: 16px;
   :empty:before {
@@ -27,7 +27,7 @@ export const SAddNewCardTitle = styled.div`
   }
 `;
 
-export const SAddNewCardContent = styled.div`
+export const SEditCardContent = styled.div`
   width: 100%;
   padding: 12px 16px;
   :empty:before {

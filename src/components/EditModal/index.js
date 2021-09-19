@@ -1,5 +1,5 @@
 import Modal from 'components/UI/Modal';
-import AddNewCard from 'components/AddNewCard';
+import AddNewCard from 'components/EditCard';
 
 const EditModal = (props) => {
   return (
