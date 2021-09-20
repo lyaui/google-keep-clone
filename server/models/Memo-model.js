@@ -3,6 +3,7 @@ const { Schema, model } = mongoose;
 
 const memoSchema = new Schema(
   {
+    creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     title: { type: String, default: '' },
     content: { type: String, default: '' },
     images: [{ type: String, default: [] }],
