@@ -8,9 +8,9 @@ const userSchema = new Schema({
   memos: [{ type: Schema.Types.ObjectId, ref: 'Memo', default: [] }],
   labels: [{ type: Schema.Types.ObjectId, ref: 'Label', default: [] }],
   settings: {
-    THEME: { type: String, required: true, enum: ['LIGHT', 'DARK'], default: 'LIGHT' },
-    LAYOUT: { type: String, required: true, enum: ['GRID', 'LIST'], default: 'GRID' },
-    SORT: { type: String, required: true, enum: ['ASCEND', 'DESCEND'], default: 'ASCEND' },
+    theme: { type: String, required: true, enum: ['LIGHT', 'DARK'], default: 'LIGHT' },
+    layout: { type: String, required: true, enum: ['GRID', 'LIST'], default: 'GRID' },
+    sort: { type: String, required: true, enum: ['ASCEND', 'DESCEND'], default: 'ASCEND' },
   },
 });
 const User = model('User', userSchema);
