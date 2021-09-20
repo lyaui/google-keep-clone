@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+
 const mongoose = require('mongoose');
+const { authRoute, labelRoute, memoRoute } = require('./routes');
+require('dotenv').config();
 
 mongoose
   .connect(process.env.DB_CONNECT)
@@ -14,6 +17,9 @@ mongoose
 
 // middleware
 app.use(bodyParser.json());
+app.use('/api/auth', authRoute);
+app.use('/api/labels', labelRoute);
+app.use('/api/memos', memoRoute);
 
 app.use((req, res, next) => {
   return next(new HttpError('Could not find this route', 404));
@@ -22,5 +28,5 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
   if (res.headerSent) return next(error);
   res.status(!error.code || 500);
-  res.json({ message: error.message || 'An known error occurred!' });
+  res.json({ success: false, message: error.message || 'An known error occurred!' });
 });
