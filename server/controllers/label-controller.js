@@ -2,6 +2,25 @@ const mongoose = require('mongoose');
 const { HttpError, Label, User } = require('../models');
 
 // TODO 所有的 label 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
+
+const getLabelsByUserId = async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    // check if user exists
+    const user = await User.findById(userId);
+    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+
+    const { labels } = await user.populate('labels', ['_id', 'name']);
+    res.status(200).json({
+      success: true,
+      data: labels,
+    });
+  } catch (err) {
+    return next(new HttpError(err));
+  }
+};
+
 const createLabel = async (req, res, next) => {
   const { name, creator } = req.body;
 
@@ -78,10 +97,10 @@ const deleteLabel = async (req, res, next) => {
     await label.creator.save({ session });
     await session.commitTransaction();
 
-    res.status(200).json({ message: 'Delete label successfully' });
+    res.status(200).json({ success: true, message: 'Delete label successfully' });
   } catch (err) {
     return next(new HttpError(err));
   }
 };
 
-module.exports = { createLabel, updateLabel, deleteLabel };
+module.exports = { getLabelsByUserId, createLabel, updateLabel, deleteLabel };
