@@ -7,7 +7,7 @@ const signup = async (req, res, next) => {
     const user = await User.findOne({ email });
     if (user) return next(new HttpError('Email has already been registered.', 422));
 
-    const createdUser = await new User({ name, email, password }).save();
+    const createdUser = await new User({ name: name.trim(), email: email.trim(), password }).save();
     res.status(201).json({
       success: true,
       data: createdUser,
