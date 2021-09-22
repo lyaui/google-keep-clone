@@ -1,5 +1,6 @@
 const { HttpError, User } = require('../models');
 
+// TODO 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
 const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
@@ -30,7 +31,22 @@ const login = async (req, res, next) => {
       return next(new HttpError('Invalid credential, please try again.', 401));
 
     res.json({ success: true, message: 'Logined in!' });
-  } catch (err) {}
+  } catch (err) {
+    return next(new HttpError(err));
+  }
 };
 
-module.exports = { signup, login };
+const getUserSettings = async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    // check if user exists
+    const user = await User.findById(userId, 'settings');
+    if (!user) return next(new HttpError('User not found.', 404));
+
+    res.json({ success: true, data: user.settings });
+  } catch (err) {
+    return next(new HttpError(err));
+  }
+};
+
+module.exports = { signup, login, getUserSettings };

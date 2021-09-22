@@ -17,7 +17,7 @@ mongoose
 
 // middleware
 app.use(bodyParser.json());
-app.use('/api/auth', authRoute);
+app.use('/api/user', authRoute);
 app.use('/api/labels', labelRoute);
 app.use('/api/memos', memoRoute);
 
