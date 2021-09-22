@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
-const { authRoute, labelRoute, memoRoute } = require('./routes');
+const { userRoute, labelRoute, memoRoute } = require('./routes');
 require('dotenv').config();
 
 mongoose
@@ -17,7 +17,7 @@ mongoose
 
 // middleware
 app.use(bodyParser.json());
-app.use('/api/user', authRoute);
+app.use('/api/user', userRoute);
 app.use('/api/labels', labelRoute);
 app.use('/api/memos', memoRoute);
 

@@ -30,7 +30,7 @@ const login = async (req, res, next) => {
     if (user.password !== password)
       return next(new HttpError('Invalid credential, please try again.', 401));
 
-    res.json({ success: true, message: 'Logined in!' });
+    res.status(200).json({ success: true, message: 'Logined in!' });
   } catch (err) {
     return next(new HttpError(err));
   }
@@ -43,10 +43,26 @@ const getUserSettings = async (req, res, next) => {
     const user = await User.findById(userId, 'settings');
     if (!user) return next(new HttpError('User not found.', 404));
 
-    res.json({ success: true, data: user.settings });
+    res.status(200).json({ success: true, data: user.settings });
   } catch (err) {
     return next(new HttpError(err));
   }
 };
 
-module.exports = { signup, login, getUserSettings };
+const updateUserSettings = async (req, res, next) => {
+  const { userId } = req.params;
+  const { theme, layout, sort } = req.body;
+  try {
+    // check if user exists
+    const user = await User.findById(userId, 'settings');
+    if (!user) return next(new HttpError('User not found.', 404));
+
+    user.settings = { theme, layout, sort };
+    await user.save();
+    res.status(200).json({ success: true, data: user.settings });
+  } catch (err) {
+    return next(new HttpError(err));
+  }
+};
+
+module.exports = { signup, login, getUserSettings, updateUserSettings };
