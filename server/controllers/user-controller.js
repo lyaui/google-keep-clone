@@ -11,13 +11,26 @@ const signup = async (req, res, next) => {
     res.status(201).json({
       success: true,
       data: createdUser,
-      message: 'Sign up successfully.',
+      message: 'Signed up successfully.',
     });
   } catch (err) {
     return next(new HttpError(err));
   }
 };
 
-const login = (req, res, next) => {};
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    // check if user exists
+    const user = await User.findOne({ email });
+    if (!user) return next(new HttpError('User not found.', 404));
+
+    // check is correct password
+    if (user.password !== password)
+      return next(new HttpError('Invalid credential, please try again.', 401));
+
+    res.json({ success: true, message: 'Logined in!' });
+  } catch (err) {}
+};
 
 module.exports = { signup, login };
