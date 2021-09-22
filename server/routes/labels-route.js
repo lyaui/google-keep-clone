@@ -3,5 +3,6 @@ const { labelController } = require('../controllers');
 
 router.post('/', labelController.createLabel);
 router.patch('/:labelId', labelController.updateLabel);
+router.delete('/:labelId', labelController.deleteLabel);
 
 module.exports = router;
