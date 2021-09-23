@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { HttpError, Label, User } = require('../models');
+const { HttpError, Label, Memo, User } = require('../models');
 
 // TODO 所有的 label 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
 
@@ -89,11 +89,13 @@ const deleteLabel = async (req, res, next) => {
     if (!label) return next(new HttpError('Could not find label for the provided id.', 404));
     await label.populate('creator');
 
-    // TODO  delete from memo's label
-    // delete label remove from user labels
     const session = await mongoose.startSession();
     session.startTransaction();
+    // remove label
     await label.remove({ session });
+    // remove label from memos
+    await Memo.updateMany({ labels: labelId }, { $pull: { labels: labelId } });
+    // remove label from user
     label.creator.labels.pull(label);
     await label.creator.save({ session });
     await session.commitTransaction();
