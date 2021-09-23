@@ -31,7 +31,7 @@ const createLabel = async (req, res, next) => {
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label name exists
-    const label = await Label.findOne({ $and: [{ creator }, { name: name.trim() }] });
+    const label = await Label.findOne({ creator, name: name.trim() });
     if (label) return next(new HttpError('Label name has existed, please try new one.', 422));
 
     // create label add to user labels
@@ -62,7 +62,7 @@ const updateLabel = async (req, res, next) => {
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label exists
-    const label = await Label.findOne({ $and: [{ creator }, { _id: labelId }] }, ['_id', 'name']);
+    const label = await Label.findOne({ creator, _id: labelId }, ['_id', 'name']);
     if (!label) return next(new HttpError('Could not find label for provided id.', 404));
 
     // check if updated label name exists, and update label name
