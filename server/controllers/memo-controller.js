@@ -26,6 +26,28 @@ const getMemos = async (req, res, next) => {
   }
 };
 
+const getMemosByLabelId = async (req, res, next) => {
+  const { labelId } = req.params;
+  const userId = '614adcec7449bc9f3a6de8cd';
+  try {
+    // check if user exists
+    const user = await User.findById(userId);
+    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+
+    // check if label exists
+    const label = await Label.findById(labelId);
+    if (!label) return next(new HttpError('Could not find label for provided id', 404));
+
+    const { memos } = await label.populate('memos');
+    res.status(200).json({
+      success: true,
+      data: memos,
+    });
+  } catch (err) {
+    next(new HttpError(err));
+  }
+};
+
 const createMemo = async (req, res, next) => {
   const { creator, title, content, images, isPinned, isArchived, links, labels, tasks, color } =
     req.body;
@@ -136,4 +158,4 @@ const deleteMemo = async (req, res, next) => {
   }
 };
 
-module.exports = { getMemos, createMemo, updateMemo, deleteMemo };
+module.exports = { getMemos, getMemosByLabelId, createMemo, updateMemo, deleteMemo };
