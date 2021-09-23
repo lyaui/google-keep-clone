@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const { HttpError, Memo, Label, User } = require('../models');
 
 // TODO 所有的 label 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
-const createMemo = async (req, res, next) => {
-  const { creator, title, content, images, isPinned, isAchived, links, labels, tasks, color } =
-    req.body;
 
+const createMemo = async (req, res, next) => {
+  const { creator, title, content, images, isPinned, isArchived, links, labels, tasks, color } =
+    req.body;
   try {
     // check if user exists
     const user = await User.findById(creator);
@@ -17,7 +17,7 @@ const createMemo = async (req, res, next) => {
       content,
       images,
       isPinned,
-      isAchived,
+      isArchived,
       links,
       labels,
       tasks,
@@ -49,7 +49,7 @@ const createMemo = async (req, res, next) => {
 };
 
 const updateMemo = async (req, res, next) => {
-  const { creator, title, content, images, isPinned, isAchived, links, labels, tasks, color } =
+  const { creator, title, content, images, isPinned, isArchived, links, labels, tasks, color } =
     req.body;
   const { memoId } = req.params;
 
@@ -59,7 +59,7 @@ const updateMemo = async (req, res, next) => {
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if memo exists
-    const memo = await Memo.findOne({ $and: [{ creator }, { _id: memoId }] });
+    const memo = await Memo.findOne({ creator, _id: memoId });
     if (!memo) return next(new HttpError('Could not find memo for provided id.', 404));
 
     const session = await mongoose.startSession();
@@ -67,7 +67,7 @@ const updateMemo = async (req, res, next) => {
     // update memo
     const updatedMemo = await Memo.findOneAndUpdate(
       { $and: [{ creator }, { _id: memoId }] },
-      { title, content, images, isPinned, isAchived, links, labels, tasks, color },
+      { title, content, images, isPinned, isArchived, links, labels, tasks, color },
       { new: true },
     );
     // update labels's memo
@@ -113,4 +113,4 @@ const deleteMemo = async (req, res, next) => {
   }
 };
 
-module.exports = { createMemo, updateMemo, deleteMemo };
+module.exports = { getMemos, createMemo, updateMemo, deleteMemo };
