@@ -7,8 +7,8 @@ const memoSchema = new Schema(
     title: { type: String, default: '' },
     content: { type: String, default: '' },
     images: [{ type: String, default: [] }],
-    isPinned: { type: Boolean, defaule: false },
-    isAchived: { type: Boolean, defaule: false },
+    isPinned: { type: Boolean, default: false },
+    isAchived: { type: Boolean, default: false },
     links: [{ type: String, default: [] }],
     labels: [{ type: Schema.Types.ObjectId, ref: 'Label', default: [] }],
     tasks: [
