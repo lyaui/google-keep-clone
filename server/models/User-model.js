@@ -10,7 +10,7 @@ const userSchema = new Schema({
   settings: {
     theme: { type: String, required: true, enum: ['LIGHT', 'DARK'], default: 'LIGHT' },
     layout: { type: String, required: true, enum: ['GRID', 'LIST'], default: 'GRID' },
-    sort: { type: String, required: true, enum: ['ASCEND', 'DESCEND'], default: 'ASCEND' },
+    sort: { type: String, required: true, enum: ['ASCEND', 'DESCEND'], default: 'DESCEND' },
   },
 });
 const User = model('User', userSchema);

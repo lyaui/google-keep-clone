@@ -10,7 +10,12 @@ const getMemos = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
-    const memos = await Memo.find({ creator: userId, isArchive: false });
+    // check user settings and sort data
+    const sortorder = user.settings.sort === 'ASCEND' ? 1 : -1;
+    const memos = await Memo.find({ creator: userId, isArchive: false }).sort({
+      updatedAt: sortorder,
+    });
+
     res.status(200).json({
       success: true,
       data: memos,
