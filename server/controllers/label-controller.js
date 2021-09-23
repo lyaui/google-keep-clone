@@ -43,7 +43,7 @@ const createLabel = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: createdLabel,
+      data: { name: createdLabel.name, _id: createdLabel._id },
       message: 'Create new label successfully.',
     });
   } catch (err) {
@@ -61,7 +61,7 @@ const updateLabel = async (req, res, next) => {
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label exists
-    const label = await Label.findOne({ $and: [{ creator }, { _id: labelId }] });
+    const label = await Label.findOne({ $and: [{ creator }, { _id: labelId }] }, ['_id', 'name']);
     if (!label) return next(new HttpError('Could not find label for provided id.', 404));
 
     // check if updated label name exists, and update label name
@@ -89,6 +89,7 @@ const deleteLabel = async (req, res, next) => {
     if (!label) return next(new HttpError('Could not find label for the provided id.', 404));
     await label.populate('creator');
 
+    // TODO  delete from memo's label
     // delete label remove from user labels
     const session = await mongoose.startSession();
     session.startTransaction();
