@@ -3,9 +3,10 @@ const { HttpError, Label, Memo, User } = require('../models');
 
 // TODO 所有的 label 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
 
-const getLabelsByUserId = async (req, res, next) => {
-  const { userId } = req.params;
-
+// TODO
+const getLabels = async (req, res, next) => {
+  // TODO tempID
+  const userId = '614adcec7449bc9f3a6de8cd';
   try {
     // check if user exists
     const user = await User.findById(userId);
@@ -106,4 +107,4 @@ const deleteLabel = async (req, res, next) => {
   }
 };
 
-module.exports = { getLabelsByUserId, createLabel, updateLabel, deleteLabel };
+module.exports = { getLabels, createLabel, updateLabel, deleteLabel };
