@@ -88,4 +88,29 @@ const updateMemo = async (req, res, next) => {
   }
 };
 
-module.exports = { createMemo, updateMemo };
+const deleteMemo = async (req, res, next) => {
+  const { memoId } = req.params;
+  try {
+    // check if memo exists
+    const memo = await Memo.findOne({ _id: memoId });
+    if (!memo) return next(new HttpError('Could not find memo for the provided id.', 404));
+    await memo.populate('creator');
+
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    // remove memo
+    await memo.remove({ session });
+    // remove memo from labesls
+    await Label.updateMany({ memos: memoId }, { $pull: { memos: memoId } });
+    // remove memo from creator
+    memo.creator.memos.pull(memo);
+    await memo.creator.save({ session });
+    await session.commitTransaction();
+
+    res.status(200).json({ success: true, message: 'Delete label successfully' });
+  } catch (err) {
+    return next(new HttpError(err));
+  }
+};
+
+module.exports = { createMemo, updateMemo, deleteMemo };
