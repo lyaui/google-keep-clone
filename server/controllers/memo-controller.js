@@ -2,6 +2,23 @@ const mongoose = require('mongoose');
 const { HttpError, Memo, Label, User } = require('../models');
 
 // TODO 所有的 label 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
+const getMemos = async (req, res, next) => {
+  // TODO tempID
+  const userId = '614adcec7449bc9f3a6de8cd';
+  try {
+    // check if user exists
+    const user = await User.findById(userId);
+    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+
+    const memos = await Memo.find({ creator: userId, isArchive: false });
+    res.status(200).json({
+      success: true,
+      data: memos,
+    });
+  } catch (err) {
+    next(new HttpError(err));
+  }
+};
 
 const createMemo = async (req, res, next) => {
   const { creator, title, content, images, isPinned, isArchived, links, labels, tasks, color } =
