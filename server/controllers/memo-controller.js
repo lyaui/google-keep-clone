@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const { HttpError, Memo, Label, User } = require('../models');
 
-// TODO 所有的 label 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
+// TODO 所有的 label 等加入 user auth 直接確認 creator 是否等於 req.user 並移除 check if user exists
 const getMemos = async (req, res, next) => {
   // TODO tempID
+  const { isArchived } = req.query;
   const userId = '614adcec7449bc9f3a6de8cd';
   try {
     // check if user exists
@@ -12,7 +13,7 @@ const getMemos = async (req, res, next) => {
 
     // check user settings and sort data
     const sortorder = user.settings.sort === 'ASCEND' ? 1 : -1;
-    const memos = await Memo.find({ creator: userId, isArchive: false }).sort({
+    const memos = await Memo.find({ creator: userId, isArchived: !!isArchived || false }).sort({
       updatedAt: sortorder,
     });
 
