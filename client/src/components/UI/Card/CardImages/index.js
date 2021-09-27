@@ -29,7 +29,7 @@ const CardImages = ({ images, isEditMode, deletImageHandler }) => {
       <SCardImages isEditMode={isEditMode} viewMode={viewMode}>
         {images.slice(0, 6).map((image, index) => (
           <SCardImage key={index} className={`img-${index}`}>
-            <img src={image} alt='' />
+            <img draggable='false' src={image} alt='' />
             {isEditMode && (
               <ButtonSquare size='30' onClick={() => deletImageHandler(index)}>
                 <Icon.Delete />
