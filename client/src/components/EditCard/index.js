@@ -1,19 +1,15 @@
-import { useState } from 'react';
 import EditCardImages from 'components/EditCard/EditCardImages';
-import EditCardToolbar from 'components/EditCard/ECardToolbar';
+import EditCardTitle from 'components/EditCard/EditCardTitle';
+import EditCardContent from 'components/EditCard/EditCardContent';
+import EditCardToolbar from 'components/EditCard/EditCardToolbar';
+import EditCardLink from 'components/EditCard/EditCardLink';
 
-import {
-  SEditCard,
-  SEditCardBody,
-  SEditCardTitle,
-  SEditCardContent,
-} from 'components/EditCard/style.js';
+import { SEditCard, SEditCardBody } from 'components/EditCard/style.js';
 
 const EditCard = () => {
-  const [isTodoList, setIsTodoList] = useState(false);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [color, setColor] = useState('');
+  // const [isTodoList, setIsTodoList] = useState(false);
+  // const [content, setContent] = useState('');
+  // const [color, setColor] = useState('');
 
   return (
     <SEditCard>
@@ -21,10 +17,12 @@ const EditCard = () => {
         {/* images */}
         <EditCardImages />
         {/* title */}
-        <SEditCardTitle contentEditable='true' />
+        <EditCardTitle />
         {/* content */}
-        <SEditCardContent contentEditable='true' />
+        <EditCardContent />
         {/* tags */}
+        {/* links */}
+        <EditCardLink />
       </SEditCardBody>
 
       {/* toolbar */}
