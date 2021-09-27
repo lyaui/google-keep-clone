@@ -14,8 +14,8 @@ const CardLinks = ({ links, isOnlyLinks }) => {
   return (
     <div>
       {links.slice(0, showLinksNum).map((link, index) => (
-        <SCardLink index={index} isOnlyLinks={isOnlyLinks}>
-          <LinkItem key={index} link={link} isOnlyLinks={isOnlyLinks}>
+        <SCardLink key={index} index={index} isOnlyLinks={isOnlyLinks}>
+          <LinkItem link={link} isOnlyLinks={isOnlyLinks}>
             {/* go share link */}
             <ButtonRound size={28} onClick={goShareLink(link.url)}>
               <Icon.Share />

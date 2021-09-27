@@ -51,8 +51,8 @@ const EditCardLink = () => {
   return (
     <div>
       {links.slice(0, showLinksNum).map((link, index) => (
-        <SEditCardLink index={index}>
-          <LinkItem key={index} link={link}>
+        <SEditCardLink key={index} index={index}>
+          <LinkItem link={link}>
             {/* go share link */}
             <ButtonRound size={34} onClick={() => {}}>
               <Icon.MoreVert />
