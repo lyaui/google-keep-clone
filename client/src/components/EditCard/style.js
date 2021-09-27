@@ -13,4 +13,5 @@ export const SEditCard = styled.div`
 export const SEditCardBody = styled.div`
   overflow: scroll;
   max-height: 500px;
+  padding: 0px 16px;
 `;

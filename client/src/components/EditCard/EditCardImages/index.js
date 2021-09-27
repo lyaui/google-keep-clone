@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CardImages from 'components/UI/Card/CardImages';
+import { SEditCardImages } from 'components/EditCard/EditCardImages/style.js';
 
 const EditCardImages = () => {
   const [images, setImages] = useState([
@@ -21,7 +22,7 @@ const EditCardImages = () => {
   };
 
   return (
-    <div>
+    <SEditCardImages>
       {images.length > 0 && (
         <CardImages
           images={images}
@@ -31,7 +32,7 @@ const EditCardImages = () => {
           deletImageHandler={deletImageHandler}
         />
       )}
-    </div>
+    </SEditCardImages>
   );
 };
 
