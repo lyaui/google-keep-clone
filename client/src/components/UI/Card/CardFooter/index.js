@@ -1,4 +1,7 @@
 import * as Icon from 'components/UI/Icon.js';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { SCardFooter } from 'components/UI/Card/CardFooter/style.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 
@@ -14,29 +17,46 @@ function CardFooter({ isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
       isOnlyImagesAndLinks={isOnlyImagesAndLinks}
     >
       {/* palette */}
-      <ButtonRound onClick={test} size={34}>
-        <Icon.Palette />
-      </ButtonRound>
+      <Tippy content={TOOLTIP_TEXT.PALETTE}>
+        <ButtonRound onClick={test} size={34}>
+          <Icon.Palette />
+        </ButtonRound>
+      </Tippy>
+
       {/* image */}
-      <ButtonRound onClick={test} size={34}>
-        <Icon.Image />
-      </ButtonRound>
+      <Tippy content={TOOLTIP_TEXT.IMAGE}>
+        <ButtonRound onClick={test} size={34}>
+          <Icon.Image />
+        </ButtonRound>
+      </Tippy>
+
       {/* copy */}
-      <ButtonRound onClick={test} size={34}>
-        <Icon.Copy />
-      </ButtonRound>
+      <Tippy content={TOOLTIP_TEXT.COPY}>
+        <ButtonRound onClick={test} size={34}>
+          <Icon.Copy />
+        </ButtonRound>
+      </Tippy>
+
       {/* archive */}
-      <ButtonRound onClick={test} size={34}>
-        <Icon.Archive />
-      </ButtonRound>
+      <Tippy content={TOOLTIP_TEXT.ARCHIVE}>
+        <ButtonRound onClick={test} size={34}>
+          <Icon.Archive />
+        </ButtonRound>
+      </Tippy>
+
       {/* delete */}
-      <ButtonRound onClick={test} size={34}>
-        <Icon.DeleteOutline />
-      </ButtonRound>
+      <Tippy content={TOOLTIP_TEXT.DELETE_MEMO}>
+        <ButtonRound onClick={test} size={34}>
+          <Icon.DeleteOutline />
+        </ButtonRound>
+      </Tippy>
+
       {/* delete */}
-      <ButtonRound onClick={test} size={34}>
-        <Icon.More />
-      </ButtonRound>
+      <Tippy content={TOOLTIP_TEXT.MORE}>
+        <ButtonRound onClick={test} size={34}>
+          <Icon.More />
+        </ButtonRound>
+      </Tippy>
     </SCardFooter>
   );
 }

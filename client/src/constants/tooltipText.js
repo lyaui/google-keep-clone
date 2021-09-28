@@ -23,4 +23,6 @@ export const TOOLTIP_TEXT = {
   COPY: '建立副本',
   ARCHIVE: '封存',
   CANCEL_ARCHIVE: '取消封存',
+  DELETE_MEMO: '刪除記事',
+  MORE: '更多',
 };

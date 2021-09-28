@@ -1,4 +1,7 @@
 import { Fragment } from 'react';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon.js';
 import { useUIContextVal } from 'contexts/ui-context.js';
 import { ButtonSquare } from 'components/UI/Buttons';
@@ -31,9 +34,11 @@ const CardImages = ({ images, isEditMode, deletImageHandler }) => {
           <SCardImage key={index} className={`img-${index}`}>
             <img draggable='false' src={image} alt='' />
             {isEditMode && (
-              <ButtonSquare size='30' onClick={() => deletImageHandler(index)}>
-                <Icon.Delete />
-              </ButtonSquare>
+              <Tippy content={TOOLTIP_TEXT.REMOVE}>
+                <ButtonSquare size='30' onClick={() => deletImageHandler(index)}>
+                  <Icon.Delete />
+                </ButtonSquare>
+              </Tippy>
             )}
           </SCardImage>
         ))}

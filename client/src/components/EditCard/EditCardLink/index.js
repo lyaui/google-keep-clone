@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import LinkItem from 'components/UI/LinkItem';
@@ -54,9 +57,11 @@ const EditCardLink = () => {
         <SEditCardLink key={index} index={index}>
           <LinkItem link={link}>
             {/* go share link */}
-            <ButtonRound size={34} onClick={() => {}}>
-              <Icon.MoreVert />
-            </ButtonRound>
+            <Tippy content={TOOLTIP_TEXT.PREVIEW_URL}>
+              <ButtonRound size={34} onClick={() => {}}>
+                <Icon.MoreVert />
+              </ButtonRound>
+            </Tippy>
           </LinkItem>
         </SEditCardLink>
       ))}

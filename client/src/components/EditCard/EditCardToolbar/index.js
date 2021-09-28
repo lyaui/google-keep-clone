@@ -1,3 +1,6 @@
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import { SEditCardToolbar } from 'components/EditCard/EditCardToolbar/style.js';
@@ -7,33 +10,53 @@ const EditCardToolbar = () => {
     <SEditCardToolbar>
       <div>
         {/* palette */}
-        <ButtonRound size={34}>
-          <Icon.Palette />
-        </ButtonRound>
+        <Tippy content={TOOLTIP_TEXT.PALETTE}>
+          <ButtonRound size={34}>
+            <Icon.Palette />
+          </ButtonRound>
+        </Tippy>
+
         {/* tag */}
-        <ButtonRound size={34}>
-          <Icon.LabelOutline />
-        </ButtonRound>
+        <Tippy content={TOOLTIP_TEXT.LABEL}>
+          <ButtonRound size={34}>
+            <Icon.LabelOutline />
+          </ButtonRound>
+        </Tippy>
+
         {/* checkbox */}
-        <ButtonRound size={34}>
-          <Icon.CheckboxOutline />
-        </ButtonRound>
+        <Tippy content={TOOLTIP_TEXT.CHECKBOX}>
+          <ButtonRound size={34}>
+            <Icon.CheckboxOutline />
+          </ButtonRound>
+        </Tippy>
+
         {/* cancel checkbox */}
-        <ButtonRound size={34}>
-          <Icon.CancelCheckboxOutline />
-        </ButtonRound>
+        <Tippy content={TOOLTIP_TEXT.CANCEL_CHECKBOX}>
+          <ButtonRound size={34}>
+            <Icon.CancelCheckboxOutline />
+          </ButtonRound>
+        </Tippy>
+
         {/* image */}
-        <ButtonRound size={34}>
-          <Icon.Image />
-        </ButtonRound>
+        <Tippy content={TOOLTIP_TEXT.IMAGE}>
+          <ButtonRound size={34}>
+            <Icon.Image />
+          </ButtonRound>
+        </Tippy>
+
         {/* copy */}
-        <ButtonRound size={34}>
-          <Icon.Copy />
-        </ButtonRound>
+        <Tippy content={TOOLTIP_TEXT.COPY}>
+          <ButtonRound size={34}>
+            <Icon.Copy />
+          </ButtonRound>
+        </Tippy>
+
         {/* archivee */}
-        <ButtonRound size={34}>
-          <Icon.Archive />
-        </ButtonRound>
+        <Tippy content={TOOLTIP_TEXT.ARCHIVE}>
+          <ButtonRound size={34}>
+            <Icon.Archive />
+          </ButtonRound>
+        </Tippy>
       </div>
       {/* <div className=''>關閉</div> */}
     </SEditCardToolbar>

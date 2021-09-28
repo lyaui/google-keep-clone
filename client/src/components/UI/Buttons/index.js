@@ -1,17 +1,18 @@
+import { forwardRef } from 'react';
 import { SButtonRound, SButtonSquare } from 'components/UI/Buttons/style.js';
 
-export const ButtonRound = ({ children, size, onClick }) => {
+export const ButtonRound = forwardRef(({ children, size, onClick }, ref) => {
   return (
-    <SButtonRound size={size} onClick={onClick}>
+    <SButtonRound ref={ref} size={size} onClick={onClick}>
       {children}
     </SButtonRound>
   );
-};
+});
 
-export const ButtonSquare = ({ children, size, onClick }) => {
+export const ButtonSquare = forwardRef(({ children, size, onClick }, ref) => {
   return (
-    <SButtonSquare size={size} onClick={onClick}>
+    <SButtonSquare ref={ref} size={size} onClick={onClick}>
       {children}
     </SButtonSquare>
   );
-};
+});

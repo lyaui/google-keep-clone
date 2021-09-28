@@ -1,3 +1,6 @@
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon.js';
 import logo from 'assets/images/logo.png';
 import SearchInput from 'components/UI/SearchInput';
@@ -9,22 +12,35 @@ const Header = () => {
   const logoPath = logo;
   return (
     <SHeader>
-      <ButtonRound size={48}>
-        <Icon.Menu />
-      </ButtonRound>
+      {/* menu */}
+      <Tippy content={TOOLTIP_TEXT.MENU}>
+        <ButtonRound size={48}>
+          <Icon.Menu />
+        </ButtonRound>
+      </Tippy>
+
       <SHeaderLogo src={logoPath} alt='keep' />
       <SHeaderTitle>記事</SHeaderTitle>
       {/* search */}
       <SearchInput />
       {/* operators */}
       <div>
+        {/* view mode */}
         <ViewMode />
-        <ButtonRound size={40}>
-          <Icon.Moon />
-        </ButtonRound>
-        <ButtonRound size={40}>
-          <Icon.Logout />
-        </ButtonRound>
+
+        {/* light/dark mode */}
+        <Tippy content={TOOLTIP_TEXT.DARK_MODE}>
+          <ButtonRound size={40}>
+            <Icon.Moon />
+          </ButtonRound>
+        </Tippy>
+
+        {/* logout */}
+        <Tippy content={TOOLTIP_TEXT.LOGOUT}>
+          <ButtonRound size={40}>
+            <Icon.Logout />
+          </ButtonRound>
+        </Tippy>
       </div>
     </SHeader>
   );
