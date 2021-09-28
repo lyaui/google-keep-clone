@@ -1,5 +1,5 @@
 export const PALETTE_COLORS = {
-  DEAFULT: '#e0e0e0',
+  DEFAULT: '#fff',
   RED: '#f28b82',
   ORANGE: '#fbbc04',
   YELLOW: '#fff475',
