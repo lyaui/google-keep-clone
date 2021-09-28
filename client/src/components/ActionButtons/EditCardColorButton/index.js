@@ -1,22 +1,21 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import Tippy from '@tippyjs/react';
-import CustomTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
+import { useUIContextVal } from 'contexts/ui-context.js';
 import * as Icon from 'components/UI/Icon.js';
+import { ButtonRound } from 'components/UI/Buttons/index.js';
+import SettingTooltip from 'components/UI/SettingTooltip';
 import {
   SEditCardColor,
   SEditCardColorUnit,
 } from 'components/ActionButtons/EditCardColorButton/style.js';
-import { ButtonRound } from 'components/UI/Buttons/index.js';
 
 const EditCardColorButton = () => {
-  const [isPalettVisible, setIsPalettVisible] = useState(false);
+  const { CTX_TOOLTIP } = useUIContextVal();
   const [selectedColor, setSelectedColor] = useState(PALETTE_COLORS.DEFAULT);
 
-  const showPaletteHandler = () => setIsPalettVisible(true);
-  const hidePaletteHandler = () => setIsPalettVisible(false);
   const selectColorHandler = (color) => () => {
     setSelectedColor(color);
   };
@@ -24,7 +23,7 @@ const EditCardColorButton = () => {
   const palette = (
     <SEditCardColor>
       {Object.values(PALETTE_COLORS).map((color) => (
-        <SEditCardColorUnit color={color} onClick={selectColorHandler(color)}>
+        <SEditCardColorUnit key={color} color={color} onClick={selectColorHandler(color)}>
           {selectedColor === color && <Icon.Check />}
         </SEditCardColorUnit>
       ))}
@@ -32,23 +31,13 @@ const EditCardColorButton = () => {
   );
 
   return (
-    <Fragment>
-      <CustomTippy
-        render={() => palette}
-        visible={isPalettVisible}
-        interactive={true}
-        onClickOutside={hidePaletteHandler}
-      >
-        <Tippy content={TOOLTIP_TEXT.PALETTE}>
-          <ButtonRound
-            size={34}
-            onClick={isPalettVisible ? hidePaletteHandler : showPaletteHandler}
-          >
-            <Icon.Palette />
-          </ButtonRound>
-        </Tippy>
-      </CustomTippy>
-    </Fragment>
+    <SettingTooltip renderElement={palette}>
+      <Tippy content={TOOLTIP_TEXT.PALETTE}>
+        <ButtonRound size={34} onClick={CTX_TOOLTIP.showTooltipHandler}>
+          <Icon.Palette />
+        </ButtonRound>
+      </Tippy>
+    </SettingTooltip>
   );
 };
 
