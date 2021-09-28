@@ -40,6 +40,7 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     outline: none;
     cursor: pointer;
+    letter-spacing: 1px;
   }
 
   .notes-container {
