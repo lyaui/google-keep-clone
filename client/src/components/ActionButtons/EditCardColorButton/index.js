@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+import CustomTooltip from 'components/UI/CustomTooltip';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
+import { TOOLTIP_NAME } from 'constants/UI.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import { useUIContextVal } from 'contexts/ui-context.js';
 import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
-import SettingTooltip from 'components/UI/SettingTooltip';
 import {
   SEditCardColor,
   SEditCardColorUnit,
@@ -31,13 +30,11 @@ const EditCardColorButton = () => {
   );
 
   return (
-    <SettingTooltip renderElement={palette}>
-      <Tippy content={TOOLTIP_TEXT.PALETTE}>
-        <ButtonRound size={34} onClick={CTX_TOOLTIP.showTooltipHandler}>
-          <Icon.Palette />
-        </ButtonRound>
-      </Tippy>
-    </SettingTooltip>
+    <CustomTooltip renderElement={palette} name={TOOLTIP_NAME.PALETTE} text={TOOLTIP_TEXT.PALETTE}>
+      <ButtonRound size={34} onClick={CTX_TOOLTIP.showTooltipHandler(TOOLTIP_NAME.PALETTE)}>
+        <Icon.Palette />
+      </ButtonRound>
+    </CustomTooltip>
   );
 };
 
