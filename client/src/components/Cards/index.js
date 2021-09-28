@@ -8,7 +8,7 @@ import { SCards } from 'components/Cards/style.js';
 
 const Cards = () => {
   const { memos } = useMemoContextVal();
-  const { viewMode } = useUIContextVal();
+  const { CTX_VIEW_MODE } = useUIContextVal();
   const masonryRef = useRef();
   const [masonryDom, setMasonryDom] = useState(null);
 
@@ -20,7 +20,7 @@ const Cards = () => {
     <Droppable droppableId='cards'>
       {(provided) => (
         <div ref={composeRefs(masonryRef, provided.innerRef)} {...provided.droppableProps}>
-          <SCards className='masonry' viewMode={viewMode}>
+          <SCards className='masonry' viewMode={CTX_VIEW_MODE.viewMode}>
             {memos.map((card, index) => (
               <Card
                 key={card.id}

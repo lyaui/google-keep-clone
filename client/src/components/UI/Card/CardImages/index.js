@@ -16,7 +16,7 @@ import {
 } from 'components/UI/Card/CardImages/style.js';
 
 const CardImages = ({ images, isEditMode, deletImageHandler }) => {
-  const { viewMode } = useUIContextVal();
+  const { CTX_VIEW_MODE } = useUIContextVal();
   const imageComponents = [
     SCardImage1,
     SCardImage2,
@@ -29,7 +29,7 @@ const CardImages = ({ images, isEditMode, deletImageHandler }) => {
   const SCardImage = imageComponents[imgNum - 1];
   return (
     <Fragment>
-      <SCardImages isEditMode={isEditMode} viewMode={viewMode}>
+      <SCardImages isEditMode={isEditMode} viewMode={CTX_VIEW_MODE.viewMode}>
         {images.slice(0, 6).map((image, index) => (
           <SCardImage key={index} className={`img-${index}`}>
             <img draggable='false' src={image} alt='' />
