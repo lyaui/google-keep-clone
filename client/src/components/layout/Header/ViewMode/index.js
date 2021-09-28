@@ -8,20 +8,20 @@ import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 
 const ViewMode = () => {
-  const { viewMode, setGridHandler, setListHandler } = useUIContextVal();
+  const { CTX_VIEW_MODE } = useUIContextVal();
 
   return (
     <Fragment>
-      {viewMode === VIEW_MODE.GRID && (
+      {CTX_VIEW_MODE.viewMode === VIEW_MODE.GRID && (
         <Tippy content={TOOLTIP_TEXT.VIEW_GRID}>
-          <ButtonRound size={40} onClick={setListHandler}>
+          <ButtonRound size={40} onClick={CTX_VIEW_MODE.setListHandler}>
             <Icon.Grid />
           </ButtonRound>
         </Tippy>
       )}
-      {viewMode === VIEW_MODE.LIST && (
+      {CTX_VIEW_MODE.viewMode === VIEW_MODE.LIST && (
         <Tippy content={TOOLTIP_TEXT.VIEW_LIST}>
-          <ButtonRound size={40} onClick={setGridHandler}>
+          <ButtonRound size={40} onClick={CTX_VIEW_MODE.setGridHandler}>
             <Icon.List />
           </ButtonRound>
         </Tippy>
