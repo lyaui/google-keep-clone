@@ -10,7 +10,7 @@ const CardLabels = ({ labels }) => {
         <Label key={index}>{label.name}</Label>
       ))}
 
-      <Label>還有個 {numOfMoreLabel} 項目</Label>
+      <Label isShowMoreLabel={true}>還有個 {numOfMoreLabel} 項目</Label>
     </SCardLabels>
   );
 };
