@@ -1,6 +1,6 @@
 import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
-import { SEditCardToolbar } from 'components/EditCard/ECardToolbar/style.js';
+import { SEditCardToolbar } from 'components/EditCard/EditCardToolbar/style.js';
 
 const EditCardToolbar = () => {
   return (
