@@ -46,7 +46,7 @@ import { MdClear as Clear } from 'react-icons/md';
 import { MdCheckCircle as SelectCircle } from 'react-icons/md';
 
 // more
-import { MdMoreVert as More } from 'react-icons/md';
+import { MdMoreVert as More, MdMoreVert as MoreVert } from 'react-icons/md';
 
 // palette
 import { BiPalette as Palette } from 'react-icons/bi';
@@ -92,6 +92,7 @@ export {
   Clear,
   SelectCircle,
   More,
+  MoreVert,
   Palette,
   Image,
   Grid,
