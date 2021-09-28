@@ -3,6 +3,11 @@ import { VIEW_MODE } from 'constants/UI.js';
 
 const UIContext = createContext({
   viewMode: '',
+  setGridHandler() {},
+  setListHandler() {},
+  tooltipName: null,
+  showTooltipHandler() {},
+  hideTooltipHandler() {},
 });
 
 const UIContextProvider = ({ children }) => {
@@ -11,14 +16,14 @@ const UIContextProvider = ({ children }) => {
   const setGridHandler = () => setViewMode(VIEW_MODE.GRID);
   const setListHandler = () => setViewMode(VIEW_MODE.LIST);
 
-  // show setting tooltip
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  const showTooltipHandler = () => setIsTooltipVisible(true);
-  const hideTooltipHandler = () => setIsTooltipVisible(false);
+  // show custom tooltip
+  const [tooltipName, setTooltipName] = useState(null);
+  const showTooltipHandler = (name) => () => setTooltipName(name);
+  const hideTooltipHandler = () => setTooltipName(null);
 
   const contextValue = {
     CTX_VIEW_MODE: { viewMode, setGridHandler, setListHandler },
-    CTX_TOOLTIP: { isTooltipVisible, showTooltipHandler, hideTooltipHandler },
+    CTX_TOOLTIP: { tooltipName, showTooltipHandler, hideTooltipHandler },
   };
 
   return <UIContext.Provider value={contextValue}>{children}</UIContext.Provider>;
