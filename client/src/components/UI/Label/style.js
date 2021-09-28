@@ -11,6 +11,27 @@ export const SLabel = styled.div`
   color: #3c4043;
   background-color: rgba(0, 0, 0, 0.08);
   border-radius: 50px;
-  padding: 4px 8px;
+  padding: 4px 12px 4px 12px;
   margin: 3px 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  :hover {
+    padding: ${(props) => (props.isShowMoreLabel ? '4px 12px 4px 12px' : '4px 16px 4px 8px')};
+  }
+  :hover svg {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    opacity: 0;
+    padding: 4px;
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
