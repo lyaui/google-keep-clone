@@ -7,7 +7,8 @@ const CardLinks = ({ links, isOnlyLinks }) => {
   const showLinksNum = 3;
   const numOfMoreLink = links.length - showLinksNum;
 
-  const goShareLink = (url) => () => {
+  const goShareLink = (url) => (e) => {
+    e.stopPropagation();
     window.open(`https://${url}`, '_blank').focus();
   };
 
