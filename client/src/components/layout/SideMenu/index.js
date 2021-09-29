@@ -1,5 +1,5 @@
-import NavItem from 'components/layout/SideMenu/NavItem/index.js';
-import { SSideMenu, SSideMenuList } from 'components/layout/SideMenu/style.js';
+import NavItem from 'components/Layout/SideMenu/NavItem/index.js';
+import { SSideMenu, SSideMenuList } from 'components/Layout/SideMenu/style.js';
 import { useUIContextVal } from 'contexts/ui-context.js';
 
 const DUMMY_DATA = [

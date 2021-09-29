@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import { SNavItemText } from 'components/layout/SideMenu/NavItem/style.js';
+import { SNavItemText } from 'components/Layout/SideMenu/NavItem/style.js';
 
 export const SSideMenu = styled.aside`
   padding-right: 12px;

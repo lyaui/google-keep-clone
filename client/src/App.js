@@ -1,15 +1,10 @@
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-// contexts
 import MemoContextProvider, { useMemoContextVal } from 'contexts/memo-context.js';
 import UIContextProvider from 'contexts/ui-context.js';
-// pages
 import Main from 'pages/Main.js';
-
-// components
-import Header from 'components/layout/Header';
-import SideMenu from 'components/layout/SideMenu';
+import Login from 'pages/Login.js';
 
 function App() {
   const { setMemos } = useMemoContextVal();
@@ -31,20 +26,17 @@ function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <UIContextProvider>
         <MemoContextProvider>
-          <BrowserRouter>
-            <Header />
-            <div className='notes-container'>
-              <SideMenu />
-              <main>
-                <Switch>
-                  <Route path='/:label'>
-                    <Main />
-                  </Route>
-                  <Redirect to='/home' />
-                </Switch>
-              </main>
-            </div>
-          </BrowserRouter>
+          <main>
+            <Switch>
+              <Route path='/login'>
+                <Login />
+              </Route>
+              <Route path='/:label'>
+                <Main />
+              </Route>
+              <Redirect to='/home' />
+            </Switch>
+          </main>
         </MemoContextProvider>
       </UIContextProvider>
     </DragDropContext>

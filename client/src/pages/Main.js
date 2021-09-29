@@ -1,13 +1,13 @@
-import { Fragment } from 'react';
+import Layout from 'components/Layout';
 import AddNewCard from 'components/EditCard';
 import Cards from 'components/Cards';
 
 const main = () => {
   return (
-    <Fragment>
+    <Layout>
       <AddNewCard />
       <Cards />
-    </Fragment>
+    </Layout>
   );
 };
 
