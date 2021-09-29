@@ -6,10 +6,7 @@ import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import { useUIContextVal } from 'contexts/ui-context.js';
 import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
-import {
-  SEditCardColor,
-  SEditCardColorUnit,
-} from 'components/ActionButtons/EditCardColorButton/style.js';
+import { SEditCardColor, SColor } from 'components/ActionButtons/EditCardColorButton/style.js';
 
 const EditCardColorButton = () => {
   const { CTX_TOOLTIP } = useUIContextVal();
@@ -20,11 +17,11 @@ const EditCardColorButton = () => {
   };
 
   const palette = (
-    <SEditCardColor>
+    <SEditCardColor width={140}>
       {Object.values(PALETTE_COLORS).map((color) => (
-        <SEditCardColorUnit key={color} color={color} onClick={selectColorHandler(color)}>
+        <SColor key={color} color={color} onClick={selectColorHandler(color)}>
           {selectedColor === color && <Icon.Check />}
-        </SEditCardColorUnit>
+        </SColor>
       ))}
     </SEditCardColor>
   );
