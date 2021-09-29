@@ -35,7 +35,7 @@ const EditCardLabelsButton = () => {
     <SEditCardLabels width={200}>
       <div>為記事加標籤</div>
       <SSearchLabel>
-        <input type='text' placeholder='輸入標籤名稱' maxlength='50' />
+        <input type='text' placeholder='輸入標籤名稱' maxLength='50' />
         <Icon.Search />
       </SSearchLabel>
 
