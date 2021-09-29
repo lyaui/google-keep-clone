@@ -4,6 +4,7 @@ import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import EditCardColorButton from 'components/ActionButtons/EditCardColorButton';
+import EditCardLabelsButton from 'components/ActionButtons/EditCardLabelsButton';
 import { SEditCardToolbar } from 'components/EditCard/EditCardToolbar/style.js';
 
 const EditCardToolbar = () => {
@@ -12,13 +13,9 @@ const EditCardToolbar = () => {
       <div>
         {/* palette */}
         <EditCardColorButton />
+        {/* labels */}
+        <EditCardLabelsButton />
 
-        {/* tag */}
-        <Tippy content={TOOLTIP_TEXT.LABEL}>
-          <ButtonRound size={34}>
-            <Icon.LabelOutline />
-          </ButtonRound>
-        </Tippy>
         {/* checkbox */}
         <Tippy content={TOOLTIP_TEXT.CHECKBOX}>
           <ButtonRound size={34}>

@@ -11,8 +11,10 @@ import { MdSearch as Search } from 'react-icons/md';
 import { MdContentCopy as Copy } from 'react-icons/md';
 
 // checkbox
+
 import { IoIosCheckbox as Checkbox } from 'react-icons/io';
 import {
+  RiCheckboxBlankLine as EmptyCheckbox,
   RiCheckboxLine as CheckboxOutline,
   RiCheckboxIndeterminateLine as CancelCheckboxOutline,
 } from 'react-icons/ri';
@@ -75,6 +77,7 @@ export {
   Bulb,
   Search,
   Copy,
+  EmptyCheckbox,
   Checkbox,
   CheckboxOutline,
   CancelCheckboxOutline,
