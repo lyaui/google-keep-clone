@@ -3,6 +3,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon.js';
 import logo from 'assets/images/logo.png';
+import FixMenu from 'components/layout/Header/FixMenu';
 import SearchInput from 'components/UI/SearchInput';
 import ViewMode from 'components/layout/Header/ViewMode';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
@@ -13,12 +14,7 @@ const Header = () => {
   return (
     <SHeader>
       {/* menu */}
-      <Tippy content={TOOLTIP_TEXT.MENU}>
-        <ButtonRound size={48}>
-          <Icon.Menu />
-        </ButtonRound>
-      </Tippy>
-
+      <FixMenu />
       <SHeaderLogo src={logoPath} alt='keep' />
       <SHeaderTitle>記事</SHeaderTitle>
       {/* search */}

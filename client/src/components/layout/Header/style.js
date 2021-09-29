@@ -7,8 +7,9 @@ export const SHeader = styled.header`
   align-items: center;
   padding: 8px;
   position: sticky;
-  box-shadow: 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%),
-    0px 2px 4px -1px rgb(0 0 0 / 20%);
+  z-index: 50;
+  box-shadow: 0px 4px 5px 0px rgb(0 0 0 / 10%), 0px 1px 10px 0px rgb(0 0 0 / 10%),
+    0px 2px 4px -1px rgb(0 0 0 / 10%);
 `;
 
 export const SHeaderLogo = styled.img`
