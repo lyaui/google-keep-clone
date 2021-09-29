@@ -5,8 +5,9 @@ export const SCards = styled.section`
   display: grid;
   grid-gap: ${(props) => (props.viewMode === VIEW_MODE.GRID ? '12px' : '20px')};
   grid-template-columns: ${(props) =>
-    props.viewMode === VIEW_MODE.GRID ? 'repeat(auto-fill, minmax(240px, 1fr))' : '600px'};
+    props.viewMode === VIEW_MODE.GRID ? 'repeat(auto-fill, minmax(230px, 1fr))' : '600px'};
   justify-content: center;
   grid-auto-rows: 0;
-  padding: 20px 80px;
+  /* padding: 20px 80px; */
+  padding: ${(props) => (props.isFixedMenu ? '20px 80px' : '20px 80px 20px 100px')};
 `;

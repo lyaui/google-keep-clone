@@ -1,14 +1,29 @@
 import styled from 'styled-components/macro';
+import { SNavItemText } from 'components/layout/SideMenu/NavItem/style.js';
 
 export const SSideMenu = styled.aside`
   padding-right: 12px;
-  width: 280px;
+  position: ${(props) => (props.isFixedMenu ? 'relative' : 'fixed')};
+  z-index: 10;
+  width: ${(props) => (props.isFixedMenu ? '280px' : '60px')};
   height: 100%;
+  background-color: #fff;
   overflow: scroll;
-  box-shadow: 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%),
-    0px 2px 4px -1px rgb(0 0 0 / 20%);
+  transition: all 0.2s;
+
+  :hover {
+    width: 280px;
+    box-shadow: 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%),
+      0px 2px 4px -1px rgb(0 0 0 / 20%);
+  }
+
+  :hover ${SNavItemText} {
+    opacity: 0.9;
+    width: 100%;
+  }
 `;
 
 export const SSideMenuList = styled.ul`
   padding: 0;
+  margin-bottom: 80px;
 `;

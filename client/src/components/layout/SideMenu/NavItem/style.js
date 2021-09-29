@@ -1,13 +1,15 @@
 import styled from 'styled-components/macro';
 
 export const SNavItem = styled.li`
+  margin-left: 2px;
   border-radius: 0 25px 25px 0;
-  font-size: 14px;
-  font-weight: 500;
   list-style: none;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.3s;
+  height: 50px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
 
   :hover {
     background-color: #f2f3f4;
@@ -18,8 +20,21 @@ export const SNavItem = styled.li`
   }
 
   a {
-    color: #202124;
     display: flex;
     align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: ${(props) => (props.isActive ? 'red' : null)};
   }
+`;
+
+export const SNavItemText = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+  color: #202124;
+  opacity: ${(props) => (props.isFixedMenu ? 0.9 : 0)};
+  width: ${(props) => (props.isFixedMenu ? '100%' : 0)};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
