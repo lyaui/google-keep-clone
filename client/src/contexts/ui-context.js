@@ -2,6 +2,9 @@ import { createContext, useContext, useState } from 'react';
 import { VIEW_MODE } from 'constants/UI.js';
 
 const UIContext = createContext({
+  isFixedMenu: false,
+  fixMenuHandler() {},
+  unfixMenuHandler() {},
   viewMode: '',
   setGridHandler() {},
   setListHandler() {},
@@ -11,6 +14,10 @@ const UIContext = createContext({
 });
 
 const UIContextProvider = ({ children }) => {
+  // fix side-menu
+  const [isFixedMenu, setIsFixedMenu] = useState(false);
+  const ToggleMenuHandler = () => setIsFixedMenu(!isFixedMenu);
+
   // viewmode
   const [viewMode, setViewMode] = useState(VIEW_MODE.GRID);
   const setGridHandler = () => setViewMode(VIEW_MODE.GRID);
@@ -22,6 +29,7 @@ const UIContextProvider = ({ children }) => {
   const hideTooltipHandler = () => setTooltipName(null);
 
   const contextValue = {
+    CTX_FIXMENU: { isFixedMenu, ToggleMenuHandler },
     CTX_VIEW_MODE: { viewMode, setGridHandler, setListHandler },
     CTX_TOOLTIP: { tooltipName, showTooltipHandler, hideTooltipHandler },
   };
