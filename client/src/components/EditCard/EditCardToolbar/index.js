@@ -5,6 +5,7 @@ import * as Icon from 'components/UI/Icon.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import EditCardColorButton from 'components/ActionButtons/EditCardColorButton';
 import EditCardLabelsButton from 'components/ActionButtons/EditCardLabelsButton';
+import UploadImageButton from 'components/ActionButtons/UploadImageButton';
 import { SEditCardToolbar } from 'components/EditCard/EditCardToolbar/style.js';
 
 const EditCardToolbar = () => {
@@ -15,7 +16,6 @@ const EditCardToolbar = () => {
         <EditCardColorButton />
         {/* labels */}
         <EditCardLabelsButton />
-
         {/* checkbox */}
         <Tippy content={TOOLTIP_TEXT.CHECKBOX}>
           <ButtonRound size={34}>
@@ -29,11 +29,7 @@ const EditCardToolbar = () => {
           </ButtonRound>
         </Tippy>
         {/* image */}
-        <Tippy content={TOOLTIP_TEXT.IMAGE}>
-          <ButtonRound size={34}>
-            <Icon.Image />
-          </ButtonRound>
-        </Tippy>
+        <UploadImageButton />
         {/* copy */}
         <Tippy content={TOOLTIP_TEXT.COPY}>
           <ButtonRound size={34}>
