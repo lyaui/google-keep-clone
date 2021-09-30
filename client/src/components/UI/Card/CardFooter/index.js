@@ -1,4 +1,4 @@
-import * as Icon from 'components/UI/Icon.js';
+import * as Icon from 'components/UI/Icon/index.js';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';

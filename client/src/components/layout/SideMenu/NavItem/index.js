@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import * as Icon from 'components/UI/Icon.js';
+import * as Icon from 'components/UI/Icon/index.js';
 import { SNavItem, SNavItemText } from 'components/Layout/SideMenu/NavItem/style.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import { useUIContextVal } from 'contexts/ui-context.js';

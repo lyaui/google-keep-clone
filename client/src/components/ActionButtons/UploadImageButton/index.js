@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
-import * as Icon from 'components/UI/Icon.js';
+import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import { SUploadImage } from 'components/ActionButtons/UploadImageButton/style.js';
 

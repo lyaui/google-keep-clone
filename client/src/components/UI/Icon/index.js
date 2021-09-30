@@ -72,6 +72,9 @@ import { GrUndo as Undo, GrRedo as Redo } from 'react-icons/gr';
 // share
 import { RiShareBoxLine as Share } from 'react-icons/ri';
 
+// Google
+import { FcGoogle as Google } from 'react-icons/fc';
+
 export {
   Menu,
   Bulb,
@@ -106,4 +109,5 @@ export {
   Undo,
   Redo,
   Share,
+  Google,
 };

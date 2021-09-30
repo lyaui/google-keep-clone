@@ -2,7 +2,7 @@ import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { TOOLTIP_NAME } from 'constants/UI.js';
 import { useUIContextVal } from 'contexts/ui-context.js';
 import CustomTooltip from 'components/UI/CustomTooltip';
-import * as Icon from 'components/UI/Icon.js';
+import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import {
   SEditCardLabels,

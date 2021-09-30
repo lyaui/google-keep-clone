@@ -4,7 +4,7 @@ import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { TOOLTIP_NAME } from 'constants/UI.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import { useUIContextVal } from 'contexts/ui-context.js';
-import * as Icon from 'components/UI/Icon.js';
+import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import { SEditCardColor, SColor } from 'components/ActionButtons/EditCardColorButton/style.js';
 

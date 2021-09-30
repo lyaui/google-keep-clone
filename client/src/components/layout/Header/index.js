@@ -1,7 +1,7 @@
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
-import * as Icon from 'components/UI/Icon.js';
+import * as Icon from 'components/UI/Icon/index.js';
 import logo from 'assets/images/logo.png';
 import FixMenu from 'components/Layout/Header/FixMenu';
 import SearchInput from 'components/UI/SearchInput';
