@@ -1,10 +1,8 @@
 import styled from 'styled-components/macro';
 
 export const SButton = styled.button`
-  width: ${(props) => `${props.size}px` || '40px'};
-  height: ${(props) => `${props.size}px` || '40px'};
-  margin: 4px;
-  background-color: transparent;
+  text-align: center;
+  background-color: ${(props) => props.color || 'transparent'};
   transition: all 0.3s;
   svg {
     width: 90%;
@@ -13,7 +11,10 @@ export const SButton = styled.button`
 `;
 
 export const SButtonRound = styled(SButton)`
+  width: ${(props) => `${props.size}px` || '40px'};
+  height: ${(props) => `${props.size}px` || '40px'};
   border-radius: 50%;
+  margin: 4px;
   svg {
     fill: #202124;
     opacity: 0.6;
@@ -29,4 +30,11 @@ export const SButtonSquare = styled(SButton)`
   svg {
     fill: #fff;
   }
+`;
+
+export const SButtonRect = styled(SButton)`
+  color: #fff;
+  border-radius: 2px;
+  height: 40px;
+  margin: 18px 0;
 `;

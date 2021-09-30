@@ -1,18 +1,26 @@
 import { forwardRef } from 'react';
-import { SButtonRound, SButtonSquare } from 'components/UI/Buttons/style.js';
+import { SButtonRound, SButtonSquare, SButtonRect } from 'components/UI/Buttons/style.js';
 
-export const ButtonRound = forwardRef(({ children, size, onClick, style }, ref) => {
+export const ButtonRound = forwardRef(({ children, size, color, onClick, style }, ref) => {
   return (
-    <SButtonRound ref={ref} size={size} onClick={onClick} style={style}>
+    <SButtonRound ref={ref} size={size} color={color} onClick={onClick} style={style}>
       {children}
     </SButtonRound>
   );
 });
 
-export const ButtonSquare = forwardRef(({ children, size, onClick }, ref) => {
+export const ButtonSquare = forwardRef(({ children, size, color, onClick }, ref) => {
   return (
-    <SButtonSquare ref={ref} size={size} onClick={onClick}>
+    <SButtonSquare ref={ref} size={size} color={color} onClick={onClick}>
       {children}
     </SButtonSquare>
+  );
+});
+
+export const ButtonRect = forwardRef(({ children, size, color, onClick }, ref) => {
+  return (
+    <SButtonRect ref={ref} size={size} color={color} onClick={onClick}>
+      {children}
+    </SButtonRect>
   );
 });
