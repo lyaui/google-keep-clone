@@ -4,7 +4,7 @@ const GoogleLoginButton = () => {
   return (
     <SGoogleLoginButton>
       <Icon.Google />
-      <span>使用 Google 帳號登入</span>
+      <span>使用 Google 註冊/登入</span>
     </SGoogleLoginButton>
   );
 };
