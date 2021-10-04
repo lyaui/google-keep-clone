@@ -9,6 +9,8 @@ require('./config/passport');
 const { HttpError } = require('./models');
 const cors = require('cors');
 
+const authCheck = require('./middleware/check-auth');
+
 mongoose
   .connect(process.env.DB_CONNECT)
   .then(() => {
@@ -22,8 +24,8 @@ mongoose
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/user', userRoute);
-app.use('/api/labels', labelRoute);
-app.use('/api/memos', memoRoute);
+app.use('/api/labels', authCheck, labelRoute);
+app.use('/api/memos', authCheck, memoRoute);
 
 app.use((req, res, next) => {
   return next(new HttpError('Could not find this route', 404));
