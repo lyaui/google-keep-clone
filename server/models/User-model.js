@@ -4,6 +4,7 @@ const { Schema, model } = mongoose;
 const userSchema = new Schema({
   name: { type: String, require: true },
   email: { type: String, require: true, unique: true },
+  googleID: { type: String },
   password: { type: String, require: true, minlength: 6 },
   memos: [{ type: Schema.Types.ObjectId, ref: 'Memo', default: [] }],
   labels: [{ type: Schema.Types.ObjectId, ref: 'Label', default: [] }],
