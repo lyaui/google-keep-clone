@@ -34,7 +34,7 @@ function App() {
               <Route path='/:label'>
                 <Main />
               </Route>
-              <Redirect to='/home' />
+              <Redirect to='/login' />
             </Switch>
           </main>
         </MemoContextProvider>
