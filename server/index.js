@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { userRoute, labelRoute, memoRoute } = require('./routes');
 require('dotenv').config();
+require('./config/passport');
+const { HttpError } = require('./models');
+const cors = require('cors');
 
 mongoose
   .connect(process.env.DB_CONNECT)
@@ -15,8 +18,9 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-// middleware
+// middlewarecle
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/api/user', userRoute);
 app.use('/api/labels', labelRoute);
 app.use('/api/memos', memoRoute);
