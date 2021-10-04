@@ -68,6 +68,30 @@ const login = async (req, res, next) => {
   }
 };
 
+const googleLogin = async (req, res) => {
+  const { user } = req;
+  const tokenObj = { id: user._id, email: user.email };
+  const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn: '30d' });
+  res.status(200).json({
+    success: true,
+    data: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token,
+    },
+    message: 'Logined in!',
+  });
+};
+
+const logout = (req, res) => {
+  req.logout();
+  res.status(200).json({
+    success: 200,
+    message: 'Logout successfully!',
+  });
+};
+
 const getUserSettings = async (req, res, next) => {
   const { userId } = req.params;
   try {
@@ -97,4 +121,4 @@ const updateUserSettings = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, login, getUserSettings, updateUserSettings };
+module.exports = { signup, login, googleLogin, logout, getUserSettings, updateUserSettings };
