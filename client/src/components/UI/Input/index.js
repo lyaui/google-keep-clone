@@ -39,7 +39,7 @@ const inputReducer = (state = INIT_INPUT_STATES, action) => {
   }
 };
 
-const Input = ({ label, type, validate }) => {
+const Input = ({ name, label, type, validate, validFormHandler }) => {
   const { path } = useRouteMatch();
   const [inputState, inputDispatch] = useReducer(inputReducer, INIT_INPUT_STATES);
   const { isTouched, isValid, value, errorMessage } = inputState;
@@ -64,6 +64,8 @@ const Input = ({ label, type, validate }) => {
       isValid,
       errorMessage,
     });
+
+    validFormHandler(name, isValid);
   };
 
   const resetInputHandle = () => inputDispatch({ type: INPUT_ACTIONS.RESET });
