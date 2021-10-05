@@ -1,7 +1,8 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd';
-
+import { ROUTE } from 'constants/routes.js';
 import MemoContextProvider, { useMemoContextVal } from 'contexts/memo-context.js';
+import AuthContextProvider from 'contexts/auth-context.js';
 import UIContextProvider from 'contexts/ui-context.js';
 import Main from 'pages/Main.js';
 import Login from 'pages/Login.js';
@@ -24,21 +25,23 @@ function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <UIContextProvider>
-        <MemoContextProvider>
-          <main>
-            <Switch>
-              <Route path='/login'>
-                <Login />
-              </Route>
-              <Route path='/:label'>
-                <Main />
-              </Route>
-              <Redirect to='/login' />
-            </Switch>
-          </main>
-        </MemoContextProvider>
-      </UIContextProvider>
+      <AuthContextProvider>
+        <UIContextProvider>
+          <MemoContextProvider>
+            <main>
+              <Switch>
+                <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]}>
+                  <Login />
+                </Route>
+                <Route path={ROUTE.LABEL}>
+                  <Main />
+                </Route>
+                <Redirect to={ROUTE.LOGIN} />
+              </Switch>
+            </main>
+          </MemoContextProvider>
+        </UIContextProvider>
+      </AuthContextProvider>
     </DragDropContext>
   );
 }
