@@ -3,9 +3,8 @@ import styled from 'styled-components/macro';
 export const SLoginForm = styled.div`
   color: #475861;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  padding: 50px;
+  padding: 60px 50px;
   width: 385px;
   p {
     font-weight: 300;
@@ -47,5 +46,11 @@ export const SLoginFormSeperator = styled.div`
     content: ' ';
     background-color: #999;
     width: 40%;
+  }
+`;
+
+export const SFormHint = styled.span`
+  u {
+    cursor: pointer;
   }
 `;
