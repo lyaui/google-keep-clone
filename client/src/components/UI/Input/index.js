@@ -1,5 +1,5 @@
 import { useRef, useEffect, useReducer } from 'react';
-import { useUIContextVal } from 'contexts/ui-context.js';
+import { useRouteMatch } from 'react-router-dom';
 import { validator } from 'utils/validator.js';
 import { SInputControl, SInput, SInputMessage } from 'components/UI/Input/style.js';
 
@@ -40,14 +40,13 @@ const inputReducer = (state = INIT_INPUT_STATES, action) => {
 };
 
 const Input = ({ label, type, validate }) => {
-  const { CTX_FORM_MODE } = useUIContextVal();
+  const match = useRouteMatch();
+  const { path } = match;
   const [inputState, inputDispatch] = useReducer(inputReducer, INIT_INPUT_STATES);
   const { isTouched, isValid, value, errorMessage } = inputState;
   const inputRef = useRef();
 
-  useEffect(() => {
-    resetInputHandle();
-  }, [CTX_FORM_MODE.formMode]);
+  useEffect(() => resetInputHandle(), [path]);
 
   const blurInputHandler = () => {
     const { isValid, errorMessage } = validator(inputRef.current.value, validate);
@@ -68,9 +67,7 @@ const Input = ({ label, type, validate }) => {
     });
   };
 
-  const resetInputHandle = () => {
-    inputDispatch({ type: INPUT_ACTIONS.RESET });
-  };
+  const resetInputHandle = () => inputDispatch({ type: INPUT_ACTIONS.RESET });
 
   return (
     <SInputControl>
@@ -83,8 +80,7 @@ const Input = ({ label, type, validate }) => {
         isInValid={(!isValid && isTouched) || false}
         value={value}
       />
-
-      {errorMessage && <SInputMessage>{errorMessage}</SInputMessage>}
+      {errorMessage && isTouched && <SInputMessage>{errorMessage}</SInputMessage>}
     </SInputControl>
   );
 };
