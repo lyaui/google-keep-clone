@@ -1,3 +1,4 @@
+import { useRouteMatch } from 'react-router-dom';
 import {
   SLoginImage,
   SLoginImageTitle,
@@ -6,8 +7,9 @@ import {
 } from 'components/LoginPage/LoginImage/style.js';
 
 const LoginImage = () => {
+  const { path } = useRouteMatch();
   return (
-    <SLoginImage>
+    <SLoginImage path={path}>
       <div>
         <SLoginImageTitle>記下每一個想法</SLoginImageTitle>
         <SLoginImageText>

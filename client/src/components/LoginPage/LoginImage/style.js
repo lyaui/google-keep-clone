@@ -1,10 +1,13 @@
 import styled from 'styled-components/macro';
-import backgroundImage from 'assets/images/login-background.jpeg';
+import { ROUTE } from 'constants/routes.js';
+import loginBackgroundImage from 'assets/images/login-background.jpeg';
+import signupBackgroundImage from 'assets/images/signup-background.jpeg';
 
 export const SLoginImage = styled.div`
   flex: 1;
   padding: 50px;
-  background-image: url(${backgroundImage});
+  background-image: ${(props) =>
+    props.path === ROUTE.LOGIN ? `url(${loginBackgroundImage})` : `url(${signupBackgroundImage})`};
   background-repeat: no-repeat;
   background-position: center;
 

@@ -40,8 +40,7 @@ const inputReducer = (state = INIT_INPUT_STATES, action) => {
 };
 
 const Input = ({ label, type, validate }) => {
-  const match = useRouteMatch();
-  const { path } = match;
+  const { path } = useRouteMatch();
   const [inputState, inputDispatch] = useReducer(inputReducer, INIT_INPUT_STATES);
   const { isTouched, isValid, value, errorMessage } = inputState;
   const inputRef = useRef();
