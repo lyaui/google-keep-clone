@@ -13,10 +13,11 @@ export const SInput = styled.input`
   padding: 8px;
   font-size: 14px;
   display: block;
-  border: 1px solid #ccc;
+  border: ${(props) => (props.isInValid ? '2px solid #FFA0A0' : '1px solid #ccc')};
   border-radius: 2px;
+  background-color: ${(props) => (props.isInValid ? '#FFDEDE' : 'transparent')};
   :focus {
-    border: 2px solid rgb(66, 133, 244);
+    border: ${(props) => (props.isInValid ? '2px solid #FFA0A0' : '2px solid rgb(66, 133, 244)')};
     opacity: 0.9;
   }
   ::placeholder {
@@ -26,7 +27,10 @@ export const SInput = styled.input`
 `;
 
 export const SInputMessage = styled.span`
+  margin-top: 4px;
   color: red;
   font-size: 12px;
   font-weight: unset;
+  padding-left: 8px;
+  margin-right: auto;
 `;
