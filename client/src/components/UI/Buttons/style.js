@@ -34,7 +34,16 @@ export const SButtonSquare = styled(SButton)`
 
 export const SButtonRect = styled(SButton)`
   color: #fff;
+  font-size: 14px;
+  background-color: rgb(66, 133, 244);
   border-radius: 2px;
   height: 40px;
   margin: 18px 0;
+`;
+
+export const SButtonRectDisabled = styled(SButtonRect)`
+  color: rgba(0, 0, 0, 0.2);
+  background-color: #eeeeee;
+  cursor: not-allowed;
+  pointer-events: all !important;
 `;
