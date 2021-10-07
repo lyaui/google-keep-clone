@@ -36,7 +36,7 @@ function App() {
                   <Login />
                 </Route>
                 {/* {isLoggedIn && ( */}
-                <Route path={ROUTE.LABEL}>
+                <Route path={[ROUTE.LABEL, ROUTE.HOME]}>
                   <Main />
                 </Route>
                 {/* )} */}
