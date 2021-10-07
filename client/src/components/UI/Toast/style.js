@@ -1,14 +1,15 @@
 import styled from 'styled-components/macro';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, Slide } from 'react-toastify';
 
 export const SToast = styled(ToastContainer).attrs({
   position: 'bottom-left',
-  autoClose: 3000,
+  autoClose: 2000,
   hideProgressBar: true,
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
+  transition: Slide,
 })`
   .Toastify__toast {
     color: #fff;
