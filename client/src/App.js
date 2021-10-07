@@ -1,13 +1,16 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
+import Toast from 'components/UI/Toast';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { ROUTE } from 'constants/routes.js';
 import MemoContextProvider, { useMemoContextVal } from 'contexts/memo-context.js';
-import AuthContextProvider from 'contexts/auth-context.js';
+import { AuthProvider, useAuth } from 'contexts/auth-context';
 import UIContextProvider from 'contexts/ui-context.js';
 import Main from 'pages/Main.js';
 import Login from 'pages/Login.js';
 
 function App() {
+  const { authState } = useAuth();
+  const { isLoggedIn } = authState;
   const { setMemos } = useMemoContextVal();
 
   const onDragEnd = () => {
@@ -18,14 +21,13 @@ function App() {
     // // 若位置沒有改變
     // if (source.droppableId === destination.droppableId && source.index === destination.index)
     //   return;
-    // console.log(draggableId);
     // setMemos();
     // const column =
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <AuthContextProvider>
+      <AuthProvider>
         <UIContextProvider>
           <MemoContextProvider>
             <main>
@@ -33,15 +35,18 @@ function App() {
                 <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]}>
                   <Login />
                 </Route>
+                {/* {isLoggedIn && ( */}
                 <Route path={ROUTE.LABEL}>
                   <Main />
                 </Route>
+                {/* )} */}
                 <Redirect to={ROUTE.LOGIN} />
               </Switch>
             </main>
+            <Toast />
           </MemoContextProvider>
         </UIContextProvider>
-      </AuthContextProvider>
+      </AuthProvider>
     </DragDropContext>
   );
 }
