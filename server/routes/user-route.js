@@ -2,8 +2,8 @@ const router = require('express').Router();
 const passport = require('passport');
 const { userController } = require('../controllers');
 
-router.post('/signup', passport.authenticate('jwt', { session: false }), userController.signup);
-router.post('/login', passport.authenticate('jwt', { session: false }), userController.login);
+router.post('/signup', userController.signup);
+router.post('/login', userController.login);
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get(
   '/google/redirect',
