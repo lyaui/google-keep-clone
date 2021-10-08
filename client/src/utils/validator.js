@@ -14,7 +14,7 @@ export const validator = (value, validators) => {
       errorMessage = !isValid && !errorMessage ? '此欄為必填' : errorMessage;
     }
     if (validator === VALIDATOR_TYPES.MINLENGTH) {
-      isValid = isValid && value.trim().length >= 6;
+      isValid = isValid && value.length >= 6;
       errorMessage = !isValid && !errorMessage ? '字數需大於等於 6 字元' : errorMessage;
     }
     if (validator === VALIDATOR_TYPES.EMAIL) {
