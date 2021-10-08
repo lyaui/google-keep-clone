@@ -75,6 +75,9 @@ import { RiShareBoxLine as Share } from 'react-icons/ri';
 // Google
 import { FcGoogle as Google } from 'react-icons/fc';
 
+// Loading
+import { RiLoader5Fill as Loading } from 'react-icons/ri';
+
 export {
   Menu,
   Bulb,
@@ -110,4 +113,5 @@ export {
   Redo,
   Share,
   Google,
+  Loading,
 };
