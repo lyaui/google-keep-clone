@@ -64,8 +64,7 @@ const Input = ({ name, label, type, validate, validFormHandler }) => {
       isValid,
       errorMessage,
     });
-
-    validFormHandler(name, isValid);
+    validFormHandler({ name, value: inputRef.current.value, isValid });
   };
 
   const resetInputHandle = () => inputDispatch({ type: INPUT_ACTIONS.RESET });

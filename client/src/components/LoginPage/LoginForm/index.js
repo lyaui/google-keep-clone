@@ -14,14 +14,14 @@ import {
 } from 'components/LoginPage/LoginForm/style.js';
 
 const INIT_SIGNIP_INPUTS = {
-  name: { isValid: false },
-  email: { isValid: false },
-  password: { isValid: false },
+  name: { value: '', isValid: false },
+  email: { value: '', isValid: false },
+  password: { value: '', isValid: false },
 };
 
 const INIT_LOGIN_INPUTS = {
-  email: { isValid: false },
-  password: { isValid: false },
+  email: { value: '', isValid: false },
+  password: { value: '', isValid: false },
 };
 
 const LoginForm = () => {
@@ -38,8 +38,8 @@ const LoginForm = () => {
   }, [path]);
 
   // update input isValid value
-  const validFormHandler = (label, isValid) => {
-    const updatedformInputs = { ...formInputs, [label]: { isValid: isValid } };
+  const validFormHandler = ({ name, value, isValid }) => {
+    const updatedformInputs = { ...formInputs, [name]: { value, isValid: isValid } };
     setFormInputs(updatedformInputs);
   };
 
@@ -88,7 +88,7 @@ const LoginForm = () => {
       />
 
       {/* submit button */}
-      <LoginButton type='submit' isFormValid={isFormValid} />
+      <LoginButton type='submit' isFormValid={isFormValid} inputValues={formInputs} />
 
       {/* toggle page */}
       {path === ROUTE.LOGIN && (
