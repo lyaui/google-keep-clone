@@ -26,7 +26,7 @@ export const ButtonRect = forwardRef(
   ({ children, size, color, isFormValid = true, onClick }, ref) => {
     const SButton = isFormValid ? SButtonRect : SButtonRectDisabled;
     return (
-      <SButton ref={ref} size={size} color={color} onClick={onClick}>
+      <SButton ref={ref} size={size} color={color} onClick={onClick} disabled={!isFormValid}>
         {children}
       </SButton>
     );
