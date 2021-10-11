@@ -16,7 +16,7 @@ const EditCardImages = () => {
   const addImageHandler = (newImage) => {
     setImages([...images, newImage]);
   };
-  const deletImageHandler = (index) => {
+  const deleteImageHandler = (index) => {
     const newImages = [...images].filter((image, idx) => idx !== index);
     setImages(newImages);
   };
@@ -29,7 +29,7 @@ const EditCardImages = () => {
           isEditMode='true'
           setUploadedImages={setImages}
           addImageHandler={addImageHandler}
-          deletImageHandler={deletImageHandler}
+          deleteImageHandler={deleteImageHandler}
         />
       )}
     </SEditCardImages>
