@@ -24,10 +24,7 @@ export const authReducer = (state = INIT_AUTH_STATES, action) => {
       };
 
     case AUTH_TYPES.LOGOUT_SUCCESS:
-      return {
-        ...state,
-        ...INIT_AUTH_STATES,
-      };
+      return {};
 
     case AUTH_TYPES.SIGNUP_FAIL:
     case AUTH_TYPES.LOGIN_FAIL:
