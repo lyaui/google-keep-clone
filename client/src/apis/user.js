@@ -5,4 +5,4 @@ export const apiLogin = (data) => axiosUser.post('/login', data);
 export const apiGoogleLogin = () => axiosUser.get('/google');
 export const apiLogout = () => axiosUser.get('/logout');
 export const apiGetUserSettings = (userId) => axiosUser.get(`/settings/${userId}`);
-export const apiUpdateUserSettings = (userId) => axiosUser.get(`/settings/${userId}`);
+export const apiUpdateUserSettings = (userId, data) => axiosUser.patch(`/settings/${userId}`, data);
