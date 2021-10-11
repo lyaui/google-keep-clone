@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { ROUTE } from 'constants/routes.js';
 import MemoContextProvider, { useMemoContextVal } from 'contexts/memo-context.js';
 import { AuthProvider, useAuth } from 'contexts/auth-context';
-import UIContextProvider from 'contexts/ui-context.js';
+import { UIProvider } from 'contexts/UI-context/index.js';
 import Main from 'pages/Main.js';
 import Login from 'pages/Login.js';
 
@@ -28,7 +28,7 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <AuthProvider>
-        <UIContextProvider>
+        <UIProvider>
           <MemoContextProvider>
             <main>
               <Switch>
@@ -45,7 +45,7 @@ function App() {
             </main>
             <Toast />
           </MemoContextProvider>
-        </UIContextProvider>
+        </UIProvider>
       </AuthProvider>
     </DragDropContext>
   );
