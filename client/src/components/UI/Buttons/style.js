@@ -4,6 +4,7 @@ export const SButton = styled.button`
   text-align: center;
   background-color: ${(props) => props.color || 'transparent'};
   transition: all 0.3s;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   svg {
     width: 90%;
     height: 90%;
