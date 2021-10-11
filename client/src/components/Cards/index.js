@@ -2,13 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import composeRefs from '@seznam/compose-react-refs';
 import { useMemoContextVal } from 'contexts/memo-context.js';
-import { useUIContextVal } from 'contexts/ui-context.js';
+import { useUI } from 'contexts/UI-context/index.js';
 import Card from 'components/UI/Card';
 import { SCards } from 'components/Cards/style.js';
 
 const Cards = () => {
   const { memos } = useMemoContextVal();
-  const { CTX_VIEW_MODE, CTX_FIXMENU } = useUIContextVal();
+  const { UIState } = useUI();
+  const { layout, isFixedMenu } = UIState;
   const masonryRef = useRef();
   const [masonryDom, setMasonryDom] = useState(null);
 
@@ -20,11 +21,7 @@ const Cards = () => {
     <Droppable droppableId='cards'>
       {(provided) => (
         <div ref={composeRefs(masonryRef, provided.innerRef)} {...provided.droppableProps}>
-          <SCards
-            className='masonry'
-            viewMode={CTX_VIEW_MODE.viewMode}
-            isFixedMenu={CTX_FIXMENU.isFixedMenu}
-          >
+          <SCards className='masonry' viewMode={layout} isFixedMenu={isFixedMenu}>
             {memos.map((card, index) => (
               <Card
                 key={card.id}
