@@ -1,6 +1,16 @@
+export const THEME = {
+  LIGHT: 'LIGHT',
+  DARK: 'DARK',
+};
+
 export const VIEW_MODE = {
   GRID: 'GRID',
   LIST: 'LIST',
+};
+
+export const SORT = {
+  ASCEND: 'ASCEND',
+  DESCEND: 'DESCEND',
 };
 
 export const TOOLTIP_NAME = {
@@ -8,7 +18,24 @@ export const TOOLTIP_NAME = {
   LABEL: 'LABEL',
 };
 
-export const FORM_MODE = {
-  SIGNUP: 'SIGNUP',
-  LOGIN: 'LOGIN',
+export const INIT_UI_STATES = {
+  isLoading: false,
+  errorMessage: '',
+  theme: THEME.LIGHT,
+  layout: VIEW_MODE.GRID,
+  sort: SORT.DESCEND,
+  isFixedMenu: false,
+};
+
+export const UI_TYPES = {
+  // USER_SETTINGS
+  SETTINGS_REQUEST: 'SETTINGS_REQUEST',
+  SETTINGS_SUCCESS: 'SETTINGS_SUCCESS',
+  SETTINGS_FAIL: 'SETTINGS_FAIL',
+  SETTINGS_RESET: 'SETTINGS_RESET',
+
+  // SETTINGS_UPDATE
+  SETTINGS_UPDATE_REQUEST: 'LOGIN_REQUEST',
+  SETTINGS_UPDATE_SUCCESS: 'LOGIN_SUCCESS',
+  SETTINGS_UPDATE_FAIL: 'LOGIN_FAIL',
 };
