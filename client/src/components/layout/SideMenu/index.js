@@ -1,6 +1,6 @@
 import NavItem from 'components/Layout/SideMenu/NavItem/index.js';
 import { SSideMenu, SSideMenuList } from 'components/Layout/SideMenu/style.js';
-import { useUIContextVal } from 'contexts/ui-context.js';
+import { useUI } from 'contexts/UI-context/index.js';
 
 const DUMMY_DATA = [
   { id: '1', label: '提醒' },
@@ -15,10 +15,11 @@ const DUMMY_DATA = [
 ];
 
 const SideMenu = () => {
-  const { CTX_FIXMENU } = useUIContextVal();
+  const { UIState } = useUI();
+  const { isFixedMenu } = UIState;
 
   return (
-    <SSideMenu isFixedMenu={CTX_FIXMENU.isFixedMenu}>
+    <SSideMenu isFixedMenu={isFixedMenu}>
       <SSideMenuList>
         <NavItem id='memo' label='記事' type='memo' />
         {/* labels */}

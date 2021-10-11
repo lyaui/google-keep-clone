@@ -2,10 +2,11 @@ import { NavLink } from 'react-router-dom';
 import * as Icon from 'components/UI/Icon/index.js';
 import { SNavItem, SNavItemText } from 'components/Layout/SideMenu/NavItem/style.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
-import { useUIContextVal } from 'contexts/ui-context.js';
+import { useUI } from 'contexts/UI-context/index.js';
 
 function NavItem({ id, label, type = 'tag' }) {
-  const { CTX_FIXMENU } = useUIContextVal();
+  const { UIState } = useUI();
+  const { isFixedMenu } = UIState;
   const icon =
     type === 'memo' ? (
       <Icon.Bulb />
@@ -21,7 +22,7 @@ function NavItem({ id, label, type = 'tag' }) {
     <SNavItem key={id}>
       <NavLink to={`/label/${label}`} activeStyle={{ backgroundColor: '#FEEFC3' }}>
         <ButtonRound size={40}>{icon}</ButtonRound>
-        <SNavItemText isFixedMenu={CTX_FIXMENU.isFixedMenu}>{label}</SNavItemText>
+        <SNavItemText isFixedMenu={isFixedMenu}>{label}</SNavItemText>
       </NavLink>
     </SNavItem>
   );
