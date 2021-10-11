@@ -11,4 +11,7 @@ export const TOAST_TEXT = {
   // LOGOUT
   LOGOUT_SUCCESS: '👋 登出成功',
   LOGOUT_FAIL: '🤭 登出失敗 請稍候再嘗試',
+
+  // SETTINGS
+  SETTINGS_FAIL: '🤔 無法取得使用者設定 請重新登入',
 };
