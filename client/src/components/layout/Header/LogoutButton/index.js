@@ -11,7 +11,8 @@ import { ButtonRound } from 'components/UI/Buttons/index.js';
 
 const LogoutButton = () => {
   const history = useHistory();
-  const { authDispatch } = useAuth();
+  const { authState, authDispatch } = useAuth();
+  const { isLoading } = authState;
 
   const logoutUserHandler = async (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const LogoutButton = () => {
       const res = await logout(authDispatch);
       if (!res.success) throw new Error();
       toast(TOAST_TEXT.LOGOUT_SUCCESS);
-      history.push(ROUTE.LOGIN);
+      history.replace(ROUTE.LOGIN);
     } catch {
       toast(TOAST_TEXT.LOGOUT_FAIL);
     }
@@ -27,7 +28,7 @@ const LogoutButton = () => {
 
   return (
     <Tippy content={TOOLTIP_TEXT.LOGOUT}>
-      <ButtonRound size={40} onClick={logoutUserHandler}>
+      <ButtonRound size={40} onClick={logoutUserHandler} disabled={isLoading}>
         <Icon.Logout />
       </ButtonRound>
     </Tippy>
