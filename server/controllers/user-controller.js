@@ -25,7 +25,7 @@ const signup = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: {
+      user: {
         _id: createdUser._id,
         name: createdUser.name,
         email: createdUser.email,
@@ -50,18 +50,18 @@ const login = async (req, res, next) => {
     if (!isValidPassword) return next(new HttpError('Invalid credential, please try again.', 401));
 
     // token
-    const tokenObj = { id: createdUser._id, email: createdUser.email };
+    const tokenObj = { id: user._id, email: user.email };
     const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn: '30d' });
 
     res.status(200).json({
       success: true,
-      data: {
+      user: {
         _id: user._id,
         name: user.name,
         email: user.email,
         token,
       },
-      message: 'Logined in!',
+      message: 'logged in!',
     });
   } catch (err) {
     return next(new HttpError(err));
@@ -74,20 +74,20 @@ const googleLogin = async (req, res) => {
   const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn: '30d' });
   res.status(200).json({
     success: true,
-    data: {
+    user: {
       _id: user._id,
       name: user.name,
       email: user.email,
       token,
     },
-    message: 'Logined in!',
+    message: 'logged in!',
   });
 };
 
 const logout = (req, res) => {
   req.logout();
   res.status(200).json({
-    success: 200,
+    success: true,
     message: 'Logout successfully!',
   });
 };
@@ -99,7 +99,7 @@ const getUserSettings = async (req, res, next) => {
     const user = await User.findById(userId, 'settings');
     if (!user) return next(new HttpError('User not found.', 404));
 
-    res.status(200).json({ success: true, data: user.settings });
+    res.status(200).json({ success: true, settings: user.settings });
   } catch (err) {
     return next(new HttpError(err));
   }
@@ -107,15 +107,15 @@ const getUserSettings = async (req, res, next) => {
 
 const updateUserSettings = async (req, res, next) => {
   const { userId } = req.params;
-  const { theme, layout, sort } = req.body;
+  const updatedData = req.body;
+
   try {
     // check if user exists
     const user = await User.findById(userId, 'settings');
     if (!user) return next(new HttpError('User not found.', 404));
-
-    user.settings = { theme, layout, sort };
+    user.settings = { ...user.settings, ...updatedData };
     await user.save();
-    res.status(200).json({ success: true, data: user.settings });
+    res.status(200).json({ success: true, settings: user.settings });
   } catch (err) {
     return next(new HttpError(err));
   }
