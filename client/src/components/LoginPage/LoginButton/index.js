@@ -1,6 +1,6 @@
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useAuth, login, signup } from 'contexts/auth-context/index.js';
+import { useAuth, login, signup } from 'contexts/auth-context';
 import { ROUTE } from 'constants/routes.js';
 import { TOAST_TEXT } from 'constants/toastText.js';
 import * as Icon from 'components/UI/Icon/index.js';
@@ -51,7 +51,7 @@ const LoginButton = ({ isFormValid, inputValues }) => {
   };
 
   return (
-    <ButtonRect onClick={submitFormHandler} isFormValid={isFormValid}>
+    <ButtonRect onClick={submitFormHandler} isFormValid={isFormValid} disabled={isLoading}>
       {!isLoading && buttonText}
       {isLoading && <Icon.Loading className='spinner' />}
     </ButtonRect>
