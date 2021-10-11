@@ -1,7 +1,8 @@
+import { useState } from 'react';
+import CustomTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
-import { TOOLTIP_NAME } from 'constants/UI.js';
-import { useUIContextVal } from 'contexts/ui-context.js';
-import CustomTooltip from 'components/UI/CustomTooltip';
 import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import {
@@ -12,8 +13,7 @@ import {
 } from 'components/ActionButtons/EditCardLabelsButton/style.js';
 
 const EditCardLabelsButton = () => {
-  const { CTX_TOOLTIP } = useUIContextVal();
-
+  const [showTooltip, setShowTooltip] = useState(false);
   const labels = [
     {
       id: 'test',
@@ -50,11 +50,18 @@ const EditCardLabelsButton = () => {
     </SEditCardLabels>
   );
   return (
-    <CustomTooltip renderElement={editLabels} name={TOOLTIP_NAME.LABEL} text={TOOLTIP_TEXT.LABEL}>
-      <ButtonRound size={34} onClick={CTX_TOOLTIP.showTooltipHandler(TOOLTIP_NAME.LABEL)}>
-        <Icon.LabelOutline />
-      </ButtonRound>
-    </CustomTooltip>
+    <CustomTippy
+      render={() => editLabels}
+      interactive={true}
+      visible={showTooltip}
+      onClickOutside={() => setShowTooltip(false)}
+    >
+      <Tippy content={TOOLTIP_TEXT.LABEL}>
+        <ButtonRound size={34} onClick={() => setShowTooltip(true)}>
+          <Icon.LabelOutline />
+        </ButtonRound>
+      </Tippy>
+    </CustomTippy>
   );
 };
 
