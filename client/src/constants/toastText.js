@@ -14,4 +14,7 @@ export const TOAST_TEXT = {
 
   // SETTINGS
   SETTINGS_FAIL: '🤔 無法取得使用者設定 請重新登入',
+
+  // LABELS
+  LABELS_FAIL: '🤔 無法取得使用者標籤 請重新登入',
 };
