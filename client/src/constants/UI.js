@@ -13,11 +13,6 @@ export const SORT = {
   DESCEND: 'DESCEND',
 };
 
-export const TOOLTIP_NAME = {
-  PALETTE: 'PALETTE',
-  LABEL: 'LABEL',
-};
-
 export const INIT_UI_STATES = {
   isLoading: false,
   errorMessage: '',
