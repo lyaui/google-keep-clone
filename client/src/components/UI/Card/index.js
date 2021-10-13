@@ -1,7 +1,8 @@
 import { Fragment, useState, useEffect, useRef } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import composeRefs from '@seznam/compose-react-refs';
-import EditModal from 'components/EditModal';
+import Modal from 'components/UI/Modal';
+import AddNewCard from 'components/EditCard';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardContent from 'components/UI/Card/CardContent';
@@ -96,7 +97,9 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
           </SCard>
         )}
       </Draggable>
-      <EditModal showModal={showEditModal} closeModal={closeEditModalHandler}></EditModal>
+      <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
+        <AddNewCard />
+      </Modal>
     </Fragment>
   );
 };
