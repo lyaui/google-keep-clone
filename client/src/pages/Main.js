@@ -12,14 +12,12 @@ import Cards from 'components/Cards';
 const Main = () => {
   const history = useHistory();
   const { authState } = useAuth();
-  const { UIState, UIDispatch } = useUI();
-  const { isLoading } = UIState;
+  const { UIDispatch } = useUI();
   const userId = authState.userId;
 
   useEffect(() => {
     (async () => {
       if (!userId) return history.replace(ROUTE.LOGIN);
-
       try {
         const res = await getUserSettings(UIDispatch, { userId });
         if (!res.success) throw new Error();
