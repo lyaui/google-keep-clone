@@ -21,6 +21,7 @@ export const authReducer = (state = INIT_AUTH_STATES, action) => {
         userName: payload.userName,
         userEmail: payload.userEmail,
         token: payload.token,
+        errorMessage: '',
       };
 
     case AUTH_TYPES.LOGOUT_SUCCESS:
