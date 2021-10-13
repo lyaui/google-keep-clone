@@ -32,8 +32,6 @@ export const SNavItemText = styled.span`
   font-size: 14px;
   font-weight: 500;
   color: #202124;
-  opacity: ${(props) => (props.isFixedMenu ? 0.9 : 0)};
-  width: ${(props) => (props.isFixedMenu ? '100%' : 0)};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

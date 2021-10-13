@@ -8,6 +8,7 @@ import { getUserLabels } from 'store/labelsSlice/labels-action.js';
 import { useAuth } from 'contexts/auth-context';
 import { useUI } from 'contexts/UI-context';
 import NavItem from 'components/Layout/SideMenu/NavItem/index.js';
+import EditLabelButton from 'components/Layout/EditLabelButton';
 import { SSideMenu, SSideMenuList } from 'components/Layout/SideMenu/style.js';
 
 const SideMenu = () => {
@@ -32,10 +33,10 @@ const SideMenu = () => {
     <SSideMenu isFixedMenu={isFixedMenu}>
       <SSideMenuList>
         <NavItem id='memo' label='記事' type='memo' />
-        {labels.map((item) => (
-          <NavItem key={item.id} id={item.id} label={item.label} type='label' />
+        {labels.map((label) => (
+          <NavItem key={label._id} id={label._id} label={label.name} type='label' />
         ))}
-        <NavItem id='edit' label='編輯標籤' type='edit' />
+        <EditLabelButton />
         <NavItem id='archive' label='封存' type='archive' />
       </SSideMenuList>
     </SSideMenu>
