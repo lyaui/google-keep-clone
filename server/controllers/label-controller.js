@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 const { HttpError, Label, Memo, User } = require('../models');
 
-// TODO 所有的 label 等加入 user auth 直接確認 cretor 是否等於 req.user 並移除 check if user exists
+// TODO 所有的 label 等加入 user auth 直接確認 creator 是否等於 req.user 並移除 check if user exists
 
-// TODO
-const getLabels = async (req, res, next) => {
-  // TODO tempID
-  const userId = '614adcec7449bc9f3a6de8cd';
+const getUserLabels = async (req, res, next) => {
+  const { userId } = req.params;
   try {
     // check if user exists
     const user = await User.findById(userId);
@@ -15,7 +13,7 @@ const getLabels = async (req, res, next) => {
     const { labels } = await user.populate('labels', ['_id', 'name']);
     res.status(200).json({
       success: true,
-      data: labels,
+      labels,
     });
   } catch (err) {
     return next(new HttpError(err));
@@ -44,7 +42,7 @@ const createLabel = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: { name: createdLabel.name, _id: createdLabel._id },
+      labels: { name: createdLabel.name, _id: createdLabel._id },
       message: 'Create new label successfully.',
     });
   } catch (err) {
@@ -74,7 +72,7 @@ const updateLabel = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: label,
+      labels: label,
       message: 'Update label successfully.',
     });
   } catch (err) {
@@ -107,4 +105,4 @@ const deleteLabel = async (req, res, next) => {
   }
 };
 
-module.exports = { getLabels, createLabel, updateLabel, deleteLabel };
+module.exports = { getUserLabels, createLabel, updateLabel, deleteLabel };
