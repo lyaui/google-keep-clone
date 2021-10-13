@@ -1,29 +1,38 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { ROUTE } from 'constants/routes.js';
+import { toast } from 'react-toastify';
+import { TOAST_TEXT } from 'constants/toastText.js';
+import { getUserLabels } from 'store/labelsSlice/labels-action.js';
+import { useAuth } from 'contexts/auth-context';
+import { useUI } from 'contexts/UI-context';
 import NavItem from 'components/Layout/SideMenu/NavItem/index.js';
 import { SSideMenu, SSideMenuList } from 'components/Layout/SideMenu/style.js';
-import { useUI } from 'contexts/UI-context/index.js';
-
-const DUMMY_DATA = [
-  { id: '1', label: '提醒' },
-  { id: '2', label: '待辦事項' },
-  { id: '3', label: '徵才' },
-  { id: '4', label: '遊戲攻略' },
-  { id: '5', label: '開發紀錄' },
-  { id: '6', label: '影視感想' },
-  { id: '7', label: '購物清單' },
-  { id: '9', label: '雜' },
-  { id: '10', label: '點子點子點子點子點子點子點子點子點子點子點子點子點子點子點子點子點子' },
-];
 
 const SideMenu = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { labels, errorMessage } = useSelector((state) => state.labels);
+  const { authState } = useAuth();
+  const { userId } = authState;
   const { UIState } = useUI();
   const { isFixedMenu } = UIState;
+
+  useEffect(() => {
+    if (!userId) return history.replace(ROUTE.LOGIN);
+    dispatch(getUserLabels(userId));
+    if (errorMessage) {
+      toast(TOAST_TEXT.LABELS_FAIL);
+      history.replace(ROUTE.LOGIN);
+    }
+  }, [dispatch, errorMessage, history, userId]);
 
   return (
     <SSideMenu isFixedMenu={isFixedMenu}>
       <SSideMenuList>
         <NavItem id='memo' label='記事' type='memo' />
-        {/* labels */}
-        {DUMMY_DATA.map((item) => (
+        {labels.map((item) => (
           <NavItem key={item.id} id={item.id} label={item.label} type='label' />
         ))}
         <NavItem id='edit' label='編輯標籤' type='edit' />
