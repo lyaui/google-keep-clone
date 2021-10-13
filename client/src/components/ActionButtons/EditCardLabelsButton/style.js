@@ -1,9 +1,13 @@
 import styled from 'styled-components/macro';
-import { SCustomTooltip } from 'components/UI/CustomTooltip/style.js';
 
-export const SEditCardLabels = styled(SCustomTooltip)`
+export const SEditCardLabels = styled.div`
   padding: 12px;
   font-size: 14px;
+  width: ${(props) => `${props.width}px` || '140px'};
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px,
+    rgb(0 0 0 / 12%) 0px 1px 4px 0px;
 `;
 
 export const SLabels = styled.div`
