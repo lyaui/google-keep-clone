@@ -12,6 +12,8 @@ export const TOOLTIP_TEXT = {
   DARK_MODE: '啟用深色主題',
   LIGHT_MODE: '停用深色主題',
   LOGOUT: '登出',
+  DELETE_LABEL: '刪除標籤',
+  RENAME_LABEL: '重新命名標籤',
 
   // toolbar
   PALETTE: '變更顏色',
