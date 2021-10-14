@@ -70,7 +70,7 @@ const updateLabel = async (req, res, next) => {
       return next(new HttpError('Label name has existed, please try new one.', 422));
     await label.save();
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       labels: label,
       message: 'Update label successfully.',
