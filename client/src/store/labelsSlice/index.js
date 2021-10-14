@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserLabels, addLabel } from 'store/labelsSlice/labels-action.js';
+import { getUserLabels, addLabel, updateLabel } from 'store/labelsSlice/labels-action.js';
 
 const INIT_LABELS_STATE = {
   isLoading: false,
@@ -35,6 +35,21 @@ const labelsSlice = createSlice({
       state.labels = [...state.labels, label];
     },
     [addLabel.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
+
+    // updateLabel
+    [updateLabel.pending](state) {
+      state.isLoading = true;
+    },
+    [updateLabel.fulfilled](state, { payload: label }) {
+      state.isLoading = false;
+      state.errorMessage = '';
+      const index = state.labels.findIndex((item) => item._id === label._id);
+      state.labels[index] = label;
+    },
+    [updateLabel.rejected](state, { payload: errorMessage }) {
       state.isLoading = false;
       state.errorMessage = errorMessage;
     },
