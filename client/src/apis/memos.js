@@ -1,7 +1,7 @@
 import { axiosMemos } from 'apis';
 
-export const apiGetMemos = () => axiosMemos.get('/');
-export const apiGetMemosByLabelId = () => axiosMemos.get('/');
-export const apiCreateMemo = (data) => axiosMemos.post('/:labelId', data);
-export const apiUpdateMemo = (data) => axiosMemos.patch('/:labelId', data);
-export const apiDeleteMemo = () => axiosMemos.delete('/:labelId');
+export const apiGetMemos = (userId) => axiosMemos.get(`/user/${userId}`);
+export const apiGetMemosByLabelId = (labelId) => axiosMemos.get(`/label/${labelId}`);
+export const apiCreateMemo = (data) => axiosMemos.post('/', data);
+export const apiUpdateMemo = (memoId, data) => axiosMemos.patch(`/${memoId}`, data);
+export const apiDeleteMemo = (memoId) => axiosMemos.delete(`/${memoId}`);

@@ -3,18 +3,17 @@ const { HttpError, Memo, Label, User } = require('../models');
 
 // TODO 所有的 label 等加入 user auth 直接確認 creator 是否等於 req.user 並移除 check if user exists
 const getMemos = async (req, res, next) => {
-  // TODO tempID
   const { isArchived } = req.query;
-  const userId = '614adcec7449bc9f3a6de8cd';
+  const { userId } = req.params;
   try {
     // check if user exists
     const user = await User.findById(userId);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check user settings and sort data
-    const sortorder = user.settings.sort === 'ASCEND' ? 1 : -1;
+    const sortedOrder = user.settings.sort === 'ASCEND' ? 1 : -1;
     const memos = await Memo.find({ creator: userId, isArchived: !!isArchived || false }).sort({
-      updatedAt: sortorder,
+      updatedAt: sortedOrder,
     });
 
     res.status(200).json({
