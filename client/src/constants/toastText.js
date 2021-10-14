@@ -17,5 +17,6 @@ export const TOAST_TEXT = {
 
   // LABELS
   LABEL_UPDATE_SUCCESS: '標籤更新成功 😊',
+  LABEL_DELETE_SUCCESS: '標籤刪除成功 😳',
   LABELS_FAIL: '🤔 無法取得使用者標籤 請重新登入',
 };
