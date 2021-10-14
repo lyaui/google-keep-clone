@@ -5,7 +5,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { toast } from 'react-toastify';
 import { TOAST_TEXT } from 'constants/toastText.js';
-import { updateLabel } from 'store/labelsSlice/labels-action.js';
+import { updateLabel, deleteLabel } from 'store/labelsSlice/labels-action.js';
 import { useAuth } from 'contexts/auth-context';
 import * as Icon from 'components/UI/Icon/index.js';
 import {
@@ -78,6 +78,8 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
 
   const deleteLabelHandler = (e) => {
     e.preventDefault();
+    dispatch(deleteLabel(label._id));
+    toast(TOAST_TEXT.LABEL_UPDATE_SUCCESS);
   };
 
   const switchInputHandler = (e) => {
@@ -106,7 +108,7 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
     });
   };
 
-  const updateLabelHandler = async (e) => {
+  const updateLabelHandler = (e) => {
     e.preventDefault();
 
     const isLabelExisted = !!labels.find((label) => label.name === textValue.trim());
@@ -114,14 +116,12 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
       return inputDispatch({ type: LABEL_ACTIONS.ERROR, errorMessage: '請輸入標籤內容' });
     if (isLabelExisted)
       return inputDispatch({ type: LABEL_ACTIONS.ERROR, errorMessage: '標籤已存在' });
-
-    await dispatch(
+    dispatch(
       updateLabel({
         labelId: label._id,
         payload: { name: tempInputValue.trim(), creator: userId },
       }),
     );
-
     toast(TOAST_TEXT.LABEL_UPDATE_SUCCESS);
   };
 
