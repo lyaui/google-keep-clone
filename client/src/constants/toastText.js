@@ -16,5 +16,6 @@ export const TOAST_TEXT = {
   SETTINGS_FAIL: '🤔 無法取得使用者設定 請重新登入',
 
   // LABELS
+  LABEL_UPDATE_SUCCESS: '標籤更新成功 😊',
   LABELS_FAIL: '🤔 無法取得使用者標籤 請重新登入',
 };
