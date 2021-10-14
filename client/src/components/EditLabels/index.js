@@ -1,20 +1,15 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon/index.js';
 import { useAuth } from 'contexts/auth-context';
 import { addLabel } from 'store/labelsSlice/labels-action.js';
 import MemoLabel from 'components/EditLabels/MemoLabel';
+import SideMenuLabel from 'components/EditLabels/SideMenuLabel';
 import {
   SEditCardLabels,
   SEditCardLabelTitle,
   SSearchLabel,
   SLabels,
-  SLabel,
-  SLabelIcon,
-  SLabelEditInput,
   SAddNewLabel,
 } from 'components/EditLabels/style.js';
 
@@ -36,12 +31,6 @@ const EditLabels = ({ type = 'memo' }) => {
   const addLabelHandler = () => {
     dispatch(addLabel({ name: keyword, creator: userId }));
     setKeyword('');
-  };
-
-  const toggleInputHandler = () => {};
-
-  const deleteLabelHandler = () => {
-    alert('yo');
   };
 
   const isSideMenu = type === 'sideMenu';
@@ -67,28 +56,7 @@ const EditLabels = ({ type = 'memo' }) => {
 
         {/* edit labels */}
         {isSideMenu &&
-          labels.map((label) => (
-            // tag
-            <SLabel key={label.id} isSideMenu={isSideMenu}>
-              <SLabelIcon>
-                <Icon.Label name={'label'} />
-              </SLabelIcon>
-              {/* delete */}
-              <Tippy content={TOOLTIP_TEXT.DELETE_LABEL}>
-                <SLabelIcon onClick={deleteLabelHandler}>
-                  <Icon.Delete name={'delete'} />
-                </SLabelIcon>
-              </Tippy>
-              <span onClick={toggleInputHandler}>{label.name}</span>
-              <SLabelEditInput type='text' value={label.name} placeholder='輸入標籤名稱' />
-              {/* edit */}
-              <Tippy content={TOOLTIP_TEXT.RENAME_LABEL}>
-                <SLabelIcon>
-                  <Icon.Edit />
-                </SLabelIcon>
-              </Tippy>
-            </SLabel>
-          ))}
+          labels.map((label) => <SideMenuLabel label={label} isSideMenu={isSideMenu} />)}
       </SLabels>
       {noMatchResults && (
         <SAddNewLabel onClick={addLabelHandler}>
