@@ -78,6 +78,9 @@ import { FcGoogle as Google } from 'react-icons/fc';
 // Loading
 import { RiLoader5Fill as Loading } from 'react-icons/ri';
 
+// Save
+import { FaRegSave as Save } from 'react-icons/fa';
+
 export {
   Menu,
   Bulb,
@@ -114,4 +117,5 @@ export {
   Share,
   Google,
   Loading,
+  Save,
 };
