@@ -6,6 +6,7 @@ import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon/index.js';
 import { useAuth } from 'contexts/auth-context';
 import { addLabel } from 'store/labelsSlice/labels-action.js';
+import MemoLabel from 'components/EditLabels/MemoLabel';
 import {
   SEditCardLabels,
   SEditCardLabelTitle,
@@ -37,12 +38,10 @@ const EditLabels = ({ type = 'memo' }) => {
     setKeyword('');
   };
 
+  const toggleInputHandler = () => {};
+
   const deleteLabelHandler = () => {
     alert('yo');
-  };
-
-  const test = () => {
-    console.log('yo');
   };
 
   const isSideMenu = type === 'sideMenu';
@@ -64,15 +63,7 @@ const EditLabels = ({ type = 'memo' }) => {
 
       <SLabels maxHeight={isSideMenu ? 300 : 200}>
         {/* edit memo labels */}
-        {!isSideMenu &&
-          labels.map((label) => (
-            <SLabel key={label.id} isSideMenu={isSideMenu}>
-              <SLabelIcon>
-                {label.isSelected ? <Icon.CheckboxOutline /> : <Icon.EmptyCheckbox />}
-              </SLabelIcon>
-              <span>{label.name}</span>
-            </SLabel>
-          ))}
+        {!isSideMenu && labels.map((label) => <MemoLabel label={label} isSideMenu={isSideMenu} />)}
 
         {/* edit labels */}
         {isSideMenu &&
@@ -88,13 +79,8 @@ const EditLabels = ({ type = 'memo' }) => {
                   <Icon.Delete name={'delete'} />
                 </SLabelIcon>
               </Tippy>
-              {/* <span editable='true'>{label.name}</span> */}
-              <SLabelEditInput
-                onBlur={test}
-                type='text'
-                value={label.name}
-                placeholder='輸入標籤名稱'
-              />
+              <span onClick={toggleInputHandler}>{label.name}</span>
+              <SLabelEditInput type='text' value={label.name} placeholder='輸入標籤名稱' />
               {/* edit */}
               <Tippy content={TOOLTIP_TEXT.RENAME_LABEL}>
                 <SLabelIcon>
