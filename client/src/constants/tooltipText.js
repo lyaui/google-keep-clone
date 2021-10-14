@@ -14,6 +14,7 @@ export const TOOLTIP_TEXT = {
   LOGOUT: '登出',
   DELETE_LABEL: '刪除標籤',
   RENAME_LABEL: '重新命名標籤',
+  SAVE_RENAME_LABEL: '儲存修改標籤',
 
   // toolbar
   PALETTE: '變更顏色',
