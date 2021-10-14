@@ -52,11 +52,16 @@ const EditLabels = ({ type = 'memo' }) => {
 
       <SLabels maxHeight={isSideMenu ? 300 : 200}>
         {/* edit memo labels */}
-        {!isSideMenu && labels.map((label) => <MemoLabel label={label} isSideMenu={isSideMenu} />)}
+        {!isSideMenu &&
+          labels.map((label) => (
+            <MemoLabel key={label._id} label={label} isSideMenu={isSideMenu} />
+          ))}
 
         {/* edit labels */}
         {isSideMenu &&
-          labels.map((label) => <SideMenuLabel label={label} isSideMenu={isSideMenu} />)}
+          labels.map((label) => (
+            <SideMenuLabel key={label._id} label={label} isSideMenu={isSideMenu} />
+          ))}
       </SLabels>
       {noMatchResults && (
         <SAddNewLabel onClick={addLabelHandler}>
