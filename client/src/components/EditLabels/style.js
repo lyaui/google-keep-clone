@@ -58,16 +58,17 @@ export const SLabel = styled.div`
     display: block;
   }
   span {
+    display: block;
     margin-top: 2px;
     width: 100%;
     word-break: break-all;
-    margin-left: 8px;
   }
 `;
 
 export const SLabelEditInput = styled.input`
   width: 100%;
-  margin: 0 20px;
+  margin: 0 12px;
+  padding: 2px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
@@ -84,6 +85,17 @@ export const SLabelIcon = styled.div`
       fill: #202124;
     }
   }
+`;
+export const SLabelValue = styled.div`
+  width: 100%;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SLabelErrMsg = styled.div`
+  margin-top: 8px;
+  color: red;
 `;
 
 export const SAddNewLabel = styled.div`
