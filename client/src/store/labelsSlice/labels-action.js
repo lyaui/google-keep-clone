@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { apiGetLabels, apiCreateLabel } from 'apis/labels.js';
+import { apiGetLabels, apiCreateLabel, apiUpdateLabel } from 'apis/labels.js';
 
 export const getUserLabels = createAsyncThunk(
   'labels/getLabels',
@@ -19,6 +19,19 @@ export const addLabel = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const res = await apiCreateLabel(payload);
+      if (!res.data.success) throw new Error();
+      return res.data.labels;
+    } catch (err) {
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
+
+export const updateLabel = createAsyncThunk(
+  'labels/updateLabels',
+  async ({ labelId, payload }, { rejectWithValue }) => {
+    try {
+      const res = await apiUpdateLabel(labelId, payload);
       if (!res.data.success) throw new Error();
       return res.data.labels;
     } catch (err) {
