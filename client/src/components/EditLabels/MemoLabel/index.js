@@ -1,5 +1,5 @@
 import * as Icon from 'components/UI/Icon/index.js';
-import { SLabel, SLabelIcon } from 'components/EditLabels/style.js';
+import { SLabel, SLabelIcon, SLabelValue } from 'components/EditLabels/style.js';
 
 const MemoLabel = ({ label, isSideMenu }) => {
   return (
@@ -7,7 +7,7 @@ const MemoLabel = ({ label, isSideMenu }) => {
       <SLabelIcon>
         {label.isSelected ? <Icon.CheckboxOutline /> : <Icon.EmptyCheckbox />}
       </SLabelIcon>
-      <span>{label.name}</span>
+      <SLabelValue>{label.name}</SLabelValue>
     </SLabel>
   );
 };

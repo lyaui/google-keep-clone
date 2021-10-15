@@ -88,6 +88,8 @@ export const SLabelIcon = styled.div`
 `;
 export const SLabelValue = styled.div`
   width: 100%;
+  margin-top: ${(props) => (props.isSideMenu ? '0' : '2px')};
+  margin-right: 2px;
   margin-left: 12px;
   display: flex;
   flex-direction: column;
