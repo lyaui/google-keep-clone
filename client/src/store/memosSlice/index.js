@@ -6,11 +6,31 @@ const INIT_MEMOS_STATE = {
   isLoading: false,
   errorMessage: '',
   memos: [...DUMMY_DATA],
+  memo: {
+    title: '',
+    content: '',
+    images: [],
+    isPinned: false,
+    isArchived: false,
+    links: [],
+    labels: [],
+    tasks: [],
+    color: 'DEFAULT',
+  },
 };
 
 const memosSlice = createSlice({
   name: 'memos',
   initialState: INIT_MEMOS_STATE,
+  reducers: {
+    updateMemo(state, { payload }) {
+      state.memo = { ...state.memo, ...payload };
+      console.log(state.memo);
+    },
+    resetMemo(state) {
+      state.memo = INIT_MEMOS_STATE.memo;
+    },
+  },
   extraReducers: {
     // getUserMemos
     [getUserMemos.pending](state) {
@@ -28,4 +48,5 @@ const memosSlice = createSlice({
   },
 });
 
+export const memosActions = memosSlice.actions;
 export default memosSlice.reducer;
