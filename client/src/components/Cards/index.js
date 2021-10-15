@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 import composeRefs from '@seznam/compose-react-refs';
-
 import { getUserMemos } from 'store/memosSlice/memos-action.js';
 import { useAuth } from 'contexts/auth-context';
 import { useUI } from 'contexts/UI-context';
@@ -12,9 +11,6 @@ import { SCards } from 'components/Cards/style.js';
 const Cards = () => {
   const dispatch = useDispatch();
   const { memos } = useSelector((state) => state.memos);
-
-  console.log({ memos });
-
   const { authState } = useAuth();
   const { UIState } = useUI();
   const { userId } = authState;
@@ -23,7 +19,7 @@ const Cards = () => {
   const [masonryDom, setMasonryDom] = useState(null);
 
   useEffect(() => {
-    // dispatch(getUserMemos(userId));
+    dispatch(getUserMemos(userId));
     setMasonryDom(masonryRef.current);
   }, [dispatch, setMasonryDom, userId]);
 
@@ -51,7 +47,7 @@ const Cards = () => {
               {provided.placeholder}
             </SCards>
           )}
-          {memos.length === 0 && <p>你新增的記事會顯示在這裡</p>}
+          {/* {memos.length === 0 && <p>你新增的記事會顯示在這裡</p>} */}
         </div>
       )}
     </Droppable>
