@@ -14,7 +14,6 @@ import { SHeader, SHeaderLogo, SHeaderTitle } from 'components/Layout/Header/sty
 const Header = () => {
   const match = useRouteMatch();
   const { labelId } = match.params;
-  console.log({ labelId });
   const logoPath = logo;
   return (
     <SHeader>
