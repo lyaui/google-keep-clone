@@ -31,20 +31,18 @@ const EditCardColorButton = () => {
   );
 
   return (
-    <span>
-      <CustomTippy
-        render={() => palette}
-        interactive={true}
-        visible={showTooltip}
-        onClickOutside={() => setShowTooltip(false)}
-      >
-        <Tippy content={TOOLTIP_TEXT.PALETTE}>
-          <ButtonRound size={34} onClick={() => setShowTooltip(true)}>
-            <Icon.Palette />
-          </ButtonRound>
-        </Tippy>
-      </CustomTippy>
-    </span>
+    <CustomTippy
+      render={() => palette}
+      interactive={true}
+      visible={showTooltip}
+      onClickOutside={() => setShowTooltip(false)}
+    >
+      <Tippy content={TOOLTIP_TEXT.PALETTE}>
+        <ButtonRound size={34} onClick={() => setShowTooltip(true)}>
+          <Icon.Palette />
+        </ButtonRound>
+      </Tippy>
+    </CustomTippy>
   );
 };
 

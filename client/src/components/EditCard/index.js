@@ -1,18 +1,18 @@
+import { useSelector } from 'react-redux';
 import EditCardImages from 'components/EditCard/EditCardImages';
 import EditCardTitle from 'components/EditCard/EditCardTitle';
 import EditCardContent from 'components/EditCard/EditCardContent';
 import EditCardLink from 'components/EditCard/EditCardLink';
 import EditCardLabels from 'components/EditCard/EditCardLabels';
 import EditCardToolbar from 'components/EditCard/EditCardToolbar';
-
 import { SEditCard, SEditCardBody } from 'components/EditCard/style.js';
 
 const EditCard = () => {
-  // const [isPinned, setIsPinner] = useState(false);
-  // const [color, setColor] = useState('');
+  const { memo } = useSelector((state) => state.memos);
+  const memoColor = memo.color;
 
   return (
-    <SEditCard>
+    <SEditCard memoColor={memoColor}>
       <SEditCardBody>
         {/* images */}
         <EditCardImages />
