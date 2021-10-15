@@ -23,7 +23,7 @@ const Cards = () => {
   const [masonryDom, setMasonryDom] = useState(null);
 
   useEffect(() => {
-    dispatch(getUserMemos(userId));
+    // dispatch(getUserMemos(userId));
     setMasonryDom(masonryRef.current);
   }, [dispatch, setMasonryDom, userId]);
 
@@ -31,24 +31,27 @@ const Cards = () => {
     <Droppable droppableId='cards'>
       {(provided) => (
         <div ref={composeRefs(masonryRef, provided.innerRef)} {...provided.droppableProps}>
-          <SCards className='masonry' viewMode={layout} isFixedMenu={isFixedMenu}>
-            {memos.map((card, index) => (
-              <Card
-                key={card.id}
-                id={card.id}
-                color={card.color}
-                title={card.title}
-                images={card.images}
-                content={card.content}
-                labels={card.labels}
-                links={card.links}
-                masonryDom={masonryDom}
-                droppableId='cards'
-                index={index}
-              />
-            ))}
-            {provided.placeholder}
-          </SCards>
+          {memos.length > 0 && (
+            <SCards className='masonry' viewMode={layout} isFixedMenu={isFixedMenu}>
+              {memos.map((card, index) => (
+                <Card
+                  key={card.id}
+                  id={card.id}
+                  color={card.color}
+                  title={card.title}
+                  images={card.images}
+                  content={card.content}
+                  labels={card.labels}
+                  links={card.links}
+                  masonryDom={masonryDom}
+                  droppableId='cards'
+                  index={index}
+                />
+              ))}
+              {provided.placeholder}
+            </SCards>
+          )}
+          {memos.length === 0 && <p>你新增的記事會顯示在這裡</p>}
         </div>
       )}
     </Droppable>

@@ -1,3 +1,4 @@
+import { useRouteMatch } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -11,13 +12,16 @@ import { ButtonRound } from 'components/UI/Buttons/index.js';
 import { SHeader, SHeaderLogo, SHeaderTitle } from 'components/Layout/Header/style.js';
 
 const Header = () => {
+  const match = useRouteMatch();
+  const { labelId } = match.params;
+  console.log({ labelId });
   const logoPath = logo;
   return (
     <SHeader>
       {/* menu */}
       <FixMenu />
       <SHeaderLogo src={logoPath} alt='keep' />
-      <SHeaderTitle>記事</SHeaderTitle>
+      <SHeaderTitle>{labelId}</SHeaderTitle>
       {/* search */}
       <SearchInput />
       {/* operators */}
