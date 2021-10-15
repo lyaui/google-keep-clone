@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { memosActions } from 'store/memosSlice';
 import CustomTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
@@ -12,11 +12,10 @@ import { SEditCardColor, SColor } from 'components/ActionButtons/EditCardColorBu
 
 const EditCardColorButton = () => {
   const dispatch = useDispatch();
+  const { memo } = useSelector((state) => state.memos);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(PALETTE_COLORS.DEFAULT);
 
   const selectColorHandler = (color) => () => {
-    setSelectedColor(color);
     dispatch(memosActions.updateMemo({ color }));
   };
 
@@ -24,7 +23,7 @@ const EditCardColorButton = () => {
     <SEditCardColor width={140}>
       {Object.values(PALETTE_COLORS).map((color) => (
         <SColor key={color} color={color} onClick={selectColorHandler(color)}>
-          {selectedColor === color && <Icon.Check />}
+          {memo.color === color && <Icon.Check />}
         </SColor>
       ))}
     </SEditCardColor>
