@@ -18,9 +18,13 @@ export const SHeaderLogo = styled.img`
 `;
 
 export const SHeaderTitle = styled.div`
+  width: 0px;
   min-width: 200px;
   padding: 0 8px;
   font-size: 20px;
   color: #191919;
   font-weight: 400;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
