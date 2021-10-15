@@ -25,7 +25,12 @@ const memosSlice = createSlice({
   reducers: {
     updateMemo(state, { payload }) {
       state.memo = { ...state.memo, ...payload };
-      console.log(state.memo);
+    },
+    addMemoLabel(state, { payload: label }) {
+      state.memo.labels = [...state.memo.labels, label];
+    },
+    removeMemoLabel(state, { payload: labelId }) {
+      state.memo.labels = state.memo.labels.filter((label) => label._id !== labelId);
     },
     resetMemo(state) {
       state.memo = INIT_MEMOS_STATE.memo;
