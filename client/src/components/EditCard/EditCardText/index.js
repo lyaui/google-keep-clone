@@ -11,10 +11,6 @@ const EditCardText = ({ fetchTextHandler, updateTextHandler }) => {
     setText(textContent);
   }, [fetchTextHandler]);
 
-  useEffect(() => {
-    updateTextHandler(JSON.stringify(text));
-  }, [updateTextHandler, text]);
-
   const textChangeHandler = (e) => {
     const linkedText = Autolinker.link(e.target.value, {
       stripPrefix: false,
@@ -24,6 +20,7 @@ const EditCardText = ({ fetchTextHandler, updateTextHandler }) => {
     });
     setLinks(matches.map((link) => link.url));
     setText(linkedText);
+    updateTextHandler(linkedText);
   };
 
   const textPasteHandler = (e) => {

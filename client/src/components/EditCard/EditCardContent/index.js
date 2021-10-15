@@ -1,14 +1,14 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { memosActions } from 'store/memosSlice';
 import EditCardText from 'components/EditCard/EditCardText';
 import { SEditCardContent } from 'components/EditCard/EditCardContent/style.js';
 
 const EditCardContent = () => {
-  const fetchContentHandler = () => {
-    return JSON.parse(window.localStorage.getItem('testEditContent')) || '';
-  };
+  const dispatch = useDispatch();
+  const { memo } = useSelector((state) => state.memos);
 
-  const updateContentHandler = (data) => {
-    window.localStorage.setItem('testEditContent', data);
-  };
+  const fetchContentHandler = () => memo.content;
+  const updateContentHandler = (content) => dispatch(memosActions.updateMemo({ content }));
 
   return (
     <SEditCardContent>
