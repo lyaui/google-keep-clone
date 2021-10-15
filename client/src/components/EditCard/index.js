@@ -21,9 +21,9 @@ const EditCard = () => {
         {/* content */}
         <EditCardContent />
         {/* label */}
-        <EditCardLabels />
+        {memo.labels.length > 0 && <EditCardLabels />}
         {/* links */}
-        <EditCardLink />
+        {memo.links.length > 0 && <EditCardLink />}
       </SEditCardBody>
       {/* toolbar */}
       <EditCardToolbar />

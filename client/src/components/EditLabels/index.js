@@ -25,10 +25,12 @@ const EditLabels = ({ type = 'memo' }) => {
     : allLabels;
 
   const searchKeywordHandler = (e) => {
+    e.preventDefault();
     setKeyword(e.target.value.trim());
   };
 
-  const addLabelHandler = () => {
+  const addLabelHandler = (e) => {
+    e.preventDefault();
     dispatch(addLabel({ name: keyword, creator: userId }));
     setKeyword('');
   };
