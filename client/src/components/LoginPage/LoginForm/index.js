@@ -9,11 +9,11 @@ import LoginButton from 'components/LoginPage/LoginButton';
 import {
   SLoginForm,
   SLoginFormLogo,
-  SLoginFormSeperator,
+  SLoginFormSeparator,
   SFormHint,
 } from 'components/LoginPage/LoginForm/style.js';
 
-const INIT_SIGNIP_INPUTS = {
+const INIT_SIGNUP_INPUTS = {
   name: { value: '', isValid: false },
   email: { value: '', isValid: false },
   password: { value: '', isValid: false },
@@ -33,14 +33,14 @@ const LoginForm = () => {
 
   // set initInputs while path changes
   useEffect(() => {
-    const initInputs = path === ROUTE.LOGIN ? INIT_LOGIN_INPUTS : INIT_SIGNIP_INPUTS;
+    const initInputs = path === ROUTE.LOGIN ? INIT_LOGIN_INPUTS : INIT_SIGNUP_INPUTS;
     setFormInputs(initInputs);
   }, [path]);
 
   // update input isValid value
   const validFormHandler = ({ name, value, isValid }) => {
-    const updatedformInputs = { ...formInputs, [name]: { value, isValid: isValid } };
-    setFormInputs(updatedformInputs);
+    const updatedFormInputs = { ...formInputs, [name]: { value, isValid: isValid } };
+    setFormInputs(updatedFormInputs);
   };
 
   // check if all inputs are valid
@@ -62,7 +62,7 @@ const LoginForm = () => {
       <GoogleLoginButton />
 
       {/* form */}
-      <SLoginFormSeperator>或</SLoginFormSeperator>
+      <SLoginFormSeparator>或</SLoginFormSeparator>
       {path === ROUTE.SIGNUP && (
         <Input
           validFormHandler={validFormHandler}

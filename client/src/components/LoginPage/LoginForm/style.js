@@ -25,7 +25,7 @@ export const SLoginFormLogo = styled.img`
   width: 200px;
 `;
 
-export const SLoginFormSeperator = styled.div`
+export const SLoginFormSeparator = styled.div`
   color: #999;
   font-size: 12px;
   padding: 24px 0;
