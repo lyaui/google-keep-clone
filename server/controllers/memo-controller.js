@@ -18,7 +18,7 @@ const getMemos = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: memos,
+      memos,
     });
   } catch (err) {
     next(new HttpError(err));
@@ -40,7 +40,7 @@ const getMemosByLabelId = async (req, res, next) => {
     const { memos } = await label.populate('memos');
     res.status(200).json({
       success: true,
-      data: memos,
+      memos,
     });
   } catch (err) {
     next(new HttpError(err));
@@ -84,7 +84,7 @@ const createMemo = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: returnedData,
+      memo: returnedData,
       message: 'Create new memo successfully.',
     });
   } catch (err) {
@@ -124,7 +124,7 @@ const updateMemo = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: returnedData,
+      memo: returnedData,
       message: 'Update label successfully.',
     });
   } catch (err) {
@@ -144,7 +144,7 @@ const deleteMemo = async (req, res, next) => {
     session.startTransaction();
     // remove memo
     await memo.remove({ session });
-    // remove memo from labesls
+    // remove memo from labels
     await Label.updateMany({ memos: memoId }, { $pull: { memos: memoId } });
     // remove memo from creator
     memo.creator.memos.pull(memo);
