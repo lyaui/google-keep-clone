@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Autolinker from 'autolinker';
 import ContentEditable from 'react-contenteditable';
 
-const EditCardText = ({ fetchTextHandler, updateTextHandler }) => {
-  const [text, setText] = useState('');
+const EditCardText = ({ text, updateTextHandler }) => {
   const [links, setLinks] = useState([]);
-
-  useEffect(() => {
-    const textContent = fetchTextHandler();
-    setText(textContent);
-  }, [fetchTextHandler]);
 
   const textChangeHandler = (e) => {
     const linkedText = Autolinker.link(e.target.value, {
@@ -19,7 +13,6 @@ const EditCardText = ({ fetchTextHandler, updateTextHandler }) => {
       urls: true,
     });
     setLinks(matches.map((link) => link.url));
-    setText(linkedText);
     updateTextHandler(linkedText);
   };
 

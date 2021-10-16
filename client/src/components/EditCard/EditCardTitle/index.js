@@ -7,12 +7,11 @@ const EditCardTitle = () => {
   const dispatch = useDispatch();
   const { memo } = useSelector((state) => state.memos);
 
-  const fetchTitleHandler = () => memo.title;
   const updateTitleHandler = (title) => dispatch(memosActions.updateMemo({ title }));
 
   return (
     <SEditCardTitle>
-      <EditCardText fetchTextHandler={fetchTitleHandler} updateTextHandler={updateTitleHandler} />
+      <EditCardText text={memo.title} updateTextHandler={updateTitleHandler} />
     </SEditCardTitle>
   );
 };

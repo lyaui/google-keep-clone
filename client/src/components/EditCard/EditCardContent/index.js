@@ -7,15 +7,11 @@ const EditCardContent = () => {
   const dispatch = useDispatch();
   const { memo } = useSelector((state) => state.memos);
 
-  const fetchContentHandler = () => memo.content;
   const updateContentHandler = (content) => dispatch(memosActions.updateMemo({ content }));
 
   return (
     <SEditCardContent>
-      <EditCardText
-        fetchTextHandler={fetchContentHandler}
-        updateTextHandler={updateContentHandler}
-      />
+      <EditCardText text={memo.content} updateTextHandler={updateContentHandler} />
     </SEditCardContent>
   );
 };
