@@ -14,10 +14,11 @@ import { MdContentCopy as Copy } from 'react-icons/md';
 
 import { IoIosCheckbox as Checkbox } from 'react-icons/io';
 import {
-  RiCheckboxBlankLine as EmptyCheckbox,
-  RiCheckboxLine as CheckboxOutline,
-  RiCheckboxIndeterminateLine as CancelCheckboxOutline,
-} from 'react-icons/ri';
+  MdCheckBoxOutlineBlank as EmptyCheckbox,
+  MdOutlineCheckBox as CheckboxOutline,
+  MdOutlineIndeterminateCheckBox as CancelCheckboxOutline,
+} from 'react-icons/md';
+
 // edit
 import { HiPencil as Edit } from 'react-icons/hi';
 import { BiPencil as EditOutline } from 'react-icons/bi';
@@ -81,6 +82,9 @@ import { RiLoader5Fill as Loading } from 'react-icons/ri';
 // Save
 import { FaRegSave as Save } from 'react-icons/fa';
 
+// Drag
+import { MdDragIndicator as Drag } from 'react-icons/md';
+
 export {
   Menu,
   Bulb,
@@ -118,4 +122,5 @@ export {
   Google,
   Loading,
   Save,
+  Drag,
 };
