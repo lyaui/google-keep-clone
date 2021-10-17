@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import EditCardImages from 'components/EditCard/EditCardImages';
 import EditCardTitle from 'components/EditCard/EditCardTitle';
 import EditCardContent from 'components/EditCard/EditCardContent';
+import EditTasks from 'components/EditCard/EditTasks';
 import EditCardLink from 'components/EditCard/EditCardLink';
 import EditCardLabels from 'components/EditCard/EditCardLabels';
 import EditCardToolbar from 'components/EditCard/EditCardToolbar';
@@ -19,7 +20,9 @@ const EditCard = () => {
         {/* title */}
         <EditCardTitle />
         {/* content */}
-        <EditCardContent />
+        {memo.tasks.length === 0 && <EditCardContent />}
+        {/* tasks */}
+        {memo.tasks.length > 0 && <EditTasks />}
         {/* label */}
         {memo.labels.length > 0 && <EditCardLabels />}
         {/* links */}
