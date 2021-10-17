@@ -7,6 +7,7 @@ const memoSchema = new Schema(
     title: { type: String, default: '' },
     content: { type: String, default: '' },
     images: [{ type: String, default: [] }],
+    isTaskList: { type: Boolean, default: false },
     isPinned: { type: Boolean, default: false },
     isArchived: { type: Boolean, default: false },
     links: [{ type: String, default: [] }],

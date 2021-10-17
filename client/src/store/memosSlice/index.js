@@ -10,6 +10,7 @@ const INIT_MEMOS_STATE = {
     title: '',
     content: '',
     images: [],
+    isTaskList: false,
     isPinned: false,
     isArchived: false,
     links: [],
