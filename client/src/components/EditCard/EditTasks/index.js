@@ -13,7 +13,7 @@ const EditTasks = () => {
   const { memo } = useSelector((state) => state.memos);
   const [newTask, setNewTask] = useState('');
 
-  const updateTitleHandler = (handledTask) => {
+  const updateTaskHandler = (handledTask) => {
     setNewTask(handledTask);
     if (handledTask.includes('<div><br></div>')) {
       dispatch(
@@ -32,7 +32,7 @@ const EditTasks = () => {
         <SEditTasks ref={provided.innerRef} {...provided.droppableProps}>
           <SEditNewTask>
             <Icon.Add />
-            <EditCardText text={newTask} updateTextHandler={updateTitleHandler} />
+            <EditCardText text={newTask} updateTextHandler={updateTaskHandler} />
           </SEditNewTask>
           {memo.tasks.map((task, index) => (
             <EditTaskItem key={index} task={task} index={index} />
