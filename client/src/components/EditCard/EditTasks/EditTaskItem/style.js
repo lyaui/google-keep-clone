@@ -2,8 +2,9 @@ import styled from 'styled-components/macro';
 
 export const SEditTaskItem = styled.div`
   display: flex;
-  padding: 8px 0;
+  padding: 6px 0;
   line-height: 1.5em;
+  background-color: ${(props) => props.color || '#fff'};
   :hover [name='drag'] {
     opacity: 1;
   }

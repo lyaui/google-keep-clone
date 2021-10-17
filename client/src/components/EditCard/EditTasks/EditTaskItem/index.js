@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 import { Draggable } from 'react-beautiful-dnd';
+import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import { memosActions } from 'store/memosSlice';
 import * as Icon from 'components/UI/Icon/index.js';
 import EditCardText from 'components/EditCard/EditCardText';
@@ -11,8 +12,9 @@ import {
   SEditTaskItemText,
 } from 'components/EditCard/EditTasks/EditTaskItem/style.js';
 
-const EditTaskItem = ({ task, index }) => {
+const EditTaskItem = ({ task, index, color }) => {
   const dispatch = useDispatch();
+  const memoColor = PALETTE_COLORS[color];
 
   const updateTaskHandler = (handledTask) => {
     // new line new task
@@ -37,12 +39,13 @@ const EditTaskItem = ({ task, index }) => {
     dispatch(memosActions.removeTask(task.id));
   };
   return (
-    <Draggable draggableId={task.id} index={index}>
+    <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided) => (
         <SEditTaskItem
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          color={memoColor}
         >
           <SEditTaskItemIcon>
             <Icon.Drag name='drag' />

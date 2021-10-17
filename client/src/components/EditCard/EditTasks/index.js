@@ -11,6 +11,7 @@ import { SEditTasks, SEditNewTask } from 'components/EditCard/EditTasks/style.js
 const EditTasks = () => {
   const dispatch = useDispatch();
   const { memo } = useSelector((state) => state.memos);
+  const { color } = memo;
   const [newTask, setNewTask] = useState('');
 
   const updateTaskHandler = (handledTask) => {
@@ -35,8 +36,9 @@ const EditTasks = () => {
             <EditCardText text={newTask} updateTextHandler={updateTaskHandler} />
           </SEditNewTask>
           {memo.tasks.map((task, index) => (
-            <EditTaskItem key={index} task={task} index={index} />
+            <EditTaskItem key={index} task={task} index={index} color={color} />
           ))}
+          {provided.placeholder}
         </SEditTasks>
       )}
     </Droppable>
