@@ -15,14 +15,12 @@ const EditCardColorButton = () => {
   const { memo } = useSelector((state) => state.memos);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const selectColorHandler = (color) => () => {
-    dispatch(memosActions.updateMemo({ color }));
-  };
+  const selectColorHandler = (color) => () => dispatch(memosActions.updateMemo({ color }));
 
   const palette = (
     <SEditCardColor width={140}>
-      {Object.values(PALETTE_COLORS).map((color) => (
-        <SColor key={color} color={color} onClick={selectColorHandler(color)}>
+      {Object.keys(PALETTE_COLORS).map((color) => (
+        <SColor key={color} color={PALETTE_COLORS[color]} onClick={selectColorHandler(color)}>
           {memo.color === color && <Icon.Check />}
         </SColor>
       ))}
