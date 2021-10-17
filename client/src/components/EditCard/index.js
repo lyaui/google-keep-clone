@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import EditCardImages from 'components/EditCard/EditCardImages';
 import EditCardTitle from 'components/EditCard/EditCardTitle';
 import EditCardContent from 'components/EditCard/EditCardContent';
@@ -10,7 +11,8 @@ import { SEditCard, SEditCardBody } from 'components/EditCard/style.js';
 
 const EditCard = () => {
   const { memo } = useSelector((state) => state.memos);
-  const { isTaskList, color: memoColor } = memo;
+  const { isTaskList, color } = memo;
+  const memoColor = PALETTE_COLORS[color];
 
   return (
     <SEditCard memoColor={memoColor}>
