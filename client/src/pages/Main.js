@@ -1,20 +1,36 @@
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import { memosActions } from 'store/memosSlice';
 import { toast } from 'react-toastify';
 import { TOAST_TEXT } from 'constants/toastText.js';
 import { ROUTE } from 'constants/routes.js';
 import { useAuth } from 'contexts/auth-context';
 import { useUI, getUserSettings } from 'contexts/UI-context/index.js';
+import Modal from 'components/UI/Modal';
 import Layout from 'components/Layout';
-import AddNewCard from 'components/EditCard';
+import EditCard from 'components/EditCard';
 import Cards from 'components/Cards';
 
 const Main = () => {
+  const match = useRouteMatch();
   const history = useHistory();
-  const { authState } = useAuth();
-  const { UIDispatch } = useUI();
-  const userId = authState.userId;
+  const dispatch = useDispatch();
 
+  const { memos } = useSelector((state) => state.memos);
+  const { memoId } = match.params;
+  const { UIDispatch } = useUI();
+  const { authState } = useAuth();
+  const userId = authState.userId;
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const closeEditModalHandler = () => {
+    setShowEditModal(false);
+    dispatch(memosActions.resetMemo());
+    history.push(ROUTE.HOME);
+  };
+
+  // fetch user settings
   useEffect(() => {
     (async () => {
       if (!userId) return history.replace(ROUTE.LOGIN);
@@ -28,10 +44,27 @@ const Main = () => {
     })();
   }, [history, UIDispatch, userId]);
 
+  // open edit modal
+  useEffect(() => {
+    if (!memoId) return history.push(ROUTE.HOME);
+    // TODO fetch data
+    // memoId existed? memoId not existed?
+
+    // temp
+    const selectedMemo = memos.find((memo) => memo.id === memoId);
+    if (!selectedMemo) return history.push(ROUTE.HOME);
+
+    dispatch(memosActions.setMemo(selectedMemo));
+    setShowEditModal(true);
+  }, [dispatch, history, memos, memoId]);
+
   return (
     <Layout>
-      <AddNewCard />
+      <EditCard showMemo={!memoId} />
       <Cards />
+      <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
+        <EditCard />
+      </Modal>
     </Layout>
   );
 };

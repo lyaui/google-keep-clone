@@ -24,17 +24,20 @@ const memosSlice = createSlice({
   name: 'memos',
   initialState: INIT_MEMOS_STATE,
   reducers: {
+    setMemo(state, { payload: memo }) {
+      state.memo = memo;
+    },
     updateMemo(state, { payload }) {
       state.memo = { ...state.memo, ...payload };
+    },
+    resetMemo(state) {
+      state.memo = INIT_MEMOS_STATE.memo;
     },
     addMemoLabel(state, { payload: label }) {
       state.memo.labels = [...state.memo.labels, label];
     },
     removeMemoLabel(state, { payload: labelId }) {
       state.memo.labels = state.memo.labels.filter((label) => label._id !== labelId);
-    },
-    resetMemo(state) {
-      state.memo = INIT_MEMOS_STATE.memo;
     },
     addTask(state, { payload }) {
       const { preIndex, task } = payload;
@@ -49,6 +52,12 @@ const memosSlice = createSlice({
     },
     removeTask(state, { payload: taskId }) {
       state.memo.tasks = state.memo.tasks.filter((task) => task.id !== taskId);
+    },
+    addImage(state, { payload: newImage }) {
+      state.memo.images = [...state.memo.images, newImage];
+    },
+    removeImage(state, { payload: imageIndex }) {
+      state.memo.images = state.memo.images.filter((image, index) => index !== imageIndex);
     },
   },
   extraReducers: {

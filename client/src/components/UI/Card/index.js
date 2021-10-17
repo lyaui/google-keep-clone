@@ -1,8 +1,7 @@
 import { Fragment, useState, useEffect, useRef } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
-import composeRefs from '@seznam/compose-react-refs';
-import Modal from 'components/UI/Modal';
-import AddNewCard from 'components/EditCard';
+import { useHistory } from 'react-router-dom';
+import { ROUTE } from 'constants/routes.js';
+import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardContent from 'components/UI/Card/CardContent';
@@ -11,17 +10,13 @@ import CardFooter from 'components/UI/Card/CardFooter';
 import CardLinks from 'components/UI/Card/CardLinks';
 import { SCard } from 'components/UI/Card/style.js';
 
-const Card = ({ id, index, color, images, title, content, labels, links, masonryDom }) => {
+const Card = ({ id, color, images, title, content, labels, links, masonryDom }) => {
+  const history = useHistory();
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const memoColor = PALETTE_COLORS[color];
 
-  const openEditModalHandler = () => {
-    setShowEditModal(true);
-  };
-  const closeEditModalHandler = () => {
-    setShowEditModal(false);
-  };
+  const openEditModalHandler = () => history.push(ROUTE.BUILD_MEMO_PATH(id));
 
   // 計算每張卡片跨列 span
   const getRowSpan = () => {
@@ -65,13 +60,7 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
 
   return (
     <Fragment>
-      <SCard
-        showEditModal={showEditModal}
-        color={color}
-        className='card'
-        ref={cardRef}
-        gridRowSpan={gridRowSpan}
-      >
+      <SCard color={memoColor} className='card' ref={cardRef} gridRowSpan={gridRowSpan}>
         <div className='growing-content' onClick={openEditModalHandler}>
           {/* images */}
           {images.length > 0 && <CardImages images={images} />}
@@ -91,9 +80,6 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
           {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
         </div>
       </SCard>
-      <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
-        <AddNewCard />
-      </Modal>
     </Fragment>
   );
 };
