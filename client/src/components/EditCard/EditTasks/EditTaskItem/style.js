@@ -36,7 +36,8 @@ export const SEditTaskItemIcon = styled.div`
 export const SEditTaskItemText = styled.div`
   width: 100%;
   padding-right: 16px;
-  margin-left: 4px;
+  margin-left: 10px;
+  margin-top: -3px;
   text-decoration: ${(props) => (props.isCompleted ? 'line-through' : 'unset')};
   color: ${(props) => (props.isCompleted ? 'rgba(0, 0, 0, 0.6)' : 'currentColor')};
   #contentEdit {
