@@ -11,7 +11,7 @@ import Login from 'pages/Login.js';
 
 function App() {
   const dispatch = useDispatch();
-  const { memos, memo } = useSelector((state) => state.memos);
+  const { memo } = useSelector((state) => state.memos);
   const { tasks } = memo;
   const { authState } = useAuth();
   const { isLoggedIn } = authState;
@@ -40,7 +40,7 @@ function App() {
               <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]}>
                 <Login />
               </Route>
-              <Route path={[ROUTE.LABEL, ROUTE.HOME]}>
+              <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO]}>
                 <Main />
               </Route>
               <Redirect to={ROUTE.LOGIN} />
