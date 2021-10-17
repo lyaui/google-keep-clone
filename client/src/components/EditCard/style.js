@@ -15,3 +15,7 @@ export const SEditCardBody = styled.div`
   max-height: 500px;
   padding: 0px 16px;
 `;
+
+export const SEmptyEditor = styled.div`
+  height: 179px;
+`;

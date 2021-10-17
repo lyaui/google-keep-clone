@@ -7,13 +7,13 @@ import EditTasks from 'components/EditCard/EditTasks';
 import EditCardLink from 'components/EditCard/EditCardLink';
 import EditCardLabels from 'components/EditCard/EditCardLabels';
 import EditCardToolbar from 'components/EditCard/EditCardToolbar';
-import { SEditCard, SEditCardBody } from 'components/EditCard/style.js';
+import { SEditCard, SEditCardBody, SEmptyEditor } from 'components/EditCard/style.js';
 
-const EditCard = () => {
+const EditCard = ({ showMemo = true }) => {
   const { memo } = useSelector((state) => state.memos);
   const { isTaskList, color } = memo;
   const memoColor = PALETTE_COLORS[color];
-
+  if (!showMemo) return <SEmptyEditor />;
   return (
     <SEditCard memoColor={memoColor}>
       <SEditCardBody>
