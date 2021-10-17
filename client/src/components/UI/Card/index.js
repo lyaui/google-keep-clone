@@ -65,38 +65,32 @@ const Card = ({ id, index, color, images, title, content, labels, links, masonry
 
   return (
     <Fragment>
-      <Draggable draggableId={id} index={index}>
-        {(provided) => (
-          <SCard
-            showEditModal={showEditModal}
-            color={color}
-            className='card'
-            ref={composeRefs(cardRef, provided.innerRef)}
-            gridRowSpan={gridRowSpan}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-          >
-            <div className='growing-content' onClick={openEditModalHandler}>
-              {/* images */}
-              {images.length > 0 && <CardImages images={images} />}
-              {/* header */}
-              {title && <CardHeader>{title}</CardHeader>}
-              {/* content */}
-              {content && <CardContent>{content}</CardContent>}
-              {/* labels */}
-              {labels.length > 0 && <CardLabels labels={labels} />}
-              {/* footer */}
-              <CardFooter
-                isOnlyImages={isOnlyImages}
-                isOnlyLinks={isOnlyLinks}
-                isOnlyImagesAndLinks={isOnlyImagesAndLinks}
-              />
-              {/* links */}
-              {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
-            </div>
-          </SCard>
-        )}
-      </Draggable>
+      <SCard
+        showEditModal={showEditModal}
+        color={color}
+        className='card'
+        ref={cardRef}
+        gridRowSpan={gridRowSpan}
+      >
+        <div className='growing-content' onClick={openEditModalHandler}>
+          {/* images */}
+          {images.length > 0 && <CardImages images={images} />}
+          {/* header */}
+          {title && <CardHeader>{title}</CardHeader>}
+          {/* content */}
+          {content && <CardContent>{content}</CardContent>}
+          {/* labels */}
+          {labels.length > 0 && <CardLabels labels={labels} />}
+          {/* footer */}
+          <CardFooter
+            isOnlyImages={isOnlyImages}
+            isOnlyLinks={isOnlyLinks}
+            isOnlyImagesAndLinks={isOnlyImagesAndLinks}
+          />
+          {/* links */}
+          {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
+        </div>
+      </SCard>
       <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
         <AddNewCard />
       </Modal>
