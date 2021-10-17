@@ -17,28 +17,30 @@ const Cards = () => {
   const [masonryDom, setMasonryDom] = useState(null);
 
   useEffect(() => {
-    dispatch(getUserMemos(userId));
+    // dispatch(getUserMemos(userId));
     setMasonryDom(masonryRef.current);
   }, [dispatch, setMasonryDom, userId]);
 
   return (
-    <SCards className='masonry' viewMode={layout} isFixedMenu={isFixedMenu}>
-      {memos.map((card, index) => (
-        <Card
-          key={card.id}
-          id={card.id}
-          color={card.color}
-          title={card.title}
-          images={card.images}
-          content={card.content}
-          labels={card.labels}
-          links={card.links}
-          masonryDom={masonryDom}
-          droppableId='cards'
-          index={index}
-        />
-      ))}
-    </SCards>
+    <div ref={masonryRef}>
+      <SCards className='masonry' viewMode={layout} isFixedMenu={isFixedMenu}>
+        {memos.map((card, index) => (
+          <Card
+            key={card.id}
+            id={card.id}
+            color={card.color}
+            title={card.title}
+            images={card.images}
+            content={card.content}
+            labels={card.labels}
+            links={card.links}
+            masonryDom={masonryDom}
+            droppableId='cards'
+            index={index}
+          />
+        ))}
+      </SCards>
+    </div>
   );
 };
 
