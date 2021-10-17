@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
+import { Draggable } from 'react-beautiful-dnd';
 import { memosActions } from 'store/memosSlice';
 import * as Icon from 'components/UI/Icon/index.js';
 import EditCardText from 'components/EditCard/EditCardText';
@@ -36,23 +37,31 @@ const EditTaskItem = ({ task, index }) => {
     dispatch(memosActions.removeTask(task.id));
   };
   return (
-    <SEditTaskItem>
-      <SEditTaskItemIcon>
-        <Icon.Drag name='drag' />
-        {!task.isCompleted && (
-          <Icon.EmptyCheckbox name='checkbox' onClick={toggleIsCompletedHandler} />
-        )}
-        {task.isCompleted && (
-          <Icon.CheckboxOutline name='checkbox' onClick={toggleIsCompletedHandler} />
-        )}
-      </SEditTaskItemIcon>
-      <SEditTaskItemText isCompleted={task.isCompleted}>
-        <EditCardText text={task.name} updateTextHandler={updateTaskHandler} />
-      </SEditTaskItemText>
-      <SEditTaskItemIcon>
-        <Icon.Clear name='delete' onClick={deleteTaskHandler} />
-      </SEditTaskItemIcon>
-    </SEditTaskItem>
+    <Draggable draggableId={task.id} index={index}>
+      {(provided) => (
+        <SEditTaskItem
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <SEditTaskItemIcon>
+            <Icon.Drag name='drag' />
+            {!task.isCompleted && (
+              <Icon.EmptyCheckbox name='checkbox' onClick={toggleIsCompletedHandler} />
+            )}
+            {task.isCompleted && (
+              <Icon.CheckboxOutline name='checkbox' onClick={toggleIsCompletedHandler} />
+            )}
+          </SEditTaskItemIcon>
+          <SEditTaskItemText isCompleted={task.isCompleted}>
+            <EditCardText text={task.name} updateTextHandler={updateTaskHandler} />
+          </SEditTaskItemText>
+          <SEditTaskItemIcon>
+            <Icon.Clear name='delete' onClick={deleteTaskHandler} />
+          </SEditTaskItemIcon>
+        </SEditTaskItem>
+      )}
+    </Draggable>
   );
 };
 

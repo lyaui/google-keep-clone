@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuid } from 'uuid';
+import { Droppable } from 'react-beautiful-dnd';
 import { memosActions } from 'store/memosSlice';
 import * as Icon from 'components/UI/Icon/index.js';
 import EditCardText from 'components/EditCard/EditCardText';
@@ -26,15 +27,19 @@ const EditTasks = () => {
   };
 
   return (
-    <SEditTasks>
-      <SEditNewTask>
-        <Icon.Add />
-        <EditCardText text={newTask} updateTextHandler={updateTitleHandler} />
-      </SEditNewTask>
-      {memo.tasks.map((task, index) => (
-        <EditTaskItem key={index} task={task} index={index} />
-      ))}
-    </SEditTasks>
+    <Droppable droppableId='tasks'>
+      {(provided) => (
+        <SEditTasks ref={provided.innerRef} {...provided.droppableProps}>
+          <SEditNewTask>
+            <Icon.Add />
+            <EditCardText text={newTask} updateTextHandler={updateTitleHandler} />
+          </SEditNewTask>
+          {memo.tasks.map((task, index) => (
+            <EditTaskItem key={index} task={task} index={index} />
+          ))}
+        </SEditTasks>
+      )}
+    </Droppable>
   );
 };
 

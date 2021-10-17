@@ -40,6 +40,7 @@ export const SEditTaskItemText = styled.div`
   margin-top: -3px;
   text-decoration: ${(props) => (props.isCompleted ? 'line-through' : 'unset')};
   color: ${(props) => (props.isCompleted ? 'rgba(0, 0, 0, 0.6)' : 'currentColor')};
+  cursor: text;
   #contentEdit {
     width: 100%;
     word-break: break-all;
