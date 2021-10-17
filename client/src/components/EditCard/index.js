@@ -10,7 +10,7 @@ import { SEditCard, SEditCardBody } from 'components/EditCard/style.js';
 
 const EditCard = () => {
   const { memo } = useSelector((state) => state.memos);
-  const memoColor = memo.color;
+  const { isTaskList, color: memoColor } = memo;
 
   return (
     <SEditCard memoColor={memoColor}>
@@ -20,9 +20,9 @@ const EditCard = () => {
         {/* title */}
         <EditCardTitle />
         {/* content */}
-        {memo.tasks.length === 0 && <EditCardContent />}
+        {!isTaskList && <EditCardContent />}
         {/* tasks */}
-        {memo.tasks.length > 0 && <EditTasks />}
+        {isTaskList && <EditTasks />}
         {/* label */}
         {memo.labels.length > 0 && <EditCardLabels />}
         {/* links */}

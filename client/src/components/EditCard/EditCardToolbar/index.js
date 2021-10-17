@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -6,10 +7,14 @@ import { ButtonRound } from 'components/UI/Buttons/index.js';
 import EditCardColorButton from 'components/ActionButtons/EditCardColorButton';
 import EditCardLabelsButton from 'components/ActionButtons/EditCardLabelsButton';
 import EditCardTaskButton from 'components/ActionButtons/EditCardTaskButton';
+import EditCardCancelTaskButton from 'components/ActionButtons/EditCardCancelTaskButton';
 import UploadImageButton from 'components/ActionButtons/UploadImageButton';
 import { SEditCardToolbar } from 'components/EditCard/EditCardToolbar/style.js';
 
 const EditCardToolbar = () => {
+  const { memo } = useSelector((state) => state.memos);
+  const { isTaskList } = memo;
+
   return (
     <SEditCardToolbar>
       <div>
@@ -18,13 +23,9 @@ const EditCardToolbar = () => {
         {/* labels */}
         <EditCardLabelsButton />
         {/* checkbox */}
-        <EditCardTaskButton />
+        {!isTaskList && <EditCardTaskButton />}
         {/* cancel checkbox */}
-        <Tippy content={TOOLTIP_TEXT.CANCEL_CHECKBOX}>
-          <ButtonRound size={34}>
-            <Icon.CancelCheckboxOutline />
-          </ButtonRound>
-        </Tippy>
+        {isTaskList && <EditCardCancelTaskButton />}
         {/* image */}
         <UploadImageButton />
         {/* copy */}
