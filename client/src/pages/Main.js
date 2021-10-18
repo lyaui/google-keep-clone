@@ -46,12 +46,13 @@ const Main = () => {
 
   // open edit modal
   useEffect(() => {
+    console.log({ memoId });
     if (!memoId) return history.push(ROUTE.HOME);
     // TODO fetch data
     // memoId existed? memoId not existed?
 
     // temp
-    const selectedMemo = memos.find((memo) => memo.id === memoId);
+    const selectedMemo = memos.find((memo) => memo._id === memoId);
     if (!selectedMemo) return history.push(ROUTE.HOME);
 
     dispatch(memosActions.setMemo(selectedMemo));

@@ -26,8 +26,8 @@ const Cards = () => {
       <SCards className='masonry' viewMode={layout} isFixedMenu={isFixedMenu}>
         {memos.map((card, index) => (
           <Card
-            key={card.id}
-            id={card.id}
+            key={card._id}
+            id={card._id}
             color={card.color}
             title={card.title}
             images={card.images}
