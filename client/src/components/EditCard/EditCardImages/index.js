@@ -17,7 +17,6 @@ const EditCardImages = () => {
         <CardImages
           images={images}
           isEditMode='true'
-          // setUploadedImages={setImages}
           addImageHandler={addImageHandler}
           deleteImageHandler={deleteImageHandler}
         />
