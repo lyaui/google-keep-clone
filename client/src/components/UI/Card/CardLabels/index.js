@@ -3,13 +3,13 @@ import { SCardLabels } from 'components/UI/Card/CardLabels/style.js';
 
 const CardLabels = ({ labels }) => {
   const showLabelsNum = 3;
-  const numOfMoreLabel = labels.length - showLabelsNum - 1;
+  const numOfMoreLabel = labels.length - showLabelsNum;
   return (
     <SCardLabels>
       {labels.slice(0, showLabelsNum).map((label, index) => (
         <Label key={index} label={label} />
       ))}
-      <Label isShowMoreLabel={true}>還有個 {numOfMoreLabel} 項目</Label>
+      {numOfMoreLabel > 0 && <Label isShowMoreLabel={true} numOfMoreLabel={numOfMoreLabel} />}
     </SCardLabels>
   );
 };
