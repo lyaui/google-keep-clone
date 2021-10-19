@@ -32,12 +32,18 @@ const SideMenu = () => {
   return (
     <SSideMenu isFixedMenu={isFixedMenu}>
       <SSideMenuList>
-        <NavItem id='memo' label='記事' type='memo' />
+        <NavItem toRoute={ROUTE.HOME} id='memo' label='記事' type='memo' />
         {labels.map((label) => (
-          <NavItem key={label._id} id={label._id} label={label.name} type='label' />
+          <NavItem
+            toRoute={ROUTE.BUILD_LABEL_PATH(label.name)}
+            key={label._id}
+            id={label._id}
+            label={label.name}
+            type='label'
+          />
         ))}
         <EditLabelButton />
-        <NavItem id='archive' label='封存' type='archive' />
+        <NavItem toRoute={ROUTE.HOME} id='archive' label='封存' type='archive' />
       </SSideMenuList>
     </SSideMenu>
   );
