@@ -16,6 +16,12 @@ export const SEditCardBody = styled.div`
   padding: 0px 16px;
 `;
 
+export const SCardCreatedAt = styled.div`
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 12px;
+  text-align: right;
+`;
+
 export const SEmptyEditor = styled.div`
   height: 179px;
 `;
