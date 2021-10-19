@@ -94,6 +94,7 @@ const Card = ({ card, masonryDom }) => {
           {labels.length > 0 && <CardLabels labels={labels} />}
           {/* footer */}
           <CardFooter
+            id={id}
             isOnlyImages={isOnlyImages}
             isOnlyLinks={isOnlyLinks}
             isOnlyImagesAndLinks={isOnlyImagesAndLinks}

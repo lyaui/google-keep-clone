@@ -2,10 +2,11 @@ import * as Icon from 'components/UI/Icon/index.js';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
-import { SCardFooter } from 'components/UI/Card/CardFooter/style.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
+import DeleteCardButton from 'components/ActionButtons/DeleteCardButton';
+import { SCardFooter } from 'components/UI/Card/CardFooter/style.js';
 
-function CardFooter({ isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
+function CardFooter({ id, isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
   const isOnlyImagesOrLinks = isOnlyImages || isOnlyLinks;
   const test = (e) => {
     e.stopPropagation();
@@ -22,14 +23,12 @@ function CardFooter({ isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
           <Icon.Palette />
         </ButtonRound>
       </Tippy>
-
       {/* image */}
       <Tippy content={TOOLTIP_TEXT.IMAGE}>
         <ButtonRound onClick={test} size={34}>
           <Icon.Image />
         </ButtonRound>
       </Tippy>
-
       {/* copy */}
       <Tippy content={TOOLTIP_TEXT.COPY}>
         <ButtonRound onClick={test} size={34}>
@@ -45,13 +44,9 @@ function CardFooter({ isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
       </Tippy>
 
       {/* delete */}
-      <Tippy content={TOOLTIP_TEXT.DELETE_MEMO}>
-        <ButtonRound onClick={test} size={34}>
-          <Icon.DeleteOutline />
-        </ButtonRound>
-      </Tippy>
+      <DeleteCardButton id={id} />
 
-      {/* delete */}
+      {/* more */}
       <Tippy content={TOOLTIP_TEXT.MORE}>
         <ButtonRound onClick={test} size={34}>
           <Icon.More />
