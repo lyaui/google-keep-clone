@@ -5,7 +5,6 @@ import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardBody from 'components/UI/Card/CardBody';
-import CardTasks from 'components/UI/Card/CardTasks';
 import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
 import CardLinks from 'components/UI/Card/CardLinks';
@@ -85,7 +84,7 @@ const Card = ({ card, masonryDom }) => {
           {content && (
             <CardBody>
               <EditCardText text={content} updateTextHandler={() => {}} />
-              {!isTaskList && <CardTasks tasks={tasks} />}
+              {/* {!isTaskList && <CardTasks tasks={tasks} />} */}
             </CardBody>
           )}
           {/* tasks */}
