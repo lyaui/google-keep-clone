@@ -12,9 +12,11 @@ const getMemos = async (req, res, next) => {
 
     // check user settings and sort data
     const sortedOrder = user.settings.sort === 'ASCEND' ? 1 : -1;
-    const memos = await Memo.find({ creator: userId, isArchived: !!isArchived || false }).sort({
-      updatedAt: sortedOrder,
-    });
+    const memos = await Memo.find({ creator: userId, isArchived: !!isArchived || false })
+      .populate('labels', ['name', '_id'])
+      .sort({
+        updatedAt: sortedOrder,
+      });
 
     res.status(200).json({
       success: true,
