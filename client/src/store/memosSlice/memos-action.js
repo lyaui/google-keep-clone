@@ -4,7 +4,7 @@ import { TOAST_TEXT } from 'constants/toastText.js';
 import {
   apiGetMemos,
   //   apiGetMemosByLabelId,
-  // apiCreateMemo,
+  apiCreateMemo,
   //   apiUpdateMemo,
   apiDeleteMemo,
 } from 'apis/memos.js';
@@ -21,6 +21,19 @@ export const getUserMemos = createAsyncThunk(
     }
   },
 );
+
+export const addMemo = createAsyncThunk('memos/addMemo', async (payload, { rejectWithValue }) => {
+  try {
+    const res = await apiCreateMemo(payload);
+    if (!res.data.success) throw new Error();
+
+    toast(TOAST_TEXT.MEMO_ADD_SUCCESS);
+    return res.data.memo;
+  } catch (err) {
+    toast(TOAST_TEXT.MEMO_ADD_FAIL);
+    return rejectWithValue(err.response.data.message);
+  }
+});
 
 export const deleteMemo = createAsyncThunk(
   'labels/updateLabels',

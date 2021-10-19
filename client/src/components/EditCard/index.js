@@ -53,8 +53,12 @@ function EditCard({ showMemo = true }) {
   const clickOutsideHandler = (e) => {
     e.preventDefault();
 
+    // TODO debounce
     // post new post
-    if (!isEmptyPost && isNewPost) dispatch(addMemo({ creator: userId, ...memo }));
+    if (!isEmptyPost && isNewPost)
+      dispatch(
+        addMemo({ creator: userId, ...memo, labels: memo.labels.map((label) => label._id) }),
+      );
 
     // edit memo
     if (!isNewPost) {

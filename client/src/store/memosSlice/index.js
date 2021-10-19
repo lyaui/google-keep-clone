@@ -76,7 +76,21 @@ const memosSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = errorMessage;
     },
-
+    // addMemo
+    [addMemo.pending](state) {
+      state.isLoading = true;
+    },
+    [addMemo.fulfilled](state, { payload: memo }) {
+      state.isLoading = false;
+      state.errorMessage = '';
+      // TODO ascend or descend
+      state.memos = [memo, ...state.memos];
+      state.memo = INIT_MEMO;
+    },
+    [addMemo.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
     // delete memo
     [deleteMemo.pending](state) {
       state.isLoading = true;
