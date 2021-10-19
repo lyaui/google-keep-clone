@@ -4,16 +4,30 @@ import { ROUTE } from 'constants/routes.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
-import CardContent from 'components/UI/Card/CardContent';
+import CardBody from 'components/UI/Card/CardBody';
+import CardTasks from 'components/UI/Card/CardTasks';
 import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
 import CardLinks from 'components/UI/Card/CardLinks';
 import { SCard } from 'components/UI/Card/style.js';
 
-const Card = ({ id, color, images, title, content, labels, links, masonryDom }) => {
+const Card = ({ card, masonryDom }) => {
   const history = useHistory();
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
+  const {
+    _id: id,
+    title,
+    content,
+    images,
+    isTaskList,
+    isPinned,
+    isArchived,
+    links,
+    labels,
+    tasks,
+    color,
+  } = card;
   const memoColor = PALETTE_COLORS[color];
 
   const openEditModalHandler = () => history.push(ROUTE.BUILD_MEMO_PATH(id));
@@ -67,7 +81,15 @@ const Card = ({ id, color, images, title, content, labels, links, masonryDom }) 
           {/* header */}
           {title && <CardHeader>{title}</CardHeader>}
           {/* content */}
-          {content && <CardContent>{content}</CardContent>}
+          {content && (
+            <CardBody>
+              {content}
+
+              {!isTaskList && <CardTasks tasks={tasks} />}
+            </CardBody>
+          )}
+          {/* tasks */}
+
           {/* labels */}
           {labels.length > 0 && <CardLabels labels={labels} />}
           {/* footer */}
