@@ -64,8 +64,7 @@ const createMemo = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findById(creator);
-    console.log(creator);
-    console.log(user);
+
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     const createdMemo = new Memo({

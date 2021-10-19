@@ -1,23 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserMemos } from 'store/memosSlice/memos-action.js';
+import { getUserMemos, addMemo, deleteMemo } from 'store/memosSlice/memos-action.js';
 import DUMMY_DATA from 'data/memos.js';
 
-const INIT_MEMOS_STATE = {
+const INIT_MEMO = {
+  title: '',
+  content: '',
+  images: [],
+  isTaskList: false,
+  isPinned: false,
+  isArchived: false,
+  links: [],
+  labels: [],
+  tasks: [],
+  color: 'DEFAULT',
+};
+
+export const INIT_MEMOS_STATE = {
   isLoading: false,
   errorMessage: '',
   memos: [...DUMMY_DATA],
-  memo: {
-    title: '',
-    content: '',
-    images: [],
-    isTaskList: false,
-    isPinned: false,
-    isArchived: false,
-    links: [],
-    labels: [],
-    tasks: [],
-    color: 'DEFAULT',
-  },
+  memo: INIT_MEMO,
 };
 
 const memosSlice = createSlice({
@@ -71,6 +73,20 @@ const memosSlice = createSlice({
       state.memos = memos;
     },
     [getUserMemos.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
+
+    // delete memo
+    [deleteMemo.pending](state) {
+      state.isLoading = true;
+    },
+    [deleteMemo.fulfilled](state, { payload: memoId }) {
+      state.isLoading = false;
+      state.errorMessage = '';
+      state.memos = state.memos.filter((memo) => memo._id !== memoId);
+    },
+    [deleteMemo.rejected](state, { payload: errorMessage }) {
       state.isLoading = false;
       state.errorMessage = errorMessage;
     },

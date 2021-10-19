@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import { TOAST_TEXT } from 'constants/toastText.js';
 import {
   apiGetMemos,
   //   apiGetMemosByLabelId,
-  //   apiCreateMemo,
+  // apiCreateMemo,
   //   apiUpdateMemo,
-  //   apiDeleteMemo,
+  apiDeleteMemo,
 } from 'apis/memos.js';
 
 export const getUserMemos = createAsyncThunk(
@@ -20,41 +22,18 @@ export const getUserMemos = createAsyncThunk(
   },
 );
 
-// export const addLabel = createAsyncThunk(
-//   'labels/addLabels',
-//   async (payload, { rejectWithValue }) => {
-//     try {
-//       const res = await apiCreateLabel(payload);
-//       if (!res.data.success) throw new Error();
-//       return res.data.labels;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data.message);
-//     }
-//   },
-// );
+export const deleteMemo = createAsyncThunk(
+  'labels/updateLabels',
+  async (memoId, { rejectWithValue }) => {
+    try {
+      const res = await apiDeleteMemo(memoId);
+      if (!res.data.success) throw new Error();
 
-// export const updateLabel = createAsyncThunk(
-//   'labels/updateLabels',
-//   async ({ labelId, payload }, { rejectWithValue }) => {
-//     try {
-//       const res = await apiUpdateLabel(labelId, payload);
-//       if (!res.data.success) throw new Error();
-//       return res.data.labels;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data.message);
-//     }
-//   },
-// );
-
-// export const deleteLabel = createAsyncThunk(
-//   'labels/updateLabels',
-//   async (labelId, { rejectWithValue }) => {
-//     try {
-//       const res = await apiDeleteLabel(labelId);
-//       if (!res.data.success) throw new Error();
-//       return labelId;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data.message);
-//     }
-//   },
-// );
+      toast(TOAST_TEXT.MEMO_DELETE_SUCCESS);
+      return memoId;
+    } catch (err) {
+      toast(TOAST_TEXT.MEMO_DELETE_FAIL);
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
