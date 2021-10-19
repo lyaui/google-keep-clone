@@ -17,6 +17,7 @@ export const SEditCardBody = styled.div`
 `;
 
 export const SCardCreatedAt = styled.div`
+  padding: 12px 0;
   color: rgba(0, 0, 0, 0.8);
   font-size: 12px;
   text-align: right;

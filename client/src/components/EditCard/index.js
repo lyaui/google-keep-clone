@@ -79,7 +79,7 @@ function EditCard({ showMemo = true }) {
           {/* updatedAt */}
           {memo.updatedAt && (
             <SCardCreatedAt>
-              上次編輯時間：
+              {memo.isArchived && '已封存記事 • '}上次編輯時間：
               {new Date(memo.updatedAt).toLocaleTimeString([], {
                 hour: '2-digit',
                 minute: '2-digit',
