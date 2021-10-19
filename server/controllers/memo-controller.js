@@ -48,11 +48,24 @@ const getMemosByLabelId = async (req, res, next) => {
 };
 
 const createMemo = async (req, res, next) => {
-  const { creator, title, content, images, isPinned, isArchived, links, labels, tasks, color } =
-    req.body;
+  const {
+    creator,
+    title,
+    content,
+    images,
+    isTaskList,
+    isPinned,
+    isArchived,
+    links,
+    labels,
+    tasks,
+    color,
+  } = req.body;
   try {
     // check if user exists
     const user = await User.findById(creator);
+    console.log(creator);
+    console.log(user);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     const createdMemo = new Memo({
@@ -60,6 +73,7 @@ const createMemo = async (req, res, next) => {
       title,
       content,
       images,
+      isTaskList,
       isPinned,
       isArchived,
       links,
@@ -157,4 +171,22 @@ const deleteMemo = async (req, res, next) => {
   }
 };
 
-module.exports = { getMemos, getMemosByLabelId, createMemo, updateMemo, deleteMemo };
+const uploadImage = (req, res) => {
+  console.log(req.file);
+  res.send('single image uploaded successfully');
+};
+
+const uploadImages = (req, res) => {
+  console.log(req.files);
+  res.send('multiple images uploaded successfully');
+};
+
+module.exports = {
+  getMemos,
+  getMemosByLabelId,
+  createMemo,
+  updateMemo,
+  deleteMemo,
+  uploadImage,
+  uploadImages,
+};
