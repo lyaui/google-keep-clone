@@ -6,7 +6,7 @@ export const SCard = styled.div`
   overflow: hidden;
   height: fit-content;
   background-color: ${(props) => props.color || '#FFFFFF'};
-  border: 1px solid ${(props) => props.color || '#e0e0e0'};
+  border: 1px solid ${(props) => (props.color === '#fff' ? '#e0e0e0' : props.color)};
   border-radius: 8px;
   cursor: pointer;
   grid-row: ${(props) => `span ${props.gridRowSpan}`};
