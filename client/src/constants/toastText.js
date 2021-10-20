@@ -30,5 +30,5 @@ export const TOAST_TEXT = {
   MEMO_DELETE_SUCCESS: '記事刪除成功 😳',
   MEMO_DELETE_FAIL: '記事刪除失敗 請重整再試 🥶',
 
-  MEMOS_FAIL: '🤔 無法取得使用者記事 請重新登入',
+  MEMOS_FAIL: '🤔 無法取得使用者記事 請重整再試',
 };
