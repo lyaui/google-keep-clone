@@ -15,7 +15,7 @@ export const authReducer = (state = INIT_AUTH_STATES, action) => {
     case AUTH_TYPES.GOOGLE_LOGIN_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true,
+        isLoggedIn: !!payload.token,
         isLoading: false,
         userId: payload.userId,
         userName: payload.userName,

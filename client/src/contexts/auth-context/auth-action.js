@@ -14,7 +14,7 @@ export const signup = async (dispatch, payload) => {
       userName: user.name,
       userEmail: user.email,
       token: user.token,
-      isLoggedIn: true,
+      isLoggedIn: !!user.token,
     };
 
     if (res.data.success) {
@@ -51,7 +51,7 @@ export const login = async (dispatch, payload) => {
       userName: user.name,
       userEmail: user.email,
       token: user.token,
-      isLoggedIn: true,
+      isLoggedIn: !!user.token,
     };
 
     if (res.data.success) {

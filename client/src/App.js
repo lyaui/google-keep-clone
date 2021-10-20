@@ -40,9 +40,11 @@ function App() {
               <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]}>
                 <Login />
               </Route>
-              <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO]}>
-                <Main />
-              </Route>
+              {isLoggedIn && (
+                <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO]}>
+                  <Main />
+                </Route>
+              )}
               <Redirect to={ROUTE.LOGIN} />
             </Switch>
           </main>
