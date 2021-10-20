@@ -5,7 +5,7 @@ import { ROUTE } from 'constants/routes.js';
 import { getUserLabels } from 'store/labelsSlice/labels-action.js';
 import { useUI } from 'contexts/UI-context';
 import NavItem from 'components/Layout/SideMenu/NavItem/index.js';
-import EditLabelButton from 'components/Layout/EditLabelButton';
+import EditLabelButton from 'components/Layout/SideMenu/EditLabelButton';
 import { SSideMenu, SSideMenuList } from 'components/Layout/SideMenu/style.js';
 
 const SideMenu = () => {
