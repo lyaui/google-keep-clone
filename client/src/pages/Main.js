@@ -38,17 +38,13 @@ const Main = () => {
 
   // fetch memos
   useEffect(() => {
-    // const { labelName } = match.params;
+    const { labelName } = match.params;
     switch (path) {
       case ROUTE.HOME:
         dispatch(getUserMemos());
         return;
       case ROUTE.LABEL:
-        // console.log(labels);
-        // const test = labels.find((label) => label.name === labelName);
-
-        // console.log({ test });
-        // dispatch(getUserMemosByLabelName(labelId));
+        dispatch(getUserMemosByLabelName(labelName));
         return;
       case ROUTE.MEMO:
       default:
