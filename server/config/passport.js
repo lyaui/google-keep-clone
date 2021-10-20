@@ -6,14 +6,15 @@ const { User } = require('../models');
 
 // JWT Strategy
 const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
 opts.secretOrKey = process.env.TOKEN_SECRET;
+
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {
     try {
-      const foundUser = await User.findOne({ id: jwt_payload.sub });
+      const foundUser = await User.findOne({ _id: jwt_payload.id });
       if (!foundUser) return done(null, false);
-      return done(null, foundUser);
+      return done(null, { id: foundUser._id });
     } catch (err) {
       return done(err, false);
     }
