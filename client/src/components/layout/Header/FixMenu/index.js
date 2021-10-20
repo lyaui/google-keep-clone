@@ -1,19 +1,16 @@
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
-import { useAuth } from 'contexts/auth-context';
 import { useUI, updateUserSettings } from 'contexts/UI-context/index.js';
 import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 
 const FixMenu = () => {
-  const { authState } = useAuth();
-  const { userId } = authState;
   const { UIState, UIDispatch } = useUI();
   const { isLoading, isFixedMenu } = UIState;
 
   const toggleIsFixedMenuHandler = async () => {
-    await updateUserSettings(UIDispatch, { userId, settings: { isFixedMenu: !isFixedMenu } });
+    await updateUserSettings(UIDispatch, { settings: { isFixedMenu: !isFixedMenu } });
   };
 
   return (

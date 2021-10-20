@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { getUserMemos, getMemosByLabelId } from 'store/memosSlice/memos-action.js';
+import { getUserMemos, getUserMemosByLabelName } from 'store/memosSlice/memos-action.js';
 import { memosActions } from 'store/memosSlice';
 import { toast } from 'react-toastify';
 import { TOAST_TEXT } from 'constants/toastText.js';
@@ -27,14 +27,14 @@ const Main = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await getUserSettings(UIDispatch, { userId });
+        const res = await getUserSettings(UIDispatch);
         if (!res.success) throw new Error();
       } catch {
         toast(TOAST_TEXT.SETTINGS_FAIL);
         history.replace(ROUTE.LOGIN);
       }
     })();
-  }, [history, UIDispatch, userId]);
+  }, [history, UIDispatch]);
 
   // fetch memos
   useEffect(() => {
@@ -48,7 +48,7 @@ const Main = () => {
         // const test = labels.find((label) => label.name === labelName);
 
         // console.log({ test });
-        // dispatch(getMemosByLabelId(labelId));
+        // dispatch(getUserMemosByLabelName(labelId));
         return;
       case ROUTE.MEMO:
       default:

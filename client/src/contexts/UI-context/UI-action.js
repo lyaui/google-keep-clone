@@ -1,16 +1,16 @@
 import { UI_TYPES } from 'constants/UI.js';
 import { apiGetUserSettings, apiUpdateUserSettings } from 'apis/user.js';
 
-export const getUserSettings = async (dispatch, payload) => {
+export const getUserSettings = async (dispatch) => {
   try {
     dispatch({ type: UI_TYPES.SETTINGS_REQUEST });
-    const res = await apiGetUserSettings(payload.userId);
+    const res = await apiGetUserSettings();
     const { settings } = res.data;
 
     if (res.data.success) {
       dispatch({
         type: UI_TYPES.SETTINGS_SUCCESS,
-        payload: payload.setting,
+        payload: res.setting,
       });
       localStorage.setItem('userSettings', JSON.stringify(settings));
       return res.data;
@@ -28,7 +28,7 @@ export const getUserSettings = async (dispatch, payload) => {
 export const updateUserSettings = async (dispatch, payload) => {
   try {
     dispatch({ type: UI_TYPES.SETTINGS_UPDATE_REQUEST });
-    const res = await apiUpdateUserSettings(payload.userId, payload.settings);
+    const res = await apiUpdateUserSettings(payload.settings);
     const { settings } = res.data;
 
     if (res.data.success) {

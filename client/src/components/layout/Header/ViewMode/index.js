@@ -1,15 +1,12 @@
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
-import { useAuth } from 'contexts/auth-context';
 import { useUI, updateUserSettings } from 'contexts/UI-context/index.js';
 import { VIEW_MODE } from 'constants/UI.js';
 import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 
 const ViewMode = () => {
-  const { authState } = useAuth();
-  const { userId } = authState;
   const { UIState, UIDispatch } = useUI();
   const { isLoading } = UIState;
 
@@ -17,7 +14,7 @@ const ViewMode = () => {
 
   const toggleViewModeHandler = async () => {
     const viewMode = isGrid ? VIEW_MODE.LIST : VIEW_MODE.GRID;
-    await updateUserSettings(UIDispatch, { userId, settings: { layout: viewMode } });
+    await updateUserSettings(UIDispatch, { settings: { layout: viewMode } });
   };
 
   return (
