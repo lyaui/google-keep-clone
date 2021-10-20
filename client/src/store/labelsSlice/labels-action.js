@@ -28,7 +28,7 @@ export const addLabel = createAsyncThunk(
 );
 
 export const updateLabel = createAsyncThunk(
-  'labels/updateLabels',
+  'labels/updateLabel',
   async ({ labelId, payload }, { rejectWithValue }) => {
     try {
       const res = await apiUpdateLabel(labelId, payload);
@@ -41,7 +41,7 @@ export const updateLabel = createAsyncThunk(
 );
 
 export const deleteLabel = createAsyncThunk(
-  'labels/updateLabels',
+  'labels/deleteLabel',
   async (labelId, { rejectWithValue }) => {
     try {
       const res = await apiDeleteLabel(labelId);
