@@ -20,7 +20,7 @@ const Header = () => {
       {/* menu */}
       <FixMenu />
       <SHeaderLogo src={logoPath} alt='keep' />
-      <SHeaderTitle>{labelId}</SHeaderTitle>
+      <SHeaderTitle>{labelId || '記事'}</SHeaderTitle>
       {/* search */}
       <SearchInput />
       {/* operators */}
