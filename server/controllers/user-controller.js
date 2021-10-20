@@ -93,7 +93,7 @@ const logout = (req, res) => {
 };
 
 const getUserSettings = async (req, res, next) => {
-  const { userId } = req.params;
+  const { id: userId } = req.user;
   try {
     // check if user exists
     const user = await User.findById(userId, 'settings');
@@ -106,7 +106,7 @@ const getUserSettings = async (req, res, next) => {
 };
 
 const updateUserSettings = async (req, res, next) => {
-  const { userId } = req.params;
+  const { id: userId } = req.user;
   const updatedData = req.body;
 
   try {
