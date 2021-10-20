@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
-import { toast } from 'react-toastify';
-import { TOAST_TEXT } from 'constants/toastText.js';
 import { updateLabel, deleteLabel } from 'store/labelsSlice/labels-action.js';
-import { useAuth } from 'contexts/auth-context';
 import * as Icon from 'components/UI/Icon/index.js';
 import {
   SLabel,
@@ -68,8 +65,6 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
   const { labels } = useSelector((state) => state.labels);
   const [inputStates, inputDispatch] = useReducer(labelReducer, INIT_LABEL_STATES);
   const { isEditing, textValue, tempInputValue, errorMessage } = inputStates;
-  const { authState } = useAuth();
-  const { userId } = authState;
   const inputRef = useRef('');
 
   useEffect(() => {
@@ -79,7 +74,6 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
   const deleteLabelHandler = (e) => {
     e.preventDefault();
     dispatch(deleteLabel(label._id));
-    toast(TOAST_TEXT.LABEL_UPDATE_SUCCESS);
   };
 
   const switchInputHandler = (e) => {
@@ -122,7 +116,6 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
         payload: { name: tempInputValue.trim() },
       }),
     );
-    toast(TOAST_TEXT.LABEL_UPDATE_SUCCESS);
   };
 
   const isSameValue = textValue.trim() === label.name;
