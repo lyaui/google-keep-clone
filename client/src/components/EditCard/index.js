@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAuth } from 'contexts/auth-context';
 import { addMemo } from 'store/memosSlice/memos-action.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import EditCardImages from 'components/EditCard/EditCardImages';
@@ -25,9 +24,6 @@ function EditCard({ showMemo = true }) {
   const { memo } = useSelector((state) => state.memos);
   const { isTaskList, color } = memo;
   const memoColor = PALETTE_COLORS[color];
-
-  const { authState } = useAuth();
-  const { userId } = authState;
 
   const [isEmptyPost, setIsEmptyPost] = useState(true);
   const match = useRouteMatch();
@@ -56,9 +52,7 @@ function EditCard({ showMemo = true }) {
     // TODO debounce
     // post new post
     if (!isEmptyPost && isNewPost)
-      dispatch(
-        addMemo({ creator: userId, ...memo, labels: memo.labels.map((label) => label._id) }),
-      );
+      dispatch(addMemo({ ...memo, labels: memo.labels.map((label) => label._id) }));
 
     // edit memo
     if (!isNewPost) {

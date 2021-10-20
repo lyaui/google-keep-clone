@@ -2,21 +2,36 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { TOAST_TEXT } from 'constants/toastText.js';
 import {
-  apiGetMemos,
-  //   apiGetMemosByLabelId,
+  apiGetUserMemos,
+  apiGetMemosByLabelName,
   apiCreateMemo,
   //   apiUpdateMemo,
   apiDeleteMemo,
 } from 'apis/memos.js';
 
 export const getUserMemos = createAsyncThunk(
-  'memos/getMemos',
-  async (userId, { rejectWithValue }) => {
+  'memos/getUserMemos',
+  async (_, { rejectWithValue }) => {
     try {
-      const res = await apiGetMemos(userId);
+      const res = await apiGetUserMemos();
       if (!res.data.success) throw new Error();
       return res.data.memos;
     } catch (err) {
+      toast(TOAST_TEXT.MEMOS_FAIL);
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
+
+export const getUserMemosByLabelName = createAsyncThunk(
+  'memos/getUserMemosByLabelName',
+  async (labelName, { rejectWithValue }) => {
+    try {
+      const res = await apiGetMemosByLabelName(labelName);
+      if (!res.data.success) throw new Error();
+      return res.data.memos;
+    } catch (err) {
+      toast(TOAST_TEXT.MEMOS_FAIL);
       return rejectWithValue(err.response.data.message);
     }
   },
@@ -36,7 +51,7 @@ export const addMemo = createAsyncThunk('memos/addMemo', async (payload, { rejec
 });
 
 export const deleteMemo = createAsyncThunk(
-  'labels/updateLabels',
+  'memos/deleteMemo',
   async (memoId, { rejectWithValue }) => {
     try {
       const res = await apiDeleteMemo(memoId);

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { getUserMemos, getMemosByLabelId } from 'store/memosSlice/memos-action.js';
 import { memosActions } from 'store/memosSlice';
 import { toast } from 'react-toastify';
 import { TOAST_TEXT } from 'constants/toastText.js';
 import { ROUTE } from 'constants/routes.js';
-import { useAuth } from 'contexts/auth-context';
 import { useUI, getUserSettings } from 'contexts/UI-context/index.js';
 import Modal from 'components/UI/Modal';
 import Layout from 'components/Layout';
@@ -13,27 +13,19 @@ import EditCard from 'components/EditCard';
 import Cards from 'components/Cards';
 
 const Main = () => {
-  const match = useRouteMatch();
-  const history = useHistory();
   const dispatch = useDispatch();
-
   const { memos } = useSelector((state) => state.memos);
-  const { memoId } = match.params;
-  const { UIDispatch } = useUI();
-  const { authState } = useAuth();
-  const userId = authState.userId;
-  const [showEditModal, setShowEditModal] = useState(false);
+  const history = useHistory();
+  const match = useRouteMatch();
+  const { path } = match;
 
-  const closeEditModalHandler = () => {
-    setShowEditModal(false);
-    dispatch(memosActions.resetMemo());
-    history.push(ROUTE.HOME);
-  };
+  const { UIDispatch } = useUI();
+
+  const [showEditModal, setShowEditModal] = useState(false);
 
   // fetch user settings
   useEffect(() => {
     (async () => {
-      if (!userId) return history.replace(ROUTE.LOGIN);
       try {
         const res = await getUserSettings(UIDispatch, { userId });
         if (!res.success) throw new Error();
@@ -44,25 +36,51 @@ const Main = () => {
     })();
   }, [history, UIDispatch, userId]);
 
-  // open edit modal
+  // fetch memos
   useEffect(() => {
-    console.log({ memoId });
-    if (!memoId) return history.push(ROUTE.HOME);
-    // TODO fetch data
-    // memoId existed? memoId not existed?
+    // const { labelName } = match.params;
+    switch (path) {
+      case ROUTE.HOME:
+        dispatch(getUserMemos());
+        return;
+      case ROUTE.LABEL:
+        // console.log(labels);
+        // const test = labels.find((label) => label.name === labelName);
 
-    // temp
-    const selectedMemo = memos.find((memo) => memo._id === memoId);
-    if (!selectedMemo) return history.push(ROUTE.HOME);
+        // console.log({ test });
+        // dispatch(getMemosByLabelId(labelId));
+        return;
+      case ROUTE.MEMO:
+      default:
+        dispatch(getUserMemos());
+        return;
+    }
 
-    dispatch(memosActions.setMemo(selectedMemo));
-    setShowEditModal(true);
-  }, [dispatch, history, memos, memoId]);
+    // // TODO fetch data
+    // // memoId existed? memoId not existed?
+
+    // // temp
+    // const selectedMemo = memos.find((memo) => memo._id === memoId);
+    // if (!selectedMemo) return history.push(ROUTE.HOME);
+
+    // dispatch(memosActions.setMemo(selectedMemo));
+    // setShowEditModal(true);
+  }, [path]);
+
+  const closeEditModalHandler = () => {
+    setShowEditModal(false);
+    dispatch(memosActions.resetMemo());
+    history.push(ROUTE.HOME);
+  };
 
   return (
     <Layout>
-      <EditCard showMemo={!memoId} />
-      <Cards />
+      <EditCard showMemo={path !== ROUTE.MEMO} />
+      {/* isPinned === true */}
+      <Cards memos={memos} />
+
+      {/* isPinned === false */}
+      <Cards memos={memos} />
       <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
         <EditCard />
       </Modal>
