@@ -84,10 +84,12 @@ const updateLabel = async (req, res, next) => {
 };
 
 const deleteLabel = async (req, res, next) => {
+  const { id: userId } = req.user;
   const { labelId } = req.params;
+
   try {
     // check if label exists
-    const label = await Label.findOne({ _id: labelId });
+    const label = await Label.findOne({ _id: labelId, creator: userId });
     if (!label) return next(new HttpError('Could not find label for the provided id.', 404));
     await label.populate('creator');
 
