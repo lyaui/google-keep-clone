@@ -1,5 +1,5 @@
 const multer = require('multer');
-import { v4 as uuid } from 'uuid';
+const { v4: uuid } = require('uuid');
 
 const FILE_TYPE = {
   'image/png': 'png',
