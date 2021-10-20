@@ -36,6 +36,8 @@ export const updateLabel = createAsyncThunk(
     try {
       const res = await apiUpdateLabel(labelId, payload);
       if (!res.data.success) throw new Error();
+
+      toast(TOAST_TEXT.LABEL_UPDATE_SUCCESS);
       return res.data.labels;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
@@ -49,6 +51,8 @@ export const deleteLabel = createAsyncThunk(
     try {
       const res = await apiDeleteLabel(labelId);
       if (!res.data.success) throw new Error();
+
+      toast(TOAST_TEXT.LABEL_UPDATE_SUCCESS);
       return labelId;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
