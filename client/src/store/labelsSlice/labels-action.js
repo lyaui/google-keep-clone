@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { apiGetLabels, apiCreateLabel, apiUpdateLabel, apiDeleteLabel } from 'apis/labels.js';
+import { apiGetUserLabels, apiCreateLabel, apiUpdateLabel, apiDeleteLabel } from 'apis/labels.js';
 
 export const getUserLabels = createAsyncThunk(
   'labels/getLabels',
   async (userId, { rejectWithValue }) => {
     try {
-      const res = await apiGetLabels(userId);
+      const res = await apiGetUserLabels(userId);
       if (!res.data.success) throw new Error();
       return res.data.labels;
     } catch (err) {

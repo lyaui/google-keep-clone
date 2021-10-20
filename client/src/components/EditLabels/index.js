@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Icon from 'components/UI/Icon/index.js';
-import { useAuth } from 'contexts/auth-context';
 import { addLabel } from 'store/labelsSlice/labels-action.js';
 import MemoLabel from 'components/EditLabels/MemoLabel';
 import SideMenuLabel from 'components/EditLabels/SideMenuLabel';
@@ -17,8 +16,6 @@ const EditLabels = ({ type = 'memo' }) => {
   const dispatch = useDispatch();
   const { labels: allLabels } = useSelector((state) => state.labels);
   const [keyword, setKeyword] = useState('');
-  const { authState } = useAuth();
-  const { userId } = authState;
 
   const labels = keyword
     ? allLabels.filter((label) => label.name.toLowerCase().includes(keyword.toLowerCase()))
@@ -31,7 +28,7 @@ const EditLabels = ({ type = 'memo' }) => {
 
   const addLabelHandler = (e) => {
     e.preventDefault();
-    dispatch(addLabel({ name: keyword, creator: userId }));
+    dispatch(addLabel({ name: keyword }));
     setKeyword('');
   };
 

@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const { HttpError, Label, Memo, User } = require('../models');
 
-// TODO 所有的 label 等加入 user auth 直接確認 creator 是否等於 req.user 並移除 check if user exists
-
 const getUserLabels = async (req, res, next) => {
-  const { userId } = req.params;
+  const { id: userId } = req.user;
+
   try {
     // check if user exists
     const user = await User.findById(userId);
@@ -21,21 +20,22 @@ const getUserLabels = async (req, res, next) => {
 };
 
 const createLabel = async (req, res, next) => {
-  const { name, creator } = req.body;
+  const { id: userId } = req.user;
+  const { name } = req.body;
 
   try {
     // check if user exists
-    const user = await User.findById(creator);
+    const user = await User.findById(userId);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label name exists
-    const label = await Label.findOne({ creator, name: name.trim() });
+    const label = await Label.findOne({ creator: userId, name: name.trim() });
     if (label) return next(new HttpError('Label name has existed, please try new one.', 422));
 
     // create label add to user labels
     const session = await mongoose.startSession();
     session.startTransaction();
-    const createdLabel = await new Label({ creator, name: name.trim() }).save({ session });
+    const createdLabel = await new Label({ creator: userId, name: name.trim() }).save({ session });
     user.labels.push(createdLabel);
     await user.save({ session });
     await session.commitTransaction();
@@ -51,21 +51,24 @@ const createLabel = async (req, res, next) => {
 };
 
 const updateLabel = async (req, res, next) => {
-  const { name, creator } = req.body;
+  const { id: userId } = req.user;
+  const { name } = req.body;
   const { labelId } = req.params;
 
   try {
     // check if user exists
-    const user = await User.findById(creator);
+    const user = await User.findById(userId);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label exists
-    const label = await Label.findOne({ creator, _id: labelId }, ['_id', 'name']);
+    const label = await Label.findOne({ creator: userId, _id: labelId }, ['_id', 'name']);
     if (!label) return next(new HttpError('Could not find label for provided id.', 404));
 
     // check if updated label name exists, and update label name
     label.name = name.trim();
-    const hasSameLabel = await Label.findOne({ $and: [{ creator }, { name: name.trim() }] });
+    const hasSameLabel = await Label.findOne({
+      $and: [{ creator: userId }, { name: name.trim() }],
+    });
     if (hasSameLabel)
       return next(new HttpError('Label name has existed, please try new one.', 422));
     await label.save();

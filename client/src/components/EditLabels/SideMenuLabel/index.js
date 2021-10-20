@@ -119,7 +119,7 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
     dispatch(
       updateLabel({
         labelId: label._id,
-        payload: { name: tempInputValue.trim(), creator: userId },
+        payload: { name: tempInputValue.trim() },
       }),
     );
     toast(TOAST_TEXT.LABEL_UPDATE_SUCCESS);
