@@ -37,10 +37,11 @@ const getUserMemosByLabelName = async (req, res, next) => {
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label exists
-    const label = await Label.find({ creator: userId, name: labelName });
+    const label = await Label.findOne({ creator: userId, name: labelName });
     if (!label) return next(new HttpError('Could not find label for provided id', 404));
 
     const { memos } = await label.populate('memos');
+
     res.status(200).json({
       success: true,
       memos,
