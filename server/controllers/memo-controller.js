@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const { HttpError, Memo, Label, User } = require('../models');
 
-// TODO 所有的 label 等加入 user auth 直接確認 creator 是否等於 req.user 並移除 check if user exists
-const getMemos = async (req, res, next) => {
+const getUserMemos = async (req, res, next) => {
+  const { id: userId } = req.user;
   const { isArchived } = req.query;
-  const { userId } = req.params;
+
   try {
     // check if user exists
     const user = await User.findById(userId);
@@ -27,16 +27,17 @@ const getMemos = async (req, res, next) => {
   }
 };
 
-const getMemosByLabelId = async (req, res, next) => {
-  const { labelId } = req.params;
-  const userId = '614adcec7449bc9f3a6de8cd';
+const getUserMemosByLabelName = async (req, res, next) => {
+  const { id: userId } = req.user;
+  const { labelName } = req.params;
+
   try {
     // check if user exists
     const user = await User.findById(userId);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label exists
-    const label = await Label.findById(labelId);
+    const label = await Label.find({ creator: userId, name: labelName });
     if (!label) return next(new HttpError('Could not find label for provided id', 404));
 
     const { memos } = await label.populate('memos');
@@ -50,27 +51,16 @@ const getMemosByLabelId = async (req, res, next) => {
 };
 
 const createMemo = async (req, res, next) => {
-  const {
-    creator,
-    title,
-    content,
-    images,
-    isTaskList,
-    isPinned,
-    isArchived,
-    links,
-    labels,
-    tasks,
-    color,
-  } = req.body;
+  const { id: userId } = req.user;
+  const { title, content, images, isTaskList, isPinned, isArchived, links, labels, tasks, color } =
+    req.body;
   try {
     // check if user exists
-    const user = await User.findById(creator);
-
+    const user = await User.findById(userId);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     const createdMemo = new Memo({
-      creator,
+      creator: userId,
       title,
       content,
       images,
@@ -108,24 +98,24 @@ const createMemo = async (req, res, next) => {
 };
 
 const updateMemo = async (req, res, next) => {
-  const { creator, title, content, images, isPinned, isArchived, links, labels, tasks, color } =
-    req.body;
+  const { id: userId } = req.user;
+  const { title, content, images, isPinned, isArchived, links, labels, tasks, color } = req.body;
   const { memoId } = req.params;
 
   try {
     // check if user exists
-    const user = await User.findById(creator);
+    const user = await User.findById(userId);
     if (!user) return next(new HttpError('Could not find user for provided id', 404));
 
     // check if memo exists
-    const memo = await Memo.findOne({ creator, _id: memoId });
+    const memo = await Memo.findOne({ creator: userId, _id: memoId });
     if (!memo) return next(new HttpError('Could not find memo for provided id.', 404));
 
     const session = await mongoose.startSession();
     session.startTransaction();
     // update memo
     const updatedMemo = await Memo.findOneAndUpdate(
-      { $and: [{ creator }, { _id: memoId }] },
+      { $and: [{ creator: userId }, { _id: memoId }] },
       { title, content, images, isPinned, isArchived, links, labels, tasks, color },
       { new: true },
     );
@@ -148,10 +138,12 @@ const updateMemo = async (req, res, next) => {
 };
 
 const deleteMemo = async (req, res, next) => {
+  const { id: userId } = req.user;
   const { memoId } = req.params;
+
   try {
     // check if memo exists
-    const memo = await Memo.findOne({ _id: memoId });
+    const memo = await Memo.findOne({ creator: userId, _id: memoId });
     if (!memo) return next(new HttpError('Could not find memo for the provided id.', 404));
     await memo.populate('creator');
 
@@ -173,18 +165,16 @@ const deleteMemo = async (req, res, next) => {
 };
 
 const uploadImage = (req, res) => {
-  console.log(req.file);
   res.send('single image uploaded successfully');
 };
 
 const uploadImages = (req, res) => {
-  console.log(req.files);
   res.send('multiple images uploaded successfully');
 };
 
 module.exports = {
-  getMemos,
-  getMemosByLabelId,
+  getUserMemos,
+  getUserMemosByLabelName,
   createMemo,
   updateMemo,
   deleteMemo,
