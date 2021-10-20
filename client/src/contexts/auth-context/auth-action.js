@@ -1,5 +1,7 @@
 import { AUTH_TYPES } from 'constants/auth.js';
 import { UI_TYPES } from 'constants/UI.js';
+import { toast } from 'react-toastify';
+import { TOAST_TEXT } from 'constants/toastText.js';
 import { apiSignup, apiLogin, apiLogout } from 'apis/user.js';
 
 export const signup = async (dispatch, payload) => {
@@ -20,6 +22,8 @@ export const signup = async (dispatch, payload) => {
         payload: storedData,
       });
       localStorage.setItem('userInfo', JSON.stringify(storedData));
+
+      toast(TOAST_TEXT.SIGNUP_SUCCESS);
       return res.data;
     }
   } catch (err) {
@@ -28,6 +32,10 @@ export const signup = async (dispatch, payload) => {
       type: AUTH_TYPES.SIGNUP_FAIL,
       payload: { errorMessage },
     });
+
+    if (err.response.status === 422) return toast(TOAST_TEXT.SIGNUP_ACCOUNT_EXISTED);
+
+    toast(TOAST_TEXT.SIGNUP_FAIL);
     return err.response;
   }
 };
@@ -50,6 +58,8 @@ export const login = async (dispatch, payload) => {
         payload: storedData,
       });
       localStorage.setItem('userInfo', JSON.stringify(storedData));
+
+      toast(TOAST_TEXT.LOGIN_SUCCESS);
       return res.data;
     }
   } catch (err) {
@@ -58,6 +68,8 @@ export const login = async (dispatch, payload) => {
       type: AUTH_TYPES.LOGIN_FAIL,
       payload: { errorMessage },
     });
+
+    toast(TOAST_TEXT.LOGIN_FAIL);
     return err.response;
   }
 };
@@ -97,12 +109,15 @@ export const logout = async (dispatch) => {
       dispatch({ type: UI_TYPES.SETTINGS_RESET });
       localStorage.removeItem('userInfo');
       localStorage.removeItem('userSettings');
+
+      toast(TOAST_TEXT.LOGOUT_SUCCESS);
       return res.data;
     }
   } catch (err) {
     dispatch({
       type: AUTH_TYPES.LOGOUT_FAIL,
     });
+    toast(TOAST_TEXT.LOGOUT_FAIL);
     return err.response;
   }
 };
