@@ -11,7 +11,15 @@ router.get(
   userController.googleLogin,
 );
 router.get('/logout', userController.logout);
-router.get('/settings/:userId', userController.getUserSettings);
-router.patch('/settings/:userId', userController.updateUserSettings);
+router.get(
+  '/settings/',
+  passport.authenticate('jwt', { session: false }),
+  userController.getUserSettings,
+);
+router.patch(
+  '/settings/',
+  passport.authenticate('jwt', { session: false }),
+  userController.updateUserSettings,
+);
 
 module.exports = router;
