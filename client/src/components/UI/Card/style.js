@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { SCardPin } from 'components/ActionButtons/EditCardPinButton/style.js';
 
 export const SCard = styled.div`
   opacity: ${(props) => (props.showEditModal ? 0 : 1)};
@@ -13,5 +14,8 @@ export const SCard = styled.div`
   transition: all 0.1s;
   :hover {
     box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
+  }
+  :hover ${SCardPin} {
+    opacity: 0.9;
   }
 `;

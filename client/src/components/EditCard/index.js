@@ -3,6 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMemo } from 'store/memosSlice/memos-action.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
+import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
 import EditCardImages from 'components/EditCard/EditCardImages';
 import EditCardTitle from 'components/EditCard/EditCardTitle';
 import EditCardContent from 'components/EditCard/EditCardContent';
@@ -64,6 +65,8 @@ function EditCard({ showMemo = true }) {
     <SEditCard memoColor={memoColor} eventTypes='click'>
       <OutsideClickHandler onOutsideClick={clickOutsideHandler}>
         <SEditCardBody>
+          {/* pin */}
+          <EditCardPinButton color={memoColor} opacity='1' isPinned={memo.isPinned} />
           {/* images */}
           <EditCardImages />
           {/* title */}

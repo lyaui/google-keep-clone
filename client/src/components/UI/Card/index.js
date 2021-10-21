@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ROUTE } from 'constants/routes.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
+import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardBody from 'components/UI/Card/CardBody';
@@ -76,6 +77,8 @@ const Card = ({ card, masonryDom }) => {
     <Fragment>
       <SCard color={memoColor} className='card' ref={cardRef} gridRowSpan={gridRowSpan}>
         <div className='growing-content' onClick={openEditModalHandler}>
+          {/* pin */}
+          <EditCardPinButton color={memoColor} opacity='0' isPinned={isPinned} />
           {/* images */}
           {images.length > 0 && <CardImages images={images} />}
           {/* header */}
@@ -88,7 +91,6 @@ const Card = ({ card, masonryDom }) => {
             </CardBody>
           )}
           {/* tasks */}
-
           {/* labels */}
           {labels.length > 0 && <CardLabels labels={labels} />}
           {/* footer */}
