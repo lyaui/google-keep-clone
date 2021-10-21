@@ -11,3 +11,9 @@ export const SCards = styled.section`
   /* padding: 20px 80px; */
   padding: ${(props) => (props.isFixedMenu ? '20px 80px' : '20px 80px 20px 100px')};
 `;
+
+export const SCardsTitle = styled.div`
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 60px;
+  padding: ${(props) => (props.isFixedMenu ? '0px 80px' : '0px 80px 0px 100px')};
+`;

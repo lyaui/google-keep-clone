@@ -69,14 +69,19 @@ const Main = () => {
     history.push(ROUTE.HOME);
   };
 
+  const pinnedMemo = memos.filter((memo) => memo.isPinned);
+  const unpinnedMemo = memos.filter((memo) => !memo.isPinned);
+
   return (
     <Layout>
       <EditCard showMemo={path !== ROUTE.MEMO} />
       {/* isPinned === true */}
-      <Cards memos={memos} title={'已固定'} />
+      {pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
 
       {/* isPinned === false */}
-      <Cards memos={memos} title={'其他記事'} />
+      {unpinnedMemo.length > 0 && (
+        <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : '其他記事'} />
+      )}
       <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
         <EditCard />
       </Modal>
