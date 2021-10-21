@@ -80,7 +80,7 @@ const Main = () => {
 
       {/* isPinned === false */}
       {unpinnedMemo.length > 0 && (
-        <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : '其他記事'} />
+        <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />
       )}
       <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
         <EditCard />
