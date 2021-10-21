@@ -4,6 +4,7 @@ import { TOAST_TEXT } from 'constants/toastText.js';
 import {
   apiGetUserMemos,
   apiGetMemosByLabelName,
+  apiGetUserMemoByMemoId,
   apiCreateMemo,
   //   apiUpdateMemo,
   apiDeleteMemo,
@@ -30,6 +31,21 @@ export const getUserMemosByLabelName = createAsyncThunk(
       const res = await apiGetMemosByLabelName(labelName);
       if (!res.data.success) throw new Error();
       return res.data.memos;
+    } catch (err) {
+      toast(TOAST_TEXT.MEMOS_FAIL);
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
+
+export const getUserMemoByMemoId = createAsyncThunk(
+  'memos/getUserMemoByMemoId',
+  async (memoId, { rejectWithValue }) => {
+    try {
+      const res = await apiGetUserMemoByMemoId(memoId);
+      if (!res.data.success) throw new Error();
+
+      return res.data.memo;
     } catch (err) {
       toast(TOAST_TEXT.MEMOS_FAIL);
       return rejectWithValue(err.response.data.message);

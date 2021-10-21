@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserMemos, addMemo, deleteMemo } from 'store/memosSlice/memos-action.js';
+import {
+  getUserMemos,
+  getUserMemosByLabelName,
+  getUserMemoByMemoId,
+  addMemo,
+  deleteMemo,
+} from 'store/memosSlice/memos-action.js';
 import DUMMY_DATA from 'data/memos.js';
 
 const INIT_MEMO = {
@@ -76,6 +82,35 @@ const memosSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = errorMessage;
     },
+
+    // getUserMemosByLabelName
+    [getUserMemosByLabelName.pending](state) {
+      state.isLoading = true;
+    },
+    [getUserMemosByLabelName.fulfilled](state, { payload: memos }) {
+      state.isLoading = false;
+      state.errorMessage = '';
+      state.memos = memos;
+    },
+    [getUserMemosByLabelName.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
+
+    // getUserMemoByMemoId
+    [getUserMemoByMemoId.pending](state) {
+      state.isLoading = true;
+    },
+    [getUserMemoByMemoId.fulfilled](state, { payload: memo }) {
+      state.isLoading = false;
+      state.errorMessage = '';
+      state.memo = memo;
+    },
+    [getUserMemoByMemoId.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
+
     // addMemo
     [addMemo.pending](state) {
       state.isLoading = true;
@@ -91,6 +126,7 @@ const memosSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = errorMessage;
     },
+
     // delete memo
     [deleteMemo.pending](state) {
       state.isLoading = true;

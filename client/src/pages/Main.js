@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { getUserMemos, getUserMemosByLabelName } from 'store/memosSlice/memos-action.js';
+import {
+  getUserMemos,
+  getUserMemosByLabelName,
+  getUserMemoByMemoId,
+} from 'store/memosSlice/memos-action.js';
 import { memosActions } from 'store/memosSlice';
 import { toast } from 'react-toastify';
 import { TOAST_TEXT } from 'constants/toastText.js';
@@ -17,10 +21,9 @@ const Main = () => {
   const { memos } = useSelector((state) => state.memos);
   const history = useHistory();
   const match = useRouteMatch();
+  const { labelName, memoId } = match.params;
   const { path } = match;
-
   const { UIDispatch } = useUI();
-
   const [showEditModal, setShowEditModal] = useState(false);
 
   // fetch user settings
@@ -38,30 +41,27 @@ const Main = () => {
 
   // fetch memos
   useEffect(() => {
-    const { labelName } = match.params;
-    switch (path) {
-      case ROUTE.HOME:
-        dispatch(getUserMemos());
-        return;
-      case ROUTE.LABEL:
-        dispatch(getUserMemosByLabelName(labelName));
-        return;
-      case ROUTE.MEMO:
-      default:
-        dispatch(getUserMemos());
-        return;
-    }
+    (async () => {
+      switch (path) {
+        case ROUTE.HOME:
+          dispatch(getUserMemos());
+          return;
 
-    // // TODO fetch data
-    // // memoId existed? memoId not existed?
+        case ROUTE.LABEL:
+          dispatch(getUserMemosByLabelName(labelName));
+          return;
 
-    // // temp
-    // const selectedMemo = memos.find((memo) => memo._id === memoId);
-    // if (!selectedMemo) return history.push(ROUTE.HOME);
+        case ROUTE.MEMO:
+          await dispatch(getUserMemoByMemoId(memoId));
+          setShowEditModal(true);
+          return;
 
-    // dispatch(memosActions.setMemo(selectedMemo));
-    // setShowEditModal(true);
-  }, [path]);
+        default:
+          dispatch(getUserMemos());
+          return;
+      }
+    })();
+  }, [path, dispatch, labelName, memoId, history]);
 
   const closeEditModalHandler = () => {
     setShowEditModal(false);
@@ -73,10 +73,10 @@ const Main = () => {
     <Layout>
       <EditCard showMemo={path !== ROUTE.MEMO} />
       {/* isPinned === true */}
-      <Cards memos={memos} />
+      <Cards memos={memos} title={'已固定'} />
 
       {/* isPinned === false */}
-      <Cards memos={memos} />
+      <Cards memos={memos} title={'其他記事'} />
       <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
         <EditCard />
       </Modal>
