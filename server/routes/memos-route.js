@@ -4,6 +4,7 @@ const fileUpload = require('../middleware/file-upload.js');
 
 router.get('/', memoController.getUserMemos);
 router.get('/label/:labelName', memoController.getUserMemosByLabelName);
+router.get('/:memoId', memoController.getUserMemoByMemoId);
 router.post('/', memoController.createMemo);
 router.patch('/:memoId', memoController.updateMemo);
 router.delete('/:memoId', memoController.deleteMemo);
