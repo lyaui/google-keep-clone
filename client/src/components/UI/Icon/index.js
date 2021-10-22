@@ -27,7 +27,7 @@ import { BiPencil as EditOutline } from 'react-icons/bi';
 import { MdLabel as Label, MdLabelOutline as LabelOutline } from 'react-icons/md';
 
 // archive
-import { RiInboxArchiveLine as Archive } from 'react-icons/ri';
+import { MdOutlineArchive as Archive, MdOutlineUnarchive as Unarchive } from 'react-icons/md';
 
 // delete
 import { MdDelete as Delete } from 'react-icons/md';
@@ -99,6 +99,7 @@ export {
   Label,
   LabelOutline,
   Archive,
+  Unarchive,
   Delete,
   DeleteOutline,
   Pin,
