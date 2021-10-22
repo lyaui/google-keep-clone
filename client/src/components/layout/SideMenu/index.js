@@ -34,7 +34,7 @@ const SideMenu = () => {
           />
         ))}
         <EditLabelButton />
-        <NavItem toRoute={ROUTE.HOME} id='archive' label='封存' type='archive' />
+        <NavItem toRoute={ROUTE.ARCHIVE} id='archive' label='封存' type='archive' />
       </SSideMenuList>
     </SSideMenu>
   );

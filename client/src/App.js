@@ -41,7 +41,7 @@ function App() {
                 <Login />
               </Route>
               {isLoggedIn && (
-                <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO]}>
+                <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE]}>
                   <Main />
                 </Route>
               )}
