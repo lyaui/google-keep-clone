@@ -4,7 +4,6 @@ import { SCardPin } from 'components/ActionButtons/EditCardPinButton/style.js';
 export const SCard = styled.div`
   opacity: ${(props) => (props.showEditModal ? 0 : 1)};
   position: relative;
-  overflow: hidden;
   height: fit-content;
   background-color: ${(props) => props.color || '#FFFFFF'};
   border: 1px solid ${(props) => (props.color === '#fff' ? '#e0e0e0' : props.color)};
