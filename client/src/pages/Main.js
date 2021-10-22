@@ -61,6 +61,10 @@ const Main = () => {
           setShowEditModal(true);
           return;
 
+        case ROUTE.ARCHIVE:
+          dispatch(getUserMemos({ isArchived: true }));
+          return;
+
         default:
           dispatch(getUserMemos());
           return;
@@ -75,9 +79,9 @@ const Main = () => {
     history.push(ROUTE.HOME);
   };
 
-  const pinnedMemo = memos.filter((memo) => memo.isPinned);
-  const unpinnedMemo = memos.filter((memo) => !memo.isPinned);
-
+  const isArchivePage = path === ROUTE.ARCHIVE;
+  const pinnedMemo = memos.filter((memo) => memo.isPinned && memo.isArchived === isArchivePage);
+  const unpinnedMemo = memos.filter((memo) => !memo.isPinned && memo.isArchived === isArchivePage);
   useEffect(() => {
     dispatch(memosActions.setIsEditingNewMemo(editQuery));
   }, [dispatch, editQuery]);

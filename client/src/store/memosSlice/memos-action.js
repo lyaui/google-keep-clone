@@ -12,9 +12,9 @@ import {
 
 export const getUserMemos = createAsyncThunk(
   'memos/getUserMemos',
-  async (_, { rejectWithValue }) => {
+  async (query, { rejectWithValue }) => {
     try {
-      const res = await apiGetUserMemos();
+      const res = await apiGetUserMemos(query);
       if (!res.data.success) throw new Error();
       return res.data.memos;
     } catch (err) {
