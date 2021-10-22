@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ROUTE } from 'constants/routes.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
@@ -14,6 +15,7 @@ import EditCardText from 'components/EditCard/EditCardText';
 
 const Card = ({ card, masonryDom }) => {
   const history = useHistory();
+  const { isLoading } = useSelector((state) => state.memos);
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
   const {
@@ -31,7 +33,10 @@ const Card = ({ card, masonryDom }) => {
   } = card;
   const memoColor = PALETTE_COLORS[color];
 
-  const openEditModalHandler = () => history.push(ROUTE.BUILD_MEMO_PATH(id));
+  const openEditModalHandler = () => {
+    if (isLoading) return;
+    history.push(ROUTE.BUILD_MEMO_PATH(id));
+  };
 
   // 計算每張卡片跨列 span
   const getRowSpan = () => {

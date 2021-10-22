@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMemo } from 'store/memosSlice/memos-action.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
@@ -11,18 +11,14 @@ import EditTasks from 'components/EditCard/EditTasks';
 import EditCardLink from 'components/EditCard/EditCardLink';
 import EditCardLabels from 'components/EditCard/EditCardLabels';
 import EditCardToolbar from 'components/EditCard/EditCardToolbar';
-import {
-  SEditCard,
-  SEditCardBody,
-  SCardCreatedAt,
-  SEmptyEditor,
-} from 'components/EditCard/style.js';
+import { SEditCard, SEditCardBody, SCardCreatedAt } from 'components/EditCard/style.js';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-function EditCard({ showMemo = true }) {
+function EditCard() {
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  const { memo } = useSelector((state) => state.memos);
+  const { memo, isLoading } = useSelector((state) => state.memos);
   const { isTaskList, color } = memo;
   const memoColor = PALETTE_COLORS[color];
 
@@ -45,22 +41,23 @@ function EditCard({ showMemo = true }) {
         memo.color === 'DEFAULT',
     );
   }, [memo]);
-  if (!showMemo) return <SEmptyEditor />;
 
   const clickOutsideHandler = (e) => {
-    e.preventDefault();
+    e.stopPropagation();
+    // prevent continuous click
+    if (isLoading) return;
 
-    // TODO debounce
-    // post new post
+    // // post new post
     if (!isEmptyPost && isNewPost)
       dispatch(addMemo({ ...memo, labels: memo.labels.map((label) => label._id) }));
 
     // edit memo
     if (!isNewPost) {
     }
+
+    history.push({ search: '' });
   };
 
-  if (!showMemo) return <SEmptyEditor />;
   return (
     <SEditCard memoColor={memoColor} eventTypes='click'>
       <OutsideClickHandler onOutsideClick={clickOutsideHandler}>

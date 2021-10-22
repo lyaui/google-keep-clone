@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch, useLocation } from 'react-router-dom';
 import {
   getUserMemos,
   getUserMemosByLabelName,
@@ -13,16 +13,22 @@ import { ROUTE } from 'constants/routes.js';
 import { useUI, getUserSettings } from 'contexts/UI-context/index.js';
 import Modal from 'components/UI/Modal';
 import Layout from 'components/Layout';
+import EmptyCardEditor from 'components/EditCard/EmptyCardEditor';
 import EditCard from 'components/EditCard';
 import Cards from 'components/Cards';
 
 const Main = () => {
   const dispatch = useDispatch();
-  const { memos } = useSelector((state) => state.memos);
   const history = useHistory();
   const match = useRouteMatch();
-  const { labelName, memoId } = match.params;
   const { path } = match;
+  const { search } = useLocation();
+  const edit = !!new URLSearchParams(search).get('edit');
+  const [isEditQueryTrue, setIsEditQueryTrue] = useState(edit);
+
+  const { memos } = useSelector((state) => state.memos);
+  const { labelName, memoId } = match.params;
+
   const { UIDispatch } = useUI();
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -72,12 +78,16 @@ const Main = () => {
   const pinnedMemo = memos.filter((memo) => memo.isPinned);
   const unpinnedMemo = memos.filter((memo) => !memo.isPinned);
 
+  useEffect(() => {
+    setIsEditQueryTrue(edit);
+  }, [edit]);
+
   return (
     <Layout>
-      <EditCard showMemo={path !== ROUTE.MEMO} />
+      {!isEditQueryTrue && <EmptyCardEditor />}
+      {isEditQueryTrue && <EditCard />}
       {/* isPinned === true */}
       {pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
-
       {/* isPinned === false */}
       {unpinnedMemo.length > 0 && (
         <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />

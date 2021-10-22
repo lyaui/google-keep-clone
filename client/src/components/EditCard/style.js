@@ -27,7 +27,3 @@ export const SCardCreatedAt = styled.div`
   font-size: 12px;
   text-align: right;
 `;
-
-export const SEmptyEditor = styled.div`
-  height: 179px;
-`;
