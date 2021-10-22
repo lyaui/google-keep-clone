@@ -60,7 +60,7 @@ const memosSlice = createSlice({
       state.memo.tasks = tempArr;
     },
     updateTask(state, { payload: task }) {
-      const index = state.memo.tasks.findIndex((item) => item.id === task.id);
+      const index = state.memo.tasks.findIndex((item) => item.id === task.id).sort((a, b) => a.up);
       state.memo.tasks[index] = task;
     },
     removeTask(state, { payload: taskId }) {
@@ -141,6 +141,7 @@ const memosSlice = createSlice({
       state.errorMessage = '';
       const memoIndex = state.memos.findIndex((memo) => memo._id === updatedMemo._id);
       state.memos[memoIndex] = updatedMemo;
+      state.memos = state.memos.sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
     },
     [updateMemo.rejected](state, { payload: errorMessage }) {
       state.isLoading = false;
