@@ -13,7 +13,7 @@ import { SEditCardColor, SColor } from 'components/ActionButtons/EditCardColorBu
 
 const EditCardColorButton = ({ id }) => {
   const dispatch = useDispatch();
-  const { memo, isEditingNewMemo } = useSelector((state) => state.memos);
+  const { memos, memo, isEditingNewMemo } = useSelector((state) => state.memos);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const showPaletteHandler = (e) => {
@@ -30,11 +30,14 @@ const EditCardColorButton = ({ id }) => {
 
   const palette = (
     <SEditCardColor width={140}>
-      {Object.keys(PALETTE_COLORS).map((color) => (
-        <SColor key={color} color={PALETTE_COLORS[color]} onClick={selectColorHandler(color)}>
-          {memo.color === color && <Icon.Check />}
-        </SColor>
-      ))}
+      {Object.keys(PALETTE_COLORS).map((color) => {
+        const currentMemo = memos.find((memo) => memo._id === id) || memo;
+        return (
+          <SColor key={color} color={PALETTE_COLORS[color]} onClick={selectColorHandler(color)}>
+            {currentMemo.color === color && <Icon.Check />}
+          </SColor>
+        );
+      })}
     </SEditCardColor>
   );
 
