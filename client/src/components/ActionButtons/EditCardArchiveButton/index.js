@@ -15,7 +15,7 @@ const EditCardArchiveButton = ({ id }) => {
   const toggleArchiveHandler = (e) => {
     e.stopPropagation();
     isEditingNewMemo
-      ? dispatch(memosActions.updateMemo({ isArchived: !currentMemo.isReactive }))
+      ? dispatch(memosActions.updateMemo({ isArchived: !currentMemo.isArchived }))
       : dispatch(updateMemo({ memoId: id, payload: { isArchived: !currentMemo.isArchived } }));
   };
 
