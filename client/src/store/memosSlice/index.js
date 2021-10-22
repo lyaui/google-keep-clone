@@ -4,6 +4,7 @@ import {
   getUserMemosByLabelName,
   getUserMemoByMemoId,
   addMemo,
+  updateMemo,
   deleteMemo,
 } from 'store/memosSlice/memos-action.js';
 import DUMMY_DATA from 'data/memos.js';
@@ -22,6 +23,7 @@ const INIT_MEMO = {
 };
 
 export const INIT_MEMOS_STATE = {
+  isEditingNewMemo: false,
   isLoading: false,
   errorMessage: '',
   memos: [...DUMMY_DATA],
@@ -32,6 +34,9 @@ const memosSlice = createSlice({
   name: 'memos',
   initialState: INIT_MEMOS_STATE,
   reducers: {
+    setIsEditingNewMemo(state, { payload: IsEditingNewMemo }) {
+      state.isEditingNewMemo = IsEditingNewMemo;
+    },
     setMemo(state, { payload: memo }) {
       state.memo = memo;
     },

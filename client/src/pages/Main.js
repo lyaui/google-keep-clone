@@ -23,10 +23,9 @@ const Main = () => {
   const match = useRouteMatch();
   const { path } = match;
   const { search } = useLocation();
-  const edit = !!new URLSearchParams(search).get('edit');
-  const [isEditQueryTrue, setIsEditQueryTrue] = useState(edit);
+  const editQuery = !!new URLSearchParams(search).get('edit');
 
-  const { memos } = useSelector((state) => state.memos);
+  const { memos, isEditingNewMemo } = useSelector((state) => state.memos);
   const { labelName, memoId } = match.params;
 
   const { UIDispatch } = useUI();
@@ -72,6 +71,7 @@ const Main = () => {
   const closeEditModalHandler = () => {
     setShowEditModal(false);
     dispatch(memosActions.resetMemo());
+    // TODO correct previous page
     history.push(ROUTE.HOME);
   };
 
@@ -79,13 +79,13 @@ const Main = () => {
   const unpinnedMemo = memos.filter((memo) => !memo.isPinned);
 
   useEffect(() => {
-    setIsEditQueryTrue(edit);
-  }, [edit]);
+    dispatch(memosActions.setIsEditingNewMemo(editQuery));
+  }, [dispatch, editQuery]);
 
   return (
     <Layout>
-      {!isEditQueryTrue && <EmptyCardEditor />}
-      {isEditQueryTrue && <EditCard />}
+      {!isEditingNewMemo && <EmptyCardEditor />}
+      {isEditingNewMemo && <EditCard />}
       {/* isPinned === true */}
       {pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
       {/* isPinned === false */}
