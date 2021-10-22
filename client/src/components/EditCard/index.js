@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { memosActions } from 'store/memosSlice';
 import { addMemo } from 'store/memosSlice/memos-action.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
@@ -33,12 +34,9 @@ function EditCard() {
       !memo.title &&
         !memo.content &&
         memo.images.length === 0 &&
-        memo.isPinned === false &&
-        memo.isArchived === false &&
         memo.links.length === 0 &&
         memo.labels.length === 0 &&
-        memo.tasks.length === 0 &&
-        memo.color === 'DEFAULT',
+        memo.tasks.length === 0,
     );
   }, [memo]);
 
@@ -56,6 +54,7 @@ function EditCard() {
     }
 
     history.push({ search: '' });
+    dispatch(memosActions.resetMemo());
   };
 
   return (
