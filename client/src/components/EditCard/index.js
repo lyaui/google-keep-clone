@@ -62,7 +62,7 @@ function EditCard() {
       <OutsideClickHandler onOutsideClick={clickOutsideHandler}>
         <SEditCardBody>
           {/* pin */}
-          <EditCardPinButton color={memoColor} opacity='1' isPinned={memo.isPinned} />
+          <EditCardPinButton />
           {/* images */}
           <EditCardImages />
           {/* title */}

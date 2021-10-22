@@ -83,7 +83,7 @@ const Card = ({ card, masonryDom }) => {
       <SCard color={memoColor} className='card' ref={cardRef} gridRowSpan={gridRowSpan}>
         <div className='growing-content' onClick={openEditModalHandler}>
           {/* pin */}
-          <EditCardPinButton color={memoColor} opacity='0' isPinned={isPinned} />
+          <EditCardPinButton id={id} />
           {/* images */}
           {images.length > 0 && <CardImages images={images} />}
           {/* header */}
