@@ -132,6 +132,21 @@ const memosSlice = createSlice({
       state.errorMessage = errorMessage;
     },
 
+    // updateMemo
+    [updateMemo.pending](state) {
+      state.isLoading = true;
+    },
+    [updateMemo.fulfilled](state, { payload: updatedMemo }) {
+      state.isLoading = false;
+      state.errorMessage = '';
+      const memoIndex = state.memos.findIndex((memo) => memo._id === updatedMemo._id);
+      state.memos[memoIndex] = updatedMemo;
+    },
+    [updateMemo.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
+
     // delete memo
     [deleteMemo.pending](state) {
       state.isLoading = true;

@@ -6,7 +6,7 @@ import {
   apiGetMemosByLabelName,
   apiGetUserMemoByMemoId,
   apiCreateMemo,
-  //   apiUpdateMemo,
+  apiUpdateMemo,
   apiDeleteMemo,
 } from 'apis/memos.js';
 
@@ -65,6 +65,22 @@ export const addMemo = createAsyncThunk('memos/addMemo', async (payload, { rejec
     return rejectWithValue(err.response.data.message);
   }
 });
+
+export const updateMemo = createAsyncThunk(
+  'memos/updateMemo',
+  async ({ memoId, payload }, { rejectWithValue }) => {
+    try {
+      const res = await apiUpdateMemo(memoId, payload);
+      if (!res.data.success) throw new Error();
+
+      toast(TOAST_TEXT.MEMO_UPDATE_SUCCESS);
+      return res.data.memo;
+    } catch (err) {
+      toast(TOAST_TEXT.MEMO_UPDATE_FAIL);
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
 
 export const deleteMemo = createAsyncThunk(
   'memos/deleteMemo',
