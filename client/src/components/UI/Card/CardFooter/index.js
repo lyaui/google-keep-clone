@@ -3,6 +3,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
+import EditCardColorButton from 'components/ActionButtons/EditCardColorButton';
 import DeleteCardButton from 'components/ActionButtons/DeleteCardButton';
 import { SCardFooter } from 'components/UI/Card/CardFooter/style.js';
 
@@ -18,11 +19,7 @@ function CardFooter({ id, isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
       isOnlyImagesAndLinks={isOnlyImagesAndLinks}
     >
       {/* palette */}
-      <Tippy content={TOOLTIP_TEXT.PALETTE}>
-        <ButtonRound onClick={test} size={34}>
-          <Icon.Palette />
-        </ButtonRound>
-      </Tippy>
+      <EditCardColorButton id={id} />
       {/* image */}
       <Tippy content={TOOLTIP_TEXT.IMAGE}>
         <ButtonRound onClick={test} size={34}>
@@ -35,23 +32,14 @@ function CardFooter({ id, isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
           <Icon.Copy />
         </ButtonRound>
       </Tippy>
-
       {/* archive */}
       <Tippy content={TOOLTIP_TEXT.ARCHIVE}>
         <ButtonRound onClick={test} size={34}>
           <Icon.Archive />
         </ButtonRound>
       </Tippy>
-
       {/* delete */}
       <DeleteCardButton id={id} />
-
-      {/* more */}
-      <Tippy content={TOOLTIP_TEXT.MORE}>
-        <ButtonRound onClick={test} size={34}>
-          <Icon.More />
-        </ButtonRound>
-      </Tippy>
     </SCardFooter>
   );
 }

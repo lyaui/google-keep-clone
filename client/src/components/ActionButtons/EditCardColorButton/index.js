@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { memosActions } from 'store/memosSlice';
+import { updateMemo } from 'store/memosSlice/memos-action.js';
 import CustomTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -10,12 +11,22 @@ import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import { SEditCardColor, SColor } from 'components/ActionButtons/EditCardColorButton/style.js';
 
-const EditCardColorButton = () => {
+const EditCardColorButton = ({ id }) => {
   const dispatch = useDispatch();
-  const { memo } = useSelector((state) => state.memos);
+  const { memo, isEditingNewMemo } = useSelector((state) => state.memos);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const selectColorHandler = (color) => () => dispatch(memosActions.updateMemo({ color }));
+  const showPaletteHandler = (e) => {
+    e.stopPropagation();
+    setShowTooltip(true);
+  };
+
+  const selectColorHandler = (color) => (e) => {
+    e.stopPropagation();
+    isEditingNewMemo
+      ? dispatch(memosActions.updateMemo({ color }))
+      : dispatch(updateMemo({ memoId: id, payload: { color } }));
+  };
 
   const palette = (
     <SEditCardColor width={140}>
@@ -35,8 +46,9 @@ const EditCardColorButton = () => {
       onClickOutside={() => setShowTooltip(false)}
     >
       <Tippy content={TOOLTIP_TEXT.PALETTE}>
-        <ButtonRound size={34} onClick={() => setShowTooltip(true)}>
+        <ButtonRound size={34} onClick={showPaletteHandler}>
           <Icon.Palette />
+          {isEditingNewMemo}
         </ButtonRound>
       </Tippy>
     </CustomTippy>
