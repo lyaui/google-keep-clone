@@ -28,13 +28,7 @@ const EditCardToolbar = () => {
         {isTaskList && <EditCardCancelTaskButton />}
         {/* image */}
         <UploadImageButton />
-        {/* copy */}
-        <Tippy content={TOOLTIP_TEXT.COPY}>
-          <ButtonRound size={34}>
-            <Icon.Copy />
-          </ButtonRound>
-        </Tippy>
-        {/* archivee */}
+        {/* archive */}
         <Tippy content={TOOLTIP_TEXT.ARCHIVE}>
           <ButtonRound size={34}>
             <Icon.Archive />

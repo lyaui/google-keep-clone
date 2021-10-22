@@ -4,6 +4,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import EditCardColorButton from 'components/ActionButtons/EditCardColorButton';
+import CopyMemoButton from 'components/ActionButtons/CopyMemoButton';
 import DeleteCardButton from 'components/ActionButtons/DeleteCardButton';
 import { SCardFooter } from 'components/UI/Card/CardFooter/style.js';
 
@@ -27,11 +28,7 @@ function CardFooter({ id, isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
         </ButtonRound>
       </Tippy>
       {/* copy */}
-      <Tippy content={TOOLTIP_TEXT.COPY}>
-        <ButtonRound onClick={test} size={34}>
-          <Icon.Copy />
-        </ButtonRound>
-      </Tippy>
+      <CopyMemoButton id={id} />
       {/* archive */}
       <Tippy content={TOOLTIP_TEXT.ARCHIVE}>
         <ButtonRound onClick={test} size={34}>
