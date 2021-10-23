@@ -13,7 +13,7 @@ import { SEditCardColor, SColor } from 'components/ActionButtons/EditCardColorBu
 
 const EditCardColorButton = ({ id }) => {
   const dispatch = useDispatch();
-  const { memos, memo, isEditingNewMemo } = useSelector((state) => state.memos);
+  const { memos, memo, isEditingNewMemo, isLoading } = useSelector((state) => state.memos);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const showPaletteHandler = (e) => {
@@ -23,6 +23,7 @@ const EditCardColorButton = ({ id }) => {
 
   const selectColorHandler = (color) => (e) => {
     e.stopPropagation();
+    if (isLoading) return;
     isEditingNewMemo
       ? dispatch(memosActions.updateMemo({ color }))
       : dispatch(updateMemo({ memoId: id, payload: { color } }));
