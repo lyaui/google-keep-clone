@@ -8,7 +8,6 @@ export const useUpdateMemo = (id) => {
   const currentMemo = memos.find((memo) => memo._id === id) || memo;
 
   const dispatchUpdateMemo = (updatedItem) => {
-    console.log(id, updatedItem);
     if (isLoading) return;
     id
       ? dispatch(updateMemo({ memoId: id, payload: updatedItem }))
