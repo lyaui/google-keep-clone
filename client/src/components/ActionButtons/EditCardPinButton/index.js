@@ -1,6 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { memosActions } from 'store/memosSlice';
-import { updateMemo } from 'store/memosSlice/memos-action.js';
+import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -10,15 +8,11 @@ import { ButtonRound } from 'components/UI/Buttons/index.js';
 import { SCardPin } from 'components/ActionButtons/EditCardPinButton/style.js';
 
 const EditCardPinButton = ({ id }) => {
-  const dispatch = useDispatch();
-  const { memos, memo, isEditingNewMemo } = useSelector((state) => state.memos);
-  const currentMemo = memos.find((memo) => memo._id === id) || memo;
+  const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
   const togglePinHandler = (e) => {
     e.stopPropagation();
-    isEditingNewMemo
-      ? dispatch(memosActions.updateMemo({ isPinned: !currentMemo.isPinned }))
-      : dispatch(updateMemo({ memoId: id, payload: { isPinned: !currentMemo.isPinned } }));
+    dispatchUpdateMemo({ isPinned: !currentMemo.isPinned });
   };
 
   const tooltipText = currentMemo.isPinned ? TOOLTIP_TEXT.CANCEL_PIN : TOOLTIP_TEXT.PIN;
