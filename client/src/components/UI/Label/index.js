@@ -7,7 +7,7 @@ import { SLabel, SLabelButton } from 'components/UI/Label/style.js';
 
 const Label = ({ id, label, isShowMoreLabel = false, numOfMoreLabel = 0 }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
-  const updatedLabels = currentMemo.labels.filter((item) => item._id !== label._id);
+  const updatedLabels = label ? currentMemo.labels.filter((item) => item._id !== label._id) : [];
 
   const removeLabelHandler = (e) => {
     e.stopPropagation();
