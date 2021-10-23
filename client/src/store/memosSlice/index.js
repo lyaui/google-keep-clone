@@ -46,12 +46,6 @@ const memosSlice = createSlice({
     resetMemo(state) {
       state.memo = INIT_MEMOS_STATE.memo;
     },
-    addMemoLabel(state, { payload: label }) {
-      state.memo.labels = [...state.memo.labels, label];
-    },
-    removeMemoLabel(state, { payload: labelId }) {
-      state.memo.labels = state.memo.labels.filter((label) => label._id !== labelId);
-    },
     addTask(state, { payload }) {
       const { preIndex, task } = payload;
       const tempArr = [...state.memo.tasks];
