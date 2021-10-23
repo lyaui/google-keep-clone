@@ -4,6 +4,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import EditCardColorButton from 'components/ActionButtons/EditCardColorButton';
+import EditCardLabelsButton from 'components/ActionButtons/EditCardLabelsButton';
 import CopyMemoButton from 'components/ActionButtons/CopyMemoButton';
 import EditCardArchiveButton from 'components/ActionButtons/EditCardArchiveButton';
 import DeleteCardButton from 'components/ActionButtons/DeleteCardButton';
@@ -22,6 +23,8 @@ function CardFooter({ id, isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) {
     >
       {/* palette */}
       <EditCardColorButton id={id} />
+      {/* labels */}
+      <EditCardLabelsButton id={id} />
       {/* image */}
       <Tippy content={TOOLTIP_TEXT.IMAGE}>
         <ButtonRound onClick={test} size={34}>

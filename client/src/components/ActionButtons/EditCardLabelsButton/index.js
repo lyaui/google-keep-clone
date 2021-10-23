@@ -7,7 +7,7 @@ import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import EditLabels from 'components/EditLabels';
 
-const EditCardLabelsButton = () => {
+const EditCardLabelsButton = ({ id }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const showTooltipHandler = (e) => {
     e.stopPropagation();
@@ -16,7 +16,7 @@ const EditCardLabelsButton = () => {
 
   return (
     <CustomTippy
-      render={() => <EditLabels />}
+      render={() => <EditLabels id={id} />}
       interactive={true}
       visible={showTooltip}
       onClickOutside={() => setShowTooltip(false)}

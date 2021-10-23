@@ -12,7 +12,7 @@ import {
   SAddNewLabel,
 } from 'components/EditLabels/style.js';
 
-const EditLabels = ({ type = 'memo' }) => {
+const EditLabels = ({ type = 'memo', id }) => {
   const dispatch = useDispatch();
   const { labels: allLabels } = useSelector((state) => state.labels);
   const [keyword, setKeyword] = useState('');
@@ -20,6 +20,10 @@ const EditLabels = ({ type = 'memo' }) => {
   const labels = keyword
     ? allLabels.filter((label) => label.name.toLowerCase().includes(keyword.toLowerCase()))
     : allLabels;
+
+  const stopPropagationHandler = (e) => {
+    e.stopPropagation();
+  };
 
   const searchKeywordHandler = (e) => {
     e.preventDefault();
@@ -36,7 +40,7 @@ const EditLabels = ({ type = 'memo' }) => {
   const noMatchResults = keyword && labels.length === 0;
 
   return (
-    <SEditCardLabels width={isSideMenu ? 300 : 200}>
+    <SEditCardLabels width={isSideMenu ? 300 : 200} onClick={stopPropagationHandler}>
       <SEditCardLabelTitle>{isSideMenu ? '編輯標籤' : '為記事加標籤'}</SEditCardLabelTitle>
       <SSearchLabel>
         <input
@@ -53,7 +57,7 @@ const EditLabels = ({ type = 'memo' }) => {
         {/* edit memo labels */}
         {!isSideMenu &&
           labels.map((label) => (
-            <MemoLabel key={label._id} label={label} isSideMenu={isSideMenu} />
+            <MemoLabel id={id} key={label._id} label={label} isSideMenu={isSideMenu} />
           ))}
 
         {/* edit labels */}

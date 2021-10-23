@@ -97,7 +97,7 @@ const Card = ({ card, masonryDom }) => {
           )}
           {/* tasks */}
           {/* labels */}
-          {labels.length > 0 && <CardLabels labels={labels} />}
+          {labels.length > 0 && <CardLabels labels={labels} id={id} />}
           {/* footer */}
           <CardFooter
             id={id}
