@@ -24,7 +24,6 @@ export const TOAST_TEXT = {
   MEMO_ADD_SUCCESS: '記事新增成功 😳',
   MEMO_ADD_FAIL: '記事新增失敗 請重整再試 🥶',
 
-  MEMO_UPDATE_SUCCESS: '記事更新成功 😊',
   MEMO_UPDATE_FAIL: '記事更新失敗 請重整再試 🥶',
 
   MEMO_DELETE_SUCCESS: '記事刪除成功 😳',

@@ -73,7 +73,6 @@ export const updateMemo = createAsyncThunk(
       const res = await apiUpdateMemo(memoId, payload);
       if (!res.data.success) throw new Error();
 
-      toast(TOAST_TEXT.MEMO_UPDATE_SUCCESS);
       return res.data.memo;
     } catch (err) {
       toast(TOAST_TEXT.MEMO_UPDATE_FAIL);
