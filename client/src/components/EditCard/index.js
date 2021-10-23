@@ -35,7 +35,6 @@ function EditCard() {
         !memo.content &&
         memo.images.length === 0 &&
         memo.links.length === 0 &&
-        memo.labels.length === 0 &&
         memo.tasks.length === 0,
     );
   }, [memo]);
