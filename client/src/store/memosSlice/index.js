@@ -45,20 +45,6 @@ const memosSlice = createSlice({
       state.memo = INIT_MEMOS_STATE.memo;
       state.isMemoUpdated = false;
     },
-    addTask(state, { payload }) {
-      const { preIndex, task } = payload;
-      const tempArr = [...state.memo.tasks];
-      tempArr.join();
-      tempArr.splice(preIndex, 0, task);
-      state.memo.tasks = tempArr;
-    },
-    updateTask(state, { payload: task }) {
-      const index = state.memo.tasks.findIndex((item) => item.id === task.id).sort((a, b) => a.up);
-      state.memo.tasks[index] = task;
-    },
-    removeTask(state, { payload: taskId }) {
-      state.memo.tasks = state.memo.tasks.filter((task) => task.id !== taskId);
-    },
     addImage(state, { payload: newImage }) {
       state.memo.images = [...state.memo.images, newImage];
     },
