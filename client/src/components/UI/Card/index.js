@@ -12,6 +12,7 @@ import CardFooter from 'components/UI/Card/CardFooter';
 import CardLinks from 'components/UI/Card/CardLinks';
 import { SCard } from 'components/UI/Card/style.js';
 import EditCardText from 'components/EditCard/EditCardText';
+import { SEditCardText } from 'components/EditCard/EditCardText/style.js';
 
 const Card = ({ card, masonryDom }) => {
   const history = useHistory();
@@ -91,7 +92,9 @@ const Card = ({ card, masonryDom }) => {
           {/* content */}
           {content && (
             <CardBody>
-              <EditCardText text={content} updateTextHandler={() => {}} />
+              <SEditCardText>
+                <EditCardText text={content} updateTextHandler={() => {}} />
+              </SEditCardText>
               {/* {!isTaskList && <CardTasks tasks={tasks} />} */}
             </CardBody>
           )}
