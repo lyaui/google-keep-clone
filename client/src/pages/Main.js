@@ -74,9 +74,9 @@ const Main = () => {
 
   const closeEditModalHandler = () => {
     setShowEditModal(false);
+    history.push(ROUTE.HOME);
     dispatch(memosActions.resetMemo());
     // TODO correct previous page
-    history.push(ROUTE.HOME);
   };
 
   const isArchivePage = path === ROUTE.ARCHIVE;
