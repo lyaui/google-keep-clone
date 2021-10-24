@@ -19,7 +19,7 @@ const Card = ({ card, masonryDom }) => {
   const { isLoading } = useSelector((state) => state.memos);
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
-  const { _id: id, title, content, images, links, labels, tasks, color } = card;
+  const { _id: id, title, content, images, links, labels, isTasksList, tasks, color } = card;
   const memoColor = PALETTE_COLORS[color];
 
   const openEditModalHandler = () => {
@@ -81,13 +81,15 @@ const Card = ({ card, masonryDom }) => {
 
           <CardBody>
             {/* content */}
-            {content && (
+            {!isTasksList && content && (
               <SEditCardText>
                 <EditCardText text={content} updateTextHandler={() => {}} />
               </SEditCardText>
             )}
             {/* tasks */}
-            {/* {!isTaskList && <CardTasks tasks={tasks} />} */}
+            {!isTasksList && tasks.map((task, index) => <div key={task.id}>{task.name}</div>)}
+
+            {/* <EditTasks /> */}
             {images.length === 0 &&
               !title &&
               !content &&
