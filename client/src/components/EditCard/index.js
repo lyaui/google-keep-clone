@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { memosActions } from 'store/memosSlice';
+import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
 import { addMemo } from 'store/memosSlice/memos-action.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
@@ -18,16 +19,16 @@ import OutsideClickHandler from 'react-outside-click-handler';
 function EditCard() {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const { memo, isLoading } = useSelector((state) => state.memos);
-  const { isTaskList, color } = memo;
-  const memoColor = PALETTE_COLORS[color];
-
   const [isEmptyPost, setIsEmptyPost] = useState(true);
-  const match = useRouteMatch();
 
+  const match = useRouteMatch();
   const { memoId } = match.params;
   const isNewPost = memoId ? false : true;
+  const { dispatchUpdateMemo } = useUpdateMemo(memoId);
+
+  const { memo, isLoading, isMemoUpdated } = useSelector((state) => state.memos);
+  const { isTaskList, color } = memo;
+  const memoColor = PALETTE_COLORS[color];
 
   useEffect(() => {
     setIsEmptyPost(
@@ -39,19 +40,16 @@ function EditCard() {
     );
   }, [memo]);
 
-  const clickOutsideHandler = (e) => {
+  const clickOutsideHandler = async (e) => {
     e.stopPropagation();
-    // prevent continuous click
     if (isLoading) return;
 
-    // // post new post
+    // post new post
     if (!isEmptyPost && isNewPost)
-      dispatch(addMemo({ ...memo, labels: memo.labels.map((label) => label._id) }));
+      await dispatch(addMemo({ ...memo, labels: memo.labels.map((label) => label._id) }));
 
     // edit memo
-    if (!isNewPost) {
-    }
-
+    if (!isNewPost && isMemoUpdated) await dispatchUpdateMemo(memo);
     history.push({ search: '' });
     dispatch(memosActions.resetMemo());
   };

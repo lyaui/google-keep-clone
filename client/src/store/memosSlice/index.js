@@ -23,6 +23,7 @@ const INIT_MEMO = {
 };
 
 export const INIT_MEMOS_STATE = {
+  isMemoUpdated: false,
   isLoading: false,
   errorMessage: '',
   memos: [...DUMMY_DATA],
@@ -37,10 +38,12 @@ const memosSlice = createSlice({
       state.memo = memo;
     },
     updateMemo(state, { payload }) {
+      state.isMemoUpdated = true;
       state.memo = { ...state.memo, ...payload };
     },
     resetMemo(state) {
       state.memo = INIT_MEMOS_STATE.memo;
+      state.isMemoUpdated = false;
     },
     addTask(state, { payload }) {
       const { preIndex, task } = payload;
