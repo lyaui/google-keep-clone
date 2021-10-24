@@ -25,7 +25,7 @@ const Main = () => {
   const { search } = useLocation();
   const editQuery = !!new URLSearchParams(search).get('edit');
 
-  const { memos, isEditingNewMemo } = useSelector((state) => state.memos);
+  const { memos } = useSelector((state) => state.memos);
   const { labelName, memoId } = match.params;
 
   const { UIDispatch } = useUI();
@@ -82,14 +82,11 @@ const Main = () => {
   const isArchivePage = path === ROUTE.ARCHIVE;
   const pinnedMemo = memos.filter((memo) => memo.isPinned && memo.isArchived === isArchivePage);
   const unpinnedMemo = memos.filter((memo) => !memo.isPinned && memo.isArchived === isArchivePage);
-  useEffect(() => {
-    dispatch(memosActions.setIsEditingNewMemo(editQuery));
-  }, [dispatch, editQuery]);
 
   return (
     <Layout>
-      {!isEditingNewMemo && <EmptyCardEditor />}
-      {isEditingNewMemo && <EditCard />}
+      {!editQuery && <EmptyCardEditor />}
+      {editQuery && <EditCard />}
       {/* isPinned === true */}
       {pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
       {/* isPinned === false */}
