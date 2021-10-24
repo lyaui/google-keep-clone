@@ -27,7 +27,7 @@ const EditCardTaskButton = () => {
   }
 
   const toggleTaskHandler = () =>
-    dispatch(memosActions.updateMemo({ isTaskList: true, tasks: tasksList }));
+    dispatch(memosActions.updateMemo({ isTaskList: true, tasks: tasksList, content: '' }));
 
   return (
     <Tippy content={TOOLTIP_TEXT.CHECKBOX}>
