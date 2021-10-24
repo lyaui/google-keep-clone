@@ -7,11 +7,12 @@ import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
 import CardBody from 'components/UI/Card/CardBody';
+import EditCardText from 'components/EditCard/EditCardText';
+import EditTaskItem from 'components/EditCard/EditTasks/EditTaskItem';
 import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
 import CardLinks from 'components/UI/Card/CardLinks';
 import { SCard } from 'components/UI/Card/style.js';
-import EditCardText from 'components/EditCard/EditCardText';
 import { SEditCardText } from 'components/EditCard/EditCardText/style.js';
 
 const Card = ({ card, masonryDom }) => {
@@ -87,7 +88,10 @@ const Card = ({ card, masonryDom }) => {
               </SEditCardText>
             )}
             {/* tasks */}
-            {!isTasksList && tasks.map((task, index) => <div key={task.id}>{task.name}</div>)}
+            {!isTasksList &&
+              tasks.map((task, index) => (
+                <EditTaskItem key={task.id} task={task} index={index} id={id} />
+              ))}
 
             {/* <EditTasks /> */}
             {images.length === 0 &&

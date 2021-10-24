@@ -15,7 +15,7 @@ export const SEditTaskItem = styled.div`
 
 export const SEditTaskItemIcon = styled.div`
   display: flex;
-  margin-left: -10px;
+  margin-left: ${(props) => (props.isCard ? '0' : '-10px')};
   cursor: pointer;
   svg {
     width: 20px;

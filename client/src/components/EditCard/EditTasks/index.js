@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
 import { v4 as uuid } from 'uuid';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import * as Icon from 'components/UI/Icon/index.js';
 import EditCardText from 'components/EditCard/EditCardText';
 import EditTaskItem from 'components/EditCard/EditTasks/EditTaskItem';
 import { SEditTasks, SEditNewTask } from 'components/EditCard/EditTasks/style.js';
 
 const EditTasks = () => {
+  const taskRef = useRef();
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo();
-  const { color } = currentMemo;
   const [newTask, setNewTask] = useState('');
 
   const updateTaskHandler = (handledTask) => {
@@ -27,7 +27,7 @@ const EditTasks = () => {
   return (
     <Droppable droppableId='tasks'>
       {(provided) => (
-        <SEditTasks ref={provided.innerRef} {...provided.droppableProps}>
+        <SEditTasks ref={provided.innerRef || taskRef} {...provided.droppableProps}>
           {/* add new task */}
           <SEditNewTask>
             <Icon.Add />
@@ -36,7 +36,17 @@ const EditTasks = () => {
 
           {/* edit task item */}
           {currentMemo.tasks.map((task, index) => (
-            <EditTaskItem key={index} task={task} index={index} color={color} />
+            <Draggable key={task.id} draggableId={task.id} index={index}>
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                >
+                  <EditTaskItem key={index} task={task} index={index} />
+                </div>
+              )}
+            </Draggable>
           ))}
           {provided.placeholder}
         </SEditTasks>
