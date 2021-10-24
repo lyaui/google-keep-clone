@@ -90,15 +90,19 @@ const Card = ({ card, masonryDom }) => {
           {/* header */}
           {title && <CardHeader>{title}</CardHeader>}
           {/* content */}
-          {content && (
-            <CardBody>
+
+          <CardBody>
+            {/* content */}
+            {content && (
               <SEditCardText>
                 <EditCardText text={content} updateTextHandler={() => {}} />
               </SEditCardText>
-              {/* {!isTaskList && <CardTasks tasks={tasks} />} */}
-            </CardBody>
-          )}
-          {/* tasks */}
+            )}
+            {/* tasks */}
+            {/* {!isTaskList && <CardTasks tasks={tasks} />} */}
+            {!content && tasks.length === 0 && <p>空白記事</p>}
+          </CardBody>
+
           {/* labels */}
           {labels.length > 0 && <CardLabels labels={labels} id={id} />}
           {/* footer */}
