@@ -11,4 +11,6 @@ router.delete('/:memoId', memoController.deleteMemo);
 router.post('/singleImage', fileUpload.single('image'), memoController.uploadImage);
 router.post('/multipleImages', fileUpload.array('images', 5), memoController.uploadImages);
 
+router.post('/linksInfo', memoController.getLinkInfo);
+
 module.exports = router;

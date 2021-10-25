@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { getLinkPreview } = require('link-preview-js');
 const { HttpError, Memo, Label, User } = require('../models');
 
 const getUserMemos = async (req, res, next) => {
@@ -185,6 +186,25 @@ const deleteMemo = async (req, res, next) => {
   }
 };
 
+const getLinkInfo = async (req, res) => {
+  const { links } = req.body;
+
+  const resLinkInfos = [];
+  try {
+    for (let i = 0; i < links.length; i += 1) {
+      const res = await getLinkPreview(links[i]);
+      const link = { url: res.url, title: res.title, images: res.images };
+      resLinkInfos.push(link);
+    }
+    res.status(200).json({
+      success: true,
+      links: resLinkInfos,
+    });
+  } catch (err) {
+    return next(new HttpError(err));
+  }
+};
+
 const uploadImage = (req, res) => {
   res.send('single image uploaded successfully');
 };
@@ -200,6 +220,7 @@ module.exports = {
   createMemo,
   updateMemo,
   deleteMemo,
+  getLinkInfo,
   uploadImage,
   uploadImages,
 };
