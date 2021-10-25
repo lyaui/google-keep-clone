@@ -9,8 +9,7 @@ router.post('/', memoController.createMemo);
 router.patch('/:memoId', memoController.updateMemo);
 router.delete('/:memoId', memoController.deleteMemo);
 router.post('/singleImage', fileUpload.single('image'), memoController.uploadImage);
-router.post('/multipleImages', fileUpload.array('images', 5), memoController.uploadImages);
-
-router.post('/linksInfo', memoController.getLinkInfo);
+router.post('/multipleImages', fileUpload.array('images'), memoController.uploadImages);
+router.post('/linksInfo', memoController.getLinksInfo);
 
 module.exports = router;

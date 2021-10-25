@@ -8,6 +8,7 @@ import {
   apiCreateMemo,
   apiUpdateMemo,
   apiDeleteMemo,
+  apiGetLinksInfo,
 } from 'apis/memos.js';
 
 export const getUserMemos = createAsyncThunk(
@@ -92,6 +93,20 @@ export const deleteMemo = createAsyncThunk(
       return memoId;
     } catch (err) {
       toast(TOAST_TEXT.MEMO_DELETE_FAIL);
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
+
+export const addLinksInfo = createAsyncThunk(
+  'memos/addLinksInfo',
+  async (links, { rejectWithValue }) => {
+    try {
+      const res = await apiGetLinksInfo(links);
+      if (!res.data.success) throw new Error();
+
+      return res.data.links;
+    } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
   },

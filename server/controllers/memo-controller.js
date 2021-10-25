@@ -186,14 +186,14 @@ const deleteMemo = async (req, res, next) => {
   }
 };
 
-const getLinkInfo = async (req, res) => {
+const getLinksInfo = async (req, res) => {
   const { links } = req.body;
 
   const resLinkInfos = [];
   try {
     for (let i = 0; i < links.length; i += 1) {
       const res = await getLinkPreview(links[i]);
-      const link = { url: res.url, title: res.title, images: res.images };
+      const link = { url: res.url, title: res.title, image: res.images[0] || '' };
       resLinkInfos.push(link);
     }
     res.status(200).json({
@@ -220,7 +220,7 @@ module.exports = {
   createMemo,
   updateMemo,
   deleteMemo,
-  getLinkInfo,
+  getLinksInfo,
   uploadImage,
   uploadImages,
 };
