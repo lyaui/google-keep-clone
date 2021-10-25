@@ -61,12 +61,11 @@ const Card = ({ card, masonryDom }) => {
       window.removeEventListener('resize', getRowSpan);
     };
   });
-  const isOnlyImages =
-    !title && !content && labels.length === 0 && links.length === 0 && images.length > 0;
-  const isOnlyLinks =
-    !title && !content && labels.length === 0 && images.length === 0 && links.length > 0;
-  const isOnlyImagesAndLinks =
-    !title && !content && labels.length === 0 && images.length > 0 && links.length > 0;
+
+  const noCardBody = !title && !content && tasks.length === 0 && labels.length === 0;
+  const isOnlyImages = noCardBody && links.length === 0 && images.length > 0;
+  const isOnlyLinks = noCardBody && images.length === 0 && links.length > 0;
+  const isOnlyImagesAndLinks = noCardBody && images.length > 0 && links.length > 0;
 
   return (
     <Fragment>

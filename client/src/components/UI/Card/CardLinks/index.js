@@ -4,7 +4,7 @@ import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 import LinkItem from 'components/UI/LinkItem';
-import { SCardLink, SCardLinkMore } from 'components/UI/Card/CardLinks/style.js';
+import { SCardLinks, SCardLink, SCardLinkMore } from 'components/UI/Card/CardLinks/style.js';
 
 const CardLinks = ({ links, isOnlyLinks }) => {
   const showLinksNum = 3;
@@ -16,7 +16,7 @@ const CardLinks = ({ links, isOnlyLinks }) => {
   };
 
   return (
-    <div>
+    <SCardLinks>
       {links.slice(0, showLinksNum).map((link, index) => (
         <SCardLink key={index} index={index} isOnlyLinks={isOnlyLinks}>
           <LinkItem link={link} isOnlyLinks={isOnlyLinks}>
@@ -30,7 +30,7 @@ const CardLinks = ({ links, isOnlyLinks }) => {
         </SCardLink>
       ))}
       {numOfMoreLink > 0 && <SCardLinkMore>還有個 {numOfMoreLink} 連結</SCardLinkMore>}
-    </div>
+    </SCardLinks>
   );
 };
 

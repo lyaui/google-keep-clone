@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -7,59 +8,40 @@ import { ButtonRound } from 'components/UI/Buttons/index.js';
 import LinkItem from 'components/UI/LinkItem';
 import { SEditCardLink, SEditCardLinkButton } from 'components/EditCard/EditCardLink/style.js';
 
-const EditCardLink = () => {
-  const defaultLinks = 3;
-  const [links, setLinks] = useState([]);
-  const [showLinksNum, setShowLinksNum] = useState(defaultLinks);
-  const numOfMoreLink = links.length - defaultLinks;
+const EditCardLink = ({ id }) => {
+  const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
-  useEffect(() => {
-    const DEFAULT_LINKS = [
-      {
-        title: 'iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天',
-        url: 'www.ithelp.ithome.com.tw',
-        sourceUrl: 'www.ithelp.ithome.com.tw',
-        image: 'https://ithelp.ithome.com.tw/storage/image/fbpic.jpg',
-      },
-      {
-        title: 'iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天',
-        url: 'www.ithelp.ithome.com.tw',
-        sourceUrl: 'www.ithelp.ithome.com.tw',
-        image: 'https://ithelp.ithome.com.tw/storage/image/fbpic.jpg',
-      },
-      {
-        title: 'iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天',
-        url: 'www.ithelp.ithome.com.tw',
-        sourceUrl: 'www.ithelp.ithome.com.tw',
-        image: 'https://ithelp.ithome.com.tw/storage/image/fbpic.jpg',
-      },
-      {
-        title: 'iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天',
-        url: 'www.ithelp.ithome.com.tw',
-        sourceUrl: 'www.ithelp.ithome.com.tw',
-        image: 'https://ithelp.ithome.com.tw/storage/image/fbpic.jpg',
-      },
-    ];
-    setLinks(DEFAULT_LINKS);
-  }, []);
+  const defaultLinks = 3;
+  const [showLinksNum, setShowLinksNum] = useState(defaultLinks);
+  const numOfMoreLink = currentMemo.links.length - defaultLinks;
 
   const clickShowMoreHandler = () => {
-    setShowLinksNum(links.length);
+    setShowLinksNum(currentMemo.links.length);
   };
 
   const clickShowLessHandler = () => {
     setShowLinksNum(defaultLinks);
   };
 
+  const removeLinkHandler = (url) => () => {
+    const updatedLinks = currentMemo.links.filter((link) => link.url !== url);
+    dispatchUpdateMemo({ links: updatedLinks });
+  };
+
+  const goShareLink = (url) => (e) => {
+    e.stopPropagation();
+    window.open(`https://${url}`, '_blank').focus();
+  };
+
   return (
     <div>
-      {links.slice(0, showLinksNum).map((link, index) => (
-        <SEditCardLink key={index} index={index}>
+      {currentMemo.links.slice(0, showLinksNum).map((link, index) => (
+        <SEditCardLink key={index} index={index} onClick={goShareLink(link.url)}>
           <LinkItem link={link}>
             {/* go share link */}
             <Tippy content={TOOLTIP_TEXT.PREVIEW_URL}>
-              <ButtonRound size={34} onClick={() => {}}>
-                <Icon.MoreVert />
+              <ButtonRound size={28} onClick={removeLinkHandler(link.url)}>
+                <Icon.Clear />
               </ButtonRound>
             </Tippy>
           </LinkItem>

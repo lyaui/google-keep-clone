@@ -1,6 +1,11 @@
 import styled from 'styled-components/macro';
 import { SLinkItem } from 'components/UI/LinkItem/style.js';
 
+export const SCardLinks = styled.div`
+  border-radius: 0 0px 8px 8px;
+  overflow: hidden;
+`;
+
 export const SCardLink = styled(SLinkItem)`
   height: ${(props) => (props.isOnlyLinks ? '88px' : '56px')};
   border-top: ${(props) =>
