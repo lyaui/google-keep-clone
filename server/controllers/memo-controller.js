@@ -121,7 +121,8 @@ const createMemo = async (req, res, next) => {
 
 const updateMemo = async (req, res, next) => {
   const { id: userId } = req.user;
-  const { title, content, images, isPinned, isArchived, links, labels, tasks, color } = req.body;
+  const { title, content, images, isPinned, isArchived, links, labels, tasks, color, isTaskList } =
+    req.body;
   const { memoId } = req.params;
 
   try {
@@ -138,7 +139,7 @@ const updateMemo = async (req, res, next) => {
     // update memo
     const updatedMemo = await Memo.findOneAndUpdate(
       { $and: [{ creator: userId }, { _id: memoId }] },
-      { title, content, images, isPinned, isArchived, links, labels, tasks, color },
+      { title, content, images, isPinned, isArchived, links, labels, tasks, color, isTaskList },
       { new: true },
     );
     // update labels's memo

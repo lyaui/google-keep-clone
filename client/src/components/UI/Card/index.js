@@ -20,7 +20,7 @@ const Card = ({ card, masonryDom }) => {
   const { isLoading } = useSelector((state) => state.memos);
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
-  const { _id: id, title, content, images, links, labels, isTasksList, tasks, color } = card;
+  const { _id: id, title, content, images, links, labels, isTaskList, tasks, color } = card;
   const memoColor = PALETTE_COLORS[color];
 
   const openEditModalHandler = () => {
@@ -79,26 +79,28 @@ const Card = ({ card, masonryDom }) => {
           {title && <CardHeader>{title}</CardHeader>}
           {/* content */}
 
-          <CardBody>
-            {/* content */}
-            {!isTasksList && content && (
-              <SEditCardText>
-                <EditCardText text={content} updateTextHandler={() => {}} />
-              </SEditCardText>
-            )}
-            {/* tasks */}
-            {!isTasksList &&
-              tasks.map((task, index) => (
-                <EditTaskItem key={task.id} task={task} index={index} id={id} />
-              ))}
+          {
+            <CardBody>
+              {/* content */}
+              {!isTaskList && content && (
+                <SEditCardText>
+                  <EditCardText text={content} updateTextHandler={() => {}} />
+                </SEditCardText>
+              )}
+              {/* tasks */}
+              {isTaskList &&
+                tasks.map((task, index) => (
+                  <EditTaskItem key={task.id} task={task} index={index} id={id} />
+                ))}
 
-            {/* <EditTasks /> */}
-            {images.length === 0 &&
-              !title &&
-              !content &&
-              links.length === 0 &&
-              tasks.length === 0 && <p>空白記事</p>}
-          </CardBody>
+              {/* <EditTasks /> */}
+              {images.length === 0 &&
+                !title &&
+                !content &&
+                links.length === 0 &&
+                tasks.length === 0 && <p>空白記事</p>}
+            </CardBody>
+          }
 
           {/* labels */}
           {labels.length > 0 && <CardLabels labels={labels} id={id} />}
