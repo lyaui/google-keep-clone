@@ -13,14 +13,14 @@ import { SHeader, SHeaderLogo, SHeaderTitle } from 'components/Layout/Header/sty
 
 const Header = () => {
   const match = useRouteMatch();
-  const { labelId } = match.params;
+  const { labelName } = match.params;
   const logoPath = logo;
   return (
     <SHeader>
       {/* menu */}
       <FixMenu />
       <SHeaderLogo src={logoPath} alt='keep' />
-      <SHeaderTitle>{labelId || '記事'}</SHeaderTitle>
+      <SHeaderTitle>{labelName || '記事'}</SHeaderTitle>
       {/* search */}
       <SearchInput />
       {/* operators */}
