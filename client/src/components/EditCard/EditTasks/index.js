@@ -14,6 +14,12 @@ const EditTasks = () => {
 
   const updateTaskHandler = (handledTask) => {
     setNewTask(handledTask);
+
+    // if just press enter
+    if (handledTask === '<div><br></div><div><br></div>') {
+      setNewTask('');
+      return;
+    }
     if (handledTask.includes('<div><br></div>')) {
       const updatedTasks = [
         { id: uuid(), name: newTask, isCompleted: false },
