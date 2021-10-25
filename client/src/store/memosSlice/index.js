@@ -6,6 +6,7 @@ import {
   addMemo,
   updateMemo,
   deleteMemo,
+  addLinksInfo,
 } from 'store/memosSlice/memos-action.js';
 import DUMMY_DATA from 'data/memos.js';
 
@@ -137,6 +138,26 @@ const memosSlice = createSlice({
       state.memos = state.memos.filter((memo) => memo._id !== memoId);
     },
     [deleteMemo.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
+
+    // addLinksInfo
+    [addLinksInfo.pending](state) {
+      state.isLoading = true;
+    },
+    [addLinksInfo.fulfilled](state, { payload: links }) {
+      const currentLinks = [...state.memo.links];
+      links.forEach((link) => {
+        if (!state.memo.links.find((stateLink) => stateLink.url === link.url)) {
+          currentLinks.push(link);
+        }
+      });
+      state.memo.links = currentLinks;
+      state.isLoading = false;
+      state.errorMessage = '';
+    },
+    [addLinksInfo.rejected](state, { payload: errorMessage }) {
       state.isLoading = false;
       state.errorMessage = errorMessage;
     },
