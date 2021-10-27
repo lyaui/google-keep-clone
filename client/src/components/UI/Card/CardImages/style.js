@@ -5,11 +5,10 @@ export const SCardImages = styled.div`
   display: grid;
   border-radius: ${(props) => (props.noCardBody ? '8px' : '8px 8px 0 0')};
   overflow: hidden;
-  /* grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: ${(props) =>
     props.isEditMode || props.viewMode === VIEW_MODE.LIST ? '60px' : '40px'};
-  grid-gap: ${(props) =>
-    props.isEditMode || props.viewMode === VIEW_MODE.LIST ? '3px' : '1px'}; */
+  grid-gap: ${(props) => (props.isEditMode || props.viewMode === VIEW_MODE.LIST ? '3px' : '1px')};
 `;
 
 const SCardImage = styled.div`
