@@ -29,6 +29,7 @@ app.use('/api/labels', passport.authenticate('jwt', { session: false }), labelRo
 app.use('/api/memos', passport.authenticate('jwt', { session: false }), memoRoute);
 app.use('/api/upload', uploadRoute);
 
+// request for the folder will be returned
 const dirname = path.resolve();
 app.use('/uploads', express.static(path.join(dirname, '/uploads')));
 
