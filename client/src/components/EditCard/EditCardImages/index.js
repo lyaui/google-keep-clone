@@ -1,25 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { memosActions } from 'store/memosSlice';
+import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
 import CardImages from 'components/UI/Card/CardImages';
 import { SEditCardImages } from 'components/EditCard/EditCardImages/style.js';
 
-const EditCardImages = () => {
-  const dispatch = useDispatch();
-  const { memo } = useSelector((state) => state.memos);
-  const { images } = memo;
+const EditCardImages = ({ id }) => {
+  const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
+  const { images } = currentMemo;
 
-  const addImageHandler = (newImage) => dispatch(memosActions.addImage(newImage));
-  const deleteImageHandler = (index) => dispatch(memosActions.removeImage(index));
+  const deleteImageHandler = (imageIdx) => {
+    const updatedImages = images.filter((image, index) => index !== imageIdx);
+    dispatchUpdateMemo({ images: updatedImages });
+  };
 
   return (
     <SEditCardImages>
       {images.length > 0 && (
-        <CardImages
-          images={images}
-          isEditMode='true'
-          addImageHandler={addImageHandler}
-          deleteImageHandler={deleteImageHandler}
-        />
+        <CardImages images={images} isEditMode='true' deleteImageHandler={deleteImageHandler} />
       )}
     </SEditCardImages>
   );
