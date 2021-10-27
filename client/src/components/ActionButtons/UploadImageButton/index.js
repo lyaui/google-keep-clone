@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { memosActions } from 'store/memosSlice';
+import { uploadMemoImage } from 'store/memosSlice/memos-action.js';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -10,21 +9,14 @@ import { SUploadImage } from 'components/ActionButtons/UploadImageButton/style.j
 
 const UploadImageButton = () => {
   const dispatch = useDispatch();
-  const [file, setFile] = useState(null);
 
-  useEffect(() => {
-    if (!file) return;
-    const fileReader = new FileReader(file);
-    fileReader.onload = () => {
-      dispatch(memosActions.addImage({ image: fileReader.result }));
-    };
-    fileReader.readAsDataURL(file);
-  }, [dispatch, file]);
-
-  const pickImageHandler = (e) => {
+  const pickImageHandler = async (e) => {
     if (e.target.files.length === 0) return;
     const pickedFile = e.target.files[0];
-    setFile(pickedFile);
+    const formData = new FormData();
+    formData.append('image', pickedFile);
+
+    await dispatch(uploadMemoImage(formData));
   };
 
   return (

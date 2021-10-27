@@ -33,7 +33,7 @@ const CardImages = ({ images, isEditMode, deleteImageHandler }) => {
       <SCardImages isEditMode={isEditMode} viewMode={layout}>
         {images.slice(0, 6).map((image, index) => (
           <SCardImage key={index} className={`img-${index}`}>
-            <img draggable='false' src={image.image} alt='' />
+            <img draggable='false' src={`${process.env.REACT_APP_BASE_URL}/${image}`} alt='' />
             {isEditMode && (
               <Tippy content={TOOLTIP_TEXT.REMOVE}>
                 <ButtonSquare size='30' onClick={() => deleteImageHandler(index)}>
