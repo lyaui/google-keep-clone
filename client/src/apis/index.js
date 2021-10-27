@@ -25,4 +25,11 @@ const axiosMemos = axios.create({
   },
 });
 
-export { axiosUser, axiosLabels, axiosMemos };
+const axiosUpload = axios.create({
+  baseURL: `${process.env.REACT_APP_BASE_URL}/api/upload`,
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+});
+
+export { axiosUser, axiosLabels, axiosMemos, axiosUpload };
