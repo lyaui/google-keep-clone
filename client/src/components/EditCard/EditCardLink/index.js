@@ -23,7 +23,8 @@ const EditCardLink = ({ id }) => {
     setShowLinksNum(defaultLinks);
   };
 
-  const removeLinkHandler = (url) => () => {
+  const removeLinkHandler = (url) => (e) => {
+    e.stopPropagation();
     const updatedLinks = currentMemo.links.filter((link) => link.url !== url);
     dispatchUpdateMemo({ links: updatedLinks });
   };
