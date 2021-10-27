@@ -10,7 +10,7 @@ export const TOOLTIP_TEXT = {
   VIEW_GRID: '格狀檢視',
   VIEW_LIST: '清單檢視',
   DARK_MODE: '啟用深色主題',
-  LIGHT_MODE: '停用深色主題',
+  LIGHT_MODE: '啟用淺色主題',
   LOGOUT: '登出',
   DELETE_LABEL: '刪除標籤',
   RENAME_LABEL: '重新命名標籤',
