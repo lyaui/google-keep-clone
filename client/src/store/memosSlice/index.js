@@ -7,6 +7,7 @@ import {
   updateMemo,
   deleteMemo,
   addLinksInfo,
+  uploadMemoImage,
 } from 'store/memosSlice/memos-action.js';
 import DUMMY_DATA from 'data/memos.js';
 
@@ -45,12 +46,6 @@ const memosSlice = createSlice({
     resetMemo(state) {
       state.memo = INIT_MEMOS_STATE.memo;
       state.isMemoUpdated = false;
-    },
-    addImage(state, { payload: newImage }) {
-      state.memo.images = [...state.memo.images, newImage];
-    },
-    removeImage(state, { payload: imageIndex }) {
-      state.memo.images = state.memo.images.filter((image, index) => index !== imageIndex);
     },
   },
   extraReducers: {
@@ -158,6 +153,18 @@ const memosSlice = createSlice({
       state.errorMessage = '';
     },
     [addLinksInfo.rejected](state, { payload: errorMessage }) {
+      state.isLoading = false;
+      state.errorMessage = errorMessage;
+    },
+    [uploadMemoImage.pending](state) {
+      state.isLoading = true;
+    },
+    [uploadMemoImage.fulfilled](state, { payload: image }) {
+      state.isLoading = false;
+      state.errorMessage = '';
+      state.memo.images = [image, ...state.memo.images];
+    },
+    [uploadMemoImage.rejected](state, { payload: errorMessage }) {
       state.isLoading = false;
       state.errorMessage = errorMessage;
     },

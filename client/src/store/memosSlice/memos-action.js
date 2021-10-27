@@ -9,7 +9,8 @@ import {
   apiUpdateMemo,
   apiDeleteMemo,
   apiGetLinksInfo,
-} from 'apis/memos.js';
+} from 'apis/memos';
+import { apiUploadImage } from 'apis/upload';
 
 export const getUserMemos = createAsyncThunk(
   'memos/getUserMemos',
@@ -106,6 +107,20 @@ export const addLinksInfo = createAsyncThunk(
       if (!res.data.success) throw new Error();
 
       return res.data.links;
+    } catch (err) {
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
+
+export const uploadMemoImage = createAsyncThunk(
+  'memos/uploadMemoImage',
+  async (imagePath, { rejectWithValue }) => {
+    try {
+      const res = await apiUploadImage(imagePath);
+      if (!res.data.success) throw new Error();
+
+      return res.data.image;
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
