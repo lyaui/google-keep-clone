@@ -74,12 +74,12 @@ const Card = ({ card, masonryDom }) => {
           {/* pin */}
           <EditCardPinButton id={id} />
           {/* images */}
-          {images.length > 0 && <CardImages images={images} />}
+          {images.length > 0 && <CardImages images={images} noCardBody={noCardBody} />}
           {/* header */}
           {title && <CardHeader>{title}</CardHeader>}
           {/* content */}
 
-          {
+          {!noCardBody && (
             <CardBody>
               {/* content */}
               {!isTaskList && content && (
@@ -99,11 +99,11 @@ const Card = ({ card, masonryDom }) => {
                 !content &&
                 links.length === 0 &&
                 tasks.length === 0 && <p>空白記事</p>}
+              {/* labels */}
+              {labels.length > 0 && <CardLabels labels={labels} id={id} />}
             </CardBody>
-          }
+          )}
 
-          {/* labels */}
-          {labels.length > 0 && <CardLabels labels={labels} id={id} />}
           {/* footer */}
           <CardFooter
             id={id}

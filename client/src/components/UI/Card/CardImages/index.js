@@ -15,7 +15,7 @@ import {
   SCardImage6,
 } from 'components/UI/Card/CardImages/style.js';
 
-const CardImages = ({ images, isEditMode, deleteImageHandler }) => {
+const CardImages = ({ images, isEditMode, deleteImageHandler, noCardBody = false }) => {
   const { UIState } = useUI();
   const { layout } = UIState;
   const imageComponents = [
@@ -30,7 +30,7 @@ const CardImages = ({ images, isEditMode, deleteImageHandler }) => {
   const SCardImage = imageComponents[imgNum - 1];
   return (
     <Fragment>
-      <SCardImages isEditMode={isEditMode} viewMode={layout}>
+      <SCardImages isEditMode={isEditMode} viewMode={layout} noCardBody={noCardBody}>
         {images.slice(0, 6).map((image, index) => (
           <SCardImage key={index} className={`img-${index}`}>
             <img draggable='false' src={`${process.env.REACT_APP_BASE_URL}/${image}`} alt='' />
