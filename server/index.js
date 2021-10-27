@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
-const { userRoute, labelRoute, memoRoute } = require('./routes');
+const { userRoute, labelRoute, memoRoute, uploadRoute } = require('./routes');
 require('dotenv').config();
 const passport = require('passport');
 require('./config/passport');
@@ -26,6 +27,10 @@ app.use(cors());
 app.use('/api/user', userRoute);
 app.use('/api/labels', passport.authenticate('jwt', { session: false }), labelRoute);
 app.use('/api/memos', passport.authenticate('jwt', { session: false }), memoRoute);
+app.use('/api/upload', uploadRoute);
+
+const dirname = path.resolve();
+app.use('/uploads', express.static(path.join(dirname, '/uploads')));
 
 app.use((req, res, next) => {
   return next(new HttpError('Could not find this route', 404));
