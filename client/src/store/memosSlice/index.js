@@ -162,7 +162,7 @@ const memosSlice = createSlice({
     [uploadMemoImage.fulfilled](state, { payload: image }) {
       state.isLoading = false;
       state.errorMessage = '';
-      state.memo.images = [image, ...state.memo.images];
+      state.memo.images = [...state.memo.images, image];
     },
     [uploadMemoImage.rejected](state, { payload: errorMessage }) {
       state.isLoading = false;
