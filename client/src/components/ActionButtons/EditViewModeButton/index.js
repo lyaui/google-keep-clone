@@ -6,7 +6,7 @@ import { VIEW_MODE } from 'constants/UI.js';
 import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 
-const ViewMode = () => {
+const EditViewModeButton = () => {
   const { UIState, UIDispatch } = useUI();
   const { isLoading } = UIState;
 
@@ -20,10 +20,10 @@ const ViewMode = () => {
   return (
     <Tippy content={isGrid ? TOOLTIP_TEXT.VIEW_GRID : TOOLTIP_TEXT.VIEW_LIST}>
       <ButtonRound size={40} onClick={toggleViewModeHandler} disabled={isLoading}>
-        {isGrid ? <Icon.Grid /> : <Icon.List />}
+        {isGrid ? <Icon.List /> : <Icon.Grid />}
       </ButtonRound>
     </Tippy>
   );
 };
 
-export default ViewMode;
+export default EditViewModeButton;

@@ -62,7 +62,7 @@ import { RiLayoutGridLine as Grid } from 'react-icons/ri';
 import { TiThMenuOutline as List } from 'react-icons/ti';
 
 // dark mode
-import { BiMoon as Moon, BiMoon as Sun } from 'react-icons/bi';
+import { BiMoon as Moon, BiSun as Sun } from 'react-icons/bi';
 
 // Logout
 import { RiLogoutCircleRLine as Logout } from 'react-icons/ri';
