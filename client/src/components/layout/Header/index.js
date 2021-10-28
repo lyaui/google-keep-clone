@@ -16,8 +16,8 @@ const Header = () => {
     <SHeader>
       {/* menu */}
       <FixMenu />
-      <SHeaderLogo src={logoPath} alt='keep' />
-      <SHeaderTitle>{labelName || '記事'}</SHeaderTitle>
+      <SHeaderLogo src={logoPath} alt='Keep' />
+      <SHeaderTitle>{labelName || 'Keep'}</SHeaderTitle>
       {/* search */}
       <SearchInput />
       {/* operators */}
