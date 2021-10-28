@@ -31,7 +31,7 @@ const EditCardLink = ({ id }) => {
 
   const goShareLink = (url) => (e) => {
     e.stopPropagation();
-    window.open(`https://${url}`, '_blank').focus();
+    window.open(url, '_blank').focus();
   };
 
   return (
