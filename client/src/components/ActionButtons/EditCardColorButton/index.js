@@ -27,9 +27,11 @@ const EditCardColorButton = ({ id }) => {
     <SEditCardColor width={140}>
       {Object.keys(PALETTE_COLORS).map((color) => {
         return (
-          <SColor key={color} color={PALETTE_COLORS[color]} onClick={selectColorHandler(color)}>
-            {currentMemo.color === color && <Icon.Check />}
-          </SColor>
+          <Tippy content={TOOLTIP_TEXT[`COLOR_${color}`]}>
+            <SColor key={color} color={PALETTE_COLORS[color]} onClick={selectColorHandler(color)}>
+              {currentMemo.color === color && <Icon.Check />}
+            </SColor>
+          </Tippy>
         );
       })}
     </SEditCardColor>

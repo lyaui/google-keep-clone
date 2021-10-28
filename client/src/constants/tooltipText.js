@@ -28,4 +28,18 @@ export const TOOLTIP_TEXT = {
   CANCEL_ARCHIVE: '取消封存',
   DELETE_MEMO: '刪除記事',
   MORE: '更多',
+
+  // colors
+  COLOR_DEFAULT: '預設',
+  COLOR_RED: '紅色',
+  COLOR_ORANGE: '橘色',
+  COLOR_YELLOW: '黃色',
+  COLOR_GREEN: '綠色',
+  COLOR_TEAL: '藍綠色',
+  COLOR_BLUE: '藍色',
+  COLOR_DARK_BLUE: '深藍色',
+  COLOR_PURPLE: '紫色',
+  COLOR_PINK: '粉紅色',
+  COLOR_BROWN: '棕色',
+  COLOR_GRAY: '灰色',
 };
