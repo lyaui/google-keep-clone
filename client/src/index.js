@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from 'store';
 import { Provider } from 'react-redux';
 import 'normalize.css';
-import { GlobalStyle } from './GlobalStyle';
+import { GlobalStyle } from './GlobalStyle.js';
 import App from './App';
 
 ReactDOM.render(

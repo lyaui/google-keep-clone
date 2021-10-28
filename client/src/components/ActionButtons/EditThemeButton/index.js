@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -11,6 +12,9 @@ const EditThemeButton = () => {
   const { isLoading } = UIState;
 
   const isLight = UIState.theme === THEME.LIGHT;
+  useEffect(() => {
+    document.body.dataset.theme = UIState.theme;
+  }, [UIState.theme]);
 
   const toggleThemeHandler = async () => {
     const theme = isLight ? THEME.DARK : THEME.LIGHT;

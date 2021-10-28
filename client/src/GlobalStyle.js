@@ -1,16 +1,23 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  :root {
+    --transition-basic:all .3s;
 
-//url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;500;700&display=swap'); */
+    /* colors */
+    --color-transparent:transparent;
+    --color-white:#ffffff;
+    --color-gray-100:#f1f3f4;
+    --color-gray-200: #e8eaed;
+    --color-gray-700:#5f6368;
+    --color-gray-800:#3c4043;
+    --color-gray-900:#202124;
+  }
 
   html {
-  /* color */
-
-  /* size */
-
-  /* others */  
-  box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 62.5%;
+    line-height: 2rem;
   }
 
   *, *:before, *:after {
@@ -18,8 +25,18 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    color: #202124;
+    font-family: Roboto, Arial, sans-serif;
+    transition: all .3s;
   }
+
+  body[data-theme='LIGHT'] {
+    color: var(--color-gray-900);
+    background-color: var(--color-white);
+}
+  body[data-theme='DARK'] {
+    color: var(--color-gray-200);
+    background-color: var(--color-gray-900);
+}
 
   div{
     outline:none;
