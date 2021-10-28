@@ -2,17 +2,18 @@ import styled from 'styled-components/macro';
 import { SCardPin } from 'components/ActionButtons/EditCardPinButton/style.js';
 
 export const SCard = styled.div`
-  opacity: ${(props) => (props.showEditModal ? 0 : 1)};
   position: relative;
   height: fit-content;
-  background-color: ${(props) => props.color || '#FFFFFF'};
-  border: 1px solid ${(props) => (props.color === '#fff' ? '#e0e0e0' : props.color)};
+  grid-row: span var(--rowSpan, 0);
+  background-color: var(--color, --color-white);
+  border: 1px solid var(--border-color);
+  opacity: var(--opacity);
+  font-size: 1.4rem;
   border-radius: 8px;
   cursor: pointer;
-  grid-row: ${(props) => `span ${props.gridRowSpan}`};
-  transition: all 0.1s;
+  transition: all 0.3s;
   :hover {
-    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
   }
   :hover ${SCardPin} {
     opacity: 0.9;

@@ -1,8 +1,10 @@
 import { Fragment, useState, useEffect, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ROUTE } from 'constants/routes.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
+import { useUI } from 'contexts/UI-context';
+
 import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
 import CardImages from 'components/UI/Card/CardImages';
 import CardHeader from 'components/UI/Card/CardHeader';
@@ -12,23 +14,30 @@ import EditTaskItem from 'components/EditCard/EditTasks/EditTaskItem';
 import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
 import CardLinks from 'components/UI/Card/CardLinks';
+
 import { SCard } from 'components/UI/Card/style.js';
 import { SEditCardText } from 'components/EditCard/EditCardText/style.js';
 
 const Card = ({ card, masonryDom }) => {
   const history = useHistory();
+  const {
+    params: { memoId },
+  } = useRouteMatch();
   const { isLoading } = useSelector((state) => state.memos);
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
   const { _id: id, title, content, images, links, labels, isTaskList, tasks, color } = card;
-  const memoColor = PALETTE_COLORS[color];
+  const {
+    UIState: { theme },
+  } = useUI();
+  const memoColor = PALETTE_COLORS[color][theme];
 
   const openEditModalHandler = () => {
     if (isLoading) return;
     history.push(ROUTE.BUILD_MEMO_PATH(id));
   };
 
-  // 計算每張卡片跨列 span
+  // calculate card spans
   const getRowSpan = () => {
     const cardRefDOM = cardRef.current;
     const grid = masonryDom;
@@ -67,9 +76,25 @@ const Card = ({ card, masonryDom }) => {
   const isOnlyLinks = noCardBody && images.length === 0 && links.length > 0;
   const isOnlyImagesAndLinks = noCardBody && images.length > 0 && links.length > 0;
 
+  const borderColor =
+    memoColor === PALETTE_COLORS.DEFAULT.LIGHT
+      ? 'var(--color-gray-200)'
+      : memoColor === PALETTE_COLORS.DEFAULT.DARK
+      ? 'var(--color-gray-700)'
+      : memoColor;
+
   return (
     <Fragment>
-      <SCard color={memoColor} className='card' ref={cardRef} gridRowSpan={gridRowSpan}>
+      <SCard
+        className='card'
+        ref={cardRef}
+        style={{
+          '--color': memoColor,
+          '--border-color': borderColor,
+          '--opacity': memoId === id ? 0 : 1,
+          '--rowSpan': gridRowSpan,
+        }}
+      >
         <div className='growing-content' onClick={openEditModalHandler}>
           {/* pin */}
           <EditCardPinButton id={id} />
