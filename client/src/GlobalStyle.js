@@ -37,7 +37,9 @@ export const GlobalStyle = createGlobalStyle`
     --color-bg: hsl(var(--color-white));
     --color-link-bg: hsla(var(--color-white),.8);
     --color-link-url:hsl(var(--color-gray-600));
-    --color-link-border: hsla(var(--color-black),.12)
+    --color-link-border: hsla(var(--color-black),.12);
+    --color-label-bg: hsla(var(--color-black),.08);
+    --color-label-border: hsl(var(--color-transparent));
   }
   
   body[data-theme='DARK'] {
@@ -45,7 +47,9 @@ export const GlobalStyle = createGlobalStyle`
     --color-bg: hsl(var(--color-gray-900));
     --color-link-bg: hsla(var(--color-white),.08);
     --color-link-url:hsl(var(--color-gray-500));
-    --color-link-border: hsla(var(--color-gray-200),.5)
+    --color-link-border: hsla(var(--color-gray-200),.5);
+    --color-label-bg: hsl(var(--color-transparent));
+    --color-label-border: hsla(var(--color-gray-200),.5);
   }
 
   body{

@@ -13,24 +13,26 @@ export const SLabelButton = styled.button`
 `;
 
 export const SLabel = styled.div`
+  padding: 3px 12px 3px 12px;
+  margin: 3px 2px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 12px;
-  text-align: center;
+  font-size: 1.2rem;
   font-weight: bold;
   letter-spacing: 0.5px;
-  color: #3c4043;
-  background-color: rgba(0, 0, 0, 0.08);
-  border-radius: 50px;
-  padding: 4px 12px 4px 12px;
-  margin: 3px 2px;
+  color: var(--color-text);
+  background-color: var(--color-label-bg);
+  border: 1px solid var(--color-label-border);
+  border-radius: var(--rounded);
   cursor: pointer;
   transition: all 0.3s;
   position: relative;
+
   :hover {
-    padding: ${(props) => (props.isShowMoreLabel ? '4px 12px 4px 12px' : '4px 16px 4px 8px')};
+    padding: var(--padding);
   }
+
   :hover ${SLabelButton} {
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.1);

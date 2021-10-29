@@ -15,10 +15,14 @@ const Label = ({ id, label, isShowMoreLabel = false, numOfMoreLabel = 0 }) => {
   };
 
   return (
-    <SLabel isShowMoreLabel={isShowMoreLabel}>
+    <SLabel
+      style={{
+        '--rounded': isShowMoreLabel ? '2px' : '50px',
+        '--padding': isShowMoreLabel ? '3px 12px 3px 12px' : '3px 16px 3px 8px',
+      }}
+    >
       {label && label.name}
       {numOfMoreLabel > 0 && `還有個 ${numOfMoreLabel} 項目`}
-
       {/* delete label */}
       {numOfMoreLabel === 0 && (
         <Tippy content={TOOLTIP_TEXT.CANCEL_LABEL}>
