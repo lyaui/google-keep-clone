@@ -7,8 +7,8 @@ export const SEditCard = styled.div`
   margin: 32px auto 16px auto;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   border-radius: 8px;
-  background-color: ${(props) => props.memoColor || '#fff'};
-  border: 1px solid ${(props) => props.memoColor || '#fff'}; ;
+  background-color: hsl(var(--color));
+  border: 1px solid hsl(var(--color)); ;
 `;
 
 export const SEditCardBody = styled.div`
@@ -23,7 +23,7 @@ export const SEditCardBody = styled.div`
 
 export const SCardCreatedAt = styled.div`
   padding: 12px 0;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--color-text);
   font-size: 12px;
   text-align: right;
 `;

@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memosActions } from 'store/memosSlice';
 import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
 import { addMemo } from 'store/memosSlice/memos-action.js';
+import { useUI } from 'contexts/UI-context';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
+
 import EditCardPinButton from 'components/ActionButtons/EditCardPinButton';
 import EditCardImages from 'components/EditCard/EditCardImages';
 import EditCardTitle from 'components/EditCard/EditCardTitle';
@@ -28,7 +30,8 @@ function EditCard() {
 
   const { memo, isLoading, isMemoUpdated } = useSelector((state) => state.memos);
   const { isTaskList, color } = memo;
-  const memoColor = PALETTE_COLORS[color];
+  const { UIState } = useUI();
+  const memoColor = PALETTE_COLORS[color][UIState.theme];
 
   useEffect(() => {
     setIsEmptyPost(
@@ -55,7 +58,7 @@ function EditCard() {
   };
 
   return (
-    <SEditCard memoColor={memoColor} eventTypes='click'>
+    <SEditCard style={{ '--color': memoColor }} eventTypes='click'>
       <OutsideClickHandler onOutsideClick={clickOutsideHandler}>
         <SEditCardBody>
           {/* pin */}
