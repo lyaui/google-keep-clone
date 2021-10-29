@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 export const SEditCardText = styled.div`
   #contentEdit {
     width: 100%;
-    line-height: 1.5em;
     padding: 8px 0px;
     white-space: pre-wrap;
 
@@ -12,7 +11,6 @@ export const SEditCardText = styled.div`
     }
 
     a {
-      color: mediumblue;
       text-decoration: underline;
     }
   }
