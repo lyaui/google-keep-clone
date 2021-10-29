@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
+import { useUI } from 'contexts/UI-context';
 import CustomTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -11,6 +12,7 @@ import { SEditCardColor, SColor } from 'components/ActionButtons/EditCardColorBu
 
 const EditCardColorButton = ({ id }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const { UIState } = useUI();
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
   const showPaletteHandler = (e) => {
@@ -24,11 +26,24 @@ const EditCardColorButton = ({ id }) => {
   };
 
   const palette = (
-    <SEditCardColor width={140}>
+    <SEditCardColor>
       {Object.keys(PALETTE_COLORS).map((color) => {
         return (
           <Tippy key={color} content={TOOLTIP_TEXT[`COLOR_${color}`]}>
-            <SColor color={PALETTE_COLORS[color]} onClick={selectColorHandler(color)}>
+            <SColor
+              style={{
+                '--color': PALETTE_COLORS[color][UIState.theme],
+                '--border':
+                  color !== 'DEFAULT'
+                    ? PALETTE_COLORS[color][UIState.theme]
+                    : UIState.theme === 'LIGHT'
+                    ? 'var(--color-gray-200)'
+                    : UIState.theme === 'DARK'
+                    ? 'var(--color-gray-800)'
+                    : PALETTE_COLORS[color][UIState.theme],
+              }}
+              onClick={selectColorHandler(color)}
+            >
               {currentMemo.color === color && <Icon.Check />}
             </SColor>
           </Tippy>
