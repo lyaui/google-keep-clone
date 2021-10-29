@@ -4,7 +4,8 @@ export const SEditTaskItem = styled.div`
   display: flex;
   padding: 6px 0;
   line-height: 1.5em;
-  background-color: ${(props) => props.color || '#fff'};
+  background-color: hsl(var(--color));
+  transition: all 0.3s;
   :hover [name='drag'] {
     opacity: 1;
   }
@@ -15,7 +16,7 @@ export const SEditTaskItem = styled.div`
 
 export const SEditTaskItemIcon = styled.div`
   display: flex;
-  margin-left: ${(props) => (props.isCard ? '0' : '-10px')};
+  margin-left: var(--margin);
   cursor: pointer;
   svg {
     width: 20px;
@@ -39,8 +40,8 @@ export const SEditTaskItemText = styled.div`
   padding-right: 16px;
   margin-left: 10px;
   margin-top: -3px;
-  text-decoration: ${(props) => (props.isCompleted ? 'line-through' : 'unset')};
-  color: ${(props) => (props.isCompleted ? 'rgba(0, 0, 0, 0.6)' : 'currentColor')};
+  text-decoration: var(--text-decoration);
+  color: var(--color);
   cursor: text;
   #contentEdit {
     width: 100%;

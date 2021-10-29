@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const SEditTasks = styled.div`
+  font-size: 1.6rem;
   padding-bottom: 8px;
 `;
 export const SEditNewTask = styled.div`
@@ -8,7 +9,7 @@ export const SEditNewTask = styled.div`
   align-items: center;
   margin-left: 14px;
   padding: 8px 0;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--color-text);
 
   svg {
     width: 20px;
@@ -18,10 +19,10 @@ export const SEditNewTask = styled.div`
   }
 
   #contentEdit {
-    font-size: 16px;
+    font-size: 1.6rem;
     :empty:before {
       content: '清單項目';
-      color: rgba(0, 0, 0, 0.6);
+      color: hsla(var(--color-gray-600));
     }
   }
 `;

@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useUpdateMemo } from 'hooks/updateMemo-hook.js';
+import { useUI } from 'contexts/UI-context';
 import { v4 as uuid } from 'uuid';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import * as Icon from 'components/UI/Icon/index.js';
@@ -12,7 +13,8 @@ import {
 
 const EditTaskItem = ({ task, index, id }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
-  const memoColor = PALETTE_COLORS[currentMemo.color];
+  const { UIState } = useUI();
+  const memoColor = PALETTE_COLORS[currentMemo.color][UIState.theme];
 
   const updateTaskHandler = (handledTask) => {
     let updatedTasks = [...currentMemo.tasks];
@@ -61,8 +63,8 @@ const EditTaskItem = ({ task, index, id }) => {
   };
 
   return (
-    <SEditTaskItem color={memoColor}>
-      <SEditTaskItemIcon isCard={!!id}>
+    <SEditTaskItem style={{ '--color': memoColor }}>
+      <SEditTaskItemIcon style={{ '--margin': !!id ? 0 : '-10px' }}>
         {!id && <Icon.Drag name='drag' />}
         {!task.isCompleted && (
           <Icon.EmptyCheckbox name='checkbox' onClick={toggleIsCompletedHandler} />
@@ -71,7 +73,12 @@ const EditTaskItem = ({ task, index, id }) => {
           <Icon.CheckboxOutline name='checkbox' onClick={toggleIsCompletedHandler} />
         )}
       </SEditTaskItemIcon>
-      <SEditTaskItemText isCompleted={task.isCompleted}>
+      <SEditTaskItemText
+        style={{
+          '--text-decoration': task.isCompleted && 'line-through',
+          '--color': task.isCompleted && 'var(--color-task-completed)',
+        }}
+      >
         <EditCardText text={task.name} updateTextHandler={updateTaskHandler} />
       </SEditTaskItemText>
       {!id && (

@@ -53,6 +53,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-input-focus-bg:hsl(var(--color-white));
     --color-menu-hover-bg:hsl(var(--color-gray-100));
     --color-menu-active-bg:hsl(var(--color-yellow-lighter));
+    --color-task-completed: hsl(var(--color-gray-700))
   }
   
   body[data-theme='DARK'] {
@@ -69,6 +70,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-input-focus-bg:hsl(var(--color-gray-100));
     --color-menu-hover-bg:hsla(var(--color-gray-800),.4);
     --color-menu-active-bg:hsl(var(--color-yellow-darker));
+    --color-task-completed: hsl(var(--color-gray-500))
   }
   }
 
