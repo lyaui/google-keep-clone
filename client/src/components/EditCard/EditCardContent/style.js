@@ -3,10 +3,12 @@ import { SEditCardText } from 'components/EditCard/EditCardText/style.js';
 
 export const SEditCardContent = styled(SEditCardText)`
   #contentEdit {
+    font-size: 1.6rem;
+    /* color: var(--color-text); */
     :empty:before {
       content: '新增記事...';
-      color: rgba(0, 0, 0, 0.702);
-      font-size: 0.875rem;
+      color: hsl(var(--color-gray-500));
+      font-size: 1.6rem;
       font-weight: bold;
     }
   }
