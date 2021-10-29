@@ -23,7 +23,7 @@ export const SLabel = styled.div`
   letter-spacing: 0.5px;
   color: var(--color-text);
   background-color: var(--color-label-bg);
-  border: 1px solid var(--color-label-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--rounded);
   cursor: pointer;
   transition: all 0.3s;

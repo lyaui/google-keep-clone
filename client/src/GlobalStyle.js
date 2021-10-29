@@ -39,11 +39,11 @@ export const GlobalStyle = createGlobalStyle`
   body[data-theme='LIGHT'] {
     --color-text: hsl(var(--color-gray-900));
     --color-bg: hsl(var(--color-white));
+    --color-border: hsl(var(--color-transparent));
     --color-link-bg: hsla(var(--color-white),.8);
     --color-link-url:hsl(var(--color-gray-600));
     --color-link-border: hsla(var(--color-black),.12);
     --color-label-bg: hsla(var(--color-black),.08);
-    --color-label-border: hsl(var(--color-transparent));
     --color-anchor-text: hsl(var(--color-blue-darker));
     --color-anchor-visited: hsl(var(--color-purple));
     --color-input-bg:hsl(var(--color-gray-100));
@@ -53,11 +53,11 @@ export const GlobalStyle = createGlobalStyle`
   body[data-theme='DARK'] {
     --color-text: hsl(var(--color-gray-200));
     --color-bg: hsl(var(--color-gray-900));
+    --color-border: hsla(var(--color-gray-200),.3);
     --color-link-bg: hsla(var(--color-white),.08);
     --color-link-url:hsl(var(--color-gray-500));
     --color-link-border: hsla(var(--color-gray-200),.5);
     --color-label-bg: hsl(var(--color-transparent));
-    --color-label-border: hsla(var(--color-gray-200),.5);
     --color-anchor-text: hsl(var(--color-gray-200));
     --color-anchor-visited: hsl(var(--color-gray-200));
     --color-input-bg:hsla(var(--color-gray-100),.24);

@@ -8,7 +8,7 @@ export const SEditCard = styled.div`
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   border-radius: 8px;
   background-color: hsl(var(--color));
-  border: 1px solid hsl(var(--color)); ;
+  border: 1px solid var(--color-border);
 `;
 
 export const SEditCardBody = styled.div`
