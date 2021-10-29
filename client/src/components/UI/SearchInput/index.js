@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -6,16 +7,31 @@ import { SSearch, SSreachInput } from 'components/UI/SearchInput/styled.js';
 import { ButtonRound } from 'components/UI/Buttons/index.js';
 
 const SearchInput = () => {
+  const [isTouched, setIsTouched] = useState(false);
+  const focusInputHandler = () => {
+    setIsTouched(true);
+  };
+  const blurInputHandler = () => {
+    setIsTouched(false);
+  };
   return (
-    <SSearch>
+    <SSearch
+      style={{
+        '--shadow': isTouched && 'var(--shadow-sm)',
+        '--color': isTouched ? 'var(--color-input-focus-bg)' : 'var(--color-input-bg)',
+      }}
+    >
       <Tippy content={TOOLTIP_TEXT.SEARCH}>
         <ButtonRound size={40}>
           <Icon.Search />
         </ButtonRound>
       </Tippy>
-
-      <SSreachInput type='text' placeholder='搜尋' />
-
+      <SSreachInput
+        onFocus={focusInputHandler}
+        onBlur={blurInputHandler}
+        type='text'
+        placeholder='搜尋'
+      />
       <Tippy content={TOOLTIP_TEXT.CLEAR_SEARCH}>
         <ButtonRound size={40}>
           <Icon.Clear />

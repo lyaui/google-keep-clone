@@ -4,6 +4,9 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --transition-basic:all .3s;
 
+    /* shadow */
+    --shadow-sm: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 4px 0px;
+
     /* colors */
     --color-transparent:transparent;
     --color-black: 0, 0%, 0%; // rgb(0%, 0%, 0%)
@@ -12,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     --color-blue: 217, 89%, 61%; // hsl(217, 89%, 61%);
     --color-blue-darker: 218, 85%, 43%; //hsl(218, 85%, 43%);
     --color-purple: 267, 85%, 43%; //hsl(267, 85%, 43%)
-
     --color-gray-100: 200, 12%, 95%; // hsl(200, 12%, 95%)
     --color-gray-200: 216, 12%, 92%; // hsl(216, 12%, 92%)
     --color-gray-500: 210, 6%, 63%; // hsl(210, 6%, 63%)
@@ -20,9 +22,6 @@ export const GlobalStyle = createGlobalStyle`
     --color-gray-700: 213, 5%, 39%; // hsl(213, 5%, 39%)
     --color-gray-800: 206, 6%, 25%; // 	hsl(206, 6%, 25%)
     --color-gray-900: 225, 6%, 13%; // hsl(225, 6%, 13%)
-
-
-    
   }
 
   *, *:before, *:after {
@@ -47,6 +46,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-label-border: hsl(var(--color-transparent));
     --color-anchor-text: hsl(var(--color-blue-darker));
     --color-anchor-visited: hsl(var(--color-purple));
+    --color-input-bg:hsl(var(--color-gray-100));
+    --color-input-focus-bg:hsl(var(--color-white));
   }
   
   body[data-theme='DARK'] {
@@ -59,6 +60,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-label-border: hsla(var(--color-gray-200),.5);
     --color-anchor-text: hsl(var(--color-gray-200));
     --color-anchor-visited: hsl(var(--color-gray-200));
+    --color-input-bg:hsla(var(--color-gray-100),.24);
+    --color-input-focus-bg:hsl(var(--color-gray-100));
   }
   }
 
