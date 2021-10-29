@@ -1,16 +1,14 @@
 import styled from 'styled-components/macro';
-import { PALETTE_COLORS } from 'constants/paletteColors.js';
 
 export const SEditCardColor = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: ${(props) => `${props.width}px` || '140px'};
+  width: 140px;
   padding: 4px;
   border-radius: 4px;
-  background-color: #fff;
-  box-shadow: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px,
-    rgb(0 0 0 / 12%) 0px 1px 4px 0px;
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
 `;
 
 export const SColor = styled.div`
@@ -21,17 +19,16 @@ export const SColor = styled.div`
   height: 28px;
   margin: 4px 2px;
   border-radius: 50%;
-  background-color: ${(props) => props.color || PALETTE_COLORS.DEFAULT};
-  border: 2px solid
-    ${(props) => (props.color === '#fff' ? '#e0e0e0' : props.color || PALETTE_COLORS.DEFAULT)};
+  background-color: hsl(var(--color));
+  border: 2px solid hsl(var(--border));
   cursor: pointer;
   :hover {
-    border: 2px solid #000;
+    border: 2px solid var(--color-text);
   }
   svg {
     width: 20px;
     height: 20px;
-    fill: #202124;
+    fill: var(--color-text);
     opacity: 0.4;
   }
 `;
