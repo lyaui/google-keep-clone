@@ -105,15 +105,6 @@ export const GlobalStyle = createGlobalStyle`
     letter-spacing: 1px;
   }
 
-  .notes-container {
-    display:flex;
-    height: calc(100vh - 64px);
-
-    main{
-      width: 100%;
-      overflow: scroll;
-    }
-  }
   .spinner {
     animation: spin infinite 0.8s linear;
   }
@@ -122,9 +113,8 @@ export const GlobalStyle = createGlobalStyle`
     from {
       transform: rotate(0deg);
     }
-   to {
+    to {
      transform: rotate(360deg);
-   }
-}
-
+    }
+  }
 `;
