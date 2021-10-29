@@ -5,8 +5,8 @@ export const SCard = styled.div`
   position: relative;
   height: fit-content;
   grid-row: span var(--rowSpan, 0);
-  background-color: var(--color, --color-white);
-  border: 1px solid var(--border-color);
+  background-color: hsl(var(--color, --color-white));
+  border: 1px solid hsl(var(--border-color));
   opacity: var(--opacity);
   font-size: 1.4rem;
   border-radius: 8px;
