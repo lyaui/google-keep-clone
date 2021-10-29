@@ -8,12 +8,11 @@ export const SCards = styled.section`
     props.viewMode === VIEW_MODE.GRID ? 'repeat(auto-fill, minmax(230px, 1fr))' : '600px'};
   justify-content: center;
   grid-auto-rows: 0;
-  /* padding: 20px 80px; */
   padding: ${(props) => (props.isFixedMenu ? '20px 80px' : '20px 80px 20px 100px')};
 `;
 
 export const SCardsTitle = styled.div`
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--color-text);
   margin-top: 60px;
   padding: ${(props) => (props.isFixedMenu ? '0px 80px' : '0px 80px 0px 100px')};
 `;
