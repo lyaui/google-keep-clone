@@ -7,7 +7,7 @@ export const SEditCardContent = styled(SEditCardText)`
     /* color: var(--color-text); */
     :empty:before {
       content: '新增記事...';
-      color: hsl(var(--color-gray-500));
+      color: hsl(var(--color-gray-600));
       font-size: 1.6rem;
       font-weight: bold;
     }
