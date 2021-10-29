@@ -10,7 +10,7 @@ function NavItem({ toRoute, label, type = 'tag' }) {
 
   return (
     <SNavItem>
-      <NavLink to={toRoute} activeStyle={{ backgroundColor: '#FEEFC3' }}>
+      <NavLink to={toRoute} activeStyle={{ backgroundColor: 'var(--color-menu-active-bg)' }}>
         <ButtonRound size={40}>{icon}</ButtonRound>
         <SNavItemText>{label}</SNavItemText>
       </NavLink>

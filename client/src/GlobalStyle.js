@@ -12,9 +12,12 @@ export const GlobalStyle = createGlobalStyle`
     --color-black: 0, 0%, 0%; // rgb(0%, 0%, 0%)
     --color-white: 0, 0%, 100%; // hsl(0, 0%, 100%)
 
-    --color-blue: 217, 89%, 61%; // hsl(217, 89%, 61%);
-    --color-blue-darker: 218, 85%, 43%; //hsl(218, 85%, 43%);
+    --color-yellow-lighter:	45, 97%, 88%; // hsl(45, 97%, 88%)
+    --color-yellow-darker: 37, 40%, 18%; //	hsl(37, 40%, 18%)
+    --color-blue: 217, 89%, 61%; // hsl(217, 89%, 61%)
+    --color-blue-darker: 218, 85%, 43%; //hsl(218, 85%, 43%)
     --color-purple: 267, 85%, 43%; //hsl(267, 85%, 43%)
+
     --color-gray-100: 200, 12%, 95%; // hsl(200, 12%, 95%)
     --color-gray-200: 216, 12%, 92%; // hsl(216, 12%, 92%)
     --color-gray-500: 210, 6%, 63%; // hsl(210, 6%, 63%)
@@ -48,6 +51,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-anchor-visited: hsl(var(--color-purple));
     --color-input-bg:hsl(var(--color-gray-100));
     --color-input-focus-bg:hsl(var(--color-white));
+    --color-menu-hover-bg:hsl(var(--color-gray-100));
+    --color-menu-active-bg:hsl(var(--color-yellow-lighter));
   }
   
   body[data-theme='DARK'] {
@@ -62,6 +67,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-anchor-visited: hsl(var(--color-gray-200));
     --color-input-bg:hsla(var(--color-gray-100),.24);
     --color-input-focus-bg:hsl(var(--color-gray-100));
+    --color-menu-hover-bg:hsla(var(--color-gray-800),.4);
+    --color-menu-active-bg:hsl(var(--color-yellow-darker));
   }
   }
 

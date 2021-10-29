@@ -13,7 +13,6 @@ const SideMenu = () => {
   const dispatch = useDispatch();
   const { labels, errorMessage } = useSelector((state) => state.labels);
   const { UIState } = useUI();
-  const { isFixedMenu } = UIState;
 
   useEffect(() => {
     dispatch(getUserLabels());
@@ -21,7 +20,12 @@ const SideMenu = () => {
   }, [dispatch, errorMessage, history]);
 
   return (
-    <SSideMenu isFixedMenu={isFixedMenu}>
+    <SSideMenu
+      style={{
+        '--position': UIState.isFixedMenu ? 'relative' : 'fixed',
+        '--width': UIState.isFixedMenu ? '280px' : '60px',
+      }}
+    >
       <SSideMenuList>
         <NavItem toRoute={ROUTE.HOME} id='memo' label='記事' type='memo' />
         {labels.map((label) => (

@@ -2,12 +2,12 @@ import styled from 'styled-components/macro';
 import { SNavItemText } from 'components/Layout/SideMenu/NavItem/style.js';
 
 export const SSideMenu = styled.aside`
-  padding-right: 12px;
-  position: ${(props) => (props.isFixedMenu ? 'relative' : 'fixed')};
-  z-index: 10;
-  width: ${(props) => (props.isFixedMenu ? '280px' : '60px')};
+  width: var(--width);
   height: 100%;
-  background-color: #fff;
+  padding-right: 12px;
+  position: var(--position);
+  z-index: 10;
+  background-color: var(--color-bg);
   overflow: scroll;
   transition: all 0.2s;
 

@@ -12,7 +12,7 @@ export const SNavItem = styled.li`
   align-items: center;
 
   :hover {
-    background-color: #f2f3f4;
+    background-color: var(--color-menu-hover-bg);
   }
 
   button {
@@ -24,14 +24,13 @@ export const SNavItem = styled.li`
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: ${(props) => (props.isActive ? 'red' : null)};
   }
 `;
 
 export const SNavItemText = styled.span`
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
-  color: #202124;
+  color: var(--color-text);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
