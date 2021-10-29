@@ -1,14 +1,50 @@
 export const PALETTE_COLORS = {
-  DEFAULT: { LIGHT: '#fff', DARK: '#202124' },
-  RED: { LIGHT: ':#f28b82', DARK: '#5c2b29' },
-  ORANGE: { LIGHT: '#fbbc04', DARK: '#614a19' },
-  YELLOW: { LIGHT: '#fff475', DARK: '#635d19' },
-  GREEN: { LIGHT: '#ccff90', DARK: '#345920' },
-  TEAL: { LIGHT: '#a7ffeb', DARK: '#16504b' },
-  BLUE: { LIGHT: '#cbf0f8', DARK: '#2d555e' },
-  DARK_BLUE: { LIGHT: '#aecbfa', DARK: '#1e3a5f' },
-  PURPLE: { LIGHT: '#d7aefb', DARK: '#42275e' },
-  PINK: { LIGHT: '#fdcfe8', DARK: '#5b2245' },
-  BROWN: { LIGHT: '#e6c9a8', DARK: '#442f19' },
-  GRAY: { LIGHT: '#e8eaed', DARK: '#3c3f43' },
+  DEFAULT: {
+    LIGHT: '0, 0%, 100%', // hsl(0, 0%, 100%)
+    DARK: '225, 6%, 13%', // hsl(225, 6%, 13%)
+  },
+  RED: {
+    LIGHT: '5, 81%, 73%', // hsl(5, 81%, 73%)
+    DARK: '2, 38%, 26%', // hsl(2, 38%, 26%)
+  },
+  ORANGE: {
+    LIGHT: '45, 97%, 50%', // hsl(45, 97%, 50%)
+    DARK: '41, 59%, 24%', // hsl(41, 59%, 24%)
+  },
+  YELLOW: {
+    LIGHT: '55, 100%, 73%', // hsl(55, 100%, 73%)
+    DARK: '55, 60%, 24%', // hsl(55, 60%, 24%)
+  },
+  GREEN: {
+    LIGHT: '88, 100%, 78%', // hsl(88, 100%, 78%)
+    DARK: '99, 47%, 24%', // hsl(99, 47%, 24%)
+  },
+  TEAL: {
+    LIGHT: '166, 100%, 83%', // hsl(166, 100%, 83%)
+    DARK: '175, 57%, 20%', // hsl(175, 57%, 20%)
+  },
+  BLUE: {
+    LIGHT: '191, 76%, 88%', // hsl(191, 76%, 88%)
+    DARK: '191, 35%, 27%', // hsl(191, 35%, 27%)
+  },
+  DARK_BLUE: {
+    LIGHT: '217, 88%, 83%', // hsl(217, 88%, 83%)
+    DARK: '214, 52%, 25%', // hsl(214, 52%, 25%)
+  },
+  PURPLE: {
+    LIGHT: '272, 91%, 83%', // hsl(272, 91%, 83%)
+    DARK: '269, 41%, 26%', //	hsl(269, 41%, 26%)
+  },
+  PINK: {
+    LIGHT: '327, 92%, 90%', // hsl(327, 92%, 90%)
+    DARK: '323, 46%, 25%', //	hsl(323, 46%, 25%)
+  },
+  BROWN: {
+    LIGHT: '32, 55%, 78%', // hsl(32, 55%, 78%)
+    DARK: '31, 46%, 18%', // hsl(31, 46%, 18%)
+  },
+  GRAY: {
+    LIGHT: '216, 12%, 92%', // hsl(216, 12%, 92%)
+    DARK: '214, 6%, 25%', // hsl(214, 6%, 25%)
+  },
 };
