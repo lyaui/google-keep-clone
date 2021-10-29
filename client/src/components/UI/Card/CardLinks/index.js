@@ -16,9 +16,15 @@ const CardLinks = ({ links, isOnlyLinks }) => {
   };
 
   return (
-    <SCardLinks>
+    <SCardLinks style={{ '--rounded': isOnlyLinks ? '8px' : '0 0px 8px 8px' }}>
       {links.slice(0, showLinksNum).map((link, index) => (
-        <SCardLink key={index} index={index} isOnlyLinks={isOnlyLinks}>
+        <SCardLink
+          key={index}
+          style={{
+            '--height': isOnlyLinks ? '88px' : '56px',
+            '--border': !index && isOnlyLinks ? 'unset' : '1px solid var(--color-link-border)',
+          }}
+        >
           <LinkItem link={link} isOnlyLinks={isOnlyLinks}>
             {/* go share link */}
             <Tippy content={TOOLTIP_TEXT.GO_URL}>

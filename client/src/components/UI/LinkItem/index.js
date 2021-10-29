@@ -5,7 +5,6 @@ import {
   SLinkItemInfo,
   SLinkItemTitle,
   SLinkItemUrl,
-  SLinkItemShare,
 } from 'components/UI/LinkItem/style.js';
 
 const LinkItem = ({ link, isOnlyLinks = false, children = null }) => {
@@ -16,16 +15,16 @@ const LinkItem = ({ link, isOnlyLinks = false, children = null }) => {
       <SLinkItemImg
         src={link.image ? link.image : DEFAULT_LINK_IMG}
         alt={link.title}
-        isOnlyLinks={isOnlyLinks}
+        style={{ '--width': isOnlyLinks ? '88px' : '54px' }}
       />
-      <SLinkItemInfo isOnlyLinks={isOnlyLinks}>
+      <SLinkItemInfo
+        style={{ '--width': isOnlyLinks ? 'calc(100% - 120px)' : 'calc(100% - 88px)' }}
+      >
         <SLinkItemTitle>{link.title}</SLinkItemTitle>
         <SLinkItemUrl>{urlText}</SLinkItemUrl>
       </SLinkItemInfo>
-      <SLinkItemShare>
-        {/* actions */}
-        {children}
-      </SLinkItemShare>
+      {/* actions */}
+      {children}
     </SLinkItem>
   );
 };

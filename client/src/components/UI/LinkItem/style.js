@@ -3,27 +3,23 @@ import styled from 'styled-components/macro';
 export const SLinkItem = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   overflow: hidden;
-  background-color: rgba(250, 250, 250, 0.8);
 `;
 
 export const SLinkItemImg = styled.img`
-  width: ${(props) => (props.isOnlyLinks ? '88px' : '56px')};
-  background-color: #fff;
+  width: var(--width);
   object-fit: cover;
 `;
 
 export const SLinkItemInfo = styled.div`
-  width: ${(props) =>
-    props.isOnlyLinks ? 'calc(100% - 88px - 32px)' : 'calc(100% - 56px - 32px)'};
+  width: var(--width);
   padding: 8px 0 8px 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin: auto;
 `;
 
 export const SLinkItemTitle = styled.div`
-  color: #202124;
+  color: var(--color-text);
   font-weight: bold;
   overflow: hidden;
   white-space: nowrap;
@@ -31,16 +27,9 @@ export const SLinkItemTitle = styled.div`
 `;
 
 export const SLinkItemUrl = styled.span`
-  color: #80868b;
-  margin-top: 4px;
-  font-size: 12px;
+  color: var(--color-link-url);
+  font-size: 1.2rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`;
-
-export const SLinkItemShare = styled.div`
-  &button {
-    margin-right: 20px;
-  }
 `;
