@@ -4,10 +4,10 @@ import { SEditCardContent } from 'components/EditCard/EditCardContent/style.js';
 
 function EmptyCardEditor() {
   const history = useHistory();
-  const testHandler = () => history.push({ search: '?edit=true' });
+  const toggleEditorHandler = () => history.push({ search: '?edit=true' });
 
   return (
-    <SEditCard onClick={testHandler}>
+    <SEditCard onClick={toggleEditorHandler}>
       <SEditCardBody>
         <SEditCardContent>
           <div id='contentEdit' contentEditable='true' />
