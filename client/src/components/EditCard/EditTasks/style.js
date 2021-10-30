@@ -22,7 +22,7 @@ export const SEditNewTask = styled.div`
     font-size: 1.6rem;
     :empty:before {
       content: '清單項目';
-      color: hsla(var(--color-gray-600));
+      color: hsla(var(--color-gray-500));
     }
   }
 `;

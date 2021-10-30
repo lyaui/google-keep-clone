@@ -80,7 +80,7 @@ const Card = ({ card, masonryDom }) => {
     memoColor === PALETTE_COLORS.DEFAULT.LIGHT
       ? 'var(--color-gray-200)'
       : memoColor === PALETTE_COLORS.DEFAULT.DARK
-      ? 'var(--color-gray-700)'
+      ? 'var(--color-gray-600)'
       : memoColor;
 
   return (

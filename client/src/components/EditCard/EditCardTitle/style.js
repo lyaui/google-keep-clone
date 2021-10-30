@@ -7,7 +7,7 @@ export const SEditCardTitle = styled(SEditCardText)`
     font-weight: 500;
     :empty:before {
       content: '標題';
-      color: hsla(var(--color-gray-600));
+      color: hsla(var(--color-gray-500));
     }
   }
 `;

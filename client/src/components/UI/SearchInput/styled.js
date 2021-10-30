@@ -19,6 +19,6 @@ export const SSreachInput = styled.input`
   background: hsl(var(--color-transparent));
   transition: all 0.3s;
   ::placeholder {
-    color: hsl(var(--color-gray-500));
+    color: hsl(var(--color-gray-400));
   }
 `;
