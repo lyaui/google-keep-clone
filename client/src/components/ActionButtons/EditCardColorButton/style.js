@@ -7,7 +7,7 @@ export const SEditCardColor = styled.div`
   width: 140px;
   padding: 4px;
   border-radius: 4px;
-  background-color: var(--color-bg);
+  background-color: var(--color-tooltip-bg);
   box-shadow: var(--shadow-sm);
 `;
 
