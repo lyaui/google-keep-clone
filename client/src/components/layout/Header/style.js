@@ -24,6 +24,7 @@ export const SHeaderTitle = styled.div`
   padding: 0 8px;
   font-size: 2.2rem;
   color: var(--color-text);
+  opacity: 0.7;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
