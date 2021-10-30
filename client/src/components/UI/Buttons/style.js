@@ -17,8 +17,7 @@ export const SButtonRound = styled(SButton)`
   border-radius: 50%;
   margin: 4px;
   svg {
-    fill: #202124;
-    opacity: 0.6;
+    fill: var(--color-icon);
   }
   :hover {
     background-color: rgba(95, 99, 104, 0.157);
@@ -29,14 +28,14 @@ export const SButtonSquare = styled(SButton)`
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.7);
   svg {
-    fill: #fff;
+    fill: hsl(var(--color-white));
   }
 `;
 
 export const SButtonRect = styled(SButton)`
-  color: #fff;
+  color: hsl(var(--color-white));
   font-size: 14px;
-  background-color: rgb(66, 133, 244);
+  background-color: hsl(var(--color-blue));
   border-radius: 2px;
   height: 40px;
   margin: 18px 0;

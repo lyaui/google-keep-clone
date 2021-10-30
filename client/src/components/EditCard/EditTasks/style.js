@@ -14,7 +14,7 @@ export const SEditNewTask = styled.div`
   svg {
     width: 20px;
     height: 20px;
-    fill: rgba(0, 0, 0, 0.6);
+    fill: var(--color-icon);
     margin-right: 8px;
   }
 

@@ -21,7 +21,7 @@ export const SEditTaskItemIcon = styled.div`
   svg {
     width: 20px;
     height: 20px;
-    fill: rgba(0, 0, 0, 0.6);
+    fill: var(--color-icon);
     &[name='drag'] {
       margin-top: -2px;
       width: 24px;
@@ -39,7 +39,6 @@ export const SEditTaskItemText = styled.div`
   width: 100%;
   padding-right: 16px;
   margin-left: 10px;
-  margin-top: -3px;
   text-decoration: var(--text-decoration);
   color: var(--color);
   cursor: text;

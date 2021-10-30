@@ -29,7 +29,7 @@ export const SSearchLabel = styled.div`
   align-items: center;
   padding: 12px 0;
   svg {
-    fill: gray;
+    fill: var(--color-icon);
   }
   input {
     font-size: 13px;
@@ -79,7 +79,7 @@ export const SLabelIcon = styled.div`
   svg {
     width: 20px;
     height: 20px;
-    fill: gray;
+    fill: var(--color-icon);
     cursor: pointer;
     :hover {
       fill: #202124;

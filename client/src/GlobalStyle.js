@@ -42,6 +42,7 @@ export const GlobalStyle = createGlobalStyle`
   body[data-theme='LIGHT'] {
     --color-text: hsl(var(--color-gray-900));
     --color-bg: hsl(var(--color-white));
+    --color-icon: hsl(var(--color-gray-700));
     --color-border: hsl(var(--color-transparent));
     --color-link-bg: hsla(var(--color-white),.8);
     --color-link-url:hsl(var(--color-gray-600));
@@ -59,6 +60,7 @@ export const GlobalStyle = createGlobalStyle`
   body[data-theme='DARK'] {
     --color-text: hsl(var(--color-gray-200));
     --color-bg: hsl(var(--color-gray-900));
+    --color-icon: hsl(var(--color-gray-500));
     --color-border: hsla(var(--color-gray-200),.3);
     --color-link-bg: hsla(var(--color-white),.08);
     --color-link-url:hsl(var(--color-gray-500));
