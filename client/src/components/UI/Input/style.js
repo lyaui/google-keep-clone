@@ -11,26 +11,23 @@ export const SInputControl = styled.div`
 export const SInput = styled.input`
   height: 40px;
   padding: 8px;
-  font-size: 14px;
-  display: block;
-  border: ${(props) => (props.isInValid ? '2px solid #FFA0A0' : '1px solid #ccc')};
+  font-size: 1.4rem;
+  border: 1px solid var(--border);
   border-radius: 2px;
-  background-color: ${(props) => (props.isInValid ? '#FFDEDE' : 'transparent')};
+  background-color: hsla(var(--color), 0.2);
   :focus {
-    border: ${(props) => (props.isInValid ? '2px solid #FFA0A0' : '2px solid rgb(66, 133, 244)')};
-    opacity: 0.9;
+    border: 2px solid hsl(var(--border-focus));
   }
   ::placeholder {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 `;
 
 export const SInputMessage = styled.span`
   margin-top: 4px;
-  color: red;
-  font-size: 12px;
-  font-weight: unset;
-  padding-left: 8px;
   margin-right: auto;
+  padding-left: 8px;
+  color: hsl(var(--color-red-darker));
+  font-size: 12px;
 `;

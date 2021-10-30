@@ -77,6 +77,13 @@ const Input = ({ name, label, type, validate, validFormHandler }) => {
         placeholder={label}
         onBlur={blurInputHandler}
         onChange={changeInputHandler}
+        style={{
+          '--border':
+            !isValid && isTouched ? 'hsl(var(--color-red))' : 'hsla(var(--color-gray-400),.5)',
+          '--border-focus': !isValid && isTouched ? 'var(--color-red)' : 'var(--color-blue)',
+          '--color':
+            !isValid && isTouched ? 'var(--color-red-lighter)' : 'var(--color-transparent)',
+        }}
         isInValid={(!isValid && isTouched) || false}
         value={value}
       />
