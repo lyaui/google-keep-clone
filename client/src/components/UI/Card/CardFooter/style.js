@@ -12,7 +12,7 @@ export const SCardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   opacity: 0;
-  transition: all 0.3s;
+  transition: var(--transition);
   ${SCard} :hover & {
     opacity: 1;
   }

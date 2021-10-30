@@ -11,7 +11,7 @@ export const SCard = styled.div`
   font-size: 1.4rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: var(--transition);
   :hover {
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
   }

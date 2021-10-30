@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --transition-basic:all .3s;
+    --transition:all .3s;
 
     /* shadow */
     --shadow-sm: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 4px 0px;
@@ -89,7 +89,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     color: var(--color-text);
     background-color: var(--color-bg);
-    transition: all .3s;
+    transition: var(--transition);
   }
 
   img {

@@ -40,7 +40,7 @@ export const SLoginImageButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
-  transition: all 0.3s;
+  transition: var(--transition);
   :hover {
     background-color: #f7b401;
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 30%);

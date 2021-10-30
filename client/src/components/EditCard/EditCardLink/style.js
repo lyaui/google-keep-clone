@@ -20,7 +20,7 @@ export const SEditCardLinkButton = styled.button`
   background-color: transparent;
   padding: 8px;
   margin-bottom: 16px;
-  transition: all 0.3s;
+  transition: var(--transition);
   &:hover {
     opacity: 1;
   }

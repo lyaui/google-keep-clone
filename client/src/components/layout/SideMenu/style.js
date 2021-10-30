@@ -9,7 +9,7 @@ export const SSideMenu = styled.aside`
   z-index: 10;
   background-color: var(--color-bg);
   overflow: scroll;
-  transition: all 0.3s;
+  transition: var(--transition);
 
   :hover {
     width: 280px;

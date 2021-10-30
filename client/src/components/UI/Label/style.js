@@ -29,7 +29,7 @@ export const SLabel = styled.div`
   border: 1px solid var(--color-border);
   border-radius: var(--rounded);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: var(--transition);
   position: relative;
 
   :hover {

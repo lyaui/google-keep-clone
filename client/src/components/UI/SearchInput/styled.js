@@ -8,7 +8,7 @@ export const SSearch = styled.form`
   border-radius: 8px;
   background-color: var(--color);
   overflow: hidden;
-  transition: all 0.3s;
+  transition: var(--transition);
   box-shadow: var(--shadow);
 `;
 
@@ -17,7 +17,7 @@ export const SSreachInput = styled.input`
   width: 110%;
   padding: 0 4px;
   background: hsl(var(--color-transparent));
-  transition: all 0.3s;
+  transition: var(--transition);
   ::placeholder {
     color: hsl(var(--color-gray-400));
   }

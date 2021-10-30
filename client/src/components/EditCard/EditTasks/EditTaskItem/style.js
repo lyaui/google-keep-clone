@@ -5,7 +5,7 @@ export const SEditTaskItem = styled.div`
   padding: 6px 0;
   line-height: 1.5em;
   background-color: hsl(var(--color));
-  transition: all 0.3s;
+  transition: var(--transition);
   :hover [name='drag'] {
     opacity: 1;
   }

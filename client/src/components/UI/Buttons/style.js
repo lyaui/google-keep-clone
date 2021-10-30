@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const SButton = styled.button`
   text-align: center;
   background-color: ${(props) => props.color || 'transparent'};
-  transition: all 0.3s;
+  transition: var(--transition);
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   svg {
     width: 90%;

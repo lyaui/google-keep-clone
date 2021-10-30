@@ -7,7 +7,7 @@ export const SNavItem = styled.li`
   cursor: pointer;
   overflow: hidden;
   height: 50px;
-  transition: all 0.2s;
+  transition: var(--transition);
   display: flex;
   align-items: center;
 
