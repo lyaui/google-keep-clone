@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const SLabelButton = styled.button`
   width: 18px;
   height: 18px;
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   opacity: 0;
   padding: 4px;
   position: absolute;

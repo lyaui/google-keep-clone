@@ -7,7 +7,7 @@ export const SGoogleLoginButton = styled.button`
   justify-content: center;
   color: #fff;
   font-size: 14px;
-  border-radius: 2px;
+  border-radius: var(--rounded-sm);
   border: 1px solid #999;
   color: #999;
   background-color: #fff;

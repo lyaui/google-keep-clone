@@ -5,7 +5,7 @@ export const SUploadImage = styled.label`
   z-index: 1;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   background-color: transparent;
   top: 0;
   left: 0;

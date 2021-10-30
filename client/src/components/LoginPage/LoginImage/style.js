@@ -34,7 +34,7 @@ export const SLoginImageButton = styled.button`
   font-size: 1.6rem;
   background-color: hsla(var(--color-yellow), 0.9);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--rounded-lg);
   cursor: pointer;
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   transition: var(--transition);

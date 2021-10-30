@@ -6,7 +6,7 @@ export const SEditCardColor = styled.div`
   justify-content: space-between;
   width: 140px;
   padding: 4px;
-  border-radius: 4px;
+  border-radius: var(--rounded-md);
   background-color: var(--color-tooltip-bg);
   box-shadow: var(--shadow-sm);
 `;
@@ -18,7 +18,7 @@ export const SColor = styled.div`
   width: 28px;
   height: 28px;
   margin: 4px 2px;
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   background-color: hsl(var(--color));
   border: 2px solid hsl(var(--border));
   cursor: pointer;

@@ -13,7 +13,7 @@ export const SInput = styled.input`
   padding: 8px;
   font-size: 1.4rem;
   border: 1px solid var(--border);
-  border-radius: 2px;
+  border-radius: var(--rounded-sm);
   background-color: hsla(var(--color), 0.2);
   :focus {
     border: 2px solid hsl(var(--border-focus));

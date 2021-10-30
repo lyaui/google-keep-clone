@@ -5,7 +5,7 @@ export const SSearch = styled.form`
   height: 100%;
   width: 600px;
   margin-right: auto;
-  border-radius: 8px;
+  border-radius: var(--rounded-lg);
   background-color: var(--color);
   overflow: hidden;
   transition: var(--transition);

@@ -4,7 +4,7 @@ export const SEditCardLabels = styled.div`
   width: var(--width);
   padding: 12px;
   font-size: 1.4rem;
-  border-radius: 4px;
+  border-radius: var(--rounded-md);
   background-color: var(--color-tooltip-bg);
   box-shadow: var(--shadow-sm);
 `;

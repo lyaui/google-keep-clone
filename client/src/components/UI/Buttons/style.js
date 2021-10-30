@@ -14,7 +14,7 @@ export const SButton = styled.button`
 export const SButtonRound = styled(SButton)`
   width: ${(props) => `${props.size}px` || '40px'};
   height: ${(props) => `${props.size}px` || '40px'};
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
   margin: 4px;
   svg {
     fill: var(--color-icon);
@@ -36,7 +36,7 @@ export const SButtonRect = styled(SButton)`
   color: hsl(var(--color-white));
   font-size: 14px;
   background-color: hsl(var(--color-blue));
-  border-radius: 2px;
+  border-radius: var(--rounded-sm);
   height: 40px;
   margin: 18px 0;
 `;

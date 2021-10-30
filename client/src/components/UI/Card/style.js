@@ -9,7 +9,7 @@ export const SCard = styled.div`
   border: 1px solid hsl(var(--border-color));
   opacity: var(--opacity);
   font-size: 1.4rem;
-  border-radius: 8px;
+  border-radius: var(--rounded-lg);
   cursor: pointer;
   transition: var(--transition);
   :hover {
