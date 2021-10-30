@@ -134,7 +134,7 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
         </Tippy>
         {/* edit */}
         {!isEditing && (
-          <SLabelValue isSideMenu={isSideMenu}>
+          <SLabelValue>
             <span onClick={switchInputHandler}>{textValue || '輸入標籤名稱'}</span>
             {errorMessage && <SLabelErrMsg>{errorMessage}</SLabelErrMsg>}
           </SLabelValue>

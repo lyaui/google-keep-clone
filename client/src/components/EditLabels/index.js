@@ -40,7 +40,10 @@ const EditLabels = ({ type = 'memo', id }) => {
   const noMatchResults = keyword && labels.length === 0;
 
   return (
-    <SEditCardLabels width={isSideMenu ? 300 : 200} onClick={stopPropagationHandler}>
+    <SEditCardLabels
+      style={{ '--width': isSideMenu ? '300px' : '200px' }}
+      onClick={stopPropagationHandler}
+    >
       <SEditCardLabelTitle>{isSideMenu ? '編輯標籤' : '為記事加標籤'}</SEditCardLabelTitle>
       <SSearchLabel>
         <input
@@ -53,7 +56,7 @@ const EditLabels = ({ type = 'memo', id }) => {
         <Icon.Search />
       </SSearchLabel>
 
-      <SLabels maxHeight={isSideMenu ? 300 : 200}>
+      <SLabels style={{ '--height': isSideMenu ? '300px' : '200px' }}>
         {/* edit memo labels */}
         {!isSideMenu &&
           labels.map((label) => (

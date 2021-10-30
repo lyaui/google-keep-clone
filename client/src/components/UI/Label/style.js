@@ -10,6 +10,9 @@ export const SLabelButton = styled.button`
   right: -7px;
   top: 50%;
   transform: translate(-50%, -50%);
+  svg {
+    fill: var(--color-icon);
+  }
 `;
 
 export const SLabel = styled.div`

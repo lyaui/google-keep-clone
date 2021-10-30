@@ -26,7 +26,10 @@ const MemoLabel = ({ id, label, isSideMenu }) => {
   };
 
   return (
-    <SLabel key={label.id} isSideMenu={isSideMenu} onClick={toggleLabelHandler}>
+    <SLabel
+      style={{ '--hover': !isSideMenu && 'var(--color-hover-bg)' }}
+      onClick={toggleLabelHandler}
+    >
       <SLabelIcon>{isSelected ? <Icon.CheckboxOutline /> : <Icon.EmptyCheckbox />}</SLabelIcon>
       <SLabelValue>{label.name}</SLabelValue>
     </SLabel>
