@@ -12,6 +12,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-black: 0, 0%, 0%; // rgb(0%, 0%, 0%)
     --color-white: 0, 0%, 100%; // hsl(0, 0%, 100%)
 
+    --color-red-lighter: 4, 79%, 81%; // hsl(4, 79%, 81%)
+    --color-red-darker: 4, 71%, 50%; // hsl(4, 71%, 50%)
     --color-yellow-lighter:	45, 97%, 88%; // hsl(45, 97%, 88%)
     --color-yellow-darker: 37, 40%, 18%; //	hsl(37, 40%, 18%)
     --color-blue: 217, 89%, 61%; // hsl(217, 89%, 61%)
@@ -45,6 +47,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-bg: hsl(var(--color-white));
     --color-icon: hsl(var(--color-gray-600));
     --color-border: hsl(var(--color-transparent));
+    --color-warning: hsl(var(--color-red-darker));
+    --color-hover-bg:hsl(var(--color-gray-100));
     --color-link-bg: hsla(var(--color-white),.8);
     --color-link-url:hsl(var(--color-gray-500));
     --color-link-border: hsla(var(--color-black),.12);
@@ -53,9 +57,9 @@ export const GlobalStyle = createGlobalStyle`
     --color-anchor-visited: hsl(var(--color-purple));
     --color-input-bg:hsl(var(--color-gray-100));
     --color-input-focus-bg:hsl(var(--color-white));
-    --color-menu-hover-bg:hsl(var(--color-gray-100));
     --color-menu-active-bg:hsl(var(--color-yellow-lighter));
-    --color-task-completed: hsl(var(--color-gray-600))
+    --color-task-completed: hsl(var(--color-gray-600));
+    --color-tooltip-bg: hsl(var(--color-white));
   }
   
   body[data-theme='DARK'] {
@@ -63,6 +67,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-bg: hsl(var(--color-gray-900));
     --color-icon: hsl(var(--color-gray-400));
     --color-border: hsla(var(--color-gray-200),.3);
+    --color-warning: hsl(var(--color-red-lighter));
+    --color-hover-bg:hsla(var(--color-gray-700),.4);
     --color-link-bg: hsla(var(--color-white),.08);
     --color-link-url:hsl(var(--color-gray-400));
     --color-link-border: hsla(var(--color-gray-200),.5);
@@ -71,9 +77,9 @@ export const GlobalStyle = createGlobalStyle`
     --color-anchor-visited: hsl(var(--color-gray-200));
     --color-input-bg:hsla(var(--color-gray-100),.24);
     --color-input-focus-bg:hsl(var(--color-gray-100));
-    --color-menu-hover-bg:hsla(var(--color-gray-700),.4);
     --color-menu-active-bg:hsl(var(--color-yellow-darker));
-    --color-task-completed: hsl(var(--color-gray-400))
+    --color-task-completed: hsl(var(--color-gray-400));
+    --color-tooltip-bg: hsl(var(--color-gray-800));
   }
   }
 
