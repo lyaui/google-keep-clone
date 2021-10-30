@@ -1,23 +1,24 @@
 import styled from 'styled-components/macro';
 
 export const SLoginForm = styled.div`
-  color: #475861;
   display: flex;
   flex-direction: column;
-  padding: 60px 50px;
   width: 385px;
+  padding: 60px 50px;
+  color: hsl(var(--color-gray-700));
+  background: hsl(var(--color-white));
   p {
     font-weight: 300;
     display: block;
     padding-top: 20px;
-    font-size: 20px;
+    font-size: 2rem;
     letter-spacing: 2px;
   }
   span {
     letter-spacing: 1px;
     text-align: center;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
 `;
 
@@ -26,26 +27,26 @@ export const SLoginFormLogo = styled.img`
 `;
 
 export const SLoginFormSeparator = styled.div`
-  color: #999;
-  font-size: 12px;
+  color: hsl(var(--color-gray-400));
+  font-size: 1.2rem;
   padding: 24px 0;
   width: 100%;
 
   :after {
     display: inline-block;
+    width: 40%;
     margin: 0 0 4px 20px;
     height: 1px;
     content: ' ';
-    background-color: #999;
-    width: 40%;
+    background-color: hsl(var(--color-gray-400));
   }
   :before {
     display: inline-block;
+    width: 40%;
     margin: 0 20px 4px 0;
     height: 1px;
     content: ' ';
-    background-color: #999;
-    width: 40%;
+    background-color: hsl(var(--color-gray-400));
   }
 `;
 
