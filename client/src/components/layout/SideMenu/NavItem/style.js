@@ -12,7 +12,7 @@ export const SNavItem = styled.li`
   align-items: center;
 
   :hover {
-    background-color: var(--color-menu-hover-bg);
+    background-color: var(--color-hover-bg);
   }
 
   button {
