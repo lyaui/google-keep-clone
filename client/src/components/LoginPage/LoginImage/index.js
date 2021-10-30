@@ -1,4 +1,7 @@
 import { useRouteMatch } from 'react-router-dom';
+import { ROUTE } from 'constants/routes.js';
+import loginBackgroundImage from 'assets/images/login-background.jpeg';
+import signupBackgroundImage from 'assets/images/signup-background.jpeg';
 import {
   SLoginImage,
   SLoginImageTitle,
@@ -9,7 +12,12 @@ import {
 const LoginImage = () => {
   const { path } = useRouteMatch();
   return (
-    <SLoginImage path={path}>
+    <SLoginImage
+      style={{
+        '--image':
+          path === ROUTE.LOGIN ? `url(${loginBackgroundImage})` : `url(${signupBackgroundImage})`,
+      }}
+    >
       <div>
         <SLoginImageTitle>記下每一個想法</SLoginImageTitle>
         <SLoginImageText>

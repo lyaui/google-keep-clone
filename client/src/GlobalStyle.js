@@ -2,7 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
+    /* transition */
     --transition:all .3s;
+
+    /* border-radius */
 
     /* shadow */
     --shadow-sm: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 4px 0px;
@@ -13,8 +16,10 @@ export const GlobalStyle = createGlobalStyle`
     --color-white: 0, 0%, 100%; // hsl(0, 0%, 100%)
 
     --color-red-lighter: 4, 79%, 81%; // hsl(4, 79%, 81%)
+    --color-red: 0, 100%, 81%; //	hsl(0, 100%, 81%)
     --color-red-darker: 4, 71%, 50%; // hsl(4, 71%, 50%)
     --color-yellow-lighter:	45, 97%, 88%; // hsl(45, 97%, 88%)
+    --color-yellow: 44, 94%, 54%;	// hsl(44, 94%, 54%)
     --color-yellow-darker: 37, 40%, 18%; //	hsl(37, 40%, 18%)
     --color-blue: 217, 89%, 61%; // hsl(217, 89%, 61%)
     --color-blue-darker: 218, 85%, 43%; //hsl(218, 85%, 43%)
@@ -24,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-gray-200: 216, 12%, 92%; // hsl(216, 12%, 92%)
     --color-gray-400: 210, 6%, 63%; // hsl(210, 6%, 63%)
     --color-gray-500: 207, 5%, 52%; // hsl(207, 5%, 52%) 
-    --color-gray-600: 213, 5%, 39%; // hsl(213, 5%, 39%)
+    --color-gray-600: 213, 5%, 39%; // hsl(213, 5%, 39%) 
     --color-gray-700: 206, 6%, 25%; // hsl(206, 6%, 25%)
     --color-gray-800:	220, 3%, 18%; // hsl(220, 3%, 18%)
     --color-gray-900: 225, 6%, 13%; // hsl(225, 6%, 13%)
