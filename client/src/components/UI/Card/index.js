@@ -15,7 +15,7 @@ import CardLabels from 'components/UI/Card/CardLabels';
 import CardFooter from 'components/UI/Card/CardFooter';
 import CardLinks from 'components/UI/Card/CardLinks';
 
-import { SCard } from 'components/UI/Card/style.js';
+import { SCard, SEmptyText } from 'components/UI/Card/style.js';
 import { SEditCardText } from 'components/EditCard/EditCardText/style.js';
 
 const Card = ({ card, masonryDom }) => {
@@ -75,6 +75,7 @@ const Card = ({ card, masonryDom }) => {
   const isOnlyImages = noCardBody && links.length === 0 && images.length > 0;
   const isOnlyLinks = noCardBody && images.length === 0 && links.length > 0;
   const isOnlyImagesAndLinks = noCardBody && images.length > 0 && links.length > 0;
+  const showEmptyText = noCardBody && images.length === 0 && links.length === 0;
 
   const borderColor =
     memoColor === PALETTE_COLORS.DEFAULT.LIGHT
@@ -103,7 +104,6 @@ const Card = ({ card, masonryDom }) => {
           {/* header */}
           {title && <CardHeader>{title}</CardHeader>}
           {/* content */}
-
           {!noCardBody && (
             <CardBody>
               {/* content */}
@@ -118,16 +118,12 @@ const Card = ({ card, masonryDom }) => {
                   <EditTaskItem key={task.id} task={task} index={index} id={id} />
                 ))}
 
-              {/* <EditTasks /> */}
-              {images.length === 0 &&
-                !title &&
-                !content &&
-                links.length === 0 &&
-                tasks.length === 0 && <p>空白記事</p>}
               {/* labels */}
               {labels.length > 0 && <CardLabels labels={labels} id={id} />}
             </CardBody>
           )}
+
+          {showEmptyText && <SEmptyText>空白記事</SEmptyText>}
 
           {/* footer */}
           <CardFooter

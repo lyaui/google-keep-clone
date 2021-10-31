@@ -19,3 +19,12 @@ export const SCard = styled.div`
     opacity: 0.9;
   }
 `;
+
+export const SEmptyText = styled.p`
+  margin: 0;
+  margin-top: 8px;
+  padding: 0 12px;
+  font-size: 2.4rem;
+  color: var(--color-text);
+  opacity: 0.5;
+`;
