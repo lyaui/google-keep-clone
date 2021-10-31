@@ -71,7 +71,8 @@ const Card = ({ card, masonryDom }) => {
     };
   });
 
-  const noCardBody = !title && !content && tasks.length === 0 && labels.length === 0;
+  const noCardBody =
+    !title && (!content || content === '<br>') && tasks.length === 0 && labels.length === 0;
   const isOnlyImages = noCardBody && links.length === 0 && images.length > 0;
   const isOnlyLinks = noCardBody && images.length === 0 && links.length > 0;
   const isOnlyImagesAndLinks = noCardBody && images.length > 0 && links.length > 0;
