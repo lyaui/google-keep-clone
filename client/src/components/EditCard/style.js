@@ -5,7 +5,7 @@ export const SEditCard = styled.div`
   overflow: hidden;
   width: 600px;
   margin: 32px auto 16px auto;
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  box-shadow: var(--shadow-lg);
   border-radius: var(--rounded-lg);
   background-color: hsl(var(--color));
   border: 1px solid var(--color-border);

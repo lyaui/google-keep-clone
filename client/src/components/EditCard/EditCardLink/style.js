@@ -7,8 +7,7 @@ export const SEditCardLink = styled(SLinkItem)`
   font-size: 1.4rem;
   border-radius: var(--rounded-lg);
   cursor: pointer;
-  box-shadow: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px,
-    rgb(0 0 0 / 12%) 0px 1px 4px 0px;
+  box-shadow: var(--shadow-sm);
   background-color: var(--color-link-bg);
 `;
 

@@ -15,7 +15,11 @@ export const GlobalStyle = createGlobalStyle`
 
     /* shadow */
     --shadow-sm: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 4px 0px;
-
+    --shadow-md: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+    --shadow-lg: 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%),
+      0px 2px 4px -1px rgb(0 0 0 / 20%);
+    --text-shadow: 0 0 10px rgb(0 0 0 / 50%);
+    
     /* z-index */
     --zindex-pin-button:10;
     --zindex-sideMenu:10;

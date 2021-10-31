@@ -19,7 +19,7 @@ export const SLoginImageTitle = styled.div`
   font-weight: 300;
   letter-spacing: 2px;
   color: hsl(var(--color-white));
-  text-shadow: 0 0 10px rgb(0 0 0 / 50%);
+  text-shadow: var(--text-shadow);
 `;
 
 export const SLoginImageText = styled.div`
@@ -27,7 +27,7 @@ export const SLoginImageText = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
   color: hsl(var(--color-white));
-  text-shadow: 0 0 20px rgb(0 0 0 / 80%);
+  text-shadow: var(--text-shadow);
 `;
 
 export const SLoginImageButton = styled.button`
@@ -36,7 +36,7 @@ export const SLoginImageButton = styled.button`
   padding: 16px;
   border-radius: var(--rounded-lg);
   cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  box-shadow: var(--shadow-md);
   transition: var(--transition);
   :hover {
     background-color: hsl(var(--color-yellow));
