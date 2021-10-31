@@ -2,9 +2,7 @@ import styled from 'styled-components/macro';
 
 export const SCardPin = styled.div`
   position: absolute;
-  opacity: ${(props) => props.opacity || 1};
+  z-index: var(--zindex-pin-button);
+  opacity: var(--opacity);
   right: 0;
-  button {
-    background-color: ${(props) => props.color || '#FFFFFF'};
-  }
 `;
