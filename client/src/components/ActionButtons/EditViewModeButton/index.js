@@ -18,7 +18,7 @@ const EditViewModeButton = () => {
   };
 
   return (
-    <Tippy content={isGrid ? TOOLTIP_TEXT.VIEW_GRID : TOOLTIP_TEXT.VIEW_LIST}>
+    <Tippy content={isGrid ? TOOLTIP_TEXT.VIEW_LIST : TOOLTIP_TEXT.VIEW_GRID}>
       <ButtonRound size={40} onClick={toggleViewModeHandler} disabled={isLoading}>
         {isGrid ? <Icon.List /> : <Icon.Grid />}
       </ButtonRound>
