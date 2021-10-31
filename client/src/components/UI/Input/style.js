@@ -19,7 +19,8 @@ export const SInput = styled.input`
     border: 2px solid hsl(var(--border-focus));
   }
   ::placeholder {
-    font-weight: 300;
+    font-weight: var(--font-light);
+    color: hsla(var(--color-gray-400));
     font-size: 1.4rem;
   }
 `;
@@ -29,5 +30,6 @@ export const SInputMessage = styled.span`
   margin-right: auto;
   padding-left: 8px;
   color: hsl(var(--color-red-darker));
-  font-size: 12px;
+  font-size: 1.2rem;
+  font-weight: var(--font-light) !important;
 `;

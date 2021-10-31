@@ -27,6 +27,12 @@ export const GlobalStyle = createGlobalStyle`
     --zindex-backdrop:100;
     --zindex-model:200;
 
+    /* font-weight */
+    --font-thin:300;
+    --font-light:400;
+    --font-normal:500;
+    --font-bold:600;
+
     /* colors */
     --color-transparent:transparent;
     --color-black: 0, 0%, 0%; // rgb(0%, 0%, 0%)
@@ -59,7 +65,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     height: 100%;
     font-size: 62.5%;
-    font-weight: 500;
+    font-weight: var(--font-normal);
     line-height: 1.5;
   }
 
@@ -125,7 +131,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a{
-    font-weight: 600;
+    font-weight: var(--font-bold);
     color: var(--color-anchor-text);
     text-decoration: none;
     :visited {

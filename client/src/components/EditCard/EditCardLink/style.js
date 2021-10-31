@@ -15,7 +15,7 @@ export const SEditCardLinkButton = styled.button`
   color: var(--color-text);
   opacity: 0.6;
   font-size: 1.4rem;
-  font-weight: bold;
+  font-weight: var(--font-bold);
   background-color: transparent;
   padding: 8px;
   margin-bottom: 16px;

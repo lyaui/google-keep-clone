@@ -63,7 +63,7 @@ export const SLabelEditInput = styled.input`
   width: 100%;
   margin: 0 12px;
   padding: 2px 0;
-  font-weight: bold;
+  font-weight: var(--font-bold);
   color: var(--color-text);
   background: var(--color-transparent);
   border-bottom: 1px solid hsl(var(--color-gray-400));

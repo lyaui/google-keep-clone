@@ -13,7 +13,7 @@ export const SGoogleLoginButton = styled.button`
 
   span {
     margin-top: -2px;
-    font-weight: normal !important;
+    font-weight: var(--font-normal) !important;
   }
 
   :hover svg {

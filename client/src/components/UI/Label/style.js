@@ -22,7 +22,7 @@ export const SLabel = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: var(--font-bold);
   letter-spacing: 0.5px;
   color: var(--color-text);
   background-color: var(--color-label-bg);

@@ -16,6 +16,6 @@ export const SToast = styled(ToastContainer).attrs({
     background-color: hsl(var(--color-gray-800));
     letter-spacing: 0.5px;
     font-size: 1.6rem;
-    font-weight: 300;
+    font-weight: var(--font-thin);
   }
 `;

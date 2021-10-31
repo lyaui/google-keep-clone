@@ -20,7 +20,7 @@ export const SLinkItemInfo = styled.div`
 
 export const SLinkItemTitle = styled.div`
   color: var(--color-text);
-  font-weight: bold;
+  font-weight: var(--font-bold);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -16,7 +16,7 @@ export const SLoginImage = styled.div`
 
 export const SLoginImageTitle = styled.div`
   font-size: 5rem;
-  font-weight: 300;
+  font-weight: var(--font-thin);
   letter-spacing: 2px;
   color: hsl(var(--color-white));
   text-shadow: var(--text-shadow);
@@ -25,7 +25,7 @@ export const SLoginImageTitle = styled.div`
 export const SLoginImageText = styled.div`
   padding: 32px 0;
   font-size: 1.6rem;
-  font-weight: 400;
+  font-weight: var(--font-light);
   color: hsl(var(--color-white));
   text-shadow: var(--text-shadow);
 `;

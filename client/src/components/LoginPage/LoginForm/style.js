@@ -8,7 +8,7 @@ export const SLoginForm = styled.div`
   color: hsl(var(--color-gray-700));
   background: hsl(var(--color-white));
   p {
-    font-weight: 300;
+    font-weight: var(--font-thin);
     display: block;
     padding-top: 20px;
     font-size: 2rem;
@@ -17,7 +17,7 @@ export const SLoginForm = styled.div`
   span {
     letter-spacing: 1px;
     text-align: center;
-    font-weight: 300;
+    font-weight: var(--font-thin);
     font-size: 1.4rem;
   }
 `;

@@ -9,7 +9,7 @@ export const SEditCardContent = styled(SEditCardText)`
       content: '新增記事...';
       color: hsl(var(--color-gray-500));
       font-size: 1.6rem;
-      font-weight: bold;
+      font-weight: var(--font-bold);
     }
   }
 `;
