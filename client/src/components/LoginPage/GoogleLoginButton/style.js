@@ -2,27 +2,29 @@ import styled from 'styled-components/macro';
 
 export const SGoogleLoginButton = styled.button`
   display: flex;
-  height: 40px;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 14px;
+  height: 40px;
+  color: hsl(var(--color-gray-400));
+  font-size: 1.4rem;
   border-radius: var(--rounded-sm);
-  border: 1px solid #999;
-  color: #999;
-  background-color: #fff;
+  border: 1px solid hsl(var(--color-gray-400));
+  background-color: var(--color-white);
 
   span {
+    margin-top: -2px;
     font-weight: normal !important;
   }
 
   :hover svg {
     opacity: 0.95;
   }
+
   svg {
+    margin-top: -2px;
     width: 38px;
     height: 38px;
     padding: 8px;
-    background-color: #fff;
+    background-color: var(--color-white);
   }
 `;
