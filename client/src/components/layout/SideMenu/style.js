@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import { SNavItemText } from 'components/Layout/SideMenu/NavItem/style.js';
+import { SNavItem } from 'components/Layout/SideMenu/NavItem/style.js';
 
 export const SSideMenu = styled.aside`
   width: var(--width);
@@ -20,6 +21,14 @@ export const SSideMenu = styled.aside`
   :hover ${SNavItemText} {
     opacity: 0.9;
     width: 100%;
+  }
+
+  :hover ${SNavItem} {
+    margin-left: -20px;
+    padding-left: 20px;
+    button {
+      margin-left: 15px;
+    }
   }
 `;
 

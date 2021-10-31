@@ -5,7 +5,7 @@ import { ButtonRound } from 'components/UI/Buttons/index.js';
 import Modal from 'components/UI/Modal';
 import EditLabels from 'components/EditLabels';
 
-const EditLabelButton = () => {
+const EditLabelButton = ({ navItemStyle }) => {
   const [showEditModal, setShowEditModal] = useState(false);
 
   const openEditModalHandler = () => setShowEditModal(true);
@@ -13,7 +13,7 @@ const EditLabelButton = () => {
 
   return (
     <Fragment>
-      <SNavItem onClick={openEditModalHandler}>
+      <SNavItem style={navItemStyle} onClick={openEditModalHandler}>
         <ButtonRound size={40}>
           <Icon.EditOutline />
         </ButtonRound>

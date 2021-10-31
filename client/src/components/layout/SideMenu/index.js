@@ -19,26 +19,33 @@ const SideMenu = () => {
     if (errorMessage) return history.replace(ROUTE.LOGIN);
   }, [dispatch, errorMessage, history]);
 
+  const navItemStyle = {
+    '--margin': UIState.isFixedMenu ? '-20px' : '10px',
+    '--padding': UIState.isFixedMenu ? '20px' : '0px',
+    '--margin-button': UIState.isFixedMenu ? '15px' : '5px',
+  };
+
   return (
     <SSideMenu
       style={{
         '--position': UIState.isFixedMenu ? 'relative' : 'fixed',
-        '--width': UIState.isFixedMenu ? '280px' : '60px',
+        '--width': UIState.isFixedMenu ? '280px' : '70px',
       }}
     >
       <SSideMenuList>
-        <NavItem toRoute={ROUTE.HOME} id='memo' label='記事' type='memo' />
+        <NavItem navItemStyle={navItemStyle} toRoute={ROUTE.HOME} label='記事' type='memo' />
         {labels.map((label) => (
           <NavItem
+            navItemStyle={navItemStyle}
             toRoute={ROUTE.BUILD_LABEL_PATH(label.name)}
             key={label._id}
-            id={label._id}
             label={label.name}
             type='label'
           />
         ))}
-        <EditLabelButton />
-        <NavItem toRoute={ROUTE.ARCHIVE} id='archive' label='封存' type='archive' />
+
+        <EditLabelButton navItemStyle={navItemStyle} />
+        <NavItem navItemStyle={navItemStyle} toRoute={ROUTE.ARCHIVE} label='封存' type='archive' />
       </SSideMenuList>
     </SSideMenu>
   );

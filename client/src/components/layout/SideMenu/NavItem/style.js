@@ -1,24 +1,21 @@
 import styled from 'styled-components/macro';
 
 export const SNavItem = styled.li`
-  margin-left: 2px;
-  border-radius: 0 25px 25px 0;
+  margin-left: var(--margin);
+  padding-left: var(--padding);
+  border-radius: var(--rounded-xl);
   list-style: none;
   cursor: pointer;
   overflow: hidden;
-  height: 50px;
   transition: var(--transition);
   display: flex;
   align-items: center;
-
   :hover {
     background-color: var(--color-hover-bg);
   }
-
   button {
-    margin-left: 12px;
+    margin-left: var(--margin-button);
   }
-
   a {
     display: flex;
     align-items: center;
