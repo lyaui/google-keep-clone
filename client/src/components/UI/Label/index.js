@@ -17,7 +17,7 @@ const Label = ({ id, label, isShowMoreLabel = false, numOfMoreLabel = 0 }) => {
   return (
     <SLabel
       style={{
-        '--rounded': isShowMoreLabel ? '2px' : '50px',
+        '--rounded': isShowMoreLabel ? 'var(--rounded-sm)' : 'var(--rounded-2xl)',
         '--padding': isShowMoreLabel ? '3px 12px 3px 12px' : '3px 16px 3px 8px',
       }}
     >

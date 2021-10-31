@@ -16,7 +16,13 @@ const CardLinks = ({ links, isOnlyLinks }) => {
   };
 
   return (
-    <SCardLinks style={{ '--rounded': isOnlyLinks ? '8px' : '0 0px 8px 8px' }}>
+    <SCardLinks
+      style={{
+        '--rounded': isOnlyLinks
+          ? 'var(--rounded-lg)'
+          : '0 0px var(--rounded-lg) var(--rounded-lg)',
+      }}
+    >
       {links.slice(0, showLinksNum).map((link, index) => (
         <SCardLink
           key={index}

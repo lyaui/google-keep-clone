@@ -25,7 +25,7 @@ export const SButtonRound = styled(SButton)`
 `;
 
 export const SButtonSquare = styled(SButton)`
-  border-radius: 5px;
+  border-radius: var(--rounded-md);
   background-color: rgba(0, 0, 0, 0.7);
   svg {
     fill: hsl(var(--color-white));

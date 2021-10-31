@@ -9,6 +9,8 @@ export const GlobalStyle = createGlobalStyle`
     --rounded-sm:2px;
     --rounded-md:4px;
     --rounded-lg:8px;
+    --rounded-xl:25px;
+    --rounded-2xl:50px;
     --rounded-full:50%;
 
     /* shadow */
