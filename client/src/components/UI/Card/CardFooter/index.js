@@ -11,6 +11,11 @@ const CardFooter = ({ id, isOnlyImages, isOnlyLinks, isOnlyImagesAndLinks }) => 
     <SCardFooter
       isOnlyImagesOrLinks={isOnlyImagesOrLinks}
       isOnlyImagesAndLinks={isOnlyImagesAndLinks}
+      style={{
+        '--position': isOnlyImagesOrLinks || isOnlyImagesAndLinks ? 'absolute' : 'unset',
+        '--bottom': isOnlyImagesAndLinks ? '198px' : '0px',
+        '--color': (isOnlyImagesOrLinks || isOnlyImagesAndLinks) && 'var(--color-card-footer-bg)',
+      }}
     >
       {/* palette */}
       <EditCardColorButton id={id} />

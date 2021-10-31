@@ -16,6 +16,9 @@ export const GlobalStyle = createGlobalStyle`
     /* shadow */
     --shadow-sm: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 4px 0px;
 
+
+    /* z-index */
+
     /* colors */
     --color-transparent:transparent;
     --color-black: 0, 0%, 0%; // rgb(0%, 0%, 0%)
@@ -71,6 +74,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-menu-active-bg:hsl(var(--color-yellow-lighter));
     --color-task-completed: hsl(var(--color-gray-600));
     --color-tooltip-bg: hsl(var(--color-white));
+    --color-card-footer-bg: hsla(var(--color-white),.8);
   }
   
   body[data-theme='DARK'] {
@@ -91,8 +95,9 @@ export const GlobalStyle = createGlobalStyle`
     --color-menu-active-bg:hsl(var(--color-yellow-darker));
     --color-task-completed: hsl(var(--color-gray-400));
     --color-tooltip-bg: hsl(var(--color-gray-800));
+    --color-card-footer-bg: hsla(var(--color-gray-900),.8);
   }
-  }
+  
 
   body{
     height: 100%;
