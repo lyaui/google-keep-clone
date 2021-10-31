@@ -7,7 +7,7 @@ export const SSideMenu = styled.aside`
   height: 100%;
   padding-right: 12px;
   position: var(--position);
-  z-index: 10;
+  z-index: var(--zindex-sideMenu);
   background-color: var(--color-bg);
   overflow: scroll;
   transition: var(--transition);

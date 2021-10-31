@@ -16,8 +16,11 @@ export const GlobalStyle = createGlobalStyle`
     /* shadow */
     --shadow-sm: rgb(0 0 0 / 12%) 0px 1px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 4px 0px;
 
-
     /* z-index */
+    --zindex-sideMenu:10;
+    --zindex-header:50;
+    --zindex-backdrop:100;
+    --zindex-model:200;
 
     /* colors */
     --color-transparent:transparent;
@@ -97,7 +100,6 @@ export const GlobalStyle = createGlobalStyle`
     --color-tooltip-bg: hsl(var(--color-gray-800));
     --color-card-footer-bg: hsla(var(--color-gray-900),.8);
   }
-  
 
   body{
     height: 100%;

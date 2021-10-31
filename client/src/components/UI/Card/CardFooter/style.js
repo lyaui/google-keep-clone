@@ -6,7 +6,6 @@ export const SCardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   position: var(--position);
-  z-index: 10;
   bottom: var(--bottom);
   background-color: var(--color);
   overflow: hidden;
