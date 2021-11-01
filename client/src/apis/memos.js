@@ -6,7 +6,9 @@ export const apiGetUserMemos = (query, { cancelToken }) =>
 export const apiGetMemosByLabelName = (labelName, { cancelToken }) =>
   axiosMemos.get(`/label/${labelName}`, { cancelToken });
 
-export const apiGetUserMemoByMemoId = (memoId) => axiosMemos.get(`/${memoId}`);
+export const apiGetUserMemoByMemoId = (memoId, { cancelToken }) =>
+  axiosMemos.get(`/${memoId}`, { cancelToken });
+
 export const apiCreateMemo = (data) => axiosMemos.post('/', data);
 export const apiUpdateMemo = (memoId, data) => axiosMemos.patch(`/${memoId}`, data);
 export const apiDeleteMemo = (memoId) => axiosMemos.delete(`/${memoId}`);
