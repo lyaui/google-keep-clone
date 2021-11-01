@@ -11,15 +11,24 @@ import {
   apiGetLinksInfo,
 } from 'apis/memos';
 import { apiUploadImage } from 'apis/upload';
+import axios from 'axios';
 
 export const getUserMemos = createAsyncThunk(
   'memos/getUserMemos',
-  async (query, { rejectWithValue }) => {
+  async (query, { rejectWithValue, signal }) => {
+    const source = axios.CancelToken.source();
+    const abortedMessage = 'thunk is canceled';
+    signal.addEventListener('abort', () => {
+      source.cancel(abortedMessage);
+    });
+
     try {
-      const res = await apiGetUserMemos(query);
+      const res = await apiGetUserMemos(query, { cancelToken: source.token });
       if (!res.data.success) throw new Error();
       return res.data.memos;
     } catch (err) {
+      if (err.message === abortedMessage) return;
+
       toast(TOAST_TEXT.MEMOS_FAIL);
       return rejectWithValue(err.response.data.message);
     }

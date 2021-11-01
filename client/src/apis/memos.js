@@ -1,6 +1,8 @@
 import { axiosMemos } from 'apis';
 
-export const apiGetUserMemos = (query) => axiosMemos.get('/', { params: query });
+export const apiGetUserMemos = (query, { cancelToken }) =>
+  axiosMemos.get('/', { params: query, cancelToken });
+
 export const apiGetMemosByLabelName = (labelName) => axiosMemos.get(`/label/${labelName}`);
 export const apiGetUserMemoByMemoId = (memoId) => axiosMemos.get(`/${memoId}`);
 export const apiCreateMemo = (data) => axiosMemos.post('/', data);
