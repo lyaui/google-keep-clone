@@ -23,7 +23,6 @@ const Card = ({ card, masonryDom }) => {
   const {
     params: { memoId },
   } = useRouteMatch();
-  const { isLoading } = useSelector((state) => state.memos);
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
   const { _id: id, title, content, images, links, labels, isTaskList, tasks, color } = card;
@@ -32,10 +31,7 @@ const Card = ({ card, masonryDom }) => {
   } = useUI();
   const memoColor = PALETTE_COLORS[color][theme];
 
-  const openEditModalHandler = () => {
-    if (isLoading) return;
-    history.push(ROUTE.BUILD_MEMO_PATH(id));
-  };
+  const openEditModalHandler = () => history.push(ROUTE.BUILD_MEMO_PATH(id));
 
   // calculate card spans
   const getRowSpan = () => {

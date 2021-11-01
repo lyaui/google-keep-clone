@@ -21,12 +21,13 @@ const Main = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const match = useRouteMatch();
-  const { path } = match;
+  const { path, url } = match;
   const { search } = useLocation();
   const editQuery = !!new URLSearchParams(search).get('edit');
   const searchQuery = new URLSearchParams(search).get('q');
 
-  const { memos } = useSelector((state) => state.memos);
+  const [savedRoute, setSavedRoute] = useState(null);
+  const { memos, memo } = useSelector((state) => state.memos);
   const { labelName, memoId } = match.params;
 
   const { UIDispatch } = useUI();
@@ -48,44 +49,54 @@ const Main = () => {
   // fetch memos
   useEffect(() => {
     let promise;
-    switch (path) {
-      case ROUTE.HOME:
-        dispatch(getUserMemos());
-        break;
 
-      case ROUTE.LABEL:
-        promise = dispatch(getUserMemosByLabelName(labelName));
-        break;
+    (async () => {
+      switch (path) {
+        case ROUTE.HOME:
+          promise = dispatch(getUserMemos());
+          break;
+        case ROUTE.LABEL:
+          promise = dispatch(getUserMemosByLabelName(labelName));
+          break;
+        case ROUTE.MEMO:
+          promise = dispatch(getUserMemoByMemoId(memoId));
+          break;
+        case ROUTE.ARCHIVE:
+          promise = dispatch(getUserMemos({ isArchived: true }));
+          break;
+        case ROUTE.SEARCH:
+          if (!searchQuery) return;
+          promise = dispatch(getUserMemos({ q: searchQuery }));
+          break;
+        default:
+          promise = dispatch(getUserMemos());
+          break;
+      }
+    })();
 
-      case ROUTE.MEMO:
-        dispatch(getUserMemoByMemoId(memoId));
-        setShowEditModal(true);
-        break;
-
-      case ROUTE.ARCHIVE:
-        dispatch(getUserMemos({ isArchived: true }));
-        break;
-
-      case ROUTE.SEARCH:
-        if (!searchQuery) return;
-        promise = dispatch(getUserMemos({ q: searchQuery }));
-        break;
-
-      default:
-        dispatch(getUserMemos());
-        break;
-    }
-
-    return () => {
+    return async () => {
       if (promise) promise.abort();
     };
   }, [path, dispatch, labelName, memoId, history, searchQuery]);
 
-  const closeEditModalHandler = () => {
+  // open edit modal
+  useEffect(() => {
+    if (path === ROUTE.MEMO && memo._id) setShowEditModal(true);
+  }, [path, memo._id]);
+
+  // remember path url
+  useEffect(() => {
+    if (path === ROUTE.MEMO) return;
+    setSavedRoute(url);
+  }, [path, url]);
+
+  const closeEditModalHandler = (e) => {
+    e.preventDefault();
     setShowEditModal(false);
-    history.push(ROUTE.HOME);
     dispatch(memosActions.resetMemo());
-    // TODO correct previous page
+
+    if (!savedRoute) return history.push(ROUTE.HOME);
+    history.push(savedRoute);
   };
 
   const isArchivePage = path === ROUTE.ARCHIVE;
