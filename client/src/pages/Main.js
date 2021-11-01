@@ -24,6 +24,7 @@ const Main = () => {
   const { path } = match;
   const { search } = useLocation();
   const editQuery = !!new URLSearchParams(search).get('edit');
+  const searchQuery = new URLSearchParams(search).get('q');
 
   const { memos } = useSelector((state) => state.memos);
   const { labelName, memoId } = match.params;
@@ -46,31 +47,39 @@ const Main = () => {
 
   // fetch memos
   useEffect(() => {
-    (async () => {
-      switch (path) {
-        case ROUTE.HOME:
-          dispatch(getUserMemos());
-          return;
+    let promise;
+    switch (path) {
+      case ROUTE.HOME:
+        dispatch(getUserMemos());
+        break;
 
-        case ROUTE.LABEL:
-          dispatch(getUserMemosByLabelName(labelName));
-          return;
+      case ROUTE.LABEL:
+        promise = dispatch(getUserMemosByLabelName(labelName));
+        break;
 
-        case ROUTE.MEMO:
-          await dispatch(getUserMemoByMemoId(memoId));
-          setShowEditModal(true);
-          return;
+      case ROUTE.MEMO:
+        dispatch(getUserMemoByMemoId(memoId));
+        setShowEditModal(true);
+        break;
 
-        case ROUTE.ARCHIVE:
-          dispatch(getUserMemos({ isArchived: true }));
-          return;
+      case ROUTE.ARCHIVE:
+        dispatch(getUserMemos({ isArchived: true }));
+        break;
 
-        default:
-          dispatch(getUserMemos());
-          return;
-      }
-    })();
-  }, [path, dispatch, labelName, memoId, history]);
+      case ROUTE.SEARCH:
+        if (!searchQuery) return;
+        promise = dispatch(getUserMemos({ q: searchQuery }));
+        break;
+
+      default:
+        dispatch(getUserMemos());
+        break;
+    }
+
+    return () => {
+      if (promise) promise.abort();
+    };
+  }, [path, dispatch, labelName, memoId, history, searchQuery]);
 
   const closeEditModalHandler = () => {
     setShowEditModal(false);
