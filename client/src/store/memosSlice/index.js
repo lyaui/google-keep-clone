@@ -9,7 +9,6 @@ import {
   addLinksInfo,
   uploadMemoImage,
 } from 'store/memosSlice/memos-action.js';
-import DUMMY_DATA from 'data/memos.js';
 
 const INIT_MEMO = {
   title: '',
@@ -28,7 +27,7 @@ export const INIT_MEMOS_STATE = {
   isMemoUpdated: false,
   isLoading: false,
   errorMessage: '',
-  memos: [...DUMMY_DATA],
+  memos: [],
   memo: INIT_MEMO,
 };
 
