@@ -10,6 +10,8 @@ import Layout from 'components/Layout';
 import Login from 'pages/Login.js';
 import Home from 'pages/Home.js';
 import Label from 'pages/Label.js';
+import Archive from 'pages/Archive.js';
+import Search from 'pages/Search.js';
 import EditModal from 'components/EditModal';
 
 function App() {
@@ -44,8 +46,11 @@ function App() {
               {isLoggedIn && (
                 <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
                   <Layout>
-                    <Route path={[ROUTE.HOME, ROUTE.ARCHIVE]} component={Home} exact />
+                    <Route path={[ROUTE.HOME]} component={Home} exact />
                     <Route path={[ROUTE.LABEL]} component={Label} exact />
+                    <Route path={[ROUTE.ARCHIVE]} component={Archive} exact />
+                    <Route path={[ROUTE.SEARCH]} component={Search} exact />
+
                     <Route path={[ROUTE.MEMO]} component={EditModal} exact />
                   </Layout>
                 </Route>
