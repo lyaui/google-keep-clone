@@ -15,18 +15,20 @@ const EditCardLabelsButton = ({ id }) => {
   };
 
   return (
-    <CustomTippy
-      render={() => <EditLabels id={id} />}
-      interactive={true}
-      visible={showTooltip}
-      onClickOutside={() => setShowTooltip(false)}
-    >
-      <Tippy content={TOOLTIP_TEXT.LABEL}>
-        <ButtonRound size={34} onClick={showTooltipHandler}>
-          <Icon.LabelOutline />
-        </ButtonRound>
-      </Tippy>
-    </CustomTippy>
+    <div>
+      <CustomTippy
+        render={() => <EditLabels id={id} />}
+        interactive={true}
+        visible={showTooltip}
+        onClickOutside={() => setShowTooltip(false)}
+      >
+        <Tippy content={TOOLTIP_TEXT.LABEL}>
+          <ButtonRound size={34} onClick={showTooltipHandler}>
+            <Icon.LabelOutline />
+          </ButtonRound>
+        </Tippy>
+      </CustomTippy>
+    </div>
   );
 };
 
