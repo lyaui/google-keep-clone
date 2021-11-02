@@ -44,7 +44,6 @@ function EditCard() {
   }, [memo]);
 
   const clickOutsideHandler = async (e) => {
-    console.log('to');
     e.stopPropagation();
     if (isLoading) return;
 
