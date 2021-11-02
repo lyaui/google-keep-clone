@@ -8,7 +8,7 @@ import { AuthProvider, useAuth } from 'contexts/auth-context';
 import { UIProvider } from 'contexts/UI-context/index.js';
 import Layout from 'components/Layout';
 import Login from 'pages/Login.js';
-import Main from 'pages/Main.js';
+import Home from 'pages/Home.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ function App() {
                   <Layout>
                     <Route
                       path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE]}
-                      component={Main}
+                      component={Home}
                     />
                   </Layout>
                 </Route>
