@@ -10,16 +10,14 @@ import EditModal from 'components/EditModal';
 const Home = () => {
   const dispatch = useDispatch();
   const { memos } = useSelector((state) => state.memos);
-
-  const { path, params } = useRouteMatch();
-  const { labelName } = params;
+  const { path } = useRouteMatch();
 
   // fetch memos
   useEffect(() => {
     if (path === ROUTE.MEMO) return;
     const promise = dispatch(getUserMemos());
     return async () => promise.abort();
-  }, [path, dispatch, labelName]);
+  }, [path, dispatch]);
 
   const isArchivePage = path === ROUTE.ARCHIVE;
   const pinnedMemo = memos.filter((memo) => memo.isPinned && memo.isArchived === isArchivePage);
