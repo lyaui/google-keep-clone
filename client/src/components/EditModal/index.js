@@ -22,7 +22,7 @@ const EditModal = () => {
 
   // fetch memo details
   useEffect(() => {
-    if (path !== ROUTE.MEMO) return;
+    if (!memoId) return;
     const promise = dispatch(getUserMemoByMemoId(memoId));
     return async () => promise.abort();
   }, [path, dispatch, memoId]);

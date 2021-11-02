@@ -25,10 +25,10 @@ function EditCard() {
 
   const match = useRouteMatch();
   const { memoId } = match.params;
-  const isNewPost = memoId ? false : true;
   const { dispatchUpdateMemo } = useUpdateMemo(memoId);
 
   const { memo, isLoading, isMemoUpdated } = useSelector((state) => state.memos);
+  const isNewPost = !!!memo._id;
   const { isTaskList, color } = memo;
   const { UIState } = useUI();
   const memoColor = PALETTE_COLORS[color][UIState.theme];
@@ -44,6 +44,7 @@ function EditCard() {
   }, [memo]);
 
   const clickOutsideHandler = async (e) => {
+    console.log('to');
     e.stopPropagation();
     if (isLoading) return;
 
