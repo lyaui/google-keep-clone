@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+import { TOAST_TEXT } from 'constants/toastText.js';
 import { UI_TYPES } from 'constants/UI.js';
 import { apiGetUserSettings, apiUpdateUserSettings } from 'apis/user.js';
 
@@ -21,6 +23,7 @@ export const getUserSettings = async (dispatch) => {
       type: UI_TYPES.SETTINGS_FAIL,
       payload: { errorMessage },
     });
+
     return err.response;
   }
 };
@@ -45,6 +48,8 @@ export const updateUserSettings = async (dispatch, payload) => {
       type: UI_TYPES.SETTINGS_UPDATE_FAIL,
       payload: errorMessage,
     });
+
+    toast(TOAST_TEXT.SETTINGS_FAIL);
     return err.response;
   }
 };

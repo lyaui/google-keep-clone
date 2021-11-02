@@ -6,8 +6,9 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { ROUTE } from 'constants/routes.js';
 import { AuthProvider, useAuth } from 'contexts/auth-context';
 import { UIProvider } from 'contexts/UI-context/index.js';
-import Main from 'pages/Main.js';
+import Layout from 'components/Layout';
 import Login from 'pages/Login.js';
+import Main from 'pages/Main.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,12 +38,15 @@ function App() {
         <UIProvider>
           <main>
             <Switch>
-              <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]}>
-                <Login />
-              </Route>
+              <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
               {isLoggedIn && (
                 <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
-                  <Main />
+                  <Layout>
+                    <Route
+                      path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE]}
+                      component={Main}
+                    />
+                  </Layout>
                 </Route>
               )}
               <Redirect to={ROUTE.LOGIN} />
