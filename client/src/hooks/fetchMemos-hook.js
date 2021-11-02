@@ -8,7 +8,7 @@ export const useFetchMemos = ({ action, params }) => {
   useEffect(() => {
     const promise = dispatch(action(params));
     return async () => promise.abort();
-  }, [action, dispatch]);
+  }, [action, dispatch, params]);
 
   const pinnedMemo = memos.filter((memo) => memo.isPinned);
   const unpinnedMemo = memos.filter((memo) => !memo.isPinned);
