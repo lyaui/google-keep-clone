@@ -13,21 +13,18 @@ const EditCardToolbar = () => {
 
   return (
     <SEditCardToolbar>
-      <div>
-        {/* palette */}
-        <EditCardColorButton />
-        {/* labels */}
-        <EditCardLabelsButton />
-        {/* checkbox */}
-        {!isTaskList && <EditCardTaskButton />}
-        {/* cancel checkbox */}
-        {isTaskList && <EditCardCancelTaskButton />}
-        {/* image */}
-        <UploadImageButton />
-        {/* archive */}
-        <EditCardArchiveButton />
-      </div>
-      {/* <div className=''>關閉</div> */}
+      {/* palette */}
+      <EditCardColorButton />
+      {/* labels */}
+      <EditCardLabelsButton />
+      {/* checkbox */}
+      {!isTaskList && <EditCardTaskButton />}
+      {/* cancel checkbox */}
+      {isTaskList && <EditCardCancelTaskButton />}
+      {/* image */}
+      <UploadImageButton />
+      {/* archive */}
+      <EditCardArchiveButton />
     </SEditCardToolbar>
   );
 };
