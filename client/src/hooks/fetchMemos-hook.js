@@ -6,6 +6,7 @@ export const useFetchMemos = ({ action, params }) => {
   const { memos } = useSelector((state) => state.memos);
 
   useEffect(() => {
+    if (!action) return;
     const promise = dispatch(action(params));
     return async () => promise.abort();
   }, [action, dispatch, params]);
