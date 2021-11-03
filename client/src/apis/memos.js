@@ -3,8 +3,8 @@ import { axiosMemos } from 'apis';
 export const apiGetUserMemos = (query, { cancelToken }) =>
   axiosMemos.get('/', { params: query, cancelToken });
 
-export const apiGetMemosByLabelName = (labelName, { cancelToken }) =>
-  axiosMemos.get(`/label/${labelName}`, { cancelToken });
+export const apiGetMemosByLabelName = ({ labelName, query }, { cancelToken }) =>
+  axiosMemos.get(`/label/${labelName}`, { params: query, cancelToken });
 
 export const apiGetUserMemoByMemoId = (memoId, { cancelToken }) =>
   axiosMemos.get(`/${memoId}`, { cancelToken });

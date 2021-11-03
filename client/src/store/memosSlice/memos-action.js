@@ -37,7 +37,7 @@ export const getUserMemos = createAsyncThunk(
 
 export const getUserMemosByLabelName = createAsyncThunk(
   'memos/getUserMemosByLabelName',
-  async (labelName, { rejectWithValue, signal }) => {
+  async ({ labelName, query }, { rejectWithValue, signal }) => {
     const source = axios.CancelToken.source();
     const abortedMessage = 'thunk is canceled';
     signal.addEventListener('abort', () => {
@@ -45,7 +45,7 @@ export const getUserMemosByLabelName = createAsyncThunk(
     });
 
     try {
-      const res = await apiGetMemosByLabelName(labelName, { cancelToken: source.token });
+      const res = await apiGetMemosByLabelName({ labelName, query }, { cancelToken: source.token });
       if (!res.data.success) throw new Error();
       return res.data.memos;
     } catch (err) {
