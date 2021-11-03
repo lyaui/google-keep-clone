@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useFetchMemos } from 'hooks/fetchMemos-hook.js';
-import { getUserMemos } from 'store/memosSlice/memos-action.js';
+import { getUserMemos, getUserMemosByLabelName } from 'store/memosSlice/memos-action.js';
 import { useUI } from 'contexts/UI-context';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import * as Icon from 'components/UI/Icon/index.js';
@@ -26,17 +26,15 @@ const Search = () => {
       ? { q: searchQuery }
       : typeQuery
       ? { type: typeQuery }
-      : labelQuery
-      ? { label: labelQuery }
       : colorQuery
       ? { color: colorQuery }
+      : labelQuery
+      ? { labelName: labelQuery }
       : null;
   }, [searchQuery, typeQuery, labelQuery, colorQuery]);
 
-  const { memos } = useFetchMemos({
-    action: getUserMemos,
-    params,
-  });
+  const action = !params ? null : labelQuery ? getUserMemosByLabelName : getUserMemos;
+  const { memos } = useFetchMemos({ action, params });
 
   const typesFilter = [
     { name: '清單', icon: <Icon.FilterList />, value: 'tasks' },
@@ -57,17 +55,25 @@ const Search = () => {
 
   return (
     <div>
-      {/* search by types */}
-      <MemosFilter title='類型' type='type' filter={typesFilter} />
-      {/* search by labels */}
-      <MemosFilter title='標籤' type='label' filter={labelsFilter} />
-      {/* search by colors */}
-      <MemosFilter title='顏色' type='color' filter={colorsFilter} />
+      {!search && (
+        <div>
+          {/* search by types */}
+          <MemosFilter title='類型' type='type' filter={typesFilter} />
+          {/* search by labels */}
+          <MemosFilter title='標籤' type='label' filter={labelsFilter} />
+          {/* search by colors */}
+          <MemosFilter title='顏色' type='color' filter={colorsFilter} />
+        </div>
+      )}
 
-      {/* search results */}
-      <Cards memos={memos} />
-      {/* editModal */}
-      <EditModal />
+      {search && (
+        <div>
+          {/* search results */}
+          <Cards memos={memos} />
+          {/* editModal */}
+          <EditModal />
+        </div>
+      )}
     </div>
   );
 };

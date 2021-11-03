@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useFetchMemos } from 'hooks/fetchMemos-hook.js';
 import { getUserMemos } from 'store/memosSlice/memos-action.js';
 import Cards from 'components/Cards';
@@ -5,7 +6,11 @@ import CardEditor from 'components/CardEditor';
 import EditModal from 'components/EditModal';
 
 const Home = () => {
-  const { pinnedMemo, unpinnedMemo } = useFetchMemos({ action: getUserMemos });
+  const params = useMemo(() => ({ isArchived: false }), []);
+  const { pinnedMemo, unpinnedMemo } = useFetchMemos({
+    action: getUserMemos,
+    params,
+  });
 
   return (
     <div>

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useFetchMemos } from 'hooks/fetchMemos-hook.js';
 import { useRouteMatch } from 'react-router-dom';
 import { getUserMemosByLabelName } from 'store/memosSlice/memos-action.js';
@@ -10,9 +11,11 @@ const Label = () => {
     params: { labelName },
   } = useRouteMatch();
 
+  const params = useMemo(() => ({ labelName, query: { isArchived: false } }), []);
+
   const { pinnedMemo, unpinnedMemo } = useFetchMemos({
     action: getUserMemosByLabelName,
-    params: labelName,
+    params,
   });
 
   return (
