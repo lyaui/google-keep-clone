@@ -11,7 +11,7 @@ const Label = () => {
     params: { labelName },
   } = useRouteMatch();
 
-  const params = useMemo(() => ({ labelName, query: { isArchived: false } }), []);
+  const params = useMemo(() => ({ labelName, query: { isArchived: false } }), [labelName]);
 
   const { pinnedMemo, unpinnedMemo } = useFetchMemos({
     action: getUserMemosByLabelName,
