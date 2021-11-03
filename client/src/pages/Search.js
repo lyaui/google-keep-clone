@@ -11,17 +11,32 @@ import Cards from 'components/Cards';
 import MemosFilter from 'components/MemosFilter';
 
 const Search = () => {
+  const { labels } = useSelector((state) => state.labels);
+  const { UIState } = useUI();
+  const { theme } = UIState;
+
   const { search } = useLocation();
   const searchQuery = new URLSearchParams(search).get('q');
-  const params = useMemo(() => ({ q: searchQuery }), [searchQuery]);
+  const typeQuery = new URLSearchParams(search).get('type');
+  const labelQuery = new URLSearchParams(search).get('label');
+  const colorQuery = new URLSearchParams(search).get('color');
+
+  const params = useMemo(() => {
+    return searchQuery
+      ? { q: searchQuery }
+      : typeQuery
+      ? { type: typeQuery }
+      : labelQuery
+      ? { label: labelQuery }
+      : colorQuery
+      ? { color: colorQuery }
+      : null;
+  }, [searchQuery, typeQuery, labelQuery, colorQuery]);
+
   const { memos } = useFetchMemos({
     action: getUserMemos,
     params,
   });
-  const { labels } = useSelector((state) => state.labels);
-  const {
-    UIState: { theme },
-  } = useUI();
 
   const typesFilter = [
     { name: '清單', icon: <Icon.FilterList />, value: 'tasks' },
@@ -45,9 +60,9 @@ const Search = () => {
       {/* search by types */}
       <MemosFilter title='類型' type='type' filter={typesFilter} />
       {/* search by labels */}
-      <MemosFilter title='標籤' type='labels' filter={labelsFilter} />
+      <MemosFilter title='標籤' type='label' filter={labelsFilter} />
       {/* search by colors */}
-      <MemosFilter title='顏色' type='colors' filter={colorsFilter} />
+      <MemosFilter title='顏色' type='color' filter={colorsFilter} />
 
       {/* search results */}
       <Cards memos={memos} />

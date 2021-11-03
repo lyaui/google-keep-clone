@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
@@ -11,17 +12,23 @@ import {
 } from 'components/MemosFilter/style.js';
 
 const MemosFilter = ({ title, type, filter = [] }) => {
+  const history = useHistory();
   const defaultUnits = 4;
   const [showUnitsNum, setShowUnitsNum] = useState(defaultUnits);
 
   const clickShowMoreHandler = () => setShowUnitsNum(filter.length);
   const clickShowLessHandler = () => setShowUnitsNum(defaultUnits);
 
+  const clickFilterHandler =
+    ({ type, value }) =>
+    () =>
+      history.push({ search: `?${type}=${value}` });
+
   return (
     <SMemosFilter>
       <SMemosFilterTitle>
         <span>{title}</span>
-        {type === 'colors' ? null : filter.length <= defaultUnits ? null : showUnitsNum ===
+        {type === 'color' ? null : filter.length <= defaultUnits ? null : showUnitsNum ===
           filter.length ? (
           <button onClick={clickShowLessHandler}>顯示較少</button>
         ) : (
@@ -34,19 +41,26 @@ const MemosFilter = ({ title, type, filter = [] }) => {
         }}
       >
         {/* types & labels */}
-        {type !== 'colors' &&
+        {type !== 'color' &&
           filter.slice(0, showUnitsNum).map((filter, index) => (
-            <SMemosFilterUnit type={type} key={index}>
+            <SMemosFilterUnit
+              type={type}
+              key={index}
+              onClick={clickFilterHandler({ type, value: filter.value })}
+            >
               {filter.icon}
               <div>{filter.name}</div>
             </SMemosFilterUnit>
           ))}
 
         {/* color */}
-        {type === 'colors' &&
+        {type === 'color' &&
           filter.map((color) => (
-            <Tippy content={TOOLTIP_TEXT[`COLOR_${color.name}`]}>
-              <SMemosFilterColor style={{ '--color': color.value }} />
+            <Tippy content={TOOLTIP_TEXT[`COLOR_${color.name}`]} key={color.name}>
+              <SMemosFilterColor
+                style={{ '--color': color.value }}
+                onClick={clickFilterHandler({ type, value: color.name })}
+              />
             </Tippy>
           ))}
       </SMemosFilterContainer>
