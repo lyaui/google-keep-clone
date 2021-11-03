@@ -4,12 +4,15 @@ const { HttpError, Memo, Label, User } = require('../models');
 
 const getUserMemos = async (req, res, next) => {
   const { id: userId } = req.user;
-  const { isArchived, q } = req.query;
+  const { isArchived, q, type, color } = req.query;
 
   const searchConfig = { $regex: q, $options: 'i' };
   const keyword = q
     ? { $or: [{ content: searchConfig }, { title: searchConfig }, { 'tasks.name': searchConfig }] }
     : {};
+  const typeCondition = type ? { [`${type}.0`]: { $exists: true } } : {};
+  const colorCondition = color ? { color } : {};
+  const isArchivedCondition = isArchived ? { isArchived } : {};
 
   try {
     // check if user exists
@@ -19,21 +22,17 @@ const getUserMemos = async (req, res, next) => {
     // check user settings and sort data
     const sortedOrder = user.settings.sort === 'ASCEND' ? 1 : -1;
 
-    // get user all memos
-    let memos = [];
-    if (q) {
-      memos = await Memo.find({ creator: userId, ...keyword })
-        .populate('labels', ['name', '_id'])
-        .sort({
-          updatedAt: sortedOrder,
-        });
-    } else {
-      memos = await Memo.find({ creator: userId, isArchived: !!isArchived || false })
-        .populate('labels', ['name', '_id'])
-        .sort({
-          updatedAt: sortedOrder,
-        });
-    }
+    const memos = await Memo.find({
+      creator: userId,
+      ...keyword,
+      ...typeCondition,
+      ...colorCondition,
+      ...isArchivedCondition,
+    })
+      .populate('labels', ['name', '_id'])
+      .sort({
+        updatedAt: sortedOrder,
+      });
 
     res.status(200).json({
       success: true,
@@ -47,6 +46,9 @@ const getUserMemos = async (req, res, next) => {
 const getUserMemosByLabelName = async (req, res, next) => {
   const { id: userId } = req.user;
   const { labelName } = req.params;
+  const { isArchived } = req.query;
+
+  const isArchivedCondition = isArchived ? { isArchived } : {};
 
   try {
     // check if user exists
@@ -59,6 +61,7 @@ const getUserMemosByLabelName = async (req, res, next) => {
 
     const { memos } = await label.populate({
       path: 'memos',
+      match: isArchivedCondition,
       populate: {
         path: 'labels',
       },
