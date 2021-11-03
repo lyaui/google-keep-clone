@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { TOOLTIP_TEXT } from 'constants/tooltipText.js';
 import {
   SMemosFilter,
   SMemosFilterTitle,
@@ -41,7 +44,11 @@ const MemosFilter = ({ title, type, filter = [] }) => {
 
         {/* color */}
         {type === 'colors' &&
-          filter.map((color) => <SMemosFilterColor style={{ '--color': color.value }} />)}
+          filter.map((color) => (
+            <Tippy content={TOOLTIP_TEXT[`COLOR_${color.name}`]}>
+              <SMemosFilterColor style={{ '--color': color.value }} />
+            </Tippy>
+          ))}
       </SMemosFilterContainer>
     </SMemosFilter>
   );

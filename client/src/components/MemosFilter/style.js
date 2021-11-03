@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const SMemosFilter = styled.div`
-  max-width: 700px;
+  max-width: 800px;
   padding: 10px;
   margin: 16px auto;
   border-radius: var(--rounded-md);
