@@ -15,18 +15,19 @@ const SearchInput = () => {
   const [keyword, setKeyword] = useState('');
   const inputRef = useRef(null);
 
-  const focusInputHandler = () => {
+  const focusInputHandler = (e) => {
+    e.preventDefault();
     history.push(ROUTE.SEARCH);
     setIsTouched(true);
   };
 
   const blurInputHandler = () => setIsTouched(false);
 
-  const changeInputHandler = () => {
+  const changeInputHandler = (e) => {
+    e.preventDefault();
     const enteredValue = inputRef.current.value;
     setKeyword(enteredValue);
-
-    if (!enteredValue.trim()) return history.push({ search: '' });
+    if (!enteredValue.trim()) return history.push({ search: null });
     history.push({ search: `?q=${enteredValue}` });
   };
 
@@ -41,6 +42,7 @@ const SearchInput = () => {
         '--shadow': isTouched && 'var(--shadow-sm)',
         '--color': isTouched ? 'var(--color-input-focus-bg)' : 'var(--color-input-bg)',
       }}
+      onSubmit={(e) => e.preventDefault()}
     >
       <Tippy content={TOOLTIP_TEXT.SEARCH}>
         <ButtonRound size={40}>
