@@ -34,7 +34,7 @@ export const SButtonSquare = styled(SButton)`
 
 export const SButtonRect = styled(SButton)`
   color: hsl(var(--color-white));
-  font-size: 14px;
+  font-size: var(--text-base);
   background-color: hsl(var(--color-blue));
   border-radius: var(--rounded-sm);
   height: 40px;

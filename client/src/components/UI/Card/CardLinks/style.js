@@ -15,7 +15,7 @@ export const SCardLinkMore = styled.div`
   padding: 8px 12px;
   border-top: 1px solid var(--color-link-border);
   color: var(--color-text);
-  font-size: 1.2rem;
+  font-size: var(--text-sm);
   font-weight: var(--font-bold);
   letter-spacing: 1px;
 `;

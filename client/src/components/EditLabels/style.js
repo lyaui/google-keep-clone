@@ -3,14 +3,14 @@ import styled from 'styled-components/macro';
 export const SEditCardLabels = styled.div`
   width: var(--width);
   padding: 12px;
-  font-size: 1.4rem;
+  font-size: var(--text-base);
   border-radius: var(--rounded-md);
   background-color: var(--color-tooltip-bg);
   box-shadow: var(--shadow-sm);
 `;
 
 export const SEditCardLabelTitle = styled.div`
-  font-size: 1.6rem;
+  font-size: var(--text-md);
   letter-spacing: 1px;
 `;
 

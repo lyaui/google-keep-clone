@@ -13,7 +13,7 @@ export const SSearch = styled.form`
 `;
 
 export const SSreachInput = styled.input`
-  font-size: 1.6rem;
+  font-size: var(--text-md);
   width: 110%;
   padding: 0 4px;
   background: hsl(var(--color-transparent));

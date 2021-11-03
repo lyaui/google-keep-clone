@@ -8,7 +8,7 @@ export const SCard = styled.div`
   background-color: hsl(var(--color, --color-white));
   border: 1px solid hsl(var(--border-color));
   opacity: var(--opacity);
-  font-size: 1.4rem;
+  font-size: var(--text-base);
   border-radius: var(--rounded-lg);
   cursor: pointer;
   transition: var(--transition);
@@ -24,7 +24,7 @@ export const SEmptyText = styled.p`
   margin: 0;
   margin-top: 8px;
   padding: 0 12px;
-  font-size: 2.4rem;
+  font-size: var(--text-xl);
   color: var(--color-text);
   opacity: 0.5;
 `;

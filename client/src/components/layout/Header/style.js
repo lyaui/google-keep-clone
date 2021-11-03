@@ -21,7 +21,7 @@ export const SHeaderTitle = styled.div`
   width: 0px;
   min-width: 200px;
   padding: 0 8px;
-  font-size: 2.2rem;
+  font-size: var(--text-xl);
   color: var(--color-text);
   opacity: 0.7;
   overflow: hidden;

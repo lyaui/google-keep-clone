@@ -27,6 +27,14 @@ export const GlobalStyle = createGlobalStyle`
     --zindex-backdrop:100;
     --zindex-model:200;
 
+    /* font-size */
+    --text-sm:1.2rem;
+    --text-base:1.4rem;
+    --text-md:1.6rem;
+    --text-lg:2rem;
+    --text-xl:2.2rem;
+    --text-2xl:5rem;
+
     /* font-weight */
     --font-thin:300;
     --font-light:400;

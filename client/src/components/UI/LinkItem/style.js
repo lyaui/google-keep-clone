@@ -28,7 +28,7 @@ export const SLinkItemTitle = styled.div`
 
 export const SLinkItemUrl = styled.span`
   color: var(--color-link-url);
-  font-size: 1.2rem;
+  font-size: var(--text-sm);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

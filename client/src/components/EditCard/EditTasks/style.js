@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const SEditTasks = styled.div`
-  font-size: 1.6rem;
+  font-size: var(--text-md);
   padding-bottom: 8px;
 `;
 export const SEditNewTask = styled.div`
@@ -19,7 +19,7 @@ export const SEditNewTask = styled.div`
   }
 
   #contentEdit {
-    font-size: 1.6rem;
+    font-size: var(--text-md);
     :empty:before {
       content: '清單項目';
       color: hsla(var(--color-gray-500));

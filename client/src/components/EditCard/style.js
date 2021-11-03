@@ -24,6 +24,6 @@ export const SEditCardBody = styled.div`
 export const SCardCreatedAt = styled.div`
   padding: 12px 0;
   color: var(--color-text);
-  font-size: 12px;
+  font-size: var(--text-sm);
   text-align: right;
 `;

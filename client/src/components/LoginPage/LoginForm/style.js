@@ -11,14 +11,14 @@ export const SLoginForm = styled.div`
     font-weight: var(--font-thin);
     display: block;
     padding-top: 20px;
-    font-size: 2rem;
+    font-size: var(--text-lg);
     letter-spacing: 2px;
   }
   span {
     letter-spacing: 1px;
     text-align: center;
     font-weight: var(--font-thin);
-    font-size: 1.4rem;
+    font-size: var(--text-base);
   }
 `;
 
@@ -28,7 +28,7 @@ export const SLoginFormLogo = styled.img`
 
 export const SLoginFormSeparator = styled.div`
   color: hsl(var(--color-gray-400));
-  font-size: 1.2rem;
+  font-size: var(--text-sm);
   padding: 24px 0;
   width: 100%;
 

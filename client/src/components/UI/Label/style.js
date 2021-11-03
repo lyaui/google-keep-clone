@@ -21,7 +21,7 @@ export const SLabel = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 1.2rem;
+  font-size: var(--text-sm);
   font-weight: var(--font-bold);
   letter-spacing: 0.5px;
   color: var(--color-text);

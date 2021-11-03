@@ -25,7 +25,7 @@ export const SNavItem = styled.li`
 `;
 
 export const SNavItemText = styled.span`
-  font-size: 1.4rem;
+  font-size: var(--text-base);
   color: var(--color-text);
   overflow: hidden;
   white-space: nowrap;
