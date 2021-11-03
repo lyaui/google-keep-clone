@@ -52,6 +52,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-yellow-lighter:	45, 97%, 88%; // hsl(45, 97%, 88%)
     --color-yellow: 44, 94%, 54%;	// hsl(44, 94%, 54%)
     --color-yellow-darker: 37, 40%, 18%; //	hsl(37, 40%, 18%)
+    --color-blue-lighter: 217, 89%, 76%; // hsl(217, 89%, 76%)
     --color-blue: 217, 89%, 61%; // hsl(217, 89%, 61%)
     --color-blue-darker: 218, 85%, 43%; //hsl(218, 85%, 43%)
     --color-purple: 267, 85%, 43%; //hsl(267, 85%, 43%)
@@ -97,6 +98,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-task-completed: hsl(var(--color-gray-600));
     --color-tooltip-bg: hsl(var(--color-white));
     --color-card-footer-bg: hsla(var(--color-white),.8);
+    --color-memos-filter-bg:hsl(var(--color-white));
   }
   
   body[data-theme='DARK'] {
@@ -118,6 +120,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-task-completed: hsl(var(--color-gray-400));
     --color-tooltip-bg: hsl(var(--color-gray-800));
     --color-card-footer-bg: hsla(var(--color-gray-900),.8);
+    --color-memos-filter-bg:hsl(var(--color-gray-800));
   }
 
   body{
@@ -154,6 +157,8 @@ export const GlobalStyle = createGlobalStyle`
 
   button{
     flex-shrink: 0;
+    color: var(--color-text);
+    background: hsl(var(--color-transparent));
     border: none;
     outline: none;
     cursor: pointer;

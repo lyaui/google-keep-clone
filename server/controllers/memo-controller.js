@@ -4,7 +4,12 @@ const { HttpError, Memo, Label, User } = require('../models');
 
 const getUserMemos = async (req, res, next) => {
   const { id: userId } = req.user;
-  const { isArchived } = req.query;
+  const { isArchived, q } = req.query;
+
+  const searchConfig = { $regex: q, $options: 'i' };
+  const keyword = q
+    ? { $or: [{ content: searchConfig }, { title: searchConfig }, { 'tasks.name': searchConfig }] }
+    : {};
 
   try {
     // check if user exists
@@ -13,15 +18,26 @@ const getUserMemos = async (req, res, next) => {
 
     // check user settings and sort data
     const sortedOrder = user.settings.sort === 'ASCEND' ? 1 : -1;
-    const memos = await Memo.find({ creator: userId, isArchived: !!isArchived || false })
-      .populate('labels', ['name', '_id'])
-      .sort({
-        updatedAt: sortedOrder,
-      });
+
+    // get user all memos
+    let memos = [];
+    if (q) {
+      memos = await Memo.find({ creator: userId, ...keyword })
+        .populate('labels', ['name', '_id'])
+        .sort({
+          updatedAt: sortedOrder,
+        });
+    } else {
+      memos = await Memo.find({ creator: userId, isArchived: !!isArchived || false })
+        .populate('labels', ['name', '_id'])
+        .sort({
+          updatedAt: sortedOrder,
+        });
+    }
 
     res.status(200).json({
       success: true,
-      memos,
+      memos: memos,
     });
   } catch (err) {
     next(new HttpError(err));
@@ -41,7 +57,12 @@ const getUserMemosByLabelName = async (req, res, next) => {
     const label = await Label.findOne({ creator: userId, name: labelName });
     if (!label) return next(new HttpError('Could not find label for provided id', 404));
 
-    const { memos } = await label.populate('memos');
+    const { memos } = await label.populate({
+      path: 'memos',
+      populate: {
+        path: 'labels',
+      },
+    });
 
     res.status(200).json({
       success: true,

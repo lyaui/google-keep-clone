@@ -85,6 +85,12 @@ import { FaRegSave as Save } from 'react-icons/fa';
 // Drag
 import { MdDragIndicator as Drag } from 'react-icons/md';
 
+// Filter List
+import { MdList as FilterList } from 'react-icons/md';
+
+// link
+import { MdLink as Link } from 'react-icons/md';
+
 export {
   Menu,
   Bulb,
@@ -124,4 +130,6 @@ export {
   Loading,
   Save,
   Drag,
+  FilterList,
+  Link,
 };
