@@ -6,5 +6,6 @@ export const SContainer = styled.div`
   main {
     width: 100%;
     overflow: scroll;
+    padding: var(--padding);
   }
 `;

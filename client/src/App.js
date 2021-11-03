@@ -40,24 +40,22 @@ function App() {
     <DragDropContext onDragEnd={onDragEnd}>
       <AuthProvider>
         <UIProvider>
-          <main>
-            <Switch>
-              <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
-              {isLoggedIn && (
-                <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
-                  <Layout>
-                    <Route path={[ROUTE.HOME]} component={Home} exact />
-                    <Route path={[ROUTE.LABEL]} component={Label} exact />
-                    <Route path={[ROUTE.ARCHIVE]} component={Archive} exact />
-                    <Route path={[ROUTE.SEARCH]} component={Search} exact />
+          <Switch>
+            <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
+            {isLoggedIn && (
+              <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
+                <Layout>
+                  <Route path={[ROUTE.HOME]} component={Home} exact />
+                  <Route path={[ROUTE.LABEL]} component={Label} exact />
+                  <Route path={[ROUTE.ARCHIVE]} component={Archive} exact />
+                  <Route path={[ROUTE.SEARCH]} component={Search} exact />
+                  <Route path={[ROUTE.MEMO]} component={EditModal} exact />
+                </Layout>
+              </Route>
+            )}
+            <Redirect to={ROUTE.LOGIN} />
+          </Switch>
 
-                    <Route path={[ROUTE.MEMO]} component={EditModal} exact />
-                  </Layout>
-                </Route>
-              )}
-              <Redirect to={ROUTE.LOGIN} />
-            </Switch>
-          </main>
           <Toast />
         </UIProvider>
       </AuthProvider>

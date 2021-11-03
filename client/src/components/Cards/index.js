@@ -16,13 +16,7 @@ const Cards = ({ memos, title }) => {
 
   return (
     <div ref={masonryRef}>
-      <SCardsTitle
-        style={{
-          '--padding': isFixedMenu ? '0px 80px' : '0px 80px 0px 100px',
-        }}
-      >
-        {title}
-      </SCardsTitle>
+      <SCardsTitle>{title}</SCardsTitle>
       <SCards
         className='masonry'
         style={{

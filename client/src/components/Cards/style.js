@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 export const SCards = styled.section`
   display: grid;
   justify-content: center;
-  padding: var(--padding);
   grid-gap: var(--gap);
   grid-template-columns: var(--columns);
   grid-auto-rows: 0;
