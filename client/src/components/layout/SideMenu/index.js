@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { ROUTE } from 'constants/routes.js';
 import { getUserLabels } from 'store/labelsSlice/labels-action.js';
 import { useUI } from 'contexts/UI-context';
+import SkeletonMenuItem from 'skeletons/SkeletonMenuItem.js';
 import NavItem from 'components/Layout/SideMenu/NavItem/index.js';
 import EditLabelButton from 'components/Layout/SideMenu/EditLabelButton';
 import { SSideMenu, SSideMenuList } from 'components/Layout/SideMenu/style.js';
@@ -11,7 +12,7 @@ import { SSideMenu, SSideMenuList } from 'components/Layout/SideMenu/style.js';
 const SideMenu = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { labels, errorMessage } = useSelector((state) => state.labels);
+  const { labels, errorMessage, isLoading } = useSelector((state) => state.labels);
   const { UIState } = useUI();
 
   useEffect(() => {
@@ -33,19 +34,34 @@ const SideMenu = () => {
       }}
     >
       <SSideMenuList>
-        <NavItem navItemStyle={navItemStyle} toRoute={ROUTE.HOME} label='記事' type='memo' />
-        {labels.map((label) => (
+        {/* skeleton */}
+        {isLoading &&
+          Array.from(Array(10).keys()).map((index) => (
+            <SkeletonMenuItem key={index} isFixedMenu={UIState.isFixedMenu} />
+          ))}
+
+        {!isLoading && (
+          <NavItem navItemStyle={navItemStyle} toRoute={ROUTE.HOME} label='記事' type='memo' />
+        )}
+        {!isLoading &&
+          labels.map((label) => (
+            <NavItem
+              navItemStyle={navItemStyle}
+              toRoute={ROUTE.BUILD_LABEL_PATH(label.name)}
+              key={label._id}
+              label={label.name}
+              type='label'
+            />
+          ))}
+        {!isLoading && <EditLabelButton navItemStyle={navItemStyle} />}
+        {!isLoading && (
           <NavItem
             navItemStyle={navItemStyle}
-            toRoute={ROUTE.BUILD_LABEL_PATH(label.name)}
-            key={label._id}
-            label={label.name}
-            type='label'
+            toRoute={ROUTE.ARCHIVE}
+            label='封存'
+            type='archive'
           />
-        ))}
-
-        <EditLabelButton navItemStyle={navItemStyle} />
-        <NavItem navItemStyle={navItemStyle} toRoute={ROUTE.ARCHIVE} label='封存' type='archive' />
+        )}
       </SSideMenuList>
     </SSideMenu>
   );

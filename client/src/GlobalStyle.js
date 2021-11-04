@@ -59,6 +59,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --color-gray-100: 200, 12%, 95%; // hsl(200, 12%, 95%)
     --color-gray-200: 216, 12%, 92%; // hsl(216, 12%, 92%)
+    --color-gray-300: 216, 12%, 87%; // hsl(216, 12%, 82%)
     --color-gray-400: 210, 6%, 63%; // hsl(210, 6%, 63%)
     --color-gray-500: 207, 5%, 52%; // hsl(207, 5%, 52%) 
     --color-gray-600: 213, 5%, 39%; // hsl(213, 5%, 39%) 
@@ -99,6 +100,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-tooltip-bg: hsl(var(--color-white));
     --color-card-footer-bg: hsla(var(--color-white),.8);
     --color-memos-filter-bg:hsl(var(--color-white));
+    --color-skeleton-bg:hsl(var(--color-gray-200));
+    --color-skeleton-highlight-bg:hsl(var(--color-gray-300));
   }
   
   body[data-theme='DARK'] {
@@ -121,6 +124,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-tooltip-bg: hsl(var(--color-gray-800));
     --color-card-footer-bg: hsla(var(--color-gray-900),.8);
     --color-memos-filter-bg:hsl(var(--color-gray-800));
+    --color-skeleton-bg:hsl(var(--color-gray-800));
+    --color-skeleton-highlight-bg:hsl(var(--color-gray-700));
   }
 
   body{
