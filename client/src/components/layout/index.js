@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
         <SideMenu />
         <main
           style={{
-            '--padding': UIState.isFixedMenu ? '0px 80px' : '0px 80px 0px 100px',
+            '--padding': UIState.isFixedMenu ? '0px 80px 40px 80px' : '0px 80px 40px 100px',
           }}
         >
           {children}
