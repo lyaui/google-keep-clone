@@ -6,7 +6,7 @@ export const SHint = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 64px - 80px);
 `;
 
 export const SHintIcon = styled.div`
