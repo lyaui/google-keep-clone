@@ -4,9 +4,7 @@ export const SHint = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: auto;
-  height: calc(100vh - 64px - 80px);
+  margin-top: 20vh;
 `;
 
 export const SHintIcon = styled.div`
