@@ -5,7 +5,7 @@ import { MdMenu as Menu } from 'react-icons/md';
 import { MdLightbulbOutline as Bulb } from 'react-icons/md';
 
 // search
-import { MdSearch as Search } from 'react-icons/md';
+import { MdSearch as Search, MdSearchOff as SearchOff } from 'react-icons/md';
 
 // copy
 import { MdContentCopy as Copy } from 'react-icons/md';
@@ -95,6 +95,7 @@ export {
   Menu,
   Bulb,
   Search,
+  SearchOff,
   Copy,
   EmptyCheckbox,
   Checkbox,
