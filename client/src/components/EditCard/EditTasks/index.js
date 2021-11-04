@@ -5,7 +5,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import * as Icon from 'components/UI/Icon/index.js';
 import EditCardText from 'components/EditCard/EditCardText';
 import EditTaskItem from 'components/EditCard/EditTasks/EditTaskItem';
-import { SEditTasks, SEditNewTask } from 'components/EditCard/EditTasks/style.js';
+import { SEditTasks, SEditNewTask, STaskItem } from 'components/EditCard/EditTasks/style.js';
 
 const EditTasks = () => {
   const taskRef = useRef();
@@ -43,14 +43,15 @@ const EditTasks = () => {
           {/* edit task item */}
           {currentMemo.tasks.map((task, index) => (
             <Draggable key={task.id} draggableId={task.id} index={index}>
-              {(provided) => (
-                <div
+              {(provided, snapshot) => (
+                <STaskItem
                   ref={provided.innerRef}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
+                  isDragging={snapshot.isDragging}
                 >
                   <EditTaskItem key={index} task={task} index={index} />
-                </div>
+                </STaskItem>
               )}
             </Draggable>
           ))}

@@ -26,3 +26,8 @@ export const SEditNewTask = styled.div`
     }
   }
 `;
+
+export const STaskItem = styled.div`
+  margin-left: ${(props) => props.isDragging && '-70%'};
+  box-shadow: ${(props) => props.isDragging && 'var(--shadow-lg)'};
+`;
