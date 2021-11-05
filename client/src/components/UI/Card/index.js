@@ -1,6 +1,5 @@
-import { Fragment, useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { ROUTE } from 'constants/routes.js';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import { useUI } from 'contexts/UI-context';
@@ -82,58 +81,56 @@ const Card = ({ card, masonryDom }) => {
       : memoColor;
 
   return (
-    <Fragment>
-      <SCard
-        className='card'
-        ref={cardRef}
-        style={{
-          '--color': memoColor,
-          '--border-color': borderColor,
-          '--opacity': memoId === id ? 0 : 1,
-          '--rowSpan': gridRowSpan,
-        }}
-      >
-        <div className='growing-content' onClick={openEditModalHandler}>
-          {/* pin */}
-          <EditCardPinButton id={id} />
-          {/* images */}
-          {images.length > 0 && <CardImages images={images} noCardBody={noCardBody} />}
-          {/* header */}
-          {title && <CardHeader>{title}</CardHeader>}
-          {/* content */}
-          {!noCardBody && (
-            <CardBody>
-              {/* content */}
-              {!isTaskList && content && (
-                <SEditCardText>
-                  <EditCardText text={content} updateTextHandler={() => {}} />
-                </SEditCardText>
-              )}
-              {/* tasks */}
-              {isTaskList &&
-                tasks.map((task, index) => (
-                  <EditTaskItem key={task.id} task={task} index={index} id={id} />
-                ))}
+    <SCard
+      className='card'
+      ref={cardRef}
+      style={{
+        '--color': memoColor,
+        '--border-color': borderColor,
+        '--opacity': memoId === id ? 0 : 1,
+        '--rowSpan': gridRowSpan,
+      }}
+    >
+      <div className='growing-content' onClick={openEditModalHandler}>
+        {/* pin */}
+        <EditCardPinButton id={id} />
+        {/* images */}
+        {images.length > 0 && <CardImages images={images} noCardBody={noCardBody} />}
+        {/* header */}
+        {title && <CardHeader>{title}</CardHeader>}
+        {/* content */}
+        {!noCardBody && (
+          <CardBody>
+            {/* content */}
+            {!isTaskList && content && (
+              <SEditCardText>
+                <EditCardText text={content} updateTextHandler={() => {}} />
+              </SEditCardText>
+            )}
+            {/* tasks */}
+            {isTaskList &&
+              tasks.map((task, index) => (
+                <EditTaskItem key={task.id} task={task} index={index} id={id} />
+              ))}
 
-              {/* labels */}
-              {labels.length > 0 && <CardLabels labels={labels} id={id} />}
-            </CardBody>
-          )}
+            {/* labels */}
+            {labels.length > 0 && <CardLabels labels={labels} id={id} />}
+          </CardBody>
+        )}
 
-          {showEmptyText && <SEmptyText>空白記事</SEmptyText>}
+        {showEmptyText && <SEmptyText>空白記事</SEmptyText>}
 
-          {/* footer */}
-          <CardFooter
-            id={id}
-            isOnlyImages={isOnlyImages}
-            isOnlyLinks={isOnlyLinks}
-            isOnlyImagesAndLinks={isOnlyImagesAndLinks}
-          />
-          {/* links */}
-          {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
-        </div>
-      </SCard>
-    </Fragment>
+        {/* footer */}
+        <CardFooter
+          id={id}
+          isOnlyImages={isOnlyImages}
+          isOnlyLinks={isOnlyLinks}
+          isOnlyImagesAndLinks={isOnlyImagesAndLinks}
+        />
+        {/* links */}
+        {links.length > 0 && <CardLinks links={links} isOnlyLinks={isOnlyLinks} />}
+      </div>
+    </SCard>
   );
 };
 
