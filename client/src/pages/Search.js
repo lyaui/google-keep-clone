@@ -6,9 +6,11 @@ import { getUserMemos, getUserMemosByLabelName } from 'store/memosSlice/memos-ac
 import { useUI } from 'contexts/UI-context';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import * as Icon from 'components/UI/Icon/index.js';
+import SkeletonCards from 'skeletons/SkeletonCards.js';
 import EditModal from 'components/EditModal';
 import Cards from 'components/Cards';
 import MemosFilter from 'components/MemosFilter';
+import Hint from 'components/UI/Hint';
 
 const Search = () => {
   const { labels } = useSelector((state) => state.labels);
@@ -34,7 +36,7 @@ const Search = () => {
   }, [searchQuery, typeQuery, labelQuery, colorQuery]);
 
   const action = !params ? null : labelQuery ? getUserMemosByLabelName : getUserMemos;
-  const { memos } = useFetchMemos({ action, params });
+  const { memos, isLoading } = useFetchMemos({ action, params });
 
   const typesFilter = [
     { name: '清單', icon: <Icon.FilterList />, value: 'tasks' },
@@ -53,8 +55,15 @@ const Search = () => {
     value: PALETTE_COLORS[color][theme],
   }));
 
+  const showCards = !isLoading && search;
+  const showHint = memos.length === 0 && !isLoading;
+
   return (
     <div>
+      {/* skeleton */}
+      {isLoading && <SkeletonCards />}
+
+      {/* filters */}
       {!search && (
         <div>
           {/* search by types */}
@@ -66,7 +75,8 @@ const Search = () => {
         </div>
       )}
 
-      {search && (
+      {/* cards */}
+      {showCards && (
         <div>
           {/* search results */}
           <Cards memos={memos} />
@@ -74,6 +84,9 @@ const Search = () => {
           <EditModal />
         </div>
       )}
+
+      {/* hint */}
+      {showHint && <Hint icon={<Icon.SearchOff />} text='找不到相符的搜尋結果' />}
     </div>
   );
 };
