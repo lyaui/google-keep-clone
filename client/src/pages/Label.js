@@ -7,7 +7,6 @@ import SkeletonEditor from 'skeletons/SkeletonEditor.js';
 import SkeletonCards from 'skeletons/SkeletonCards.js';
 import Cards from 'components/Cards';
 import CardEditor from 'components/CardEditor';
-import EditModal from 'components/EditModal';
 import Hint from 'components/UI/Hint';
 
 const Label = () => {
@@ -22,7 +21,7 @@ const Label = () => {
     params,
   });
 
-  const showHint = pinnedMemo.length === 0 && unpinnedMemo.length === 0;
+  const showHint = pinnedMemo.length === 0 && unpinnedMemo.length === 0 && !isLoading;
 
   return (
     <div>
@@ -34,13 +33,11 @@ const Label = () => {
       <CardEditor />
 
       {/* isPinned === true */}
-      {pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
+      {isLoading && pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
       {/* isPinned === false */}
-      {unpinnedMemo.length > 0 && (
+      {isLoading && unpinnedMemo.length > 0 && (
         <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />
       )}
-      {/* editModal */}
-      <EditModal />
 
       {/* hint */}
       {showHint && <Hint icon={<Icon.LabelOutline />} text='目前還沒有記事加上這個標籤' />}

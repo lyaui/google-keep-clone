@@ -6,7 +6,6 @@ import SkeletonEditor from 'skeletons/SkeletonEditor.js';
 import SkeletonCards from 'skeletons/SkeletonCards.js';
 import Cards from 'components/Cards';
 import CardEditor from 'components/CardEditor';
-import EditModal from 'components/EditModal';
 import Hint from 'components/UI/Hint';
 
 const Home = () => {
@@ -28,12 +27,11 @@ const Home = () => {
       {!isLoading && <CardEditor />}
 
       {/* isPinned === true */}
-      {!isLoading && <Cards memos={pinnedMemo} title={'已固定'} />}
+      {!isLoading && pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
       {/* isPinned === false */}
-      {!isLoading && <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />}
-
-      {/* editModal */}
-      <EditModal />
+      {!isLoading && unpinnedMemo.length > 0 && (
+        <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />
+      )}
 
       {/* hint */}
       {showHint && <Hint icon={<Icon.Bulb />} text='你新增的記事會顯示在這裡' />}

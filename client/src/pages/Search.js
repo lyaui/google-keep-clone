@@ -7,7 +7,6 @@ import { useUI } from 'contexts/UI-context';
 import { PALETTE_COLORS } from 'constants/paletteColors.js';
 import * as Icon from 'components/UI/Icon/index.js';
 import SkeletonCards from 'skeletons/SkeletonCards.js';
-import EditModal from 'components/EditModal';
 import Cards from 'components/Cards';
 import MemosFilter from 'components/MemosFilter';
 import Hint from 'components/UI/Hint';
@@ -56,7 +55,7 @@ const Search = () => {
   }));
 
   const showCards = !isLoading && search;
-  const showHint = memos.length === 0 && !isLoading;
+  const showHint = memos.length === 0 && !isLoading && search;
 
   return (
     <div>
@@ -75,15 +74,8 @@ const Search = () => {
         </div>
       )}
 
-      {/* cards */}
-      {showCards && (
-        <div>
-          {/* search results */}
-          <Cards memos={memos} />
-          {/* editModal */}
-          <EditModal />
-        </div>
-      )}
+      {/* search results */}
+      {showCards && <Cards memos={memos} />}
 
       {/* hint */}
       {showHint && <Hint icon={<Icon.SearchOff />} text='找不到相符的搜尋結果' />}
