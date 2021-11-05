@@ -10,7 +10,7 @@ export const SSideMenu = styled.aside`
   z-index: var(--zindex-sideMenu);
   background-color: var(--color-bg);
   overflow: scroll;
-  transition: var(--transition);
+  transition: width 0.3s;
 
   :hover {
     width: 280px;

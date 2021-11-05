@@ -134,7 +134,6 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     color: var(--color-text);
     background-color: var(--color-bg);
-    transition: var(--transition);
   }
 
   img {
