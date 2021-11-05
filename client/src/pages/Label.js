@@ -2,9 +2,13 @@ import { useMemo } from 'react';
 import { useFetchMemos } from 'hooks/fetchMemos-hook.js';
 import { useRouteMatch } from 'react-router-dom';
 import { getUserMemosByLabelName } from 'store/memosSlice/memos-action.js';
+import * as Icon from 'components/UI/Icon';
+import SkeletonEditor from 'skeletons/SkeletonEditor.js';
+import SkeletonCards from 'skeletons/SkeletonCards.js';
 import Cards from 'components/Cards';
 import CardEditor from 'components/CardEditor';
 import EditModal from 'components/EditModal';
+import Hint from 'components/UI/Hint';
 
 const Label = () => {
   const {
@@ -13,13 +17,19 @@ const Label = () => {
 
   const params = useMemo(() => ({ labelName, query: { isArchived: false } }), [labelName]);
 
-  const { pinnedMemo, unpinnedMemo } = useFetchMemos({
+  const { pinnedMemo, unpinnedMemo, isLoading } = useFetchMemos({
     action: getUserMemosByLabelName,
     params,
   });
 
+  const showHint = pinnedMemo.length === 0 && unpinnedMemo.length === 0;
+
   return (
     <div>
+      {/* skeleton */}
+      {isLoading && <SkeletonEditor />}
+      {isLoading && <SkeletonCards />}
+
       {/* editor */}
       <CardEditor />
 
@@ -31,6 +41,9 @@ const Label = () => {
       )}
       {/* editModal */}
       <EditModal />
+
+      {/* hint */}
+      {showHint && <Hint icon={<Icon.LabelOutline />} text='目前還沒有記事加上這個標籤' />}
     </div>
   );
 };
