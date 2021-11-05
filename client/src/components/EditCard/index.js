@@ -78,8 +78,12 @@ function EditCard() {
             <SCardCreatedAt>
               {memo.isArchived && '已封存記事 • '}上次編輯時間：
               {new Date(memo.updatedAt).toLocaleTimeString([], {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
+                hour12: false,
               })}
             </SCardCreatedAt>
           )}
