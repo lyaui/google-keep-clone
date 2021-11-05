@@ -15,7 +15,7 @@ export const SLoginImage = styled.div`
 `;
 
 export const SLoginImageTitle = styled.div`
-  font-size: var(--text-sxl);
+  font-size: var(--text-2xl);
   font-weight: var(--font-thin);
   letter-spacing: 2px;
   color: hsl(var(--color-white));
