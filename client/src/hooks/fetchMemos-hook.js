@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const useFetchMemos = ({ action, params }) => {
   const dispatch = useDispatch();
-  const { memos } = useSelector((state) => state.memos);
+  const { memos, isLoading } = useSelector((state) => state.memos);
 
   useEffect(() => {
     if (!action) return;
@@ -14,5 +14,5 @@ export const useFetchMemos = ({ action, params }) => {
   const pinnedMemo = memos.filter((memo) => memo.isPinned);
   const unpinnedMemo = memos.filter((memo) => !memo.isPinned);
 
-  return { memos, pinnedMemo, unpinnedMemo };
+  return { memos, pinnedMemo, unpinnedMemo, isLoading };
 };
