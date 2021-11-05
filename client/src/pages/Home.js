@@ -1,31 +1,42 @@
 import { useMemo } from 'react';
 import { useFetchMemos } from 'hooks/fetchMemos-hook.js';
 import { getUserMemos } from 'store/memosSlice/memos-action.js';
+import * as Icon from 'components/UI/Icon';
+import SkeletonEditor from 'skeletons/SkeletonEditor.js';
+import SkeletonCards from 'skeletons/SkeletonCards.js';
 import Cards from 'components/Cards';
 import CardEditor from 'components/CardEditor';
 import EditModal from 'components/EditModal';
+import Hint from 'components/UI/Hint';
 
 const Home = () => {
   const params = useMemo(() => ({ isArchived: false }), []);
-  const { pinnedMemo, unpinnedMemo } = useFetchMemos({
+  const { pinnedMemo, unpinnedMemo, isLoading } = useFetchMemos({
     action: getUserMemos,
     params,
   });
 
+  const showHint = pinnedMemo.length === 0 && unpinnedMemo.length === 0 && !isLoading;
+
   return (
     <div>
+      {/* skeleton */}
+      {isLoading && <SkeletonEditor />}
+      {isLoading && <SkeletonCards />}
+
       {/* editor */}
-      <CardEditor />
+      {!isLoading && <CardEditor />}
 
       {/* isPinned === true */}
-      {pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
+      {!isLoading && <Cards memos={pinnedMemo} title={'已固定'} />}
       {/* isPinned === false */}
-      {unpinnedMemo.length > 0 && (
-        <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />
-      )}
+      {!isLoading && <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />}
 
       {/* editModal */}
       <EditModal />
+
+      {/* hint */}
+      {showHint && <Hint icon={<Icon.Bulb />} text='你新增的記事會顯示在這裡' />}
     </div>
   );
 };
