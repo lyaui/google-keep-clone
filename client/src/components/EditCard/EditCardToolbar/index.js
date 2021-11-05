@@ -5,6 +5,7 @@ import EditCardTaskButton from 'components/ActionButtons/EditCardTaskButton';
 import EditCardCancelTaskButton from 'components/ActionButtons/EditCardCancelTaskButton';
 import UploadImageButton from 'components/ActionButtons/UploadImageButton';
 import EditCardArchiveButton from 'components/ActionButtons/EditCardArchiveButton';
+import CancelEditButton from 'components/ActionButtons/CancelEditButton';
 import { SEditCardToolbar } from 'components/EditCard/EditCardToolbar/style.js';
 
 const EditCardToolbar = () => {
@@ -25,6 +26,8 @@ const EditCardToolbar = () => {
       <UploadImageButton />
       {/* archive */}
       <EditCardArchiveButton />
+      {/* cancel edit */}
+      <CancelEditButton />
     </SEditCardToolbar>
   );
 };
