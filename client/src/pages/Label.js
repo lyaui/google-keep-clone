@@ -30,12 +30,12 @@ const Label = () => {
       {isLoading && <SkeletonCards />}
 
       {/* editor */}
-      <CardEditor />
+      {!isLoading && <CardEditor />}
 
       {/* isPinned === true */}
-      {isLoading && pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
+      {!isLoading && pinnedMemo.length > 0 && <Cards memos={pinnedMemo} title={'已固定'} />}
       {/* isPinned === false */}
-      {isLoading && unpinnedMemo.length > 0 && (
+      {!isLoading && unpinnedMemo.length > 0 && (
         <Cards memos={unpinnedMemo} title={pinnedMemo.length > 0 ? '其他記事' : ''} />
       )}
 
