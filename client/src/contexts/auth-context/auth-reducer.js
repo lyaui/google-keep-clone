@@ -4,7 +4,7 @@ const initAuthStates = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : INIT_AUTH_STATES;
 
-export const authReducer = (state = INIT_AUTH_STATES, action) => {
+export const authReducer = (state = initAuthStates, action) => {
   const { type, payload } = action;
 
   switch (type) {
