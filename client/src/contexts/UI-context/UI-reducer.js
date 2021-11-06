@@ -21,7 +21,7 @@ export const UIReducer = (state = userSettingsFromStorage, action) => {
       return { ...state, isLoading: false, errorMessage: payload.errorMessage };
 
     case UI_TYPES.SETTINGS_RESET:
-      return {};
+      return INIT_UI_STATES;
 
     default:
       return state;

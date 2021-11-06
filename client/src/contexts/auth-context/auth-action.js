@@ -8,7 +8,7 @@ export const signup = async (dispatch, payload) => {
   try {
     dispatch({ type: AUTH_TYPES.SIGNUP_REQUEST });
     const res = await apiSignup(payload);
-    const { user } = res.data;
+    const { success, user } = res.data;
     const storedData = {
       userId: user._id,
       userName: user.name,
@@ -17,7 +17,7 @@ export const signup = async (dispatch, payload) => {
       isLoggedIn: !!user.token,
     };
 
-    if (res.data.success) {
+    if (success) {
       dispatch({
         type: AUTH_TYPES.SIGNUP_SUCCESS,
         payload: storedData,
@@ -45,7 +45,7 @@ export const login = async (dispatch, payload) => {
   try {
     dispatch({ type: AUTH_TYPES.LOGIN_REQUEST });
     const res = await apiLogin(payload);
-    const { user } = res.data;
+    const { success, user } = res.data;
     const storedData = {
       userId: user._id,
       userName: user.name,
@@ -54,7 +54,7 @@ export const login = async (dispatch, payload) => {
       isLoggedIn: !!user.token,
     };
 
-    if (res.data.success) {
+    if (success) {
       dispatch({
         type: AUTH_TYPES.LOGIN_SUCCESS,
         payload: storedData,

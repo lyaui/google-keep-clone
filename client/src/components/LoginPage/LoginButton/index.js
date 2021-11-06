@@ -1,4 +1,4 @@
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import { useAuth, login, signup } from 'contexts/auth-context';
 import { useUI, getUserSettings } from 'contexts/UI-context/index.js';
 import { ROUTE } from 'constants/routes.js';
@@ -6,7 +6,6 @@ import * as Icon from 'components/UI/Icon/index.js';
 import { ButtonRect } from 'components/UI/Buttons';
 
 const LoginButton = ({ isFormValid, inputValues }) => {
-  const history = useHistory();
   const { path } = useRouteMatch();
   const { authState, authDispatch } = useAuth();
   const { isLoading } = authState;
@@ -23,15 +22,9 @@ const LoginButton = ({ isFormValid, inputValues }) => {
       email: inputValues.email.value.trim(),
       password: inputValues.password.value,
     };
-    // login
     const loginRes = await login(authDispatch, payload);
     if (!loginRes.success) return;
-
-    // fetch user settings
-    const settingRes = await getUserSettings(UIDispatch);
-    if (!settingRes) throw new Error();
-
-    history.push(ROUTE.HOME);
+    await getUserSettings(UIDispatch);
   };
 
   const signupUserHandler = async () => {
@@ -40,15 +33,9 @@ const LoginButton = ({ isFormValid, inputValues }) => {
       email: inputValues.email.value.trim(),
       password: inputValues.password.value,
     };
-
     const signUpRes = await signup(authDispatch, payload);
     if (!signUpRes.success) return;
-
-    // fetch user settings
-    const settingRes = await getUserSettings(UIDispatch);
-    if (!settingRes) throw new Error();
-
-    history.push(ROUTE.HOME);
+    await getUserSettings(UIDispatch);
   };
 
   return (

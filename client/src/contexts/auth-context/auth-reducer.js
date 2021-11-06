@@ -1,5 +1,9 @@
 import { INIT_AUTH_STATES, AUTH_TYPES } from 'constants/auth.js';
 
+const initAuthStates = localStorage.getItem('userInfo')
+  ? JSON.parse(localStorage.getItem('userInfo'))
+  : INIT_AUTH_STATES;
+
 export const authReducer = (state = INIT_AUTH_STATES, action) => {
   const { type, payload } = action;
 

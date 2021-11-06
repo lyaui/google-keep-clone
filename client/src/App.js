@@ -4,8 +4,7 @@ import { memosActions } from 'store/memosSlice/index.js';
 import Toast from 'components/UI/Toast';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { ROUTE } from 'constants/routes.js';
-import { AuthProvider, useAuth } from 'contexts/auth-context';
-import { UIProvider } from 'contexts/UI-context/index.js';
+import { useAuth } from 'contexts/auth-context';
 import Layout from 'components/Layout';
 import Login from 'pages/Login.js';
 import Home from 'pages/Home.js';
@@ -38,27 +37,22 @@ function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <AuthProvider>
-        <UIProvider>
-          <Switch>
-            <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
-            {isLoggedIn && (
-              <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
-                <Layout>
-                  <Route path={[ROUTE.HOME]} component={Home} exact />
-                  <Route path={[ROUTE.LABEL]} component={Label} exact />
-                  <Route path={[ROUTE.ARCHIVE]} component={Archive} exact />
-                  <Route path={[ROUTE.SEARCH]} component={Search} exact />
-                  <Route path={[ROUTE.MEMO]} component={EditModal} exact />
-                </Layout>
-              </Route>
-            )}
-            <Redirect to={ROUTE.LOGIN} />
-          </Switch>
-
-          <Toast />
-        </UIProvider>
-      </AuthProvider>
+      <Switch>
+        <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
+        {isLoggedIn && (
+          <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
+            <Layout>
+              <Route path={ROUTE.HOME} component={Home} exact />
+              <Route path={ROUTE.LABEL} component={Label} exact />
+              <Route path={ROUTE.ARCHIVE} component={Archive} exact />
+              <Route path={ROUTE.SEARCH} component={Search} exact />
+              <Route path={ROUTE.MEMO} component={EditModal} exact />
+            </Layout>
+          </Route>
+        )}
+        <Redirect to={ROUTE.LOGIN} />
+      </Switch>
+      <Toast />
     </DragDropContext>
   );
 }
