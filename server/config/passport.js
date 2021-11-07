@@ -29,18 +29,18 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/api/user/google/redirect',
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async function (accessToken, refreshToken, profile, done) {
       try {
-        const foundUser = await User.findOne({ googleId: profile.id });
+        const foundUser = await User.findOne({ google_id: profile.id });
         if (foundUser) {
           return done(null, foundUser);
         } else {
           const createdUser = await new User({
             name: profile.displayName,
-            googleID: profile.id,
-            thumbnail: profile.photos[0].value,
+            google_id: profile.id,
             email: profile.emails[0].value,
           }).save();
+
           return done(null, createdUser);
         }
       } catch (err) {
