@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { HttpError, User } = require('../models');
 
+const expiresIn = '10d';
+
 const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
@@ -21,7 +23,7 @@ const signup = async (req, res, next) => {
 
     // token
     const tokenObj = { id: createdUser._id, email: createdUser.email };
-    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn: '30d' });
+    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
 
     res.status(201).json({
       success: true,
@@ -51,8 +53,8 @@ const login = async (req, res, next) => {
 
     // token
     const tokenObj = { id: user._id, email: user.email };
-    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn: '30d' });
-
+    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
+    console.log({ expiresIn });
     res.status(200).json({
       success: true,
       user: {
@@ -71,7 +73,7 @@ const login = async (req, res, next) => {
 const googleLogin = async (req, res) => {
   const { user } = req;
   const tokenObj = { id: user._id, email: user.email };
-  const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn: '30d' });
+  const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
 
   const storedData = JSON.stringify({
     userId: user._id,
