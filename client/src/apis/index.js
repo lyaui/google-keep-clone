@@ -7,7 +7,7 @@ const addAuthConfig = (config) => {
 };
 
 const axiosUser = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_URL}/api/user`,
+  baseURL: `${process.env.REACT_APP_SERVER_BASE_URL}/api/user`,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -15,7 +15,7 @@ const axiosUser = axios.create({
 axiosUser.interceptors.request.use(addAuthConfig, (error) => Promise.reject(error));
 
 const axiosLabels = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_URL}/api/labels`,
+  baseURL: `${process.env.REACT_APP_SERVER_BASE_URL}/api/labels`,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -23,7 +23,7 @@ const axiosLabels = axios.create({
 axiosLabels.interceptors.request.use(addAuthConfig, (error) => Promise.reject(error));
 
 const axiosMemos = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_URL}/api/memos`,
+  baseURL: `${process.env.REACT_APP_SERVER_BASE_URL}/api/memos`,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -31,7 +31,7 @@ const axiosMemos = axios.create({
 axiosMemos.interceptors.request.use(addAuthConfig, (error) => Promise.reject(error));
 
 const axiosUpload = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_URL}/api/upload`,
+  baseURL: `${process.env.REACT_APP_SERVER_BASE_URL}/api/upload`,
   headers: {
     'Content-Type': 'multipart/form-data',
   },
