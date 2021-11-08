@@ -15,6 +15,7 @@ export const TOOLTIP_TEXT = {
   DELETE_LABEL: '刪除標籤',
   RENAME_LABEL: '重新命名標籤',
   SAVE_RENAME_LABEL: '儲存修改標籤',
+  CANCEL: '取消',
 
   // toolbar
   PALETTE: '變更顏色',

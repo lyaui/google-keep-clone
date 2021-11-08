@@ -60,7 +60,7 @@ const labelReducer = (state = INIT_LABEL_STATES, action) => {
   }
 };
 
-const SideMenuLabel = ({ label, isSideMenu }) => {
+const SideMenuLabel = ({ label }) => {
   const dispatch = useDispatch();
   const { labels } = useSelector((state) => state.labels);
   const [inputStates, inputDispatch] = useReducer(labelReducer, INIT_LABEL_STATES);
@@ -122,7 +122,7 @@ const SideMenuLabel = ({ label, isSideMenu }) => {
 
   return (
     <Fragment>
-      <SLabel key={label.id} isSideMenu={isSideMenu}>
+      <SLabel key={label.id}>
         <SLabelIcon>
           <Icon.Label name={'label'} />
         </SLabelIcon>

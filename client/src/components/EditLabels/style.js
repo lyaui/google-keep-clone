@@ -21,7 +21,7 @@ export const SLabels = styled.div`
   cursor: pointer;
 `;
 
-export const SSearchLabel = styled.div`
+export const SLabelInput = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
