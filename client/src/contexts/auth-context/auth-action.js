@@ -5,7 +5,8 @@ import { TOAST_TEXT } from 'constants/toastText.js';
 import { apiSignup, apiLogin, apiLogout } from 'apis/user.js';
 
 const setStoredData = (user) => {
-  const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 10);
+  // 30 days
+  const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30);
   return {
     userId: user._id,
     userName: user.name,
