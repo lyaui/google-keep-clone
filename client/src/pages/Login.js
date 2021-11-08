@@ -9,12 +9,16 @@ import { SLoginPage } from 'components/LoginPage/style.js';
 const Login = () => {
   const history = useHistory();
   const { authState } = useAuth();
-  const { isLoggedIn } = authState;
+  const { isLoggedIn, expiration } = authState;
 
+  // auto login
   useEffect(() => {
     if (!isLoggedIn) return;
+    const expireTimestamp = new Date(expiration).getTime();
+    const remainingTime = expireTimestamp - new Date().getTime();
+    if (remainingTime < 0) return;
     history.push(ROUTE.HOME);
-  }, [history, isLoggedIn]);
+  }, [history, expiration, isLoggedIn]);
 
   return (
     <SLoginPage>
