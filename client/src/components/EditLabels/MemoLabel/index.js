@@ -8,20 +8,24 @@ const MemoLabel = ({ id, label, isSideMenu }) => {
   const { params } = useRouteMatch();
   const { labelName } = params;
 
-  const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
-  const isSelected = !!currentMemo.labels.find((item) => item._id === label._id) || false;
+  const {
+    currentMemo: { labels },
+    dispatchUpdateMemo,
+  } = useUpdateMemo(id);
+  const isSelected = !!labels.find((item) => item._id === label._id) || false;
 
   useEffect(() => {
     if (id) return;
     if (label.name !== labelName) return;
-    dispatchUpdateMemo({ labels: [...currentMemo.labels, label] });
-  }, []);
+    if (labels.find((item) => item.name === label.name)) return;
+    dispatchUpdateMemo({ labels: [...labels, label] });
+  }, [id, label, labelName, dispatchUpdateMemo, labels]);
 
   const toggleLabelHandler = (e) => {
     e.preventDefault();
     const updatedLabels = isSelected
-      ? currentMemo.labels.filter((item) => item._id !== label._id)
-      : [...currentMemo.labels, label];
+      ? labels.filter((item) => item._id !== label._id)
+      : [...labels, label];
     dispatchUpdateMemo({ labels: updatedLabels });
   };
 
