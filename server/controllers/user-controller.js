@@ -54,7 +54,7 @@ const login = async (req, res, next) => {
     // token
     const tokenObj = { id: user._id, email: user.email };
     const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
-    console.log({ expiresIn });
+
     res.status(200).json({
       success: true,
       user: {
