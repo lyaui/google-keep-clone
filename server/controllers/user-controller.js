@@ -83,7 +83,7 @@ const googleLogin = async (req, res) => {
     isLoggedIn: true,
   });
 
-  const url = 'http://localhost:3000/login';
+  const url = `${process.env.CLIENT_BASE_URL}/login`;
 
   const html = `
   <!DOCTYPE html>
