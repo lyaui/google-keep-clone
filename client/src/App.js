@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { memosActions } from 'store/memosSlice/index.js';
@@ -7,12 +7,18 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { ROUTE } from 'constants/routes.js';
 import { useAuth, logout } from 'contexts/auth-context';
 import Layout from 'components/Layout';
-import Login from 'pages/Login.js';
-import Home from 'pages/Home.js';
-import Label from 'pages/Label.js';
-import Archive from 'pages/Archive.js';
-import Search from 'pages/Search.js';
-import EditModal from 'components/EditModal';
+const Login = lazy(() => import('pages/Login'));
+const Home = lazy(() => import('pages/Home'));
+const Label = lazy(() => import('pages/Label'));
+const Archive = lazy(() => import('pages/Archive'));
+const Search = lazy(() => import('pages/Search'));
+const EditModal = lazy(() => import('components/EditModal'));
+// import Login from 'pages/Login.js';
+// import Home from 'pages/Home.js';
+// import Label from 'pages/Label.js';
+// import Archive from 'pages/Archive.js';
+// import Search from 'pages/Search.js';
+// import EditModal from 'components/EditModal';
 
 let logoutTimer;
 
@@ -54,19 +60,21 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Switch>
-        <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
-        {isLoggedIn && (
-          <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
-            <Layout>
-              <Route path={ROUTE.HOME} component={Home} exact />
-              <Route path={ROUTE.LABEL} component={Label} exact />
-              <Route path={ROUTE.ARCHIVE} component={Archive} exact />
-              <Route path={ROUTE.SEARCH} component={Search} exact />
-              <Route path={ROUTE.MEMO} component={EditModal} exact />
-            </Layout>
-          </Route>
-        )}
-        <Redirect to={ROUTE.LOGIN} />
+        <Suspense fallback={<div></div>}>
+          <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
+          {isLoggedIn && (
+            <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
+              <Layout>
+                <Route path={ROUTE.HOME} component={Home} exact />
+                <Route path={ROUTE.LABEL} component={Label} exact />
+                <Route path={ROUTE.ARCHIVE} component={Archive} exact />
+                <Route path={ROUTE.SEARCH} component={Search} exact />
+                <Route path={ROUTE.MEMO} component={EditModal} exact />
+              </Layout>
+            </Route>
+          )}
+          <Redirect to={ROUTE.LOGIN} />
+        </Suspense>
       </Switch>
       <Toast />
     </DragDropContext>
