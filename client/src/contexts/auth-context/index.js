@@ -1,6 +1,6 @@
 import { createContext, useReducer, useContext } from 'react';
 import { INIT_AUTH_STATES } from 'constants/auth.js';
-import { signup, login, logout } from 'contexts/auth-context/auth-action.js';
+import { signup, login, logout, googleLogin } from 'contexts/auth-context/auth-action.js';
 import { authReducer } from 'contexts/auth-context/auth-reducer.js';
 
 const initAuthStates = localStorage.getItem('userInfo')
@@ -20,4 +20,4 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => useContext(AuthContext);
 
 // export actions
-export { signup, login, logout };
+export { signup, login, logout, googleLogin };

@@ -76,30 +76,13 @@ export const login = async (dispatch, payload) => {
   }
 };
 
-// export const googleLogin = async (dispatch) => {
-//   try {
-//     dispatch({ type: AUTH_TYPES.GOOGLE_LOGIN_REQUEST });
-//     const res = await apiGoogleLogin();
-//     const user = res.data;
-
-//     dispatch({
-//       type: AUTH_TYPES.GOOGLE_LOGIN_SUCCESS,
-//       payload: {
-//         isLoggedIn: true,
-//         userId: user._id,
-//         username: user.name,
-//         userEmail: user.email,
-//         token: user.token,
-//       },
-//     });
-//     localStorage.setItem('userInfo', JSON.stringify(user));
-//   } catch (err) {
-//     dispatch({
-//       type: AUTH_TYPES.GOOGLE_LOGIN_FAIL,
-//       payload: err,
-//     });
-//   }
-// };
+export const googleLogin = async (dispatch, payload) => {
+  dispatch({
+    type: AUTH_TYPES.GOOGLE_LOGIN_SUCCESS,
+    payload,
+  });
+  localStorage.setItem('userInfo', JSON.stringify(payload));
+};
 
 export const logout = async (dispatch) => {
   try {
