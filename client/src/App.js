@@ -13,12 +13,6 @@ const Label = lazy(() => import('pages/Label'));
 const Archive = lazy(() => import('pages/Archive'));
 const Search = lazy(() => import('pages/Search'));
 const EditModal = lazy(() => import('components/EditModal'));
-// import Login from 'pages/Login.js';
-// import Home from 'pages/Home.js';
-// import Label from 'pages/Label.js';
-// import Archive from 'pages/Archive.js';
-// import Search from 'pages/Search.js';
-// import EditModal from 'components/EditModal';
 
 let logoutTimer;
 
@@ -59,8 +53,8 @@ function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Switch>
-        <Suspense fallback={<div></div>}>
+      <Suspense fallback={<div></div>}>
+        <Switch>
           <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
           {isLoggedIn && (
             <Route path={[ROUTE.HOME, ROUTE.LABEL, ROUTE.MEMO, ROUTE.ARCHIVE, ROUTE.SEARCH]}>
@@ -74,8 +68,8 @@ function App() {
             </Route>
           )}
           <Redirect to={ROUTE.LOGIN} />
-        </Suspense>
-      </Switch>
+        </Switch>
+      </Suspense>
       <Toast />
     </DragDropContext>
   );
