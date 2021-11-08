@@ -9,7 +9,9 @@ export const SCards = styled.section`
 `;
 
 export const SCardsTitle = styled.div`
+  display: grid;
+  justify-content: var(--justify-content);
   color: var(--color-text);
   margin-top: 60px;
-  padding: var(--padding);
+  padding: 20px 12px;
 `;

@@ -16,7 +16,9 @@ const Cards = ({ memos, title }) => {
 
   return (
     <div ref={masonryRef}>
-      <SCardsTitle>{title}</SCardsTitle>
+      <SCardsTitle style={{ '--justify-content': layout === VIEW_MODE.LIST && 'center' }}>
+        {title}
+      </SCardsTitle>
       <SCards
         className='masonry'
         style={{
