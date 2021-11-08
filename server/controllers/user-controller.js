@@ -72,16 +72,34 @@ const googleLogin = async (req, res) => {
   const { user } = req;
   const tokenObj = { id: user._id, email: user.email };
   const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn: '30d' });
-  res.status(200).json({
-    success: true,
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      token,
-    },
-    message: 'logged in!',
+
+  const storedData = JSON.stringify({
+    userId: user._id,
+    userName: user.name,
+    userEmail: user.email,
+    token: token,
+    isLoggedIn: true,
   });
+
+  const url = 'http://localhost:3000/login';
+
+  const html = `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Authenticated</title>
+    </head>
+    <body>
+      Google 登入授權成功！.
+      <script type="text/javascript">      
+        setTimeout(()=>{
+          opener.postMessage({ command: "token-ready", info: ${storedData}}, "${url}");
+          window.close()},1000);
+      </script>
+    </body>
+  </html>
+`;
+  return res.send(html);
 };
 
 const logout = (req, res) => {
