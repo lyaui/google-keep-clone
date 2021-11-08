@@ -1,10 +1,11 @@
+import { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { memosActions } from 'store/memosSlice/index.js';
 import Toast from 'components/UI/Toast';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { ROUTE } from 'constants/routes.js';
-import { useAuth } from 'contexts/auth-context';
+import { useAuth, logout } from 'contexts/auth-context';
 import Layout from 'components/Layout';
 import Login from 'pages/Login.js';
 import Home from 'pages/Home.js';
@@ -13,12 +14,27 @@ import Archive from 'pages/Archive.js';
 import Search from 'pages/Search.js';
 import EditModal from 'components/EditModal';
 
+let logoutTimer;
+
 function App() {
   const dispatch = useDispatch();
   const { memo } = useSelector((state) => state.memos);
   const { tasks } = memo;
-  const { authState } = useAuth();
-  const { isLoggedIn } = authState;
+  const { authState, authDispatch } = useAuth();
+  const { isLoggedIn, expiration } = authState;
+
+  // auto logout
+  useEffect(() => {
+    if (isLoggedIn && expiration) {
+      const expireTimestamp = new Date(expiration).getTime();
+      const remainingTime = expireTimestamp - new Date().getTime();
+      logoutTimer = setTimeout(() => {
+        logout(authDispatch);
+      }, remainingTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+  }, [isLoggedIn, authDispatch, expiration]);
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
