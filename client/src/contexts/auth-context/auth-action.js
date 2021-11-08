@@ -4,26 +4,32 @@ import { toast } from 'react-toastify';
 import { TOAST_TEXT } from 'constants/toastText.js';
 import { apiSignup, apiLogin, apiLogout } from 'apis/user.js';
 
+const setStoredData = (user) => {
+  const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 10);
+  return {
+    userId: user._id,
+    userName: user.name,
+    userEmail: user.email,
+    token: user.token,
+    isLoggedIn: !!user.token,
+    expiration: tokenExpirationDate.toISOString(),
+  };
+};
+
 export const signup = async (dispatch, payload) => {
   try {
     dispatch({ type: AUTH_TYPES.SIGNUP_REQUEST });
     const res = await apiSignup(payload);
     const { success, user } = res.data;
-    const storedData = {
-      userId: user._id,
-      userName: user.name,
-      userEmail: user.email,
-      token: user.token,
-      isLoggedIn: !!user.token,
-    };
+    const storedData = setStoredData(user);
 
     if (success) {
       dispatch({
         type: AUTH_TYPES.SIGNUP_SUCCESS,
         payload: storedData,
       });
-      localStorage.setItem('userInfo', JSON.stringify(storedData));
 
+      localStorage.setItem('userInfo', JSON.stringify(storedData));
       toast(TOAST_TEXT.SIGNUP_SUCCESS);
       return res.data;
     }
@@ -46,21 +52,15 @@ export const login = async (dispatch, payload) => {
     dispatch({ type: AUTH_TYPES.LOGIN_REQUEST });
     const res = await apiLogin(payload);
     const { success, user } = res.data;
-    const storedData = {
-      userId: user._id,
-      userName: user.name,
-      userEmail: user.email,
-      token: user.token,
-      isLoggedIn: !!user.token,
-    };
+    const storedData = setStoredData(user);
 
     if (success) {
       dispatch({
         type: AUTH_TYPES.LOGIN_SUCCESS,
         payload: storedData,
       });
-      localStorage.setItem('userInfo', JSON.stringify(storedData));
 
+      localStorage.setItem('userInfo', JSON.stringify(storedData));
       toast(TOAST_TEXT.LOGIN_SUCCESS);
       return res.data;
     }
@@ -77,11 +77,13 @@ export const login = async (dispatch, payload) => {
 };
 
 export const googleLogin = async (dispatch, payload) => {
+  const storedData = setStoredData(payload);
   dispatch({
     type: AUTH_TYPES.GOOGLE_LOGIN_SUCCESS,
-    payload,
+    payload: storedData,
   });
-  localStorage.setItem('userInfo', JSON.stringify(payload));
+  localStorage.setItem('userInfo', JSON.stringify(storedData));
+  toast(TOAST_TEXT.LOGIN_SUCCESS);
 };
 
 export const logout = async (dispatch) => {

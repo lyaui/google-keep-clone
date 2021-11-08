@@ -25,6 +25,7 @@ export const authReducer = (state = initAuthStates, action) => {
         userName: payload.userName,
         userEmail: payload.userEmail,
         token: payload.token,
+        expiration: payload.expiration,
         errorMessage: '',
       };
 

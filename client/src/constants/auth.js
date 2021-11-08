@@ -6,6 +6,7 @@ export const INIT_AUTH_STATES = {
   userName: '',
   userEmail: '',
   token: '',
+  expiration: '',
 };
 
 export const AUTH_TYPES = {
