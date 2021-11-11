@@ -84,4 +84,4 @@
 - 標籤搜尋：搜尋自定義分類標籤
 - 顏色搜尋：搜尋特定顏色記事
 
-<img src="https://i.imgur.com/jSYdmqF.gif" alt="" width="100%" height="100%"/>
+![](https://i.imgur.com/GE45yS6.gif)
