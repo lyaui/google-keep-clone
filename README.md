@@ -4,7 +4,7 @@
 
 ✨ [DEMO](https://durable-matter-327719.web.app/)✨
 
-- 仿 GOOGLE KEEP 服務的全端記事 App，歡迎點選登入頁 ![](https://i.imgur.com/VubeeWu.png =15%x) 立即體驗！
+- 仿 GOOGLE KEEP 服務的全端記事 App，歡迎點選登入頁<img src="https://i.imgur.com/VubeeWu.png" alt="" width="100px"/> 立即體驗！
 - 你可以使用社群帳號註冊登入，並設定偏好的主題或檢視模式。
 - 記事提供一般與清單雙編輯模式，可以新增自訂分類標籤，並設定記事顏色、排序任務、上傳圖片、新增預覽網址等...
 - 能固定重要或封存不想顯示的記事，並提供多種搜尋篩選模式，簡單歸類輕鬆找。
@@ -85,3 +85,5 @@
 - 顏色搜尋：搜尋特定顏色記事
 
 ![](https://i.imgur.com/GE45yS6.gif)
+
+<img src="https://i.imgur.com/GE45yS6.gif" alt=""/>
