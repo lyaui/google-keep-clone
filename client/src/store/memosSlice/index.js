@@ -137,9 +137,7 @@ const memosSlice = createSlice({
     },
 
     // addLinksInfo
-    [addLinksInfo.pending](state) {
-      state.isLoading = true;
-    },
+    [addLinksInfo.pending](state) {},
     [addLinksInfo.fulfilled](state, { payload: links }) {
       const currentLinks = [...state.memo.links];
       links.forEach((link) => {
@@ -148,11 +146,9 @@ const memosSlice = createSlice({
         }
       });
       state.memo.links = currentLinks;
-      state.isLoading = false;
       state.errorMessage = '';
     },
     [addLinksInfo.rejected](state, { payload: errorMessage }) {
-      state.isLoading = false;
       state.errorMessage = errorMessage;
     },
     [uploadMemoImage.pending](state) {
