@@ -31,7 +31,8 @@
 - [Passport.js](http://www.passportjs.org/) - 註冊與驗證使用者權限
 - [passport-jwt](https://www.npmjs.com/package/passport-jwt) + [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - 信箱密碼登入註冊會員
 - [passport-google-oauth20](https://www.npmjs.com/package/passport-google-oauth20) - OAuth 登入註冊會員
-- [multer](https://github.com/expressjs/multer) - 處理用戶上傳圖片檔案
+- [multer](https://github.com/expressjs/multer) - 處理用戶上傳圖檔
+- [cloudinary](https://www.npmjs.com/package/cloudinary) - 儲存用戶上傳圖檔
 
 ## 特點
 
