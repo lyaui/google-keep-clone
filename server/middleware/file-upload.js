@@ -1,5 +1,4 @@
 const multer = require('multer');
-const { v4: uuid } = require('uuid');
 
 const FILE_TYPE = {
   'image/png': 'png',
@@ -10,15 +9,7 @@ const FILE_TYPE = {
 
 const fileUpload = multer({
   limits: 500000,
-  storage: multer.diskStorage({
-    destination(req, file, cb) {
-      cb(null, 'uploads/images');
-    },
-    filename(req, file, cb) {
-      const extension = FILE_TYPE[file.mimetype];
-      cb(null, `${uuid()}.${extension}`);
-    },
-  }),
+  storage: multer.diskStorage({}),
   function(req, file, cb) {
     const isValid = !!FILE_TYPE[file.mimetype];
     let error = isValid ? null : new Error('Invalid file type.');
