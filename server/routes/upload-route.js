@@ -17,7 +17,6 @@ router.post('/image', fileUpload.single('image'), async (req, res, next) => {
       image: cloudinaryRes.secure_url,
     });
   } catch (err) {
-    console.log({ err });
     next(new HttpError(err));
   }
 });
