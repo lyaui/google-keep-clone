@@ -122,9 +122,9 @@ const createMemo = async (req, res, next) => {
     const session = await mongoose.startSession();
     session.startTransaction();
     // save created memo
-    await createdMemo.save(createdMemo);
+    await createdMemo.save({ session });
     // add memo to labels
-    await Label.updateMany({ _id: labels }, { $push: { memos: createdMemo._id } });
+    await Label.updateMany({ _id: labels }, { $push: { memos: createdMemo._id } }).session(session);
     // add memo to user
     user.memos.push(createdMemo);
     await user.save({ session });
@@ -165,10 +165,10 @@ const updateMemo = async (req, res, next) => {
       { $and: [{ creator: userId }, { _id: memoId }] },
       { title, content, images, isPinned, isArchived, links, labels, tasks, color, isTaskList },
       { new: true },
-    );
+    ).session(session);
     // update labels's memo
-    await Label.updateMany({ memos: memoId }, { $pull: { memos: memoId } });
-    await Label.updateMany({ _id: labels }, { $push: { memos: memoId } });
+    await Label.updateMany({ memos: memoId }, { $pull: { memos: memoId } }).session(session);
+    await Label.updateMany({ _id: labels }, { $push: { memos: memoId } }).session(session);
     await session.commitTransaction();
 
     // return data with label details
