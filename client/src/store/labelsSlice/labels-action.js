@@ -1,7 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { TOAST_TEXT } from 'constants/toastText.js';
-import { apiGetUserLabels, apiCreateLabel, apiUpdateLabel, apiDeleteLabel } from 'apis/labels.js';
+import { TOAST_TEXT } from '@/constants/toastText.js';
+import {
+  apiGetUserLabels,
+  apiCreateLabel,
+  apiUpdateLabel,
+  apiDeleteLabel,
+} from '@/apis/labels.js';
 
 export const getUserLabels = createAsyncThunk(
   'labels/getUserLabels',

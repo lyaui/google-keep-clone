@@ -4,7 +4,7 @@ import {
   addLabel,
   updateLabel,
   deleteLabel,
-} from 'store/labelsSlice/labels-action.js';
+} from '@/store/labelsSlice/labels-action.js';
 
 const INIT_LABELS_STATE = {
   isLoading: false,

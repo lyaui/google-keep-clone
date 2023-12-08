@@ -9,7 +9,8 @@ const signup = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findOne({ email });
-    if (user) return next(new HttpError('Email has already been registered.', 422));
+    if (user)
+      return next(new HttpError('Email has already been registered.', 422));
 
     // hash the password
     const saultRound = 12;
@@ -23,7 +24,9 @@ const signup = async (req, res, next) => {
 
     // token
     const tokenObj = { id: createdUser._id, email: createdUser.email };
-    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
+    const token = jwt.sign(tokenObj, import.meta.env.TOKEN_SECRET, {
+      expiresIn,
+    });
 
     res.status(201).json({
       success: true,
@@ -49,11 +52,14 @@ const login = async (req, res, next) => {
 
     // check is correct password
     const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) return next(new HttpError('Invalid credential, please try again.', 401));
+    if (!isValidPassword)
+      return next(new HttpError('Invalid credential, please try again.', 401));
 
     // token
     const tokenObj = { id: user._id, email: user.email };
-    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
+    const token = jwt.sign(tokenObj, import.meta.env.TOKEN_SECRET, {
+      expiresIn,
+    });
 
     res.status(200).json({
       success: true,
@@ -73,7 +79,7 @@ const login = async (req, res, next) => {
 const googleLogin = async (req, res) => {
   const { user } = req;
   const tokenObj = { id: user._id, email: user.email };
-  const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
+  const token = jwt.sign(tokenObj, import.meta.env.TOKEN_SECRET, { expiresIn });
 
   const storedData = JSON.stringify({
     userId: user._id,
@@ -83,7 +89,7 @@ const googleLogin = async (req, res) => {
     isLoggedIn: true,
   });
 
-  const url = `${process.env.CLIENT_BASE_URL}/login`;
+  const url = `${import.meta.env.CLIENT_BASE_URL}/login`;
 
   const html = `
   <!DOCTYPE html>
@@ -141,4 +147,11 @@ const updateUserSettings = async (req, res, next) => {
   }
 };
 
-module.exports = { signup, login, googleLogin, logout, getUserSettings, updateUserSettings };
+module.exports = {
+  signup,
+  login,
+  googleLogin,
+  logout,
+  getUserSettings,
+  updateUserSettings,
+};

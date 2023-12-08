@@ -1,4 +1,4 @@
-import { INIT_AUTH_STATES, AUTH_TYPES } from 'constants/auth.js';
+import { INIT_AUTH_STATES, AUTH_TYPES } from '@/constants/auth.js';
 
 const initAuthStates = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { TOAST_TEXT } from 'constants/toastText.js';
+import { TOAST_TEXT } from '@/constants/toastText.js';
 import {
   apiGetUserMemos,
   apiGetMemosByLabelName,
@@ -9,8 +9,8 @@ import {
   apiUpdateMemo,
   apiDeleteMemo,
   apiGetLinksInfo,
-} from 'apis/memos';
-import { apiUploadImage } from 'apis/upload';
+} from '@/apis/memos';
+import { apiUploadImage } from '@/apis/upload';
 import axios from 'axios';
 
 export const getUserMemos = createAsyncThunk(
@@ -45,7 +45,10 @@ export const getUserMemosByLabelName = createAsyncThunk(
     });
 
     try {
-      const res = await apiGetMemosByLabelName({ labelName, query }, { cancelToken: source.token });
+      const res = await apiGetMemosByLabelName(
+        { labelName, query },
+        { cancelToken: source.token },
+      );
       if (!res.data.success) throw new Error();
       return res.data.memos;
     } catch (err) {
@@ -67,7 +70,9 @@ export const getUserMemoByMemoId = createAsyncThunk(
     });
 
     try {
-      const res = await apiGetUserMemoByMemoId(memoId, { cancelToken: source.token });
+      const res = await apiGetUserMemoByMemoId(memoId, {
+        cancelToken: source.token,
+      });
       if (!res.data.success) throw new Error();
       return res.data.memo;
     } catch (err) {
@@ -79,18 +84,21 @@ export const getUserMemoByMemoId = createAsyncThunk(
   },
 );
 
-export const addMemo = createAsyncThunk('memos/addMemo', async (payload, { rejectWithValue }) => {
-  try {
-    const res = await apiCreateMemo(payload);
-    if (!res.data.success) throw new Error();
+export const addMemo = createAsyncThunk(
+  'memos/addMemo',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await apiCreateMemo(payload);
+      if (!res.data.success) throw new Error();
 
-    toast(TOAST_TEXT.MEMO_ADD_SUCCESS);
-    return res.data.memo;
-  } catch (err) {
-    toast(TOAST_TEXT.MEMO_ADD_FAIL);
-    return rejectWithValue(err.response.data.message);
-  }
-});
+      toast(TOAST_TEXT.MEMO_ADD_SUCCESS);
+      return res.data.memo;
+    } catch (err) {
+      toast(TOAST_TEXT.MEMO_ADD_FAIL);
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
 
 export const updateMemo = createAsyncThunk(
   'memos/updateMemo',

@@ -1,12 +1,14 @@
-import { AUTH_TYPES } from 'constants/auth.js';
-import { UI_TYPES } from 'constants/UI.js';
+import { AUTH_TYPES } from '@/constants/auth.js';
+import { UI_TYPES } from '@/constants/UI.js';
 import { toast } from 'react-toastify';
-import { TOAST_TEXT } from 'constants/toastText.js';
-import { apiSignup, apiLogin, apiLogout } from 'apis/user.js';
+import { TOAST_TEXT } from '@/constants/toastText.js';
+import { apiSignup, apiLogin, apiLogout } from '@/apis/user.js';
 
 const setStoredData = (user) => {
   // 10 days
-  const tokenExpirationDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 10);
+  const tokenExpirationDate = new Date(
+    new Date().getTime() + 1000 * 60 * 60 * 24 * 10,
+  );
   return {
     userId: user._id,
     userName: user.name,
@@ -41,7 +43,8 @@ export const signup = async (dispatch, payload) => {
       payload: { errorMessage },
     });
 
-    if (err.response.status === 422) return toast(TOAST_TEXT.SIGNUP_ACCOUNT_EXISTED);
+    if (err.response.status === 422)
+      return toast(TOAST_TEXT.SIGNUP_ACCOUNT_EXISTED);
 
     toast(TOAST_TEXT.SIGNUP_FAIL);
     return err.response;

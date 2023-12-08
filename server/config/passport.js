@@ -7,7 +7,7 @@ const { User } = require('../models');
 // JWT Strategy
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
-opts.secretOrKey = process.env.TOKEN_SECRET;
+opts.secretOrKey = import.meta.env.TOKEN_SECRET;
 
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {
@@ -25,9 +25,11 @@ passport.use(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.SERVER_BASE_URL}/api/user/google/redirect`,
+      clientID: import.meta.env.GOOGLE_CLIENT_ID,
+      clientSecret: import.meta.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `${
+        import.meta.env.SERVER_BASE_URL
+      }/api/user/google/redirect`,
     },
     async function (accessToken, refreshToken, profile, done) {
       try {

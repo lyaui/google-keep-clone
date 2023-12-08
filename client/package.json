@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@loadable/component": "^5.15.3",
     "@reduxjs/toolkit": "^1.6.2",
     "@seznam/compose-react-refs": "^1.0.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@tippyjs/react": "^4.2.5",
+    "@vitejs/plugin-react": "^4.2.1",
     "autolinker": "^3.14.3",
     "axios": "^0.22.0",
     "dotenv": "^10.0.0",
@@ -22,17 +24,19 @@
     "react-onclickoutside": "^6.12.0",
     "react-outside-click-handler": "^1.3.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
     "react-toastify": "^8.0.3",
-    "styled-components": "^5.3.0",
+    "styled-components": "^6.1.1",
     "uuid": "^8.3.2",
+    "vite": "^5.0.7",
+    "vite-plugin-env-compatible": "^2.0.1",
+    "vite-plugin-svgr": "^4.2.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [

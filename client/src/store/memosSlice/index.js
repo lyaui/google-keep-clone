@@ -8,7 +8,7 @@ import {
   deleteMemo,
   addLinksInfo,
   uploadMemoImage,
-} from 'store/memosSlice/memos-action.js';
+} from '@/store/memosSlice/memos-action.js';
 
 const INIT_MEMO = {
   title: '',
@@ -113,9 +113,13 @@ const memosSlice = createSlice({
     [updateMemo.fulfilled](state, { payload: updatedMemo }) {
       state.isLoading = false;
       state.errorMessage = '';
-      const memoIndex = state.memos.findIndex((memo) => memo._id === updatedMemo._id);
+      const memoIndex = state.memos.findIndex(
+        (memo) => memo._id === updatedMemo._id,
+      );
       state.memos[memoIndex] = updatedMemo;
-      state.memos = state.memos.sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
+      state.memos = state.memos.sort((a, b) =>
+        a.updatedAt > b.updatedAt ? -1 : 1,
+      );
     },
     [updateMemo.rejected](state, { payload: errorMessage }) {
       state.isLoading = false;

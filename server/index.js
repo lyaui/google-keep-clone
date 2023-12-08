@@ -13,10 +13,10 @@ const { HttpError } = require('./models');
 const cors = require('cors');
 
 mongoose
-  .connect(process.env.DB_CONNECT)
+  .connect(import.meta.env.DB_CONNECT)
   .then(() => {
-    app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server running on ${process.env.PORT || 5000}.`);
+    app.listen(import.meta.env.PORT || 5000, () => {
+      console.log(`Server running on ${import.meta.env.PORT || 5000}.`);
     });
   })
   .catch((err) => console.log(err));
@@ -25,8 +25,16 @@ mongoose
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/user', userRoute);
-app.use('/api/labels', passport.authenticate('jwt', { session: false }), labelRoute);
-app.use('/api/memos', passport.authenticate('jwt', { session: false }), memoRoute);
+app.use(
+  '/api/labels',
+  passport.authenticate('jwt', { session: false }),
+  labelRoute,
+);
+app.use(
+  '/api/memos',
+  passport.authenticate('jwt', { session: false }),
+  memoRoute,
+);
 app.use('/api/upload', uploadRoute);
 
 // request for the folder will be returned
@@ -40,5 +48,8 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
   if (res.headerSent) return next(error);
   res.status(error.code || 500);
-  res.json({ success: false, message: error.message || 'An known error occurred!' });
+  res.json({
+    success: false,
+    message: error.message || 'An known error occurred!',
+  });
 });

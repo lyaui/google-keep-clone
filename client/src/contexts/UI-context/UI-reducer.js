@@ -1,4 +1,4 @@
-import { INIT_UI_STATES, UI_TYPES } from 'constants/UI.js';
+import { INIT_UI_STATES, UI_TYPES } from '@/constants/UI.js';
 
 const userSettingsFromStorage = localStorage.getItem('userSettings')
   ? JSON.parse(localStorage.getItem('userSettings'))

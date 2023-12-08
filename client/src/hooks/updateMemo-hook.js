@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { memosActions } from 'store/memosSlice';
-import { updateMemo } from 'store/memosSlice/memos-action.js';
+import { memosActions } from '@/store/memosSlice';
+import { updateMemo } from '@/store/memosSlice/memos-action.js';
 
 export const useUpdateMemo = (id) => {
   const dispatch = useDispatch();
