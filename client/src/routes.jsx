@@ -8,6 +8,7 @@ const Archive = lazy(() => import('@/pages/Archive'));
 const Search = lazy(() => import('@/pages/Search'));
 const EditModal = lazy(() => import('@/components/EditModal'));
 const Layout = lazy(() => import('@/components/Layout'));
+const Error = lazy(() => import('@/pages/Error'));
 
 export const ROUTER_PATH = {
   LOGIN: '/login',
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <Error />,
     children: [
       {
         element: <Home />,
