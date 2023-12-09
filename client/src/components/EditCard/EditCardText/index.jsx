@@ -35,7 +35,7 @@ function EditCardText({ text, updateTextHandler }) {
 
   const textPasteHandler = (e) => {
     const paste = (e.clipboardData || window.clipboardData).getData(
-      'text/plain',
+      'text/plain'
     );
     const selection = window.getSelection();
     if (!selection.rangeCount) return false;
@@ -50,7 +50,7 @@ function EditCardText({ text, updateTextHandler }) {
 
   return (
     <ContentEditable
-      id='contentEdit'
+      id="contentEdit"
       html={text}
       onChange={textChangeHandler}
       onPaste={textPasteHandler}

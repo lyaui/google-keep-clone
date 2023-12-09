@@ -23,12 +23,12 @@ const UploadImageButton = () => {
     <Tippy content={TOOLTIP_TEXT.IMAGE}>
       <ButtonRound size={34} style={{ position: 'relative' }}>
         <Icon.Image />
-        <SUploadImage htmlFor='upload-button' />
+        <SUploadImage htmlFor="upload-button" />
         <input
-          type='file'
-          id='upload-button'
+          type="file"
+          id="upload-button"
           style={{ display: 'none' }}
-          accept='.jpg,.png,.jpeg,.gif'
+          accept=".jpg,.png,.jpeg,.gif"
           onChange={pickImageHandler}
         />
       </ButtonRound>

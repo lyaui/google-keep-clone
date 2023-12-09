@@ -69,7 +69,7 @@ const EditTaskItem = ({ task, index, id }) => {
 
   const deleteTaskHandler = () => {
     const updatedTasks = currentMemo.tasks.filter(
-      (item) => item.id !== task.id,
+      (item) => item.id !== task.id
     );
     dispatchUpdateMemo({ tasks: updatedTasks });
   };
@@ -77,16 +77,16 @@ const EditTaskItem = ({ task, index, id }) => {
   return (
     <SEditTaskItem style={{ '--color': memoColor }}>
       <SEditTaskItemIcon style={{ '--margin': !!id ? 0 : '-10px' }}>
-        {!id && <Icon.Drag name='drag' />}
+        {!id && <Icon.Drag name="drag" />}
         {!task.isCompleted && (
           <Icon.EmptyCheckbox
-            name='checkbox'
+            name="checkbox"
             onClick={toggleIsCompletedHandler}
           />
         )}
         {task.isCompleted && (
           <Icon.CheckboxOutline
-            name='checkbox'
+            name="checkbox"
             onClick={toggleIsCompletedHandler}
           />
         )}
@@ -101,7 +101,7 @@ const EditTaskItem = ({ task, index, id }) => {
       </SEditTaskItemText>
       {!id && (
         <SEditTaskItemIcon>
-          <Icon.Clear name='delete' onClick={deleteTaskHandler} />
+          <Icon.Clear name="delete" onClick={deleteTaskHandler} />
         </SEditTaskItemIcon>
       )}
     </SEditTaskItem>

@@ -26,7 +26,7 @@ const EditLabels = ({ type = 'memo', id }) => {
 
   const labels = keyword
     ? allLabels.filter((label) =>
-        label.name.toLowerCase().includes(keyword.toLowerCase()),
+        label.name.toLowerCase().includes(keyword.toLowerCase())
       )
     : allLabels;
 
@@ -52,7 +52,7 @@ const EditLabels = ({ type = 'memo', id }) => {
     e.preventDefault();
     if (!value.trim()) return;
     const isLabelExisted = !!allLabels.find(
-      (label) => label.name === value.trim(),
+      (label) => label.name === value.trim()
     );
     if (isLabelExisted) return setErrorMessage('已經有同名的標籤');
     dispatch(addLabel({ name: value.trim() }));
@@ -80,7 +80,7 @@ const EditLabels = ({ type = 'memo', id }) => {
           </Tippy>
           <SLabelEditInput
             style={{ margin: '0 10px' }}
-            placeholder='建立新標籤'
+            placeholder="建立新標籤"
             value={enteredLabel}
             onChange={enteredLabelHandler}
           />
@@ -101,10 +101,10 @@ const EditLabels = ({ type = 'memo', id }) => {
       {!isSideMenu && (
         <SLabelInput>
           <input
-            type='text'
+            type="text"
             value={keyword}
-            placeholder='輸入標籤名稱'
-            maxLength='50'
+            placeholder="輸入標籤名稱"
+            maxLength="50"
             onChange={searchKeywordHandler}
           />
           <Icon.Search />

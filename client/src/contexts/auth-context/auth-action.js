@@ -7,7 +7,7 @@ import { apiSignup, apiLogin, apiLogout } from '@/apis/user.js';
 const setStoredData = (user) => {
   // 10 days
   const tokenExpirationDate = new Date(
-    new Date().getTime() + 1000 * 60 * 60 * 24 * 10,
+    new Date().getTime() + 1000 * 60 * 60 * 24 * 10
   );
   return {
     userId: user._id,

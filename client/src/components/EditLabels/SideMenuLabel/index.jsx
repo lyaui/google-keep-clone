@@ -65,7 +65,7 @@ const SideMenuLabel = ({ label }) => {
   const { labels } = useSelector((state) => state.labels);
   const [inputStates, inputDispatch] = useReducer(
     labelReducer,
-    INIT_LABEL_STATES,
+    INIT_LABEL_STATES
   );
   const { isEditing, textValue, tempInputValue, errorMessage } = inputStates;
   const inputRef = useRef('');
@@ -113,7 +113,7 @@ const SideMenuLabel = ({ label }) => {
     e.preventDefault();
 
     const isLabelExisted = !!labels.find(
-      (label) => label.name === textValue.trim(),
+      (label) => label.name === textValue.trim()
     );
     if (!textValue.trim())
       return inputDispatch({
@@ -129,7 +129,7 @@ const SideMenuLabel = ({ label }) => {
       updateLabel({
         labelId: label._id,
         payload: { name: tempInputValue.trim() },
-      }),
+      })
     );
   };
 
@@ -160,12 +160,12 @@ const SideMenuLabel = ({ label }) => {
         {isEditing && (
           <SLabelEditInput
             autoFocus
-            type='text'
+            type="text"
             ref={inputRef}
             value={tempInputValue}
             onChange={changeInputHandler}
             onBlur={blurInputHandler}
-            placeholder='輸入標籤名稱'
+            placeholder="輸入標籤名稱"
           />
         )}
 

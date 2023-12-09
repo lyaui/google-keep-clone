@@ -32,7 +32,7 @@ export const getUserMemos = createAsyncThunk(
       toast(TOAST_TEXT.MEMOS_FAIL);
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const getUserMemosByLabelName = createAsyncThunk(
@@ -47,7 +47,7 @@ export const getUserMemosByLabelName = createAsyncThunk(
     try {
       const res = await apiGetMemosByLabelName(
         { labelName, query },
-        { cancelToken: source.token },
+        { cancelToken: source.token }
       );
       if (!res.data.success) throw new Error();
       return res.data.memos;
@@ -57,7 +57,7 @@ export const getUserMemosByLabelName = createAsyncThunk(
       toast(TOAST_TEXT.MEMOS_FAIL);
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const getUserMemoByMemoId = createAsyncThunk(
@@ -81,7 +81,7 @@ export const getUserMemoByMemoId = createAsyncThunk(
       toast(TOAST_TEXT.MEMOS_FAIL);
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const addMemo = createAsyncThunk(
@@ -97,7 +97,7 @@ export const addMemo = createAsyncThunk(
       toast(TOAST_TEXT.MEMO_ADD_FAIL);
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const updateMemo = createAsyncThunk(
@@ -112,7 +112,7 @@ export const updateMemo = createAsyncThunk(
       toast(TOAST_TEXT.MEMO_UPDATE_FAIL);
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const deleteMemo = createAsyncThunk(
@@ -128,7 +128,7 @@ export const deleteMemo = createAsyncThunk(
       toast(TOAST_TEXT.MEMO_DELETE_FAIL);
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const addLinksInfo = createAsyncThunk(
@@ -142,7 +142,7 @@ export const addLinksInfo = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const uploadMemoImage = createAsyncThunk(
@@ -156,5 +156,5 @@ export const uploadMemoImage = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );

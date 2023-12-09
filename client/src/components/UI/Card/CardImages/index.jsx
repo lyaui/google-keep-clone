@@ -42,11 +42,11 @@ const CardImages = ({
       >
         {images.slice(0, 6).map((image, index) => (
           <SCardImage key={index} className={`img-${index}`}>
-            <img draggable='false' src={image} alt='' />
+            <img draggable="false" src={image} alt="" />
             {isEditMode && (
               <Tippy content={TOOLTIP_TEXT.REMOVE}>
                 <ButtonSquare
-                  size='30'
+                  size="30"
                   onClick={() => deleteImageHandler(index)}
                 >
                   <Icon.Delete />

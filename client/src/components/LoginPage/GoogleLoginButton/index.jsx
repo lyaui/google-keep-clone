@@ -26,7 +26,7 @@ const GoogleLoginButton = () => {
         getUserSettings(UIDispatch);
       }
     },
-    [authDispatch, UIDispatch],
+    [authDispatch, UIDispatch]
   );
 
   useEffect(() => {

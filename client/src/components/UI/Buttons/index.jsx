@@ -20,7 +20,7 @@ export const ButtonRound = forwardRef(
         {children}
       </SButtonRound>
     );
-  },
+  }
 );
 
 export const ButtonSquare = forwardRef(
@@ -36,13 +36,13 @@ export const ButtonSquare = forwardRef(
         {children}
       </SButtonSquare>
     );
-  },
+  }
 );
 
 export const ButtonRect = forwardRef(
   (
     { children, size, color, isFormValid = true, onClick, disabled = false },
-    ref,
+    ref
   ) => {
     const SButton = isFormValid ? SButtonRect : SButtonRectDisabled;
     return (
@@ -56,5 +56,5 @@ export const ButtonRect = forwardRef(
         {children}
       </SButton>
     );
-  },
+  }
 );

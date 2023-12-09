@@ -12,8 +12,8 @@ export const SSkeletonMenuItem = styled.li`
 const SkeletonMenuItem = ({ isFixedMenu }) => {
   return (
     <SkeletonTheme
-      baseColor='var(--color-skeleton-bg)'
-      highlightColor='var(--color-skeleton-highlight-bg)'
+      baseColor="var(--color-skeleton-bg)"
+      highlightColor="var(--color-skeleton-highlight-bg)"
     >
       <SSkeletonMenuItem>
         <Skeleton

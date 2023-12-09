@@ -52,7 +52,7 @@ function LoginForm() {
   useEffect(() => {
     if (!formInputs) return;
     const isFormValid = Object.values(formInputs).every(
-      (item) => item.isValid === true,
+      (item) => item.isValid === true
     );
     setIsFormValid(isFormValid);
   }, [formInputs]);
@@ -62,7 +62,7 @@ function LoginForm() {
 
   return (
     <SLoginForm onSubmit={() => {}}>
-      <SLoginFormLogo src={Logo} alt='Google Keep' />
+      <SLoginFormLogo src={Logo} alt="Google Keep" />
       <p>{formText}你的帳戶</p>
 
       {/* google OAuth */}
@@ -73,30 +73,30 @@ function LoginForm() {
       {pathname === ROUTER_PATH.SIGNUP && (
         <Input
           validFormHandler={validFormHandler}
-          name='name'
-          label='用戶名稱'
-          type='text'
+          name="name"
+          label="用戶名稱"
+          type="text"
           validate={[VALIDATOR_TYPES.REQUIRE]}
         />
       )}
       <Input
-        name='email'
+        name="email"
         validFormHandler={validFormHandler}
-        label='電子信箱'
-        type='text'
+        label="電子信箱"
+        type="text"
         validate={[VALIDATOR_TYPES.REQUIRE, VALIDATOR_TYPES.EMAIL]}
       />
       <Input
-        name='password'
+        name="password"
         validFormHandler={validFormHandler}
-        label='密碼'
-        type='password'
+        label="密碼"
+        type="password"
         validate={[VALIDATOR_TYPES.REQUIRE, VALIDATOR_TYPES.MINLENGTH]}
       />
 
       {/* submit button */}
       <LoginButton
-        type='submit'
+        type="submit"
         isFormValid={isFormValid}
         inputValues={formInputs}
       />

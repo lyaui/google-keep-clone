@@ -35,7 +35,7 @@ const Archive = () => {
 
       {/* hint */}
       {showHint && (
-        <Hint icon={<Icon.Archive />} text='你封存的記事會顯示在這裡' />
+        <Hint icon={<Icon.Archive />} text="你封存的記事會顯示在這裡" />
       )}
     </div>
   );

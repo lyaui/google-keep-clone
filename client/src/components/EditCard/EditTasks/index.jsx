@@ -35,7 +35,7 @@ const EditTasks = () => {
   };
 
   return (
-    <Droppable droppableId='tasks'>
+    <Droppable droppableId="tasks">
       {(provided) => (
         <SEditTasks
           ref={provided.innerRef || taskRef}

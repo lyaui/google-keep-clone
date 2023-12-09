@@ -15,7 +15,7 @@ function Label() {
 
   const params = useMemo(
     () => ({ labelName, query: { isArchived: false } }),
-    [labelName],
+    [labelName]
   );
 
   const { pinnedMemo, unpinnedMemo, isLoading } = useFetchMemos({
@@ -49,7 +49,7 @@ function Label() {
 
       {/* hint */}
       {showHint && (
-        <Hint icon={<Icon.LabelOutline />} text='目前還沒有記事加上這個標籤' />
+        <Hint icon={<Icon.LabelOutline />} text="目前還沒有記事加上這個標籤" />
       )}
     </div>
   );

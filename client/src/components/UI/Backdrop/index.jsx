@@ -4,7 +4,7 @@ import { SBackdrop } from '@/components/UI/Backdrop/style.jsx';
 const Backdrop = ({ onClick }) => {
   return ReactDOM.createPortal(
     <SBackdrop onClick={onClick} />,
-    document.getElementById('backdrop-root'),
+    document.getElementById('backdrop-root')
   );
 };
 

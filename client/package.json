@@ -14,11 +14,14 @@
     "autolinker": "^3.14.3",
     "axios": "^0.22.0",
     "dotenv": "^10.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest": "^27.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
     "normalize.css": "^8.0.1",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.0",
     "react-contenteditable": "^3.3.6",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
     "react-loading-skeleton": "^3.0.1",
     "react-onclickoutside": "^6.12.0",
@@ -36,7 +39,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettier": "prettier . --write"
   },
   "eslintConfig": {
     "extends": [
@@ -57,6 +61,12 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint": "^8.55.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "3.1.0",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

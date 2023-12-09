@@ -16,7 +16,7 @@ const EditCardImages = ({ id }) => {
       {images.length > 0 && (
         <CardImages
           images={images}
-          isEditMode='true'
+          isEditMode="true"
           deleteImageHandler={deleteImageHandler}
         />
       )}

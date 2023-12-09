@@ -47,7 +47,7 @@ function Input({ name, label, type, validate, validFormHandler }) {
   const { pathname } = useLocation();
   const [inputState, inputDispatch] = useReducer(
     inputReducer,
-    INIT_INPUT_STATES,
+    INIT_INPUT_STATES
   );
   const { isTouched, isValid, value, errorMessage } = inputState;
   const inputRef = useRef();
@@ -57,7 +57,7 @@ function Input({ name, label, type, validate, validFormHandler }) {
   const blurInputHandler = () => {
     const { isValid, errorMessage } = validator(
       inputRef.current.value,
-      validate,
+      validate
     );
     inputDispatch({
       type: INPUT_ACTIONS.BLUR,
@@ -69,7 +69,7 @@ function Input({ name, label, type, validate, validFormHandler }) {
   const changeInputHandler = () => {
     const { isValid, errorMessage } = validator(
       inputRef.current.value,
-      validate,
+      validate
     );
     inputDispatch({
       type: INPUT_ACTIONS.CHANGE,

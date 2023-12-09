@@ -41,7 +41,7 @@ const Home = () => {
 
       {/* hint */}
       {showHint && (
-        <Hint icon={<Icon.Bulb />} text='你新增的記事會顯示在這裡' />
+        <Hint icon={<Icon.Bulb />} text="你新增的記事會顯示在這裡" />
       )}
     </div>
   );

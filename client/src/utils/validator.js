@@ -15,11 +15,13 @@ export const validator = (value, validators) => {
     }
     if (validator === VALIDATOR_TYPES.MINLENGTH) {
       isValid = isValid && value.length >= 6;
-      errorMessage = !isValid && !errorMessage ? '字數需大於等於 6 字元' : errorMessage;
+      errorMessage =
+        !isValid && !errorMessage ? '字數需大於等於 6 字元' : errorMessage;
     }
     if (validator === VALIDATOR_TYPES.EMAIL) {
       isValid = isValid && /^\S+@\S+\.\S+$/.test(value);
-      errorMessage = !isValid && !errorMessage ? '請輸入正確信箱格式' : errorMessage;
+      errorMessage =
+        !isValid && !errorMessage ? '請輸入正確信箱格式' : errorMessage;
     }
   });
   return { isValid, errorMessage };

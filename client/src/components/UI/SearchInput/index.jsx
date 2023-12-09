@@ -58,8 +58,8 @@ function SearchInput() {
         onChange={changeInputHandler}
         onFocus={focusInputHandler}
         onBlur={blurInputHandler}
-        type='text'
-        placeholder='搜尋'
+        type="text"
+        placeholder="搜尋"
       />
       <Tippy content={TOOLTIP_TEXT.CLEAR_SEARCH}>
         <ButtonRound size={40} onClick={clearInputHandler}>

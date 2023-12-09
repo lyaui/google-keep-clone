@@ -24,17 +24,26 @@ import { HiPencil as Edit } from 'react-icons/hi';
 import { BiPencil as EditOutline } from 'react-icons/bi';
 
 // label
-import { MdLabel as Label, MdLabelOutline as LabelOutline } from 'react-icons/md';
+import {
+  MdLabel as Label,
+  MdLabelOutline as LabelOutline,
+} from 'react-icons/md';
 
 // archive
-import { MdOutlineArchive as Archive, MdOutlineUnarchive as Unarchive } from 'react-icons/md';
+import {
+  MdOutlineArchive as Archive,
+  MdOutlineUnarchive as Unarchive,
+} from 'react-icons/md';
 
 // delete
 import { MdDelete as Delete } from 'react-icons/md';
 import { RiDeleteBin6Line as DeleteOutline } from 'react-icons/ri';
 
 // pin
-import { RiPushpin2Fill as Pin, RiPushpin2Line as PinOutline } from 'react-icons/ri';
+import {
+  RiPushpin2Fill as Pin,
+  RiPushpin2Line as PinOutline,
+} from 'react-icons/ri';
 
 // add
 import { MdAdd as Add } from 'react-icons/md';

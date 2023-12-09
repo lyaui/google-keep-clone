@@ -13,7 +13,7 @@ const EditCardTaskButton = () => {
 
   let tasksList = memo.content.split('</div><div>') || [];
   tasksList = [...tasksList[0].split('<div>'), ...tasksList.slice(1)].filter(
-    (item) => item !== '<br>' && item !== '<br></div>',
+    (item) => item !== '<br>' && item !== '<br></div>'
   );
 
   if (tasksList.length === 1 && tasksList[0].trim() === '') {
@@ -32,7 +32,7 @@ const EditCardTaskButton = () => {
         isTaskList: true,
         tasks: tasksList,
         content: '',
-      }),
+      })
     );
 
   return (

@@ -8,7 +8,7 @@ const Toast = () => {
     <SToast>
       <ToastContainer />
     </SToast>,
-    document.getElementById('toast-root'),
+    document.getElementById('toast-root')
   );
 };
 

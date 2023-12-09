@@ -14,7 +14,7 @@ function SideMenu() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { labels, errorMessage, isLoading } = useSelector(
-    (state) => state.labels,
+    (state) => state.labels
   );
   const { UIState } = useUI();
 
@@ -48,8 +48,8 @@ function SideMenu() {
           <NavItem
             navItemStyle={navItemStyle}
             toRoute={ROUTER_PATH.HOME}
-            label='記事'
-            type='memo'
+            label="記事"
+            type="memo"
           />
         )}
         {!isLoading &&
@@ -59,7 +59,7 @@ function SideMenu() {
               toRoute={ROUTER_PATH.BUILD_LABEL_PATH(label.name)}
               key={label._id}
               label={label.name}
-              type='label'
+              type="label"
             />
           ))}
         {!isLoading && <EditLabelButton navItemStyle={navItemStyle} />}
@@ -67,8 +67,8 @@ function SideMenu() {
           <NavItem
             navItemStyle={navItemStyle}
             toRoute={ROUTER_PATH.ARCHIVE}
-            label='封存'
-            type='archive'
+            label="封存"
+            type="archive"
           />
         )}
       </SSideMenuList>

@@ -10,7 +10,7 @@ function EmptyCardEditor() {
     <SEditCard onClick={toggleEditorHandler}>
       <SEditCardBody>
         <SEditCardContent>
-          <div id='contentEdit' contentEditable='true' />
+          <div id="contentEdit" contentEditable="true" />
         </SEditCardContent>
       </SEditCardBody>
     </SEditCard>

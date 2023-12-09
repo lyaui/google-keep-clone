@@ -15,7 +15,7 @@ const EditCardCancelTaskButton = () => {
 
   const toggleTaskHandler = () =>
     dispatch(
-      memosActions.updateMemo({ isTaskList: false, tasks: [], content }),
+      memosActions.updateMemo({ isTaskList: false, tasks: [], content })
     );
 
   return (

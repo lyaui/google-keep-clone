@@ -48,7 +48,7 @@ function LoginButton({ isFormValid, inputValues }) {
       disabled={isLoading}
     >
       {!isLoading && buttonText}
-      {isLoading && <Icon.Loading className='spinner' />}
+      {isLoading && <Icon.Loading className="spinner" />}
     </ButtonRect>
   );
 }

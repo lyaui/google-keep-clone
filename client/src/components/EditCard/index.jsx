@@ -31,7 +31,7 @@ function EditCard() {
   const { dispatchUpdateMemo } = useUpdateMemo(memoId);
 
   const { memo, isLoading, isMemoUpdated } = useSelector(
-    (state) => state.memos,
+    (state) => state.memos
   );
   const isNewPost = !!!memo._id;
   const { isTaskList, color } = memo;
@@ -44,7 +44,7 @@ function EditCard() {
         !memo.content &&
         memo.images.length === 0 &&
         memo.links.length === 0 &&
-        memo.tasks.length === 0,
+        memo.tasks.length === 0
     );
   }, [memo]);
 
@@ -55,7 +55,7 @@ function EditCard() {
     // post new post
     if (!isEmptyPost && isNewPost)
       await dispatch(
-        addMemo({ ...memo, labels: memo.labels.map((label) => label._id) }),
+        addMemo({ ...memo, labels: memo.labels.map((label) => label._id) })
       );
 
     // edit memo
@@ -65,7 +65,7 @@ function EditCard() {
   };
 
   return (
-    <SEditCard style={{ '--color': memoColor }} eventTypes='click'>
+    <SEditCard style={{ '--color': memoColor }} eventTypes="click">
       <OutsideClickHandler onOutsideClick={clickOutsideHandler}>
         <SEditCardBody>
           {/* pin */}

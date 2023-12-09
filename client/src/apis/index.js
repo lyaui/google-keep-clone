@@ -13,7 +13,7 @@ const axiosUser = axios.create({
   },
 });
 axiosUser.interceptors.request.use(addAuthConfig, (error) =>
-  Promise.reject(error),
+  Promise.reject(error)
 );
 
 const axiosLabels = axios.create({
@@ -23,7 +23,7 @@ const axiosLabels = axios.create({
   },
 });
 axiosLabels.interceptors.request.use(addAuthConfig, (error) =>
-  Promise.reject(error),
+  Promise.reject(error)
 );
 
 const axiosMemos = axios.create({
@@ -33,7 +33,7 @@ const axiosMemos = axios.create({
   },
 });
 axiosMemos.interceptors.request.use(addAuthConfig, (error) =>
-  Promise.reject(error),
+  Promise.reject(error)
 );
 
 const axiosUpload = axios.create({
@@ -43,7 +43,7 @@ const axiosUpload = axios.create({
   },
 });
 axiosUpload.interceptors.request.use(addAuthConfig, (error) =>
-  Promise.reject(error),
+  Promise.reject(error)
 );
 
 export { axiosUser, axiosLabels, axiosMemos, axiosUpload };

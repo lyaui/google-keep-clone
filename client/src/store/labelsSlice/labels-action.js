@@ -19,7 +19,7 @@ export const getUserLabels = createAsyncThunk(
       toast(TOAST_TEXT.LABELS_FAIL);
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const addLabel = createAsyncThunk(
@@ -32,7 +32,7 @@ export const addLabel = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const updateLabel = createAsyncThunk(
@@ -47,7 +47,7 @@ export const updateLabel = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );
 
 export const deleteLabel = createAsyncThunk(
@@ -62,5 +62,5 @@ export const deleteLabel = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.response.data.message);
     }
-  },
+  }
 );

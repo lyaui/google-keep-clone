@@ -24,8 +24,8 @@ const SSkeletonEditBar = styled.div`
 const SkeletonEditModal = () => {
   return (
     <SkeletonTheme
-      baseColor='var(--color-skeleton-bg)'
-      highlightColor='var(--color-skeleton-highlight-bg)'
+      baseColor="var(--color-skeleton-bg)"
+      highlightColor="var(--color-skeleton-highlight-bg)"
     >
       <SSkeletonEditModal>
         <Skeleton style={{ marginBottom: '20px' }} height={30} width={200} />

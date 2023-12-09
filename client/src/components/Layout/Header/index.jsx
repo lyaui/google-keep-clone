@@ -20,7 +20,7 @@ function Header() {
     <SHeader>
       {/* menu */}
       <FixMenu />
-      <SHeaderLogo src={logoPath} alt='Keep' />
+      <SHeaderLogo src={logoPath} alt="Keep" />
       <SHeaderTitle>{labelName || 'Keep'}</SHeaderTitle>
       {/* search */}
       <SearchInput />

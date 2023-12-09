@@ -15,7 +15,7 @@ export const useUpdateMemo = (id) => {
         ? dispatch(updateMemo({ memoId: id, payload: updatedItem }))
         : dispatch(memosActions.updateMemo(updatedItem));
     },
-    [isLoading, id, dispatch],
+    [isLoading, id, dispatch]
   );
 
   return { currentMemo, dispatchUpdateMemo };

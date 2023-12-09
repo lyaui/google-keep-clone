@@ -23,8 +23,8 @@ const SkeletonCards = () => {
   const cardNum = isFixedMenu ? 4 : 5;
   return (
     <SkeletonTheme
-      baseColor='var(--color-skeleton-bg)'
-      highlightColor='var(--color-skeleton-highlight-bg)'
+      baseColor="var(--color-skeleton-bg)"
+      highlightColor="var(--color-skeleton-highlight-bg)"
     >
       <SSkeletonCards>
         {Array.from(Array(cardNum).keys()).map((index) => (

@@ -11,8 +11,8 @@ const SSkeletonEditor = styled.div`
 const SkeletonEditor = () => {
   return (
     <SkeletonTheme
-      baseColor='var(--color-skeleton-bg)'
-      highlightColor='var(--color-skeleton-highlight-bg)'
+      baseColor="var(--color-skeleton-bg)"
+      highlightColor="var(--color-skeleton-highlight-bg)"
     >
       <SSkeletonEditor>
         <Skeleton height={40} borderRadius={8} />

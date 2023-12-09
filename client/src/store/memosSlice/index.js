@@ -114,11 +114,11 @@ const memosSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = '';
       const memoIndex = state.memos.findIndex(
-        (memo) => memo._id === updatedMemo._id,
+        (memo) => memo._id === updatedMemo._id
       );
       state.memos[memoIndex] = updatedMemo;
       state.memos = state.memos.sort((a, b) =>
-        a.updatedAt > b.updatedAt ? -1 : 1,
+        a.updatedAt > b.updatedAt ? -1 : 1
       );
     },
     [updateMemo.rejected](state, { payload: errorMessage }) {
@@ -141,7 +141,7 @@ const memosSlice = createSlice({
     },
 
     // addLinksInfo
-    [addLinksInfo.pending](state) {},
+    [addLinksInfo.pending]() {},
     [addLinksInfo.fulfilled](state, { payload: links }) {
       const currentLinks = [...state.memo.links];
       links.forEach((link) => {

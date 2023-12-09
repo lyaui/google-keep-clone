@@ -29,19 +29,19 @@ const Search = () => {
     return searchQuery
       ? { q: searchQuery }
       : typeQuery
-      ? { type: typeQuery }
-      : colorQuery
-      ? { color: colorQuery }
-      : labelQuery
-      ? { labelName: labelQuery }
-      : null;
+        ? { type: typeQuery }
+        : colorQuery
+          ? { color: colorQuery }
+          : labelQuery
+            ? { labelName: labelQuery }
+            : null;
   }, [searchQuery, typeQuery, labelQuery, colorQuery]);
 
   const action = !params
     ? null
     : labelQuery
-    ? getUserMemosByLabelName
-    : getUserMemos;
+      ? getUserMemosByLabelName
+      : getUserMemos;
   const { memos, isLoading } = useFetchMemos({ action, params });
 
   const typesFilter = [
@@ -73,11 +73,11 @@ const Search = () => {
       {!search && (
         <div>
           {/* search by types */}
-          <MemosFilter title='類型' type='type' filter={typesFilter} />
+          <MemosFilter title="類型" type="type" filter={typesFilter} />
           {/* search by labels */}
-          <MemosFilter title='標籤' type='label' filter={labelsFilter} />
+          <MemosFilter title="標籤" type="label" filter={labelsFilter} />
           {/* search by colors */}
-          <MemosFilter title='顏色' type='color' filter={colorsFilter} />
+          <MemosFilter title="顏色" type="color" filter={colorsFilter} />
         </div>
       )}
 
@@ -86,7 +86,7 @@ const Search = () => {
 
       {/* hint */}
       {showHint && (
-        <Hint icon={<Icon.SearchOff />} text='找不到相符的搜尋結果' />
+        <Hint icon={<Icon.SearchOff />} text="找不到相符的搜尋結果" />
       )}
     </div>
   );

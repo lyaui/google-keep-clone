@@ -50,19 +50,19 @@ function Card({ card, masonryDom }) {
       window
         .getComputedStyle(grid.querySelector('.masonry'))
         .getPropertyValue('grid-row-gap')
-        .replace('px', ''),
+        .replace('px', '')
     );
     const rowHeight = parseInt(
       window
         .getComputedStyle(grid.querySelector('.masonry'))
         .getPropertyValue('grid-auto-rows')
-        .replace('px', ''),
+        .replace('px', '')
     );
     const rowSpan = Math.ceil(
       (cardRefDOM.querySelector('.growing-content').getBoundingClientRect()
         .height +
         rowGap) /
-        (rowHeight + rowGap),
+        (rowHeight + rowGap)
     );
 
     setGridRowSpan(rowSpan);
@@ -91,12 +91,12 @@ function Card({ card, masonryDom }) {
     memoColor === PALETTE_COLORS.DEFAULT.LIGHT
       ? 'var(--color-gray-200)'
       : memoColor === PALETTE_COLORS.DEFAULT.DARK
-      ? 'var(--color-gray-600)'
-      : memoColor;
+        ? 'var(--color-gray-600)'
+        : memoColor;
 
   return (
     <SCard
-      className='card'
+      className="card"
       ref={cardRef}
       style={{
         '--color': memoColor,
@@ -105,7 +105,7 @@ function Card({ card, masonryDom }) {
         '--rowSpan': gridRowSpan,
       }}
     >
-      <div className='growing-content' onClick={openEditModalHandler}>
+      <div className="growing-content" onClick={openEditModalHandler}>
         {/* pin */}
         <EditCardPinButton id={id} />
         {/* images */}

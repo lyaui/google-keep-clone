@@ -40,10 +40,10 @@ const EditCardColorButton = ({ id }) => {
                   color !== 'DEFAULT'
                     ? PALETTE_COLORS[color][UIState.theme]
                     : UIState.theme === 'LIGHT'
-                    ? 'var(--color-gray-200)'
-                    : UIState.theme === 'DARK'
-                    ? 'var(--color-gray-700)'
-                    : PALETTE_COLORS[color][UIState.theme],
+                      ? 'var(--color-gray-200)'
+                      : UIState.theme === 'DARK'
+                        ? 'var(--color-gray-700)'
+                        : PALETTE_COLORS[color][UIState.theme],
               }}
               onClick={selectColorHandler(color)}
             >

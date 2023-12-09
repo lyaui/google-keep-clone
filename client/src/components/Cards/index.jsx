@@ -22,7 +22,7 @@ const Cards = ({ memos, title }) => {
         {title}
       </SCardsTitle>
       <SCards
-        className='masonry'
+        className="masonry"
         style={{
           '--gap': layout === VIEW_MODE.GRID ? '12px' : '20px',
           '--columns':
