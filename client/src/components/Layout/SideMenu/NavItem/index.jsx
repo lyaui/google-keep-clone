@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
+
 import {
   SNavItem,
   SNavItemText,
-} from '@/components/Layout/SideMenu/NavItem/style.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+} from '@/components/Layout/SideMenu/NavItem/style';
+import { ButtonRound } from '@/components/UI/Buttons';
 
 function NavItem({ navItemStyle, toRoute, label, type = 'tag' }) {
   const icon =
@@ -20,7 +21,10 @@ function NavItem({ navItemStyle, toRoute, label, type = 'tag' }) {
     <SNavItem style={navItemStyle}>
       <NavLink
         to={toRoute}
-        activeStyle={{ backgroundColor: 'var(--color-menu-active-bg)' }}
+        style={({ isActive }) => ({
+          backgroundColor: isActive ? 'var(--color-menu-active-bg)' : '',
+        })}
+        end
       >
         <ButtonRound size={40}>{icon}</ButtonRound>
         <SNavItemText>{label}</SNavItemText>

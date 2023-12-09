@@ -1,18 +1,12 @@
-import { lazy, Suspense, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { memosActions } from '@/store/memosSlice/index.js';
-import Toast from '@/components/UI/Toast';
+import { RouterProvider } from 'react-router-dom';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { ROUTE } from '@/constants/routes.js';
+
+import { router } from '@/routes';
+import { memosActions } from '@/store/memosSlice';
+import Toast from '@/components/UI/Toast';
 import { useAuth, logout } from '@/contexts/auth-context';
-import Layout from '@/components/Layout';
-const Login = lazy(() => import('@/pages/Login'));
-const Home = lazy(() => import('@/pages/Home'));
-const Label = lazy(() => import('@/pages/Label'));
-const Archive = lazy(() => import('@/pages/Archive'));
-const Search = lazy(() => import('@/pages/Search'));
-const EditModal = lazy(() => import('@/components/EditModal'));
 
 let logoutTimer;
 
@@ -24,17 +18,17 @@ function App() {
   const { isLoggedIn, expiration } = authState;
 
   // auto logout
-  useEffect(() => {
-    if (isLoggedIn && expiration) {
-      const expireTimestamp = new Date(expiration).getTime();
-      const remainingTime = expireTimestamp - new Date().getTime();
-      logoutTimer = setTimeout(() => {
-        logout(authDispatch);
-      }, remainingTime);
-    } else {
-      clearTimeout(logoutTimer);
-    }
-  }, [isLoggedIn, authDispatch, expiration]);
+  // useEffect(() => {
+  //   if (isLoggedIn && expiration) {
+  //     const expireTimestamp = new Date(expiration).getTime();
+  //     const remainingTime = expireTimestamp - new Date().getTime();
+  //     logoutTimer = setTimeout(() => {
+  //       logout(authDispatch);
+  //     }, remainingTime);
+  //   } else {
+  //     clearTimeout(logoutTimer);
+  //   }
+  // }, [isLoggedIn, authDispatch, expiration]);
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -55,34 +49,13 @@ function App() {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Suspense fallback={<div></div>}>
-        <Switch>
-          <Route path={[ROUTE.LOGIN, ROUTE.SIGNUP]} component={Login} />
-          {isLoggedIn && (
-            <Route
-              path={[
-                ROUTE.HOME,
-                ROUTE.LABEL,
-                ROUTE.MEMO,
-                ROUTE.ARCHIVE,
-                ROUTE.SEARCH,
-              ]}
-            >
-              <Layout>
-                <Route path={ROUTE.HOME} component={Home} exact />
-                <Route path={ROUTE.LABEL} component={Label} exact />
-                <Route path={ROUTE.ARCHIVE} component={Archive} exact />
-                <Route path={ROUTE.SEARCH} component={Search} exact />
-                <Route path={ROUTE.MEMO} component={EditModal} exact />
-              </Layout>
-            </Route>
-          )}
-          <Redirect to={ROUTE.LOGIN} />
-        </Switch>
-      </Suspense>
-      <Toast />
-    </DragDropContext>
+    <Suspense fallback={<div></div>}>
+      <RouterProvider router={router}>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Toast />
+        </DragDropContext>
+      </RouterProvider>
+    </Suspense>
   );
 }
 

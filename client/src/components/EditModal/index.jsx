@@ -1,16 +1,16 @@
-import { useRouteMatch, useHistory } from 'react-router-dom';
-import { useFetchMemos } from '@/hooks/fetchMemos-hook.js';
-import { getUserMemoByMemoId } from '@/store/memosSlice/memos-action.js';
-import { ROUTE } from '@/constants/routes.js';
+import { useParams, useNavigate } from 'react-router-dom';
+
+import { useFetchMemos } from '@/hooks/fetchMemos-hook';
+import { getUserMemoByMemoId } from '@/store/memosSlice/memos-action';
+import { ROUTER_PATH } from '@/routes';
 import SkeletonEditModal from '@/skeletons/SkeletonEditModal';
 import Modal from '@/components/UI/Modal';
 import EditCard from '@/components/EditCard';
 
-const EditModal = () => {
-  const history = useHistory();
-  const match = useRouteMatch();
+function EditModal() {
+  const navigate = useNavigate();
+  const { memoId } = useParams();
 
-  const { memoId } = match.params;
   const { isLoading } = useFetchMemos({
     action: getUserMemoByMemoId,
     params: memoId,
@@ -18,7 +18,7 @@ const EditModal = () => {
 
   const closeEditModalHandler = (e) => {
     e.preventDefault();
-    history.push(ROUTE.HOME);
+    navigate(ROUTER_PATH.HOME);
   };
 
   return (
@@ -27,6 +27,6 @@ const EditModal = () => {
       {isLoading && <SkeletonEditModal />}
     </Modal>
   );
-};
+}
 
 export default EditModal;

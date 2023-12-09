@@ -1,11 +1,11 @@
 import { useRef, useEffect, useReducer } from 'react';
-import { useRouteMatch } from 'react-router-dom';
-import { validator } from '@/utils/validator.js';
+import { useLocation } from 'react-router-dom';
+import { validator } from '@/utils/validator';
 import {
   SInputControl,
   SInput,
   SInputMessage,
-} from '@/components/UI/Input/style.jsx';
+} from '@/components/UI/Input/style';
 
 const INIT_INPUT_STATES = {
   isTouched: false,
@@ -20,7 +20,7 @@ const INPUT_ACTIONS = {
   RESET: 'RESET',
 };
 
-const inputReducer = (state = INIT_INPUT_STATES, action) => {
+function inputReducer(state = INIT_INPUT_STATES, action) {
   switch (action.type) {
     case INPUT_ACTIONS.BLUR:
       return {
@@ -41,10 +41,10 @@ const inputReducer = (state = INIT_INPUT_STATES, action) => {
     default:
       return state;
   }
-};
+}
 
-const Input = ({ name, label, type, validate, validFormHandler }) => {
-  const { path } = useRouteMatch();
+function Input({ name, label, type, validate, validFormHandler }) {
+  const { pathname } = useLocation();
   const [inputState, inputDispatch] = useReducer(
     inputReducer,
     INIT_INPUT_STATES,
@@ -52,7 +52,7 @@ const Input = ({ name, label, type, validate, validFormHandler }) => {
   const { isTouched, isValid, value, errorMessage } = inputState;
   const inputRef = useRef();
 
-  useEffect(() => resetInputHandle(), [path]);
+  useEffect(() => resetInputHandle(), [pathname]);
 
   const blurInputHandler = () => {
     const { isValid, errorMessage } = validator(
@@ -110,6 +110,6 @@ const Input = ({ name, label, type, validate, validFormHandler }) => {
       )}
     </SInputControl>
   );
-};
+}
 
 export default Input;

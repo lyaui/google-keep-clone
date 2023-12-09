@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
-import { ROUTE } from '@/constants/routes.js';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { ROUTER_PATH } from '@/routes';
 import { PALETTE_COLORS } from '@/constants/paletteColors.js';
 import { useUI } from '@/contexts/UI-context';
-
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
 import CardImages from '@/components/UI/Card/CardImages';
 import CardHeader from '@/components/UI/Card/CardHeader';
@@ -13,15 +13,13 @@ import EditTaskItem from '@/components/EditCard/EditTasks/EditTaskItem';
 import CardLabels from '@/components/UI/Card/CardLabels';
 import CardFooter from '@/components/UI/Card/CardFooter';
 import CardLinks from '@/components/UI/Card/CardLinks';
+import { SCard, SEmptyText } from '@/components/UI/Card/style';
+import { SEditCardText } from '@/components/EditCard/EditCardText/style';
 
-import { SCard, SEmptyText } from '@/components/UI/Card/style.jsx';
-import { SEditCardText } from '@/components/EditCard/EditCardText/style.jsx';
+function Card({ card, masonryDom }) {
+  const navigate = useNavigate();
+  const { memoId } = useParams();
 
-const Card = ({ card, masonryDom }) => {
-  const history = useHistory();
-  const {
-    params: { memoId },
-  } = useRouteMatch();
   const cardRef = useRef();
   const [gridRowSpan, setGridRowSpan] = useState(0);
   const {
@@ -40,7 +38,7 @@ const Card = ({ card, masonryDom }) => {
   } = useUI();
   const memoColor = PALETTE_COLORS[color][theme];
 
-  const openEditModalHandler = () => history.push(ROUTE.BUILD_MEMO_PATH(id));
+  const openEditModalHandler = () => navigate(ROUTER_PATH.BUILD_MEMO_PATH(id));
 
   // calculate card spans
   const getRowSpan = () => {
@@ -152,6 +150,6 @@ const Card = ({ card, masonryDom }) => {
       </div>
     </SCard>
   );
-};
+}
 
 export default Card;

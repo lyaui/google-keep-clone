@@ -1,26 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useRouteMatch } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Autolinker from 'autolinker';
 import ContentEditable from 'react-contenteditable';
-import { ROUTE } from '@/constants/routes.js';
-import { addLinksInfo } from '@/store/memosSlice/memos-action.js';
 
-const EditCardText = ({ text, updateTextHandler }) => {
+import { ROUTER_PATH } from '@/routes';
+import { addLinksInfo } from '@/store/memosSlice/memos-action';
+
+function EditCardText({ text, updateTextHandler }) {
   const dispatch = useDispatch();
-  const { path } = useRouteMatch();
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
   const editQuery = !!new URLSearchParams(search).get('edit');
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
     if (links.length === 0) return;
-    if (editQuery || path === ROUTE.MEMO) {
+    if (editQuery || pathname === ROUTER_PATH.MEMO) {
       (async () => {
         await dispatch(addLinksInfo({ links }));
       })();
     }
-  }, [links, editQuery, path, dispatch]);
+  }, [links, editQuery, pathname, dispatch]);
 
   const textChangeHandler = (e) => {
     const linkedText = Autolinker.link(e.target.value, {
@@ -57,6 +57,6 @@ const EditCardText = ({ text, updateTextHandler }) => {
       onDrop={textDropHandler}
     ></ContentEditable>
   );
-};
+}
 
 export default EditCardText;

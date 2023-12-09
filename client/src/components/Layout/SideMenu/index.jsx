@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { ROUTE } from '@/constants/routes.js';
-import { getUserLabels } from '@/store/labelsSlice/labels-action.js';
+import { useNavigate } from 'react-router-dom';
+
+import { ROUTER_PATH } from '@/routes';
+import { getUserLabels } from '@/store/labelsSlice/labels-action';
 import { useUI } from '@/contexts/UI-context';
 import SkeletonMenuItem from '@/skeletons/SkeletonMenuItem';
-import NavItem from '@/components/Layout/SideMenu/NavItem/index.jsx';
+import NavItem from '@/components/Layout/SideMenu/NavItem';
 import EditLabelButton from '@/components/Layout/SideMenu/EditLabelButton';
 import { SSideMenu, SSideMenuList } from '@/components/Layout/SideMenu/style';
 
-const SideMenu = () => {
-  const history = useHistory();
+function SideMenu() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { labels, errorMessage, isLoading } = useSelector(
     (state) => state.labels,
@@ -19,8 +20,9 @@ const SideMenu = () => {
 
   useEffect(() => {
     dispatch(getUserLabels());
-    if (errorMessage) return history.replace(ROUTE.LOGIN);
-  }, [dispatch, errorMessage, history]);
+    if (errorMessage)
+      return navigate.replace(ROUTER_PATH.LOGIN, { replace: true });
+  }, [dispatch, errorMessage, navigate]);
 
   const navItemStyle = {
     '--margin': UIState.isFixedMenu ? '-20px' : '10px',
@@ -45,7 +47,7 @@ const SideMenu = () => {
         {!isLoading && (
           <NavItem
             navItemStyle={navItemStyle}
-            toRoute={ROUTE.HOME}
+            toRoute={ROUTER_PATH.HOME}
             label='記事'
             type='memo'
           />
@@ -54,7 +56,7 @@ const SideMenu = () => {
           labels.map((label) => (
             <NavItem
               navItemStyle={navItemStyle}
-              toRoute={ROUTE.BUILD_LABEL_PATH(label.name)}
+              toRoute={ROUTER_PATH.BUILD_LABEL_PATH(label.name)}
               key={label._id}
               label={label.name}
               type='label'
@@ -64,7 +66,7 @@ const SideMenu = () => {
         {!isLoading && (
           <NavItem
             navItemStyle={navItemStyle}
-            toRoute={ROUTE.ARCHIVE}
+            toRoute={ROUTER_PATH.ARCHIVE}
             label='封存'
             type='archive'
           />
@@ -72,6 +74,6 @@ const SideMenu = () => {
       </SSideMenuList>
     </SSideMenu>
   );
-};
+}
 
 export default SideMenu;

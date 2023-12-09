@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { memosActions } from '@/store/memosSlice';
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
-import { addMemo } from '@/store/memosSlice/memos-action.js';
-import { useUI } from '@/contexts/UI-context';
-import { PALETTE_COLORS } from '@/constants/paletteColors.js';
 
+import { memosActions } from '@/store/memosSlice';
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
+import { addMemo } from '@/store/memosSlice/memos-action';
+import { useUI } from '@/contexts/UI-context';
+import { PALETTE_COLORS } from '@/constants/paletteColors';
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
 import EditCardImages from '@/components/EditCard/EditCardImages';
 import EditCardTitle from '@/components/EditCard/EditCardTitle';
@@ -19,16 +19,15 @@ import {
   SEditCard,
   SEditCardBody,
   SCardCreatedAt,
-} from '@/components/EditCard/style.jsx';
+} from '@/components/EditCard/style';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 function EditCard() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isEmptyPost, setIsEmptyPost] = useState(true);
 
-  const match = useRouteMatch();
-  const { memoId } = match.params;
+  const { memoId } = useParams();
   const { dispatchUpdateMemo } = useUpdateMemo(memoId);
 
   const { memo, isLoading, isMemoUpdated } = useSelector(
@@ -61,7 +60,7 @@ function EditCard() {
 
     // edit memo
     if (!isNewPost && isMemoUpdated) await dispatchUpdateMemo(memo);
-    history.push({ search: '' });
+    navigate({ search: '' });
     dispatch(memosActions.resetMemo());
   };
 

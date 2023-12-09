@@ -1,11 +1,12 @@
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { memosActions } from '@/store/memosSlice';
-import { ROUTE } from '@/constants/routes.js';
-import { SCancelEditButton } from '@/components/ActionButtons/CancelEditButton/style.jsx';
 
-const CancelEditButton = () => {
-  const history = useHistory();
+import { memosActions } from '@/store/memosSlice';
+import { ROUTER_PATH } from '@/routes';
+import { SCancelEditButton } from '@/components/ActionButtons/CancelEditButton/style';
+
+function CancelEditButton() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { search } = useLocation();
   const editQuery = !!new URLSearchParams(search).get('edit');
@@ -13,9 +14,9 @@ const CancelEditButton = () => {
   const cancelEditHandler = (e) => {
     e.preventDefault();
     if (editQuery) {
-      history.push({ search: null });
+      navigate({ search: null });
     } else {
-      history.push(ROUTE.HOME);
+      navigate(ROUTER_PATH.HOME);
     }
     dispatch(memosActions.resetMemo());
   };
@@ -23,6 +24,6 @@ const CancelEditButton = () => {
   return (
     <SCancelEditButton onClick={cancelEditHandler}>取消編輯</SCancelEditButton>
   );
-};
+}
 
 export default CancelEditButton;

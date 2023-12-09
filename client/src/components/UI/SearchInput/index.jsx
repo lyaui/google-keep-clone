@@ -1,15 +1,16 @@
 import { useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
-import { ROUTE } from '@/constants/routes.js';
-import * as Icon from '@/components/UI/Icon/index.jsx';
-import { SSearch, SSreachInput } from '@/components/UI/SearchInput/style.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
 
-const SearchInput = () => {
-  const history = useHistory();
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
+import { ROUTER_PATH } from '@/routes';
+import * as Icon from '@/components/UI/Icon';
+import { SSearch, SSreachInput } from '@/components/UI/SearchInput/style';
+import { ButtonRound } from '@/components/UI/Buttons';
+
+function SearchInput() {
+  const navigate = useNavigate();
 
   const [isTouched, setIsTouched] = useState(false);
   const [keyword, setKeyword] = useState('');
@@ -17,7 +18,7 @@ const SearchInput = () => {
 
   const focusInputHandler = (e) => {
     e.preventDefault();
-    history.push(ROUTE.SEARCH);
+    navigate(ROUTER_PATH.SEARCH);
     setIsTouched(true);
   };
 
@@ -27,8 +28,8 @@ const SearchInput = () => {
     e.preventDefault();
     const enteredValue = inputRef.current.value;
     setKeyword(enteredValue);
-    if (!enteredValue.trim()) return history.push({ search: null });
-    history.push({ search: `?q=${enteredValue}` });
+    if (!enteredValue.trim()) return navigate({ search: null });
+    navigate({ search: `?q=${enteredValue}` });
   };
 
   const clearInputHandler = (e) => {
@@ -67,6 +68,6 @@ const SearchInput = () => {
       </Tippy>
     </SSearch>
   );
-};
+}
 
 export default SearchInput;

@@ -1,4 +1,5 @@
-import { useRouteMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 import logo from '@/assets/images/logo.png';
 import FixMenu from '@/components/Layout/Header/FixMenu';
 import SearchInput from '@/components/UI/SearchInput';
@@ -11,9 +12,8 @@ import {
   SHeaderTitle,
 } from '@/components/Layout/Header/style';
 
-const Header = () => {
-  const match = useRouteMatch();
-  const { labelName } = match.params;
+function Header() {
+  let { labelName } = useParams();
   const logoPath = logo;
 
   return (
@@ -35,6 +35,6 @@ const Header = () => {
       </div>
     </SHeader>
   );
-};
+}
 
 export default Header;

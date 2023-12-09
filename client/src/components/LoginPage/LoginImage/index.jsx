@@ -1,7 +1,7 @@
-import { useRouteMatch } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useAuth, login } from '@/contexts/auth-context';
-import { useUI, getUserSettings } from '@/contexts/UI-context/index.jsx';
-import { ROUTE } from '@/constants/routes.js';
+import { useUI, getUserSettings } from '@/contexts/UI-context';
+import { ROUTER_PATH } from '@/routes';
 import loginBackgroundImage from '@/assets/images/login-background.jpeg';
 import signupBackgroundImage from '@/assets/images/signup-background.jpeg';
 import {
@@ -9,10 +9,10 @@ import {
   SLoginImageTitle,
   SLoginImageText,
   SLoginImageButton,
-} from '@/components/LoginPage/LoginImage/style.jsx';
+} from '@/components/LoginPage/LoginImage/style';
 
-const LoginImage = () => {
-  const { path } = useRouteMatch();
+function LoginImage() {
+  const { pathname } = useLocation();
   const { authDispatch } = useAuth();
   const { UIDispatch } = useUI();
 
@@ -30,7 +30,7 @@ const LoginImage = () => {
     <SLoginImage
       style={{
         '--image':
-          path === ROUTE.LOGIN
+          pathname === ROUTER_PATH.LOGIN
             ? `url(${loginBackgroundImage})`
             : `url(${signupBackgroundImage})`,
       }}
@@ -47,6 +47,6 @@ const LoginImage = () => {
       </div>
     </SLoginImage>
   );
-};
+}
 
 export default LoginImage;

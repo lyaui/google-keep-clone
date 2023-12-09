@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useFetchMemos } from '@/hooks/fetchMemos-hook.js';
-import { useRouteMatch } from 'react-router-dom';
-import { getUserMemosByLabelName } from '@/store/memosSlice/memos-action.js';
+import { useParams } from 'react-router-dom';
+
+import { getUserMemosByLabelName } from '@/store/memosSlice/memos-action';
 import * as Icon from '@/components/UI/Icon';
 import SkeletonEditor from '@/skeletons/SkeletonEditor';
 import SkeletonCards from '@/skeletons/SkeletonCards';
@@ -9,10 +10,8 @@ import Cards from '@/components/Cards';
 import CardEditor from '@/components/CardEditor';
 import Hint from '@/components/UI/Hint';
 
-const Label = () => {
-  const {
-    params: { labelName },
-  } = useRouteMatch();
+function Label() {
+  const { labelName } = useParams();
 
   const params = useMemo(
     () => ({ labelName, query: { isArchived: false } }),
@@ -54,6 +53,6 @@ const Label = () => {
       )}
     </div>
   );
-};
+}
 
 export default Label;

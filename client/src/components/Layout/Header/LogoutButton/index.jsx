@@ -1,14 +1,15 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
-import { ROUTE } from '@/constants/routes.js';
-import { useAuth, logout } from '@/contexts/auth-context';
-import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
 
-const LogoutButton = () => {
-  const history = useHistory();
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
+import { ROUTER_PATH } from '@/routes';
+import { useAuth, logout } from '@/contexts/auth-context';
+import * as Icon from '@/components/UI/Icon/index';
+import { ButtonRound } from '@/components/UI/Buttons/index';
+
+function LogoutButton() {
+  const navigate = useNavigate();
   const { authState, authDispatch } = useAuth();
   const { isLoading } = authState;
 
@@ -16,7 +17,7 @@ const LogoutButton = () => {
     e.preventDefault();
 
     await logout(authDispatch);
-    history.replace(ROUTE.LOGIN);
+    navigate.replace(ROUTER_PATH.LOGIN, { replace: true });
   };
 
   return (
@@ -26,6 +27,6 @@ const LogoutButton = () => {
       </ButtonRound>
     </Tippy>
   );
-};
+}
 
 export default LogoutButton;

@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
+
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import {
   SMemosFilter,
   SMemosFilterTitle,
   SMemosFilterUnit,
   SMemosFilterColor,
   SMemosFilterContainer,
-} from '@/components/MemosFilter/style.jsx';
+} from '@/components/MemosFilter/style';
 
-const MemosFilter = ({ title, type, filter = [] }) => {
-  const history = useHistory();
+function MemosFilter({ title, type, filter = [] }) {
+  const navigate = useNavigate();
   const defaultUnits = 4;
   const [showUnitsNum, setShowUnitsNum] = useState(defaultUnits);
 
@@ -22,7 +23,7 @@ const MemosFilter = ({ title, type, filter = [] }) => {
   const clickFilterHandler =
     ({ type, value }) =>
     () =>
-      history.push({ search: `?${type}=${value}` });
+      navigate({ search: `?${type}=${value}` });
 
   return (
     <SMemosFilter>
@@ -70,6 +71,6 @@ const MemosFilter = ({ title, type, filter = [] }) => {
       </SMemosFilterContainer>
     </SMemosFilter>
   );
-};
+}
 
 export default MemosFilter;

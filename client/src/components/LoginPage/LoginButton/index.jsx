@@ -1,20 +1,23 @@
-import { useRouteMatch } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 import { useAuth, login, signup } from '@/contexts/auth-context';
-import { useUI, getUserSettings } from '@/contexts/UI-context/index.jsx';
-import { ROUTE } from '@/constants/routes.js';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import { useUI, getUserSettings } from '@/contexts/UI-context';
+import { ROUTER_PATH } from '@/routes';
+import * as Icon from '@/components/UI/Icon';
 import { ButtonRect } from '@/components/UI/Buttons';
 
-const LoginButton = ({ isFormValid, inputValues }) => {
-  const { path } = useRouteMatch();
+function LoginButton({ isFormValid, inputValues }) {
+  const { pathname } = useLocation();
   const { authState, authDispatch } = useAuth();
   const { isLoading } = authState;
-  const buttonText = path === ROUTE.LOGIN ? '登 入' : '註 冊';
+  const buttonText = pathname === ROUTER_PATH.LOGIN ? '登 入' : '註 冊';
   const { UIDispatch } = useUI();
 
   const submitFormHandler = async (e) => {
     e.preventDefault();
-    path === ROUTE.LOGIN ? await loginUserHandler() : await signupUserHandler();
+    pathname === ROUTER_PATH.LOGIN
+      ? await loginUserHandler()
+      : await signupUserHandler();
   };
 
   const loginUserHandler = async () => {
@@ -48,6 +51,6 @@ const LoginButton = ({ isFormValid, inputValues }) => {
       {isLoading && <Icon.Loading className='spinner' />}
     </ButtonRect>
   );
-};
+}
 
 export default LoginButton;

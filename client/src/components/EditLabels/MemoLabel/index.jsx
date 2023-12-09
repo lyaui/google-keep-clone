@@ -1,16 +1,12 @@
 import { useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
-import * as Icon from '@/components/UI/Icon/index.jsx';
-import {
-  SLabel,
-  SLabelIcon,
-  SLabelValue,
-} from '@/components/EditLabels/style.jsx';
+import { useParams } from 'react-router-dom';
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
 
-const MemoLabel = ({ id, label, isSideMenu }) => {
-  const { params } = useRouteMatch();
-  const { labelName } = params;
+import * as Icon from '@/components/UI/Icon/index';
+import { SLabel, SLabelIcon, SLabelValue } from '@/components/EditLabels/style';
+
+function MemoLabel({ id, label, isSideMenu }) {
+  const { labelName } = useParams();
 
   const {
     currentMemo: { labels },
@@ -44,6 +40,6 @@ const MemoLabel = ({ id, label, isSideMenu }) => {
       <SLabelValue>{label.name}</SLabelValue>
     </SLabel>
   );
-};
+}
 
 export default MemoLabel;

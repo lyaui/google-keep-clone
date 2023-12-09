@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import { useAuth } from '@/contexts/auth-context';
-import { ROUTE } from '@/constants/routes.js';
+import { ROUTER_PATH } from '@/routes';
 import LoginForm from '@/components/LoginPage/LoginForm';
 import LoginImage from '@/components/LoginPage/LoginImage';
-import { SLoginPage } from '@/components/LoginPage/style.jsx';
+import { SLoginPage } from '@/components/LoginPage/style';
 
-const Login = () => {
-  const history = useHistory();
+function Login() {
+  const navigate = useNavigate();
   const { authState } = useAuth();
   const { isLoggedIn, expiration } = authState;
 
@@ -17,7 +18,7 @@ const Login = () => {
     const expireTimestamp = new Date(expiration).getTime();
     const remainingTime = expireTimestamp - new Date().getTime();
     if (remainingTime < 0) return;
-    history.push(ROUTE.HOME);
+    navigate(ROUTER_PATH.HOME);
   }, [history, expiration, isLoggedIn]);
 
   return (
@@ -26,6 +27,6 @@ const Login = () => {
       <LoginImage />
     </SLoginPage>
   );
-};
+}
 
 export default Login;

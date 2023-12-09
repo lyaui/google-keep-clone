@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
-import { useUI } from '@/contexts/UI-context';
+import { Outlet } from 'react-router-dom';
 
+import { useUI } from '@/contexts/UI-context';
 import Header from '@/components/Layout/Header';
 import SideMenu from '@/components/Layout/SideMenu';
 import { SContainer } from '@/components/Layout/style';
 
-const Layout = ({ children }) => {
+function Layout() {
   const { UIState } = useUI();
   return (
     <Fragment>
@@ -19,11 +20,11 @@ const Layout = ({ children }) => {
               : '0px 80px 40px 100px',
           }}
         >
-          {children}
+          <Outlet />
         </main>
       </SContainer>
     </Fragment>
   );
-};
+}
 
 export default Layout;

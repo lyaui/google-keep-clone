@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useRouteMatch, useHistory } from 'react-router-dom';
-import { ROUTE } from '@/constants/routes.js';
-import { VALIDATOR_TYPES } from '@/utils/validator.js';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { ROUTER_PATH } from '@/routes';
+import { VALIDATOR_TYPES } from '@/utils/validator';
 import Logo from '@/assets/images/logo-text.png';
 import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
 import Input from '@/components/UI/Input';
@@ -24,19 +25,19 @@ const INIT_LOGIN_INPUTS = {
   password: { value: '', isValid: false },
 };
 
-const LoginForm = () => {
-  const { path } = useRouteMatch();
-  const history = useHistory();
+function LoginForm() {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [formInputs, setFormInputs] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
-  const formText = path === ROUTE.LOGIN ? '登入' : '註冊';
+  const formText = pathname === ROUTER_PATH.LOGIN ? '登入' : '註冊';
 
-  // set initInputs while path changes
+  // set initInputs while pathname changes
   useEffect(() => {
     const initInputs =
-      path === ROUTE.LOGIN ? INIT_LOGIN_INPUTS : INIT_SIGNUP_INPUTS;
+      pathname === ROUTER_PATH.LOGIN ? INIT_LOGIN_INPUTS : INIT_SIGNUP_INPUTS;
     setFormInputs(initInputs);
-  }, [path]);
+  }, [pathname]);
 
   // update input isValid value
   const validFormHandler = ({ name, value, isValid }) => {
@@ -56,8 +57,8 @@ const LoginForm = () => {
     setIsFormValid(isFormValid);
   }, [formInputs]);
 
-  const goLoginPage = () => history.push(ROUTE.LOGIN);
-  const goSignupPage = () => history.push(ROUTE.SIGNUP);
+  const goLoginPage = () => navigate(ROUTER_PATH.LOGIN);
+  const goSignupPage = () => navigate(ROUTER_PATH.SIGNUP);
 
   return (
     <SLoginForm onSubmit={() => {}}>
@@ -69,7 +70,7 @@ const LoginForm = () => {
 
       {/* form */}
       <SLoginFormSeparator>或</SLoginFormSeparator>
-      {path === ROUTE.SIGNUP && (
+      {pathname === ROUTER_PATH.SIGNUP && (
         <Input
           validFormHandler={validFormHandler}
           name='name'
@@ -101,18 +102,18 @@ const LoginForm = () => {
       />
 
       {/* toggle page */}
-      {path === ROUTE.LOGIN && (
+      {pathname === ROUTER_PATH.LOGIN && (
         <SFormHint>
           還不是會員嗎？ 立刻 <u onClick={goSignupPage}>註冊新帳號</u>
         </SFormHint>
       )}
-      {path === ROUTE.SIGNUP && (
+      {pathname === ROUTER_PATH.SIGNUP && (
         <SFormHint>
           已經有帳號了？ <u onClick={goLoginPage}>馬上登入</u>
         </SFormHint>
       )}
     </SLoginForm>
   );
-};
+}
 
 export default LoginForm;
