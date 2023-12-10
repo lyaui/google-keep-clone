@@ -13,10 +13,10 @@ const { HttpError } = require('./models');
 const cors = require('cors');
 
 mongoose
-  .connect(import.meta.env.DB_CONNECT)
+  .connect(process.env.DB_CONNECT)
   .then(() => {
-    app.listen(import.meta.env.PORT || 5000, () => {
-      console.log(`Server running on ${import.meta.env.PORT || 5000}.`);
+    app.listen(process.env.PORT || 5000, () => {
+      console.log(`Server running on ${process.env.PORT || 5000}.`);
     });
   })
   .catch((err) => console.log(err));

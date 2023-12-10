@@ -24,7 +24,7 @@ const signup = async (req, res, next) => {
 
     // token
     const tokenObj = { id: createdUser._id, email: createdUser.email };
-    const token = jwt.sign(tokenObj, import.meta.env.TOKEN_SECRET, {
+    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, {
       expiresIn,
     });
 
@@ -57,7 +57,7 @@ const login = async (req, res, next) => {
 
     // token
     const tokenObj = { id: user._id, email: user.email };
-    const token = jwt.sign(tokenObj, import.meta.env.TOKEN_SECRET, {
+    const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, {
       expiresIn,
     });
 
@@ -79,7 +79,7 @@ const login = async (req, res, next) => {
 const googleLogin = async (req, res) => {
   const { user } = req;
   const tokenObj = { id: user._id, email: user.email };
-  const token = jwt.sign(tokenObj, import.meta.env.TOKEN_SECRET, { expiresIn });
+  const token = jwt.sign(tokenObj, process.env.TOKEN_SECRET, { expiresIn });
 
   const storedData = JSON.stringify({
     userId: user._id,
@@ -89,7 +89,7 @@ const googleLogin = async (req, res) => {
     isLoggedIn: true,
   });
 
-  const url = `${import.meta.env.CLIENT_BASE_URL}/login`;
+  const url = `${process.env.CLIENT_BASE_URL}/login`;
 
   const html = `
   <!DOCTYPE html>
