@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const SButton = styled.button`
+import { ButtonProps } from '@/components/UI/Buttons';
+
+export const SButton = styled.button<ButtonProps>`
   text-align: center;
   background-color: ${(props) => props.color || 'transparent'};
   transition: var(--transition);
@@ -11,9 +13,9 @@ export const SButton = styled.button`
   }
 `;
 
-export const SButtonRound = styled(SButton)`
-  width: ${(props) => `${props.size}px` || '40px'};
-  height: ${(props) => `${props.size}px` || '40px'};
+export const SButtonRound = styled(SButton)<ButtonProps>`
+  width: ${(props) => `${props?.size || 40}px`};
+  height: ${(props) => `${props?.size || 40}px`};
   border-radius: var(--rounded-full);
   margin: 4px;
   svg {
@@ -24,7 +26,7 @@ export const SButtonRound = styled(SButton)`
   }
 `;
 
-export const SButtonSquare = styled(SButton)`
+export const SButtonSquare = styled(SButton)<ButtonProps>`
   border-radius: var(--rounded-md);
   background-color: rgba(0, 0, 0, 0.7);
   svg {
@@ -32,18 +34,11 @@ export const SButtonSquare = styled(SButton)`
   }
 `;
 
-export const SButtonRect = styled(SButton)`
+export const SButtonRect = styled(SButton)<ButtonProps>`
   color: hsl(var(--color-white));
   font-size: var(--text-base);
   background-color: hsl(var(--color-blue));
   border-radius: var(--rounded-sm);
   height: 40px;
   margin: 18px 0;
-`;
-
-export const SButtonRectDisabled = styled(SButtonRect)`
-  color: rgba(0, 0, 0, 0.2);
-  background-color: #eeeeee;
-  cursor: not-allowed;
-  pointer-events: all !important;
 `;
