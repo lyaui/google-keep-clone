@@ -19,7 +19,7 @@ export const SButtonRound = styled(SButton)`
   svg {
     fill: var(--color-icon);
   }
-  :hover {
+  &:hover {
     background-color: rgba(95, 99, 104, 0.157);
   }
 `;

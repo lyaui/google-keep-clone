@@ -6,10 +6,10 @@ export const SEditTaskItem = styled.div`
   line-height: 1.5em;
   background-color: hsl(var(--color));
   transition: var(--transition);
-  :hover [name='drag'] {
+  &:hover [name='drag'] {
     opacity: 1;
   }
-  :hover [name='delete'] {
+  &:hover [name='delete'] {
     opacity: 1;
   }
 `;

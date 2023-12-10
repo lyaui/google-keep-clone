@@ -38,7 +38,7 @@ export const SLoginImageButton = styled.button`
   cursor: pointer;
   box-shadow: var(--shadow-md);
   transition: var(--transition);
-  :hover {
+  &:hover {
     background-color: hsl(var(--color-yellow));
   }
 `;

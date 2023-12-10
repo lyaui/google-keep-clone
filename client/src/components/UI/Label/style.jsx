@@ -32,11 +32,11 @@ export const SLabel = styled.div`
   transition: var(--transition);
   position: relative;
 
-  :hover {
+  &:hover {
     padding: var(--padding);
   }
 
-  :hover ${SLabelButton} {
+  &:hover ${SLabelButton} {
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.1);
   }

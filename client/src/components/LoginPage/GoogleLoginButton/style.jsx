@@ -16,7 +16,7 @@ export const SGoogleLoginButton = styled.button`
     font-weight: var(--font-normal) !important;
   }
 
-  :hover svg {
+  &:hover svg {
     opacity: 0.95;
   }
 

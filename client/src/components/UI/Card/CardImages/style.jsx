@@ -15,7 +15,7 @@ export const SCardImages = styled.div`
 const SCardImage = styled.div`
   position: relative;
   cursor: pointer;
-  :hover button {
+  &:hover button {
     opacity: 1;
   }
   img {

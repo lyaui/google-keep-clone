@@ -13,7 +13,7 @@ export const SCardFooter = styled.div`
   opacity: 0;
   transition: var(--transition);
 
-  ${SCard} :hover & {
+  ${SCard} &:hover & {
     opacity: 1;
   }
 `;

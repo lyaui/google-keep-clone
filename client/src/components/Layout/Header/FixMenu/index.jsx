@@ -1,9 +1,9 @@
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
-import { useUI, updateUserSettings } from '@/contexts/UI-context/index.jsx';
-import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
+import { useUI, updateUserSettings } from '@/contexts/UI-context';
+import * as Icon from '@/components/UI/Icon';
+import { ButtonRound } from '@/components/UI/Buttons';
 
 const FixMenu = () => {
   const { UIState, UIDispatch } = useUI();

@@ -12,17 +12,17 @@ export const SSideMenu = styled.aside`
   overflow: scroll;
   transition: width 0.3s;
 
-  :hover {
+  &:hover {
     width: 280px;
     box-shadow: var(--shadow-lg);
   }
 
-  :hover ${SNavItemText} {
+  &:hover ${SNavItemText} {
     opacity: 0.9;
     width: 100%;
   }
 
-  :hover ${SNavItem} {
+  &:hover ${SNavItem} {
     margin-left: -20px;
     padding-left: 20px;
     button {

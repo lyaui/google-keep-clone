@@ -10,7 +10,7 @@ export const SNavItem = styled.li`
   transition: var(--transition);
   display: flex;
   align-items: center;
-  :hover {
+  &:hover {
     background-color: var(--color-hover-bg);
   }
   button {

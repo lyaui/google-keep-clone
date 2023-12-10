@@ -41,14 +41,14 @@ export const SLabel = styled.div`
   display: flex;
   align-items: start;
 
-  :hover {
+  &:hover {
     background-color: var(--hover);
   }
-  :hover svg[name='label'] {
+  &:hover svg[name='label'] {
     display: none;
   }
 
-  :hover svg[name='delete'] {
+  &:hover svg[name='delete'] {
     display: block;
   }
   span {

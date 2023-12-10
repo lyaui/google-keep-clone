@@ -12,10 +12,10 @@ export const SCard = styled.div`
   border-radius: var(--rounded-lg);
   cursor: pointer;
   transition: var(--transition);
-  :hover {
+  &:hover {
     box-shadow: var(--shadow-md);
   }
-  :hover ${SCardPin} {
+  &:hover ${SCardPin} {
     opacity: 0.9;
   }
 `;

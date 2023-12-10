@@ -22,7 +22,7 @@ export const SColor = styled.div`
   background-color: hsl(var(--color));
   border: 2px solid hsl(var(--border));
   cursor: pointer;
-  :hover {
+  &:hover {
     border: 2px solid var(--color-text);
   }
   svg {
