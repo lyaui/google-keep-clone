@@ -5,7 +5,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 
 const CopyMemoButton = ({ id }) => {
   const dispatch = useDispatch();
@@ -19,9 +19,9 @@ const CopyMemoButton = ({ id }) => {
 
   return (
     <Tippy content={TOOLTIP_TEXT.COPY}>
-      <ButtonRound size={34} onClick={copyMemoHandler}>
+      <Button size="medium" onClick={copyMemoHandler}>
         <Icon.Copy />
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 };

@@ -4,7 +4,7 @@ import { useAuth, login, signup } from '@/contexts/auth-context';
 import { useUI, getUserSettings } from '@/contexts/UI-context';
 import { ROUTER_PATH } from '@/routes';
 import * as Icon from '@/components/UI/Icon';
-import { ButtonRect } from '@/components/UI/Buttons';
+import Button from '@/components/UI/Buttons';
 
 function LoginButton({ isFormValid, inputValues }) {
   const { pathname } = useLocation();
@@ -42,14 +42,24 @@ function LoginButton({ isFormValid, inputValues }) {
   };
 
   return (
-    <ButtonRect
+    <Button
+      variant="rectangle"
       onClick={submitFormHandler}
-      isFormValid={isFormValid}
+      style={
+        isFormValid
+          ? {
+              color: 'rgba(0, 0, 0, 0.2)',
+              'background-color': '#eeeeee',
+              cursor: 'not-allowed',
+              'pointer-events': 'all !important',
+            }
+          : {}
+      }
       disabled={isLoading}
     >
       {!isLoading && buttonText}
       {isLoading && <Icon.Loading className="spinner" />}
-    </ButtonRect>
+    </Button>
   );
 }
 

@@ -7,7 +7,7 @@ import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { ROUTER_PATH } from '@/routes';
 import * as Icon from '@/components/UI/Icon';
 import { SSearch, SSreachInput } from '@/components/UI/SearchInput/style';
-import { ButtonRound } from '@/components/UI/Buttons';
+import Button from '@/components/UI/Buttons';
 
 function SearchInput() {
   const navigate = useNavigate();
@@ -48,9 +48,9 @@ function SearchInput() {
       onSubmit={(e) => e.preventDefault()}
     >
       <Tippy content={TOOLTIP_TEXT.SEARCH}>
-        <ButtonRound size={40}>
+        <Button size="large">
           <Icon.Search />
-        </ButtonRound>
+        </Button>
       </Tippy>
       <SSreachInput
         ref={inputRef}
@@ -62,9 +62,9 @@ function SearchInput() {
         placeholder="搜尋"
       />
       <Tippy content={TOOLTIP_TEXT.CLEAR_SEARCH}>
-        <ButtonRound size={40} onClick={clearInputHandler}>
+        <Button size="large" onClick={clearInputHandler}>
           <Icon.Clear />
-        </ButtonRound>
+        </Button>
       </Tippy>
     </SSearch>
   );

@@ -6,7 +6,7 @@ import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { ROUTER_PATH } from '@/routes';
 import { useAuth, logout } from '@/contexts/auth-context';
 import * as Icon from '@/components/UI/Icon/index';
-import { ButtonRound } from '@/components/UI/Buttons/index';
+import Button from '@/components/UI/Buttons/index';
 
 function LogoutButton() {
   const navigate = useNavigate();
@@ -22,9 +22,9 @@ function LogoutButton() {
 
   return (
     <Tippy content={TOOLTIP_TEXT.LOGOUT}>
-      <ButtonRound size={40} onClick={logoutUserHandler} disabled={isLoading}>
+      <Button size="large" onClick={logoutUserHandler} disabled={isLoading}>
         <Icon.Logout />
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 }

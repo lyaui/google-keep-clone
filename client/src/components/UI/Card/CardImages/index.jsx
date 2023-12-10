@@ -4,7 +4,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
 import { useUI } from '@/contexts/UI-context/index.jsx';
-import { ButtonSquare } from '@/components/UI/Buttons';
+import Button from '@/components/UI/Buttons';
 import {
   SCardImages,
   SCardImage1,
@@ -45,12 +45,13 @@ const CardImages = ({
             <img draggable="false" src={image} alt="" />
             {isEditMode && (
               <Tippy content={TOOLTIP_TEXT.REMOVE}>
-                <ButtonSquare
-                  size="30"
+                <Button
+                  size="small"
+                  variant="square"
                   onClick={() => deleteImageHandler(index)}
                 >
                   <Icon.Delete />
-                </ButtonSquare>
+                </Button>
               </Tippy>
             )}
           </SCardImage>

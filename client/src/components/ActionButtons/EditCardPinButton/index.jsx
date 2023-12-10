@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style.jsx';
 
 const EditCardPinButton = ({ id }) => {
@@ -21,9 +21,9 @@ const EditCardPinButton = ({ id }) => {
   return (
     <Tippy content={tooltipText}>
       <SCardPin style={{ '--opacity': currentMemo._id ? 0 : 1 }}>
-        <ButtonRound size={34} onClick={togglePinHandler}>
+        <Button size="medium" onClick={togglePinHandler}>
           {currentMemo.isPinned ? <Icon.Pin /> : <Icon.PinOutline />}
-        </ButtonRound>
+        </Button>
       </SCardPin>
     </Tippy>
   );

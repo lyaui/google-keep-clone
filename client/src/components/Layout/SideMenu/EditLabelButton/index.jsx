@@ -4,7 +4,7 @@ import {
   SNavItem,
   SNavItemText,
 } from '@/components/Layout/SideMenu/NavItem/style.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 import Modal from '@/components/UI/Modal';
 import EditLabels from '@/components/EditLabels';
 
@@ -17,9 +17,9 @@ const EditLabelButton = ({ navItemStyle }) => {
   return (
     <Fragment>
       <SNavItem style={navItemStyle} onClick={openEditModalHandler}>
-        <ButtonRound size={40}>
+        <Button size="large">
           <Icon.EditOutline />
-        </ButtonRound>
+        </Button>
         <SNavItemText isFixedMenu={true}>編輯標籤</SNavItemText>
       </SNavItem>
       <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>

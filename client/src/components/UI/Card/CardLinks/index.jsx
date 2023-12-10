@@ -2,7 +2,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 import LinkItem from '@/components/UI/LinkItem';
 import {
   SCardLinks,
@@ -41,9 +41,9 @@ const CardLinks = ({ links, isOnlyLinks }) => {
           <LinkItem link={link} isOnlyLinks={isOnlyLinks}>
             {/* go share link */}
             <Tippy content={TOOLTIP_TEXT.GO_URL}>
-              <ButtonRound size={28} onClick={goShareLink(link.url)}>
+              <Button size="small" onClick={goShareLink(link.url)}>
                 <Icon.Share />
-              </ButtonRound>
+              </Button>
             </Tippy>
           </LinkItem>
         </SCardLink>

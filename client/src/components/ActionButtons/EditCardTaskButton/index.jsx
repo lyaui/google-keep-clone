@@ -5,7 +5,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 
 const EditCardTaskButton = () => {
   const dispatch = useDispatch();
@@ -37,9 +37,9 @@ const EditCardTaskButton = () => {
 
   return (
     <Tippy content={TOOLTIP_TEXT.CHECKBOX}>
-      <ButtonRound size={34} onClick={toggleTaskHandler}>
+      <Button size="medium" onClick={toggleTaskHandler}>
         <Icon.CheckboxOutline />
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 };

@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 import { SUploadImage } from '@/components/ActionButtons/UploadImageButton/style.jsx';
 
 const UploadImageButton = () => {
@@ -21,7 +21,7 @@ const UploadImageButton = () => {
 
   return (
     <Tippy content={TOOLTIP_TEXT.IMAGE}>
-      <ButtonRound size={34} style={{ position: 'relative' }}>
+      <Button size="medium" style={{ position: 'relative' }}>
         <Icon.Image />
         <SUploadImage htmlFor="upload-button" />
         <input
@@ -31,7 +31,7 @@ const UploadImageButton = () => {
           accept=".jpg,.png,.jpeg,.gif"
           onChange={pickImageHandler}
         />
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 };

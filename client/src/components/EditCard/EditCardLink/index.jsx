@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 import LinkItem from '@/components/UI/LinkItem';
 import {
   SEditCardLink,
@@ -48,9 +48,9 @@ const EditCardLink = ({ id }) => {
           <LinkItem link={link}>
             {/* go share link */}
             <Tippy content={TOOLTIP_TEXT.PREVIEW_URL}>
-              <ButtonRound size={28} onClick={removeLinkHandler(link.url)}>
+              <Button size="small" onClick={removeLinkHandler(link.url)}>
                 <Icon.Clear />
-              </ButtonRound>
+              </Button>
             </Tippy>
           </LinkItem>
         </SEditCardLink>

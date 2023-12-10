@@ -7,7 +7,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import { PALETTE_COLORS } from '@/constants/paletteColors.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 import {
   SEditCardColor,
   SColor,
@@ -64,9 +64,9 @@ const EditCardColorButton = ({ id }) => {
         onClickOutside={() => setShowTooltip(false)}
       >
         <Tippy content={TOOLTIP_TEXT.PALETTE}>
-          <ButtonRound size={34} onClick={showPaletteHandler}>
+          <Button size="medium" onClick={showPaletteHandler}>
             <Icon.Palette />
-          </ButtonRound>
+          </Button>
         </Tippy>
       </CustomTippy>
     </div>

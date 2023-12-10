@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 import EditLabels from '@/components/EditLabels';
 
 const EditCardLabelsButton = ({ id }) => {
@@ -23,9 +23,9 @@ const EditCardLabelsButton = ({ id }) => {
         onClickOutside={() => setShowTooltip(false)}
       >
         <Tippy content={TOOLTIP_TEXT.LABEL}>
-          <ButtonRound size={34} onClick={showTooltipHandler}>
+          <Button size="medium" onClick={showTooltipHandler}>
             <Icon.LabelOutline />
-          </ButtonRound>
+          </Button>
         </Tippy>
       </CustomTippy>
     </div>

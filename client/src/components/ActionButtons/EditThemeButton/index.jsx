@@ -5,7 +5,7 @@ import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import { useUI, updateUserSettings } from '@/contexts/UI-context/index.jsx';
 import { THEME } from '@/constants/UI.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 
 const EditThemeButton = () => {
   const { UIState, UIDispatch } = useUI();
@@ -23,9 +23,9 @@ const EditThemeButton = () => {
 
   return (
     <Tippy content={isLight ? TOOLTIP_TEXT.DARK_MODE : TOOLTIP_TEXT.LIGHT_MODE}>
-      <ButtonRound size={40} onClick={toggleThemeHandler} disabled={isLoading}>
+      <Button size="large" onClick={toggleThemeHandler} disabled={isLoading}>
         {isLight ? <Icon.Moon /> : <Icon.Sun />}
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 };

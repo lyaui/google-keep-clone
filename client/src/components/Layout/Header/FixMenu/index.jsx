@@ -3,7 +3,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { useUI, updateUserSettings } from '@/contexts/UI-context';
 import * as Icon from '@/components/UI/Icon';
-import { ButtonRound } from '@/components/UI/Buttons';
+import Button from '@/components/UI/Buttons';
 
 const FixMenu = () => {
   const { UIState, UIDispatch } = useUI();
@@ -17,13 +17,9 @@ const FixMenu = () => {
 
   return (
     <Tippy content={TOOLTIP_TEXT.MENU}>
-      <ButtonRound
-        size={44}
-        onClick={toggleIsFixedMenuHandler}
-        disabled={isLoading}
-      >
+      <Button size={44} onClick={toggleIsFixedMenuHandler} disabled={isLoading}>
         <Icon.Menu />
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 };

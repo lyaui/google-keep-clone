@@ -5,7 +5,7 @@ import {
   SNavItem,
   SNavItemText,
 } from '@/components/Layout/SideMenu/NavItem/style';
-import { ButtonRound } from '@/components/UI/Buttons';
+import Button from '@/components/UI/Buttons';
 
 function NavItem({ navItemStyle, toRoute, label, type = 'tag' }) {
   const icon =
@@ -26,7 +26,7 @@ function NavItem({ navItemStyle, toRoute, label, type = 'tag' }) {
         })}
         end
       >
-        <ButtonRound size={40}>{icon}</ButtonRound>
+        <Button size="large">{icon}</Button>
         <SNavItemText>{label}</SNavItemText>
       </NavLink>
     </SNavItem>

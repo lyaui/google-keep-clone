@@ -4,7 +4,7 @@ import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
 import { useUI, updateUserSettings } from '@/contexts/UI-context/index.jsx';
 import { VIEW_MODE } from '@/constants/UI.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 
 const EditViewModeButton = () => {
   const { UIState, UIDispatch } = useUI();
@@ -19,13 +19,9 @@ const EditViewModeButton = () => {
 
   return (
     <Tippy content={isGrid ? TOOLTIP_TEXT.VIEW_LIST : TOOLTIP_TEXT.VIEW_GRID}>
-      <ButtonRound
-        size={40}
-        onClick={toggleViewModeHandler}
-        disabled={isLoading}
-      >
+      <Button size="large" onClick={toggleViewModeHandler} disabled={isLoading}>
         {isGrid ? <Icon.List /> : <Icon.Grid />}
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 };

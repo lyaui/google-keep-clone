@@ -3,7 +3,7 @@ import * as Icon from '@/components/UI/Icon/index.jsx';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
-import { ButtonRound } from '@/components/UI/Buttons/index.jsx';
+import Button from '@/components/UI/Buttons';
 
 const EditCardArchiveButton = ({ id }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
@@ -19,9 +19,9 @@ const EditCardArchiveButton = ({ id }) => {
 
   return (
     <Tippy content={tooltipText}>
-      <ButtonRound size={34} onClick={toggleArchiveHandler}>
+      <Button size="medium" onClick={toggleArchiveHandler}>
         {currentMemo.isArchived ? <Icon.Unarchive /> : <Icon.Archive />}
-      </ButtonRound>
+      </Button>
     </Tippy>
   );
 };
