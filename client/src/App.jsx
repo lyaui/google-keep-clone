@@ -49,13 +49,13 @@ function App() {
   };
 
   return (
-    <Suspense fallback={<div></div>}>
-      <RouterProvider router={router}>
-        <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Suspense fallback={<div></div>}>
+        <RouterProvider router={router}>
           <Toast />
-        </DragDropContext>
-      </RouterProvider>
-    </Suspense>
+        </RouterProvider>
+      </Suspense>
+    </DragDropContext>
   );
 }
 
