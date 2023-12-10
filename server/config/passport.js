@@ -18,7 +18,7 @@ passport.use(
     } catch (err) {
       return done(err, false);
     }
-  }),
+  })
 );
 
 // google OAuth
@@ -46,6 +46,6 @@ passport.use(
       } catch (err) {
         return done(err, false);
       }
-    },
-  ),
+    }
+  )
 );

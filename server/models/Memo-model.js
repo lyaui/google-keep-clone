@@ -44,7 +44,7 @@ const memoSchema = new Schema(
       default: 'DEFAULT',
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 const Memo = model('Memo', memoSchema);
 

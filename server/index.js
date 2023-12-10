@@ -28,12 +28,12 @@ app.use('/api/user', userRoute);
 app.use(
   '/api/labels',
   passport.authenticate('jwt', { session: false }),
-  labelRoute,
+  labelRoute
 );
 app.use(
   '/api/memos',
   passport.authenticate('jwt', { session: false }),
-  memoRoute,
+  memoRoute
 );
 app.use('/api/upload', uploadRoute);
 

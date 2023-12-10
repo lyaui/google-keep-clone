@@ -7,7 +7,8 @@ const getUserLabels = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     const { labels } = await user.populate('labels', ['_id', 'name']);
     res.status(200).json({
@@ -26,16 +27,23 @@ const createLabel = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label name exists
     const label = await Label.findOne({ creator: userId, name: name.trim() });
-    if (label) return next(new HttpError('Label name has existed, please try new one.', 422));
+    if (label)
+      return next(
+        new HttpError('Label name has existed, please try new one.', 422)
+      );
 
     // create label add to user labels
     const session = await mongoose.startSession();
     session.startTransaction();
-    const createdLabel = await new Label({ creator: userId, name: name.trim() }).save({ session });
+    const createdLabel = await new Label({
+      creator: userId,
+      name: name.trim(),
+    }).save({ session });
     user.labels.push(createdLabel);
     await user.save({ session });
     await session.commitTransaction();
@@ -58,11 +66,16 @@ const updateLabel = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label exists
-    const label = await Label.findOne({ creator: userId, _id: labelId }, ['_id', 'name']);
-    if (!label) return next(new HttpError('Could not find label for provided id.', 404));
+    const label = await Label.findOne({ creator: userId, _id: labelId }, [
+      '_id',
+      'name',
+    ]);
+    if (!label)
+      return next(new HttpError('Could not find label for provided id.', 404));
 
     // check if updated label name exists, and update label name
     label.name = name.trim();
@@ -70,7 +83,9 @@ const updateLabel = async (req, res, next) => {
       $and: [{ creator: userId }, { name: name.trim() }],
     });
     if (hasSameLabel)
-      return next(new HttpError('Label name has existed, please try new one.', 422));
+      return next(
+        new HttpError('Label name has existed, please try new one.', 422)
+      );
     await label.save();
 
     res.status(200).json({
@@ -90,7 +105,10 @@ const deleteLabel = async (req, res, next) => {
   try {
     // check if label exists
     const label = await Label.findOne({ _id: labelId, creator: userId });
-    if (!label) return next(new HttpError('Could not find label for the provided id.', 404));
+    if (!label)
+      return next(
+        new HttpError('Could not find label for the provided id.', 404)
+      );
     await label.populate('creator');
 
     const session = await mongoose.startSession();
@@ -104,7 +122,9 @@ const deleteLabel = async (req, res, next) => {
     await label.creator.save({ session });
     await session.commitTransaction();
 
-    res.status(200).json({ success: true, message: 'Delete label successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Delete label successfully' });
   } catch (err) {
     return next(new HttpError(err));
   }

@@ -8,7 +8,13 @@ const getUserMemos = async (req, res, next) => {
 
   const searchConfig = { $regex: q, $options: 'i' };
   const keyword = q
-    ? { $or: [{ content: searchConfig }, { title: searchConfig }, { 'tasks.name': searchConfig }] }
+    ? {
+        $or: [
+          { content: searchConfig },
+          { title: searchConfig },
+          { 'tasks.name': searchConfig },
+        ],
+      }
     : {};
   const typeCondition = type ? { [`${type}.0`]: { $exists: true } } : {};
   const colorCondition = color ? { color } : {};
@@ -17,7 +23,8 @@ const getUserMemos = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     // check user settings and sort data
     const sortedOrder = user.settings.sort === 'ASCEND' ? 1 : -1;
@@ -53,11 +60,13 @@ const getUserMemosByLabelName = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     // check if label exists
     const label = await Label.findOne({ creator: userId, name: labelName });
-    if (!label) return next(new HttpError('Could not find label for provided id', 404));
+    if (!label)
+      return next(new HttpError('Could not find label for provided id', 404));
 
     const { memos } = await label.populate({
       path: 'memos',
@@ -83,11 +92,15 @@ const getUserMemoByMemoId = async (req, res, next) => {
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     // check if memo exists
-    const memo = await Memo.findById({ creator: userId, _id: memoId }).populate('labels');
-    if (!memo) return next(new HttpError('Could not find memo for provided id', 404));
+    const memo = await Memo.findById({ creator: userId, _id: memoId }).populate(
+      'labels'
+    );
+    if (!memo)
+      return next(new HttpError('Could not find memo for provided id', 404));
 
     res.status(200).json({
       success: true,
@@ -98,12 +111,23 @@ const getUserMemoByMemoId = async (req, res, next) => {
 
 const createMemo = async (req, res, next) => {
   const { id: userId } = req.user;
-  const { title, content, images, isTaskList, isPinned, isArchived, links, labels, tasks, color } =
-    req.body;
+  const {
+    title,
+    content,
+    images,
+    isTaskList,
+    isPinned,
+    isArchived,
+    links,
+    labels,
+    tasks,
+    color,
+  } = req.body;
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     const createdMemo = new Memo({
       creator: userId,
@@ -124,7 +148,10 @@ const createMemo = async (req, res, next) => {
     // save created memo
     await createdMemo.save({ session });
     // add memo to labels
-    await Label.updateMany({ _id: labels }, { $push: { memos: createdMemo._id } }).session(session);
+    await Label.updateMany(
+      { _id: labels },
+      { $push: { memos: createdMemo._id } }
+    ).session(session);
     // add memo to user
     user.memos.push(createdMemo);
     await user.save({ session });
@@ -145,30 +172,59 @@ const createMemo = async (req, res, next) => {
 
 const updateMemo = async (req, res, next) => {
   const { id: userId } = req.user;
-  const { title, content, images, isPinned, isArchived, links, labels, tasks, color, isTaskList } =
-    req.body;
+  const {
+    title,
+    content,
+    images,
+    isPinned,
+    isArchived,
+    links,
+    labels,
+    tasks,
+    color,
+    isTaskList,
+  } = req.body;
   const { memoId } = req.params;
 
   try {
     // check if user exists
     const user = await User.findById(userId);
-    if (!user) return next(new HttpError('Could not find user for provided id', 404));
+    if (!user)
+      return next(new HttpError('Could not find user for provided id', 404));
 
     // check if memo exists
     const memo = await Memo.findOne({ creator: userId, _id: memoId });
-    if (!memo) return next(new HttpError('Could not find memo for provided id.', 404));
+    if (!memo)
+      return next(new HttpError('Could not find memo for provided id.', 404));
 
     const session = await mongoose.startSession();
     session.startTransaction();
     // update memo
     const updatedMemo = await Memo.findOneAndUpdate(
       { $and: [{ creator: userId }, { _id: memoId }] },
-      { title, content, images, isPinned, isArchived, links, labels, tasks, color, isTaskList },
-      { new: true },
+      {
+        title,
+        content,
+        images,
+        isPinned,
+        isArchived,
+        links,
+        labels,
+        tasks,
+        color,
+        isTaskList,
+      },
+      { new: true }
     ).session(session);
     // update labels's memo
-    await Label.updateMany({ memos: memoId }, { $pull: { memos: memoId } }).session(session);
-    await Label.updateMany({ _id: labels }, { $push: { memos: memoId } }).session(session);
+    await Label.updateMany(
+      { memos: memoId },
+      { $pull: { memos: memoId } }
+    ).session(session);
+    await Label.updateMany(
+      { _id: labels },
+      { $push: { memos: memoId } }
+    ).session(session);
     await session.commitTransaction();
 
     // return data with label details
@@ -191,7 +247,10 @@ const deleteMemo = async (req, res, next) => {
   try {
     // check if memo exists
     const memo = await Memo.findOne({ creator: userId, _id: memoId });
-    if (!memo) return next(new HttpError('Could not find memo for the provided id.', 404));
+    if (!memo)
+      return next(
+        new HttpError('Could not find memo for the provided id.', 404)
+      );
     await memo.populate('creator');
 
     const session = await mongoose.startSession();
@@ -205,7 +264,9 @@ const deleteMemo = async (req, res, next) => {
     await memo.creator.save({ session });
     await session.commitTransaction();
 
-    res.status(200).json({ success: true, message: 'Delete label successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Delete label successfully' });
   } catch (err) {
     return next(new HttpError(err));
   }
@@ -218,7 +279,11 @@ const getLinksInfo = async (req, res) => {
   try {
     for (let i = 0; i < links.length; i += 1) {
       const res = await getLinkPreview(links[i]);
-      const link = { url: res.url, title: res.title, image: res.images[0] || '' };
+      const link = {
+        url: res.url,
+        title: res.title,
+        image: res.images[0] || '',
+      };
       resLinkInfos.push(link);
     }
     res.status(200).json({
