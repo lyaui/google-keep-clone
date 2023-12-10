@@ -76,7 +76,7 @@ const EditTaskItem = ({ task, index, id }) => {
 
   return (
     <SEditTaskItem style={{ '--color': memoColor }}>
-      <SEditTaskItemIcon style={{ '--margin': !!id ? 0 : '-10px' }}>
+      <SEditTaskItemIcon style={{ '--margin': id ? 0 : '-10px' }}>
         {!id && <Icon.Drag name="drag" />}
         {!task.isCompleted && (
           <Icon.EmptyCheckbox

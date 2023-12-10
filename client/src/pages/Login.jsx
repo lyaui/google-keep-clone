@@ -19,7 +19,7 @@ function Login() {
     const remainingTime = expireTimestamp - new Date().getTime();
     if (remainingTime < 0) return;
     navigate(ROUTER_PATH.HOME);
-  }, [history, expiration, isLoggedIn]);
+  }, [expiration, isLoggedIn, navigate]);
 
   return (
     <SLoginPage>

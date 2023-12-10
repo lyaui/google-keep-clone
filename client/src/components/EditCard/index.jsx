@@ -33,7 +33,7 @@ function EditCard() {
   const { memo, isLoading, isMemoUpdated } = useSelector(
     (state) => state.memos
   );
-  const isNewPost = !!!memo._id;
+  const isNewPost = !!memo._id;
   const { isTaskList, color } = memo;
   const { UIState } = useUI();
   const memoColor = PALETTE_COLORS[color][UIState.theme];
