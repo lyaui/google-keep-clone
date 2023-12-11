@@ -1,10 +1,19 @@
 import { Fragment } from 'react';
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { useUI } from '@/contexts/UI-context';
 import Header from '@/components/Layout/Header';
 import SideMenu from '@/components/Layout/SideMenu';
-import { SContainer } from '@/components/Layout/style';
+
+export const SContainer = styled.div`
+  display: flex;
+  height: calc(100vh - 64px);
+  main {
+    width: 100%;
+    overflow: scroll;
+  }
+`;
 
 function Layout() {
   const { UIState } = useUI();
@@ -15,7 +24,7 @@ function Layout() {
         <SideMenu />
         <main
           style={{
-            '--padding': UIState.isFixedMenu
+            padding: UIState.isFixedMenu
               ? '0px 80px 40px 80px'
               : '0px 80px 40px 100px',
           }}
