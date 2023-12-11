@@ -1,4 +1,10 @@
-import type { ReactNode, CSSProperties, ComponentPropsWithoutRef } from 'react';
+import type {
+  ReactNode,
+  CSSProperties,
+  ComponentPropsWithoutRef,
+  MouseEvent,
+  MouseEventHandler,
+} from 'react';
 
 import {
   SButtonRound,
@@ -14,7 +20,7 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   variant?: Variant;
   size?: number | Size;
   color?: string;
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   style?: CSSProperties;
   disabled?: boolean;
 }
@@ -41,9 +47,9 @@ function Button({
       ? size
       : { small: 28, medium: 34, large: 40 }[size] || 34;
 
-  const handleClick = () => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (disabled) return;
-    onClick();
+    onClick(event);
   };
 
   return (
