@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style.jsx';
+import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style';
 
 export const SCard = styled.div`
   position: relative;

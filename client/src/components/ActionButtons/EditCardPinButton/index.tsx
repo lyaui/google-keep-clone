@@ -1,16 +1,18 @@
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
+import { type MouseEvent } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
+import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
-import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style.jsx';
 
-const EditCardPinButton = ({ id }) => {
+const EditCardPinButton = ({ id }: { id: string }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
-  const togglePinHandler = (e) => {
-    e.stopPropagation();
+  const togglePinHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     dispatchUpdateMemo({ isPinned: !currentMemo.isPinned });
   };
 
@@ -20,7 +22,7 @@ const EditCardPinButton = ({ id }) => {
 
   return (
     <Tippy content={tooltipText}>
-      <SCardPin style={{ '--opacity': currentMemo._id ? 0 : 1 }}>
+      <SCardPin isNewMemo={!!currentMemo._id}>
         <Button size="medium" onClick={togglePinHandler}>
           {currentMemo.isPinned ? <Icon.Pin /> : <Icon.PinOutline />}
         </Button>
