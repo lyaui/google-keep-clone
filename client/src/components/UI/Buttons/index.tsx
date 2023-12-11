@@ -9,13 +9,14 @@ import {
 } from 'react';
 
 import {
+  SButton,
   SButtonRound,
   SButtonSquare,
   SButtonRect,
 } from '@/components/UI/Buttons/style';
 
 type Size = 'small' | 'medium' | 'large';
-type Variant = 'round' | 'square' | 'rectangle';
+type Variant = 'round' | 'square' | 'rectangle' | 'text';
 
 export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   children: ReactNode;
@@ -46,6 +47,7 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(
         round: SButtonRound,
         square: SButtonSquare,
         rectangle: SButtonRect,
+        text: SButton,
       }[variant] || SButtonRound;
 
     const propSize =

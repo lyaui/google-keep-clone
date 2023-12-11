@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import { ButtonProps } from '@/components/UI/Buttons';
 
 export const SButton = styled.button<ButtonProps>`
+  color: var(--color-text);
+  font-size: var(--text-base);
   text-align: center;
   background-color: ${(props) => props.color || 'transparent'};
   transition: var(--transition);
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  transition: 'var(--transition)';
   svg {
     width: 90%;
     height: 90%;
