@@ -8,4 +8,7 @@ const store = configureStore({
     memos: memosReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+
 export default store;
