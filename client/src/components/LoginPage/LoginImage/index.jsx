@@ -2,8 +2,8 @@ import { useLocation } from 'react-router-dom';
 import { useAuth, login } from '@/contexts/auth-context';
 import { useUI, getUserSettings } from '@/contexts/UI-context';
 import { ROUTER_PATH } from '@/routes';
-import loginBackgroundImage from '@/assets/images/login-background.jpeg';
-import signupBackgroundImage from '@/assets/images/signup-background.jpeg';
+import loginBackgroundImage from '/public/assets/images/login-background.jpeg';
+import signupBackgroundImage from '/public/assets/images/signup-background.jpeg';
 import {
   SLoginImage,
   SLoginImageTitle,

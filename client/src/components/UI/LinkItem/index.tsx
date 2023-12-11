@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { MemoLink } from '@/types';
-import DEFAULT_LINK_IMG from '@/assets/images/default-link.png';
+import DEFAULT_LINK_IMG from '/public/assets/images/default-link.png';
 import {
   SLinkItem,
   SLinkItemImg,
@@ -9,7 +9,6 @@ import {
   SLinkItemTitle,
   SLinkItemUrl,
 } from '@/components/UI/LinkItem/style';
-
 interface LinkItemProps {
   link: MemoLink;
   isOnlyLinks?: boolean;

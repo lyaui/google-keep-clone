@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ROUTER_PATH } from '@/routes';
 import { VALIDATOR_TYPES } from '@/utils/validator';
-import Logo from '@/assets/images/logo-text.png';
+import Logo from '/public/assets/images/logo-text.png';
 import GoogleLoginButton from '@/components/LoginPage/GoogleLoginButton';
 import Input from '@/components/UI/Input';
 import LoginButton from '@/components/LoginPage/LoginButton';
