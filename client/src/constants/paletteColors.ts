@@ -47,4 +47,4 @@ export const PALETTE_COLORS = {
     LIGHT: '216, 12%, 92%', // hsl(216, 12%, 92%)
     DARK: '214, 6%, 25%', // hsl(214, 6%, 25%)
   },
-};
+} as const;
