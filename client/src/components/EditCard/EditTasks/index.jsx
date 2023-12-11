@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
 import { v4 as uuid } from 'uuid';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
 import EditCardText from '@/components/EditCard/EditCardText';
 import EditTaskItem from '@/components/EditCard/EditTasks/EditTaskItem';
 import {

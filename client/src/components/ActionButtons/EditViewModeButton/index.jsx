@@ -2,8 +2,8 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { useUI, updateUserSettings } from '@/contexts/UI-context/index.jsx';
-import { VIEW_MODE } from '@/constants/UI.js';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import { VIEW_MODE } from '@/constants/UI';
+import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 
 const EditViewModeButton = () => {

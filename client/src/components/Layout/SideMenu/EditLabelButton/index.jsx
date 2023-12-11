@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
 import {
   SNavItem,
   SNavItemText,

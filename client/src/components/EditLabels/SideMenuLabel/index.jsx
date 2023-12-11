@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { updateLabel, deleteLabel } from '@/store/labelsSlice/labels-action.js';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
 import {
   SLabel,
   SLabelIcon,

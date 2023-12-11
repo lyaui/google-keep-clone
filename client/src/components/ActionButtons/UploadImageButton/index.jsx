@@ -3,7 +3,7 @@ import { uploadMemoImage } from '@/store/memosSlice/memos-action.js';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 import { SUploadImage } from '@/components/ActionButtons/UploadImageButton/style.jsx';
 

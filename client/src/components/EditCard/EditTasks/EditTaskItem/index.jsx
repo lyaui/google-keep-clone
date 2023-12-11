@@ -3,7 +3,7 @@ import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
 import { useUI } from '@/contexts/UI-context';
 import { v4 as uuid } from 'uuid';
 import { PALETTE_COLORS } from '@/constants/paletteColors.js';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
 import EditCardText from '@/components/EditCard/EditCardText';
 import {
   SEditTaskItem,

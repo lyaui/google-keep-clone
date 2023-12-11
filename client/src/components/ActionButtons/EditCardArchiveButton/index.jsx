@@ -1,5 +1,5 @@
 import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
