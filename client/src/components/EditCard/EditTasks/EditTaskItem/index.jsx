@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
 import { useUI } from '@/contexts/UI-context';
 import { v4 as uuid } from 'uuid';
-import { PALETTE_COLORS } from '@/constants/paletteColors.js';
+import { PALETTE_COLORS } from '@/constants/paletteColors';
 import * as Icon from '@/components/UI/Icon';
 import EditCardText from '@/components/EditCard/EditCardText';
 import {

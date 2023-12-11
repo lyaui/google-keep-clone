@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ROUTER_PATH } from '@/routes';
-import { PALETTE_COLORS } from '@/constants/paletteColors.js';
+import { PALETTE_COLORS } from '@/constants/paletteColors';
 import { useUI } from '@/contexts/UI-context';
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
 import CardImages from '@/components/UI/Card/CardImages';

@@ -7,7 +7,7 @@ import {
   getUserMemosByLabelName,
 } from '@/store/memosSlice/memos-action.js';
 import { useUI } from '@/contexts/UI-context';
-import { PALETTE_COLORS } from '@/constants/paletteColors.js';
+import { PALETTE_COLORS } from '@/constants/paletteColors';
 import * as Icon from '@/components/UI/Icon';
 import SkeletonCards from '@/skeletons/SkeletonCards';
 import Cards from '@/components/Cards';
