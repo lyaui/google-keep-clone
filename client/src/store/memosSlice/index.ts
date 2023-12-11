@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import {
   getUserMemos,
   getUserMemosByLabelName,
@@ -8,7 +8,16 @@ import {
   deleteMemo,
   addLinksInfo,
   uploadMemoImage,
-} from '@/store/memosSlice/memos-action.js';
+} from '@/store/memosSlice/memos-action';
+import type { Memo, MemoImage, MemoLink } from '@/types';
+
+interface MemoState {
+  isLoading: boolean;
+  errorMessage: string;
+  isMemoUpdated: boolean; // TODO what is this?
+  memos: Memo[];
+  memo: Memo;
+}
 
 const INIT_MEMO = {
   title: '',
@@ -29,18 +38,18 @@ export const INIT_MEMOS_STATE = {
   errorMessage: '',
   memos: [],
   memo: INIT_MEMO,
-};
+} as MemoState;
 
 const memosSlice = createSlice({
   name: 'memos',
   initialState: INIT_MEMOS_STATE,
   reducers: {
-    setMemo(state, { payload: memo }) {
-      state.memo = memo;
+    setMemo(state, action: PayloadAction<Memo>) {
+      state.memo = action.payload;
     },
-    updateMemo(state, { payload }) {
+    updateMemo(state, action: PayloadAction<Memo>) {
       state.isMemoUpdated = true;
-      state.memo = { ...state.memo, ...payload };
+      state.memo = { ...state.memo, ...action.payload };
     },
     resetMemo(state) {
       state.memo = INIT_MEMOS_STATE.memo;
@@ -52,65 +61,66 @@ const memosSlice = createSlice({
     [getUserMemos.pending](state) {
       state.isLoading = true;
     },
-    [getUserMemos.fulfilled](state, { payload: memos }) {
+    [getUserMemos.fulfilled](state, action: PayloadAction<Memo[]>) {
       state.isLoading = false;
       state.errorMessage = '';
-      state.memos = memos;
+      state.memos = action.payload;
     },
-    [getUserMemos.rejected](state, { payload: errorMessage }) {
+    [getUserMemos.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
-      state.errorMessage = errorMessage;
+      state.errorMessage = action.payload;
     },
 
     // getUserMemosByLabelName
     [getUserMemosByLabelName.pending](state) {
       state.isLoading = true;
     },
-    [getUserMemosByLabelName.fulfilled](state, { payload: memos }) {
+    [getUserMemosByLabelName.fulfilled](state, action: PayloadAction<Memo[]>) {
       state.isLoading = false;
       state.errorMessage = '';
-      state.memos = memos;
+      state.memos = action.payload;
     },
-    [getUserMemosByLabelName.rejected](state, { payload: errorMessage }) {
+    [getUserMemosByLabelName.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
-      state.errorMessage = errorMessage;
+      state.errorMessage = action.payload;
     },
 
     // getUserMemoByMemoId
     [getUserMemoByMemoId.pending](state) {
       state.isLoading = true;
     },
-    [getUserMemoByMemoId.fulfilled](state, { payload: memo }) {
+    [getUserMemoByMemoId.fulfilled](state, action: PayloadAction<Memo>) {
       state.isLoading = false;
       state.errorMessage = '';
-      state.memo = memo;
+      state.memo = action.payload;
     },
-    [getUserMemoByMemoId.rejected](state, { payload: errorMessage }) {
+    [getUserMemoByMemoId.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
-      state.errorMessage = errorMessage;
+      state.errorMessage = action.payload;
     },
 
     // addMemo
     [addMemo.pending](state) {
       state.isLoading = true;
     },
-    [addMemo.fulfilled](state, { payload: memo }) {
+    [addMemo.fulfilled](state, action: PayloadAction<Memo>) {
       state.isLoading = false;
       state.errorMessage = '';
       // TODO ascend or descend
-      state.memos = [memo, ...state.memos];
-      state.memo = INIT_MEMO;
+      state.memos = [action.payload, ...state.memos];
+      state.memo = { ...INIT_MEMO } as Memo;
     },
-    [addMemo.rejected](state, { payload: errorMessage }) {
+    [addMemo.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
-      state.errorMessage = errorMessage;
+      state.errorMessage = action.payload;
     },
 
     // updateMemo
     [updateMemo.pending](state) {
       state.isLoading = true;
     },
-    [updateMemo.fulfilled](state, { payload: updatedMemo }) {
+    [updateMemo.fulfilled](state, action: PayloadAction<Memo>) {
+      const updatedMemo = action.payload;
       state.isLoading = false;
       state.errorMessage = '';
       const memoIndex = state.memos.findIndex(
@@ -118,31 +128,33 @@ const memosSlice = createSlice({
       );
       state.memos[memoIndex] = updatedMemo;
       state.memos = state.memos.sort((a, b) =>
-        a.updatedAt > b.updatedAt ? -1 : 1
+        (a.updatedAt || '') > (b.updatedAt || '') ? -1 : 1
       );
     },
-    [updateMemo.rejected](state, { payload: errorMessage }) {
+    [updateMemo.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
-      state.errorMessage = errorMessage;
+      state.errorMessage = action.payload;
     },
 
     // delete memo
     [deleteMemo.pending](state) {
       state.isLoading = true;
     },
-    [deleteMemo.fulfilled](state, { payload: memoId }) {
+    [deleteMemo.fulfilled](state, action: PayloadAction<string>) {
+      const memoId = action.payload;
       state.isLoading = false;
       state.errorMessage = '';
       state.memos = state.memos.filter((memo) => memo._id !== memoId);
     },
-    [deleteMemo.rejected](state, { payload: errorMessage }) {
+    [deleteMemo.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
-      state.errorMessage = errorMessage;
+      state.errorMessage = action.payload;
     },
 
     // addLinksInfo
     [addLinksInfo.pending]() {},
-    [addLinksInfo.fulfilled](state, { payload: links }) {
+    [addLinksInfo.fulfilled](state, action: PayloadAction<MemoLink[]>) {
+      const links = action.payload;
       const currentLinks = [...state.memo.links];
       links.forEach((link) => {
         if (!state.memo.links.find((stateLink) => stateLink.url === link.url)) {
@@ -152,20 +164,20 @@ const memosSlice = createSlice({
       state.memo.links = currentLinks;
       state.errorMessage = '';
     },
-    [addLinksInfo.rejected](state, { payload: errorMessage }) {
-      state.errorMessage = errorMessage;
+    [addLinksInfo.rejected](state, action: PayloadAction<string>) {
+      state.errorMessage = action.payload;
     },
     [uploadMemoImage.pending](state) {
       state.isLoading = true;
     },
-    [uploadMemoImage.fulfilled](state, { payload: image }) {
+    [uploadMemoImage.fulfilled](state, action: PayloadAction<MemoImage>) {
       state.isLoading = false;
       state.errorMessage = '';
-      state.memo.images = [...state.memo.images, image];
+      state.memo.images = [...state.memo.images, action.payload];
     },
-    [uploadMemoImage.rejected](state, { payload: errorMessage }) {
+    [uploadMemoImage.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
-      state.errorMessage = errorMessage;
+      state.errorMessage = action.payload;
     },
   },
 });
