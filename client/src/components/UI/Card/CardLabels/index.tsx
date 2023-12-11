@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import type { Label as LabelType } from '@/types';
+import type { MemoLabel } from '@/types';
 import Label from '@/components/UI/Label';
 
 export const SCardLabels = styled.div`
@@ -10,12 +10,12 @@ export const SCardLabels = styled.div`
 `;
 
 interface CardLabelsProps {
-  labels: LabelType[];
+  labels: MemoLabel[];
   id: string;
   limit?: number;
 }
 
-function CardLabels({ labels, id, limit = 3 }: CardLabelsProps) {
+function CardLabels({ labels = [], id, limit = 3 }: CardLabelsProps) {
   const numOfMoreLabel = labels.length - limit;
   return (
     <SCardLabels>

@@ -1,4 +1,4 @@
-export interface Label {
+export interface MemoLabel {
   id: string;
   name: string;
 }
