@@ -8,7 +8,8 @@ import SideMenu from '@/components/Layout/SideMenu';
 
 export const SContainer = styled.div`
   display: flex;
-  height: calc(100vh - 64px);
+  height: 100vh;
+  padding-top: 64px;
   main {
     width: 100%;
     overflow: scroll;
