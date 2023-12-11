@@ -1,3 +1,4 @@
+import { type MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -13,11 +14,11 @@ function LogoutButton() {
   const { authState, authDispatch } = useAuth();
   const { isLoading } = authState;
 
-  const logoutUserHandler = async (e) => {
-    e.preventDefault();
+  const logoutUserHandler = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
 
     await logout(authDispatch);
-    navigate.replace(ROUTER_PATH.LOGIN, { replace: true });
+    navigate(ROUTER_PATH.LOGIN, { replace: true });
   };
 
   return (
