@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext } from 'react';
-import { INIT_UI_STATES } from '@/constants/UI.js';
+import { INIT_UI_STATES } from '@/constants/UI';
 import {
   getUserSettings,
   updateUserSettings,

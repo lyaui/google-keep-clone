@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useUI } from '@/contexts/UI-context';
-import { VIEW_MODE } from '@/constants/UI.js';
+import { VIEW_MODE } from '@/constants/UI';
 import Card from '@/components/UI/Card';
 import { SCards, SCardsTitle } from '@/components/Cards/style.jsx';
 

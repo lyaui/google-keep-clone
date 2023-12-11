@@ -4,7 +4,7 @@ import { memosActions } from '@/store/memosSlice';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
-import * as Icon from '@/components/UI/Icon/index.jsx';
+import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 
 const EditCardTaskButton = () => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { VIEW_MODE } from '@/constants/UI.js';
+import { VIEW_MODE } from '@/constants/UI';
 
 export const SCardImages = styled.div`
   display: grid;
