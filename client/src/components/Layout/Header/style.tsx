@@ -7,9 +7,10 @@ export const SHeader = styled.header`
   align-items: center;
   padding: 8px;
   border-bottom: 1px solid var(--color-border);
-  position: sticky;
+  position: fixed;
   z-index: var(--zindex-header);
   box-shadow: var(--shadow-sm);
+  background-color: var(--color-bg);
 `;
 
 export const SHeaderLogo = styled.img`

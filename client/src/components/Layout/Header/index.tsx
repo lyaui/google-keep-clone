@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import logo from '@/assets/images/logo.png';
+import logo from '/public/assets/images/logo.png';
 import FixMenu from '@/components/Layout/Header/FixMenu';
 import SearchInput from '@/components/UI/SearchInput';
 import EditViewModeButton from '@/components/ActionButtons/EditViewModeButton';
@@ -14,13 +14,12 @@ import {
 
 function Header() {
   let { labelName } = useParams();
-  const logoPath = logo;
 
   return (
     <SHeader>
       {/* menu */}
       <FixMenu />
-      <SHeaderLogo src={logoPath} alt="Keep" />
+      <SHeaderLogo src={logo} alt="Keep" />
       <SHeaderTitle>{labelName || 'Keep'}</SHeaderTitle>
       {/* search */}
       <SearchInput />
