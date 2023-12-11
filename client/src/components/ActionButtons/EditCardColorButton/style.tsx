@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { PALETTE_COLORS } from '@/constants/paletteColors';
+
 export const SEditCardColor = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -11,7 +13,7 @@ export const SEditCardColor = styled.div`
   box-shadow: var(--shadow-sm);
 `;
 
-export const SColor = styled.div`
+export const SColor = styled.div<{ color?: string; borderColor?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,8 +21,11 @@ export const SColor = styled.div`
   height: 28px;
   margin: 4px 2px;
   border-radius: var(--rounded-full);
-  background-color: hsl(var(--color));
-  border: 2px solid hsl(var(--border));
+  background-color: hsl(
+    ${(props) => props.color || PALETTE_COLORS.DEFAULT.LIGHT}
+  );
+  border: 2px solid
+    hsl(${(props) => props.borderColor || 'var(--color-gray-700)'});
   cursor: pointer;
   &:hover {
     border: 2px solid var(--color-text);
