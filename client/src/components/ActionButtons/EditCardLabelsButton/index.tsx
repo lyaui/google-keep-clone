@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import CustomTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 import EditLabels from '@/components/EditLabels';
 
-const EditCardLabelsButton = ({ id }) => {
+const EditCardLabelsButton = ({ id }: { id: string }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const showTooltipHandler = (e) => {
-    e.stopPropagation();
+  const showTooltipHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setShowTooltip(true);
   };
 
