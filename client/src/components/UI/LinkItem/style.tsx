@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+type width = number | string;
+
 export const SLinkItem = styled.div`
   display: flex;
   width: 100%;
@@ -7,13 +9,13 @@ export const SLinkItem = styled.div`
   overflow: hidden;
 `;
 
-export const SLinkItemImg = styled.img`
-  width: var(--width);
+export const SLinkItemImg = styled.img<{ width: width }>`
+  width: ${(props) => props.width || 54};
   object-fit: cover;
 `;
 
-export const SLinkItemInfo = styled.div`
-  width: var(--width);
+export const SLinkItemInfo = styled.div<{ width: width }>`
+  width: ${(props) => props.width || 'calc(100% - 88px)'};
   padding: 8px 0 8px 8px;
   margin: auto;
 `;

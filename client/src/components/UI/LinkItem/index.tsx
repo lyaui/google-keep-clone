@@ -1,3 +1,6 @@
+import type { ReactNode } from 'react';
+
+import type { MemoLink } from '@/types';
 import DEFAULT_LINK_IMG from '@/assets/images/default-link.png';
 import {
   SLinkItem,
@@ -5,9 +8,19 @@ import {
   SLinkItemInfo,
   SLinkItemTitle,
   SLinkItemUrl,
-} from '@/components/UI/LinkItem/style.jsx';
+} from '@/components/UI/LinkItem/style';
 
-const LinkItem = ({ link, isOnlyLinks = false, children = null }) => {
+interface LinkItemProps {
+  link: MemoLink;
+  isOnlyLinks?: boolean;
+  children?: ReactNode;
+}
+
+const LinkItem = ({
+  link,
+  isOnlyLinks = false,
+  children = null,
+}: LinkItemProps) => {
   const { host: urlText } = new URL(link.url);
 
   return (
@@ -15,12 +28,10 @@ const LinkItem = ({ link, isOnlyLinks = false, children = null }) => {
       <SLinkItemImg
         src={link.image ? link.image : DEFAULT_LINK_IMG}
         alt={link.title}
-        style={{ '--width': isOnlyLinks ? '88px' : '54px' }}
+        width={isOnlyLinks ? 88 : 54}
       />
       <SLinkItemInfo
-        style={{
-          '--width': isOnlyLinks ? 'calc(100% - 120px)' : 'calc(100% - 88px)',
-        }}
+        width={isOnlyLinks ? 'calc(100% - 120px)' : 'calc(100% - 88px)'}
       >
         <SLinkItemTitle>{link.title}</SLinkItemTitle>
         <SLinkItemUrl>{urlText}</SLinkItemUrl>
