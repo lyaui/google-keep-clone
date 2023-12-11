@@ -43,4 +43,4 @@ export const TOOLTIP_TEXT = {
   COLOR_PINK: '粉紅色',
   COLOR_BROWN: '棕色',
   COLOR_GRAY: '灰色',
-};
+} as const;
