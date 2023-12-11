@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
-import { TOAST_TEXT } from '@/constants/toastText.js';
-import { UI_TYPES } from '@/constants/UI.js';
-import { apiGetUserSettings, apiUpdateUserSettings } from '@/apis/user.js';
+import { TOAST_TEXT } from '@/constants/toastText';
+import { UI_TYPES } from '@/constants/UI';
+import { apiGetUserSettings, apiUpdateUserSettings } from '@/apis/user';
 
 export const getUserSettings = async (dispatch) => {
   try {

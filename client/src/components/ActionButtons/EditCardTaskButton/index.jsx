@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { memosActions } from '@/store/memosSlice';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon/index.jsx';
 import Button from '@/components/UI/Buttons';
 

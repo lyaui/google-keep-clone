@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { TOAST_TEXT } from '@/constants/toastText.js';
+import { TOAST_TEXT } from '@/constants/toastText';
 import {
   apiGetUserMemos,
   apiGetMemosByLabelName,

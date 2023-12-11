@@ -2,7 +2,7 @@ import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import Button from '@/components/UI/Buttons';
 
 const EditCardArchiveButton = ({ id }) => {

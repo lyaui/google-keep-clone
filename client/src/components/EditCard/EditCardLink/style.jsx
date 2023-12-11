@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SLinkItem } from '@/components/UI/LinkItem/style.jsx';
+import { SLinkItem } from '@/components/UI/LinkItem/style';
 
 export const SEditCardLink = styled(SLinkItem)`
   height: 56px;

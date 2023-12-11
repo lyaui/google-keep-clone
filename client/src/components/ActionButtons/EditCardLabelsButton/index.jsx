@@ -2,7 +2,7 @@ import { useState } from 'react';
 import CustomTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon/index.jsx';
 import Button from '@/components/UI/Buttons';
 import EditLabels from '@/components/EditLabels';

@@ -4,7 +4,7 @@ import { useUI } from '@/contexts/UI-context';
 import CustomTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { PALETTE_COLORS } from '@/constants/paletteColors.js';
 import * as Icon from '@/components/UI/Icon/index.jsx';
 import Button from '@/components/UI/Buttons';

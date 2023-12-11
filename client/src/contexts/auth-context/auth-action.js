@@ -1,8 +1,8 @@
-import { AUTH_TYPES } from '@/constants/auth.js';
-import { UI_TYPES } from '@/constants/UI.js';
+import { AUTH_TYPES } from '@/constants/auth';
+import { UI_TYPES } from '@/constants/UI';
 import { toast } from 'react-toastify';
-import { TOAST_TEXT } from '@/constants/toastText.js';
-import { apiSignup, apiLogin, apiLogout } from '@/apis/user.js';
+import { TOAST_TEXT } from '@/constants/toastText';
+import { apiSignup, apiLogin, apiLogout } from '@/apis/user';
 
 const setStoredData = (user) => {
   // 10 days

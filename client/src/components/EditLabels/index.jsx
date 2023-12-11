@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon/index.jsx';
 import { addLabel } from '@/store/labelsSlice/labels-action.js';
 import MemoLabel from '@/components/EditLabels/MemoLabel';

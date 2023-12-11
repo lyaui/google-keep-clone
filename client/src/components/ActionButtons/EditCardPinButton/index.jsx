@@ -1,7 +1,7 @@
 import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { TOOLTIP_TEXT } from '@/constants/tooltipText.js';
+import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon/index.jsx';
 import Button from '@/components/UI/Buttons';
 import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style.jsx';
