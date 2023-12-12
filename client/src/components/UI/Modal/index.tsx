@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import type { ReactNode } from 'react';
+import type { ReactNode, MouseEventHandler } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
 
@@ -17,7 +17,7 @@ export const SModalOverlay = styled.div`
 interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
-  onClose: () => void;
+  onClose: MouseEventHandler<HTMLElement>;
 }
 
 function ModalOverlay({ children }: Pick<ModalProps, 'children'>) {
@@ -28,12 +28,16 @@ function ModalOverlay({ children }: Pick<ModalProps, 'children'>) {
   return ReactDom.createPortal(content, root);
 }
 
-const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
     <Fragment>
-      {isOpen && <Backdrop onClose={onClose} />}
-      {isOpen && <ModalOverlay children={children} />}
+      {isOpen && (
+        <>
+          <Backdrop onClose={onClose} />
+          <ModalOverlay children={children} />
+        </>
+      )}
     </Fragment>
   );
-};
+}
 export default Modal;
