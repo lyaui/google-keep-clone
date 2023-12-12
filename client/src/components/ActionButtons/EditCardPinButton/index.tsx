@@ -8,7 +8,7 @@ import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 
-const EditCardPinButton = ({ id }: { id: string }) => {
+const EditCardPinButton = ({ id }: { id?: string }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
   const togglePinHandler = (event: MouseEvent<HTMLButtonElement>) => {
