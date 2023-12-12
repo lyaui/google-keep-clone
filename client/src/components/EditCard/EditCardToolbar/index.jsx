@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import EditCardColorButton from '@/components/ActionButtons/EditCardColorButton';
 import EditCardLabelsButton from '@/components/ActionButtons/EditCardLabelsButton';
 import EditCardTaskButton from '@/components/ActionButtons/EditCardTaskButton';
-import EditCardCancelTaskButton from '@/components/ActionButtons/EditCardCancelTaskButton';
+import EditCancelTaskButton from '@/components/ActionButtons/EditCancelTaskButton';
 import UploadImageButton from '@/components/ActionButtons/UploadImageButton';
 import EditMemoArchiveButton from '@/components/ActionButtons/EditMemoArchiveButton';
 import CancelEditButton from '@/components/ActionButtons/CancelEditButton';
@@ -21,7 +21,7 @@ const EditCardToolbar = () => {
       {/* checkbox */}
       {!isTaskList && <EditCardTaskButton />}
       {/* cancel checkbox */}
-      {isTaskList && <EditCardCancelTaskButton />}
+      {isTaskList && <EditCancelTaskButton />}
       {/* image */}
       <UploadImageButton />
       {/* archive */}
