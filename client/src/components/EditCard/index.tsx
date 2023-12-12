@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { isNil } from 'lodash';
 
+import type { Color, Theme } from '@/types';
+import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { memosActions } from '@/store/memosSlice';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { addMemo } from '@/store/memosSlice/memos-action';
 import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
-import EditCardImages from '@/components/EditCard/EditCardImages';
+import CreateMemoImages from '@/components/EditCard/CreateMemoImages';
 import CreateMemoTitle from '@/components/EditCard/CreateMemoTitle';
 import CreateMemoContent from '@/components/EditCard/CreateMemoContent';
 import EditTasks from '@/components/EditCard/EditTasks';
@@ -24,54 +25,42 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 function EditCard() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [isEmptyPost, setIsEmptyPost] = useState(true);
+  const dispatch = useAppDispatch();
 
   const { memoId } = useParams();
   const { dispatchUpdateMemo } = useUpdateMemo(memoId);
 
-  const { memo, isLoading, isMemoUpdated } = useSelector(
-    (state) => state.memos
-  );
-  const isNewPost = !!memo._id;
+  const { memo, isLoading } = useAppSelector((state) => state.memos);
+  const isNewPost = isNil(memo._id);
   const { isTaskList, color } = memo;
   const { UIState } = useUI();
-  const memoColor = PALETTE_COLORS[color][UIState.theme];
+  const memoColor = PALETTE_COLORS[color as Color][UIState.theme as Theme];
 
-  useEffect(() => {
-    setIsEmptyPost(
-      !memo.title &&
-        !memo.content &&
-        memo.images.length === 0 &&
-        memo.links.length === 0 &&
-        memo.tasks.length === 0
-    );
-  }, [memo]);
-
-  const clickOutsideHandler = async (e) => {
-    e.stopPropagation();
+  const clickOutsideHandler = async (event: globalThis.MouseEvent) => {
+    event.stopPropagation();
     if (isLoading) return;
 
-    // post new post
-    if (!isEmptyPost && isNewPost)
+    if (isNewPost) {
       await dispatch(
         addMemo({ ...memo, labels: memo.labels.map((label) => label._id) })
       );
+    } else {
+      await dispatchUpdateMemo(memo);
+    }
 
-    // edit memo
-    if (!isNewPost && isMemoUpdated) await dispatchUpdateMemo(memo);
     navigate({ search: '' });
     dispatch(memosActions.resetMemo());
+    return;
   };
 
   return (
-    <SEditCard style={{ '--color': memoColor }} eventTypes="click">
+    <SEditCard color={memoColor} eventTypes="click">
       <OutsideClickHandler onOutsideClick={clickOutsideHandler}>
         <SEditCardBody>
           {/* pin */}
           <EditCardPinButton />
           {/* images */}
-          <EditCardImages />
+          <CreateMemoImages />
           {/* title */}
           <CreateMemoTitle />
           {/* tasks | content */}

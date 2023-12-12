@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style';
 
-export const SEditCard = styled.div`
+import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style';
+import { PALETTE_COLORS } from '@/constants/paletteColors';
+
+export const SEditCard = styled.div<{ color?: string; eventTypes?: string }>`
   overflow: hidden;
   width: 600px;
   margin: 32px auto 16px auto;
   box-shadow: var(--shadow-md);
   border-radius: var(--rounded-lg);
-  background-color: hsl(var(--color));
+  background-color: ${(props) =>
+    `hsl(${props.color})` || `hsl(${PALETTE_COLORS.DEFAULT.LIGHT})`};
   border: 1px solid var(--color-border);
 `;
 
