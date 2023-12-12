@@ -1,17 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
+import type { MouseEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
-import { deleteMemo } from '@/store/memosSlice/memos-action.js';
+import { deleteMemo } from '@/store/memosSlice/memos-action';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 
-const DeleteCardButton = ({ id }) => {
-  const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.memos);
+function DeleteMemoButton({ id }: { id: string }) {
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.memos);
 
-  const deleteMemoHandler = (e) => {
-    e.stopPropagation();
+  const deleteMemoHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     if (!id) return;
     dispatch(deleteMemo(id));
   };
@@ -23,6 +25,6 @@ const DeleteCardButton = ({ id }) => {
       </Button>
     </Tippy>
   );
-};
+}
 
-export default DeleteCardButton;
+export default DeleteMemoButton;
