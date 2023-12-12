@@ -14,7 +14,7 @@ import EditCardContent from '@/components/EditCard/EditCardContent';
 import EditTasks from '@/components/EditCard/EditTasks';
 import EditCardLink from '@/components/EditCard/EditCardLink';
 import EditCardLabels from '@/components/EditCard/EditCardLabels';
-import EditCardToolbar from '@/components/EditCard/EditCardToolbar';
+import EditNewMemoToolbar from '@/components/EditCard/EditNewMemoToolbar';
 import {
   SEditCard,
   SEditCardBody,
@@ -98,7 +98,7 @@ function EditCard() {
           {memo.links.length > 0 && <EditCardLink />}
         </SEditCardBody>
         {/* toolbar */}
-        <EditCardToolbar />
+        <EditNewMemoToolbar />
       </OutsideClickHandler>
     </SEditCard>
   );

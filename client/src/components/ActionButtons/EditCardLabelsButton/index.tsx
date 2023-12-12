@@ -8,7 +8,7 @@ import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 import EditLabels from '@/components/EditLabels';
 
-const EditCardLabelsButton = ({ id }: { id: string }) => {
+const EditCardLabelsButton = ({ id }: { id?: string }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const showTooltipHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();

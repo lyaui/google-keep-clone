@@ -7,7 +7,7 @@ import * as Icon from '@/components/UI/Icon';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import Button from '@/components/UI/Buttons';
 
-function EditMemoArchiveButton({ id }: { id: string }) {
+function EditMemoArchiveButton({ id }: { id?: string }) {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
   const toggleArchiveHandler = (event: MouseEvent<HTMLButtonElement>) => {

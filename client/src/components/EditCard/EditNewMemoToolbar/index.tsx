@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+
+import { useAppSelector } from '@/hooks/useReduxStore';
 import EditCardColorButton from '@/components/ActionButtons/EditCardColorButton';
 import EditCardLabelsButton from '@/components/ActionButtons/EditCardLabelsButton';
 import EditCardTaskButton from '@/components/ActionButtons/EditCardTaskButton';
@@ -6,10 +8,15 @@ import EditCancelTaskButton from '@/components/ActionButtons/EditCancelTaskButto
 import UploadImageButton from '@/components/ActionButtons/UploadImageButton';
 import EditMemoArchiveButton from '@/components/ActionButtons/EditMemoArchiveButton';
 import CancelEditButton from '@/components/ActionButtons/CancelEditButton';
-import { SEditCardToolbar } from '@/components/EditCard/EditCardToolbar/style.jsx';
 
-const EditCardToolbar = () => {
-  const { memo } = useSelector((state) => state.memos);
+export const SEditCardToolbar = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+`;
+
+function EditNewMemoToolbar() {
+  const { memo } = useAppSelector((state) => state.memos);
   const { isTaskList } = memo;
 
   return (
@@ -18,10 +25,8 @@ const EditCardToolbar = () => {
       <EditCardColorButton />
       {/* labels */}
       <EditCardLabelsButton />
-      {/* checkbox */}
-      {!isTaskList && <EditCardTaskButton />}
-      {/* cancel checkbox */}
-      {isTaskList && <EditCancelTaskButton />}
+      {/* cancel checkbox | checkbox */}
+      {isTaskList ? <EditCancelTaskButton /> : <EditCardTaskButton />}
       {/* image */}
       <UploadImageButton />
       {/* archive */}
@@ -30,6 +35,6 @@ const EditCardToolbar = () => {
       <CancelEditButton />
     </SEditCardToolbar>
   );
-};
+}
 
-export default EditCardToolbar;
+export default EditNewMemoToolbar;

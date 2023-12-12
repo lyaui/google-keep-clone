@@ -15,7 +15,7 @@ import {
   SColor,
 } from '@/components/ActionButtons/EditCardColorButton/style';
 
-const Palette = ({ id }: { id: string }) => {
+const Palette = ({ id }: { id?: string }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
   const { UIState } = useUI();
   const colorArr = Object.keys(PALETTE_COLORS) as Color[];
@@ -54,7 +54,7 @@ const Palette = ({ id }: { id: string }) => {
   );
 };
 
-const EditCardColorButton = ({ id }: { id: string }) => {
+const EditCardColorButton = ({ id }: { id?: string }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const showPaletteHandler = (event: MouseEvent<HTMLButtonElement>) => {
