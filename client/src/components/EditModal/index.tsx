@@ -22,9 +22,8 @@ function EditModal() {
   };
 
   return (
-    <Modal showModal={true} closeModal={closeEditModalHandler}>
-      {!isLoading && <EditCard />}
-      {isLoading && <SkeletonEditModal />}
+    <Modal isOpen={true} onClose={closeEditModalHandler}>
+      {isLoading ? <SkeletonEditModal /> : <EditCard />}
     </Modal>
   );
 }
