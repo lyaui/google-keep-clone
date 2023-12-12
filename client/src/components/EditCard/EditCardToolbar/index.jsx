@@ -4,7 +4,7 @@ import EditCardLabelsButton from '@/components/ActionButtons/EditCardLabelsButto
 import EditCardTaskButton from '@/components/ActionButtons/EditCardTaskButton';
 import EditCardCancelTaskButton from '@/components/ActionButtons/EditCardCancelTaskButton';
 import UploadImageButton from '@/components/ActionButtons/UploadImageButton';
-import EditCardArchiveButton from '@/components/ActionButtons/EditCardArchiveButton';
+import EditMemoArchiveButton from '@/components/ActionButtons/EditMemoArchiveButton';
 import CancelEditButton from '@/components/ActionButtons/CancelEditButton';
 import { SEditCardToolbar } from '@/components/EditCard/EditCardToolbar/style.jsx';
 
@@ -25,7 +25,7 @@ const EditCardToolbar = () => {
       {/* image */}
       <UploadImageButton />
       {/* archive */}
-      <EditCardArchiveButton />
+      <EditMemoArchiveButton />
       {/* cancel edit */}
       <CancelEditButton />
     </SEditCardToolbar>

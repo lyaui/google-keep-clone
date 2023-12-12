@@ -1,15 +1,17 @@
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
-import * as Icon from '@/components/UI/Icon';
+import type { MouseEvent } from 'react';
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
+import * as Icon from '@/components/UI/Icon';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import Button from '@/components/UI/Buttons';
 
-const EditCardArchiveButton = ({ id }) => {
+function EditMemoArchiveButton({ id }: { id: string }) {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
-  const toggleArchiveHandler = (e) => {
-    e.stopPropagation();
+  const toggleArchiveHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     dispatchUpdateMemo({ isArchived: !currentMemo.isArchived });
   };
 
@@ -24,6 +26,6 @@ const EditCardArchiveButton = ({ id }) => {
       </Button>
     </Tippy>
   );
-};
+}
 
-export default EditCardArchiveButton;
+export default EditMemoArchiveButton;

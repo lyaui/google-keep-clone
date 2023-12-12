@@ -1,7 +1,7 @@
 import EditCardColorButton from '@/components/ActionButtons/EditCardColorButton';
 import EditCardLabelsButton from '@/components/ActionButtons/EditCardLabelsButton';
 import CopyMemoButton from '@/components/ActionButtons/CopyMemoButton';
-import EditCardArchiveButton from '@/components/ActionButtons/EditCardArchiveButton';
+import EditMemoArchiveButton from '@/components/ActionButtons/EditMemoArchiveButton';
 import DeleteMemoButton from '@/components/ActionButtons/DeleteMemoButton';
 import { SCardFooter } from '@/components/UI/Card/CardFooter/style.jsx';
 
@@ -32,7 +32,7 @@ const CardFooter = ({
       {/* copy */}
       <CopyMemoButton id={id} />
       {/* archive */}
-      <EditCardArchiveButton id={id} />
+      <EditMemoArchiveButton id={id} />
       {/* delete */}
       <DeleteMemoButton id={id} />
     </SCardFooter>
