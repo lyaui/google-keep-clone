@@ -13,7 +13,7 @@ import CreateMemoTitle from '@/components/EditCard/CreateMemoTitle';
 import CreateMemoContent from '@/components/EditCard/CreateMemoContent';
 import EditTasks from '@/components/EditCard/EditTasks';
 import EditCardLink from '@/components/EditCard/EditCardLink';
-import EditCardLabels from '@/components/EditCard/EditCardLabels';
+import CreateMemoLabels from '@/components/EditCard/CreateMemoLabels';
 import CreateMemoToolbar from '@/components/EditCard/CreateMemoToolbar';
 import {
   SEditCard,
@@ -77,7 +77,7 @@ function EditCard() {
           {/* tasks | content */}
           {isTaskList ? <EditTasks /> : <CreateMemoContent />}
           {/* label */}
-          {memo.labels.length > 0 && <EditCardLabels />}
+          {memo.labels.length > 0 && <CreateMemoLabels />}
           {/* updatedAt */}
           {memo.updatedAt && (
             <SCardCreatedAt>
