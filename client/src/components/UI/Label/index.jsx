@@ -1,4 +1,4 @@
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';

@@ -1,4 +1,4 @@
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
 import CardImages from '@/components/UI/Card/CardImages';
 import { SEditCardImages } from '@/components/EditCard/EditCardImages/style.jsx';
 

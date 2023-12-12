@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
 import { v4 as uuid } from 'uuid';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import * as Icon from '@/components/UI/Icon';
