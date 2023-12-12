@@ -40,22 +40,22 @@ const CardImages = ({
         viewMode={layout}
         noCardBody={noCardBody}
       >
-        {images.slice(0, 6).map((image, index) => (
-          <SCardImage key={index} className={`img-${index}`}>
+        {images.slice(0, 6).map((image, index) => {
+          <SCardImage key={image} className={`img-${index}`}>
             <img draggable="false" src={image} alt="" />
             {isEditMode && (
               <Tippy content={TOOLTIP_TEXT.REMOVE}>
                 <Button
                   size="small"
                   variant="square"
-                  onClick={() => deleteImageHandler(index)}
+                  onClick={() => deleteImageHandler(image)}
                 >
                   <Icon.Delete />
                 </Button>
               </Tippy>
             )}
-          </SCardImage>
-        ))}
+          </SCardImage>;
+        })}
       </SCardImages>
     </Fragment>
   );

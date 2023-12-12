@@ -2,7 +2,7 @@ import { type MouseEvent } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-import { useUpdateMemo } from '@/hooks/updateMemo-hook';
+import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { SCardPin } from '@/components/ActionButtons/EditCardPinButton/style';
 import * as Icon from '@/components/UI/Icon';

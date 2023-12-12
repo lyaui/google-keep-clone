@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useUpdateMemo } from '@/hooks/updateMemo-hook';
+import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 
 import * as Icon from '@/components/UI/Icon/index';
 import { SLabel, SLabelIcon, SLabelValue } from '@/components/EditLabels/style';

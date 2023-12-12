@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useUpdateMemo } from '@/hooks/updateMemo-hook';
+import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { useUI } from '@/contexts/UI-context';
 import { v4 as uuid } from 'uuid';
 import { PALETTE_COLORS } from '@/constants/paletteColors';

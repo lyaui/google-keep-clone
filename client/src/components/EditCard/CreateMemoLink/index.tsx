@@ -3,7 +3,7 @@ import type { MouseEvent } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-import { useUpdateMemo } from '@/hooks/updateMemo-hook';
+import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';

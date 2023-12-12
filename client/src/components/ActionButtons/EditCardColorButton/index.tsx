@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import type { Color, Theme } from '@/types';
-import { useUpdateMemo } from '@/hooks/updateMemo-hook';
+import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { useUI } from '@/contexts/UI-context';
 import CustomTippy from '@tippyjs/react/headless';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
