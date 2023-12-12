@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { isEqual, pick } from 'lodash';
+import axios from 'axios';
+
+import { INIT_MEMO } from '@/store/memosSlice';
 import { TOAST_TEXT } from '@/constants/toastText';
 import {
   apiGetUserMemos,
@@ -11,7 +15,6 @@ import {
   apiGetLinksInfo,
 } from '@/apis/memos';
 import { apiUploadImage } from '@/apis/upload';
-import axios from 'axios';
 
 export const getUserMemos = createAsyncThunk(
   'memos/getUserMemos',
@@ -97,6 +100,17 @@ export const addMemo = createAsyncThunk(
       toast(TOAST_TEXT.MEMO_ADD_FAIL);
       return rejectWithValue(err.response.data.message);
     }
+  },
+  {
+    condition: (memo, { getState, extra }) => {
+      const pickItems = ['title', 'content', 'images', 'links', 'tasks'];
+      const isEmptyMemo = isEqual(
+        pick(memo, pickItems),
+        pick(INIT_MEMO, pickItems)
+      );
+
+      if (isEmptyMemo) return false;
+    },
   }
 );
 
