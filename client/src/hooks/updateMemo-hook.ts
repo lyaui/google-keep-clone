@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { memosActions } from '@/store/memosSlice';
 import { updateMemo } from '@/store/memosSlice/memos-action';
 
-export const useUpdateMemo = (id: { id?: string }) => {
+export const useUpdateMemo = (id: string | undefined) => {
   const dispatch = useAppDispatch();
   const { memos, memo, isLoading } = useAppSelector((state) => state.memos);
   const currentMemo = memos.find((memo) => memo._id === id) || memo;
