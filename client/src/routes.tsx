@@ -18,8 +18,8 @@ export const ROUTER_PATH = {
   MEMO: '/memo/:memoId',
   ARCHIVE: '/archive',
   SEARCH: '/search',
-  BUILD_LABEL_PATH: (labelName) => `/label/${labelName}`,
-  BUILD_MEMO_PATH: (memoId) => `/memo/${memoId}`,
+  BUILD_LABEL_PATH: (labelName: string) => `/label/${labelName}`,
+  BUILD_MEMO_PATH: (memoId: string) => `/memo/${memoId}`,
 };
 
 export const router = createBrowserRouter([
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     children: [
       {
         element: <Home />,
