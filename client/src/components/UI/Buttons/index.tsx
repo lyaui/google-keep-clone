@@ -57,7 +57,7 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;
-      onClick(event);
+      onClick && onClick(event);
     };
 
     return (
