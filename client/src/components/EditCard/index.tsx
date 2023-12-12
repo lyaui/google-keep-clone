@@ -9,7 +9,7 @@ import { addMemo } from '@/store/memosSlice/memos-action';
 import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
-import CreateMemoImages from '@/components/EditCard/CreateMemoImages';
+import EditMemoImages from '@/components/EditCard/EditMemoImages';
 import CreateMemoTitle from '@/components/EditCard/CreateMemoTitle';
 import CreateMemoContent from '@/components/EditCard/CreateMemoContent';
 import EditTasks from '@/components/EditCard/EditTasks';
@@ -60,7 +60,7 @@ function EditCard() {
           {/* pin */}
           <EditCardPinButton />
           {/* images */}
-          <CreateMemoImages />
+          <EditMemoImages />
           {/* title */}
           <CreateMemoTitle />
           {/* tasks | content */}
