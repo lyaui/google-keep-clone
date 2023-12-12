@@ -3,7 +3,7 @@ import { useFetchMemos } from '@/hooks/fetchMemos-hook.js';
 import { getUserMemos } from '@/store/memosSlice/memos-action.js';
 import * as Icon from '@/components/UI/Icon';
 import SkeletonCards from '@/skeletons/SkeletonCards';
-import Cards from '@/components/Cards';
+import MemoCards from '@/components/MemoCards';
 import Hint from '@/components/UI/Hint';
 
 const Archive = () => {
@@ -23,11 +23,11 @@ const Archive = () => {
 
       {/* isPinned === true */}
       {!isLoading && pinnedMemo.length > 0 && (
-        <Cards memos={pinnedMemo} title={'已固定'} />
+        <MemoCards memos={pinnedMemo} title={'已固定'} />
       )}
       {/* isPinned === false */}
       {!isLoading && unpinnedMemo.length > 0 && (
-        <Cards
+        <MemoCards
           memos={unpinnedMemo}
           title={pinnedMemo.length > 0 ? '其他記事' : ''}
         />

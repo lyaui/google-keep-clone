@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import { useFetchMemos } from '@/hooks/fetchMemos-hook.js';
 import {
   getUserMemos,
@@ -10,7 +11,7 @@ import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import * as Icon from '@/components/UI/Icon';
 import SkeletonCards from '@/skeletons/SkeletonCards';
-import Cards from '@/components/Cards';
+import MemoCards from '@/components/MemoCards';
 import MemosFilter from '@/components/MemosFilter';
 import Hint from '@/components/UI/Hint';
 
@@ -82,7 +83,7 @@ const Search = () => {
       )}
 
       {/* search results */}
-      {showCards && <Cards memos={memos} />}
+      {showCards && <MemoCards memos={memos} />}
 
       {/* hint */}
       {showHint && (
