@@ -1,18 +1,33 @@
-import { useDispatch } from 'react-redux';
-import { uploadMemoImage } from '@/store/memosSlice/memos-action.js';
+import type { ChangeEvent } from 'react';
+import styled from 'styled-components';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
+import { useAppDispatch } from '@/hooks/useReduxStore';
+import { uploadMemoImage } from '@/store/memosSlice/memos-action';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
-import { SUploadImage } from '@/components/ActionButtons/UploadImageButton/style.jsx';
 
-const UploadImageButton = () => {
-  const dispatch = useDispatch();
+export const SUploadImage = styled.label`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--rounded-full);
+  background-color: transparent;
+  cursor: pointer;
+`;
 
-  const pickImageHandler = async (e) => {
-    if (e.target.files.length === 0) return;
-    const pickedFile = e.target.files[0];
+function UploadImageButton() {
+  const dispatch = useAppDispatch();
+
+  const pickImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+    if (event.target.files.length === 0) return;
+
+    const pickedFile = event.target.files[0];
     const formData = new FormData();
     formData.append('image', pickedFile);
 
@@ -34,6 +49,6 @@ const UploadImageButton = () => {
       </Button>
     </Tippy>
   );
-};
+}
 
 export default UploadImageButton;
