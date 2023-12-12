@@ -17,7 +17,7 @@ export interface MemoLink {
 }
 
 export interface MemoTask {
-  _id?: string;
+  id: string;
   name: string;
   isCompleted: boolean;
 }
