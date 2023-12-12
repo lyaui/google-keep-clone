@@ -12,7 +12,7 @@ import EditCardImages from '@/components/EditCard/EditCardImages';
 import CreateMemoTitle from '@/components/EditCard/CreateMemoTitle';
 import CreateMemoContent from '@/components/EditCard/CreateMemoContent';
 import EditTasks from '@/components/EditCard/EditTasks';
-import EditCardLink from '@/components/EditCard/EditCardLink';
+import CreateMemoLink from '@/components/EditCard/CreateMemoLink';
 import CreateMemoLabels from '@/components/EditCard/CreateMemoLabels';
 import CreateMemoToolbar from '@/components/EditCard/CreateMemoToolbar';
 import {
@@ -93,7 +93,7 @@ function EditCard() {
             </SCardCreatedAt>
           )}
           {/* links */}
-          {memo.links.length > 0 && <EditCardLink />}
+          {memo.links.length > 0 && <CreateMemoLink />}
         </SEditCardBody>
         {/* toolbar */}
         <CreateMemoToolbar />

@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { useUpdateMemo } from '@/hooks/updateMemo-hook.js';
+import type { MouseEvent } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
+import { useUpdateMemo } from '@/hooks/updateMemo-hook';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
@@ -9,9 +11,9 @@ import LinkItem from '@/components/UI/LinkItem';
 import {
   SEditCardLink,
   SEditCardLinkButton,
-} from '@/components/EditCard/EditCardLink/style.jsx';
+} from '@/components/EditCard/CreateMemoLink/style';
 
-const EditCardLink = ({ id }) => {
+const CreateMemoLink = ({ id }: { id?: string }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
   const defaultLinks = 3;
@@ -26,29 +28,27 @@ const EditCardLink = ({ id }) => {
     setShowLinksNum(defaultLinks);
   };
 
-  const removeLinkHandler = (url) => (e) => {
-    e.stopPropagation();
-    const updatedLinks = currentMemo.links.filter((link) => link.url !== url);
-    dispatchUpdateMemo({ links: updatedLinks });
-  };
+  const removeLinkHandler =
+    (url: string) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      const updatedLinks = currentMemo.links.filter((link) => link.url !== url);
+      dispatchUpdateMemo({ links: updatedLinks });
+    };
 
-  const goShareLink = (url) => (e) => {
-    e.stopPropagation();
-    window.open(url, '_blank').focus();
+  const goShareLink = (url: string) => (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    if (!window) return;
+    window.open(url, '_blank')?.focus();
   };
 
   return (
     <div>
-      {currentMemo.links.slice(0, showLinksNum).map((link, index) => (
-        <SEditCardLink
-          key={index}
-          index={index}
-          onClick={goShareLink(link.url)}
-        >
-          <LinkItem link={link}>
+      {currentMemo.links.slice(0, showLinksNum).map((_link) => (
+        <SEditCardLink key={_link.url} onClick={goShareLink(_link.url)}>
+          <LinkItem link={_link}>
             {/* go share link */}
             <Tippy content={TOOLTIP_TEXT.PREVIEW_URL}>
-              <Button size="small" onClick={removeLinkHandler(link.url)}>
+              <Button size="small" onClick={removeLinkHandler(_link.url)}>
                 <Icon.Clear />
               </Button>
             </Tippy>
@@ -70,4 +70,4 @@ const EditCardLink = ({ id }) => {
   );
 };
 
-export default EditCardLink;
+export default CreateMemoLink;
