@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { SEditCard, SEditCardBody } from '@/components/EditCard/style';
-import { SEditCardContent } from '@/components/EditCard/EditCardContent/style';
+import { SCreateMemoContent } from '@/components/EditCard/CreateMemoContent/style';
 
 function EmptyCardEditor() {
   const navigate = useNavigate();
@@ -9,9 +9,9 @@ function EmptyCardEditor() {
   return (
     <SEditCard onClick={toggleEditorHandler}>
       <SEditCardBody>
-        <SEditCardContent>
+        <SCreateMemoContent>
           <div id="contentEdit" contentEditable="true" />
-        </SEditCardContent>
+        </SCreateMemoContent>
       </SEditCardBody>
     </SEditCard>
   );

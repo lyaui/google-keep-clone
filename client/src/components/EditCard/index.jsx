@@ -9,8 +9,8 @@ import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
 import EditCardImages from '@/components/EditCard/EditCardImages';
-import EditNewMemoTitle from '@/components/EditCard/EditNewMemoTitle';
-import EditCardContent from '@/components/EditCard/EditCardContent';
+import CreateMemoTitle from '@/components/EditCard/CreateMemoTitle';
+import CreateMemoContent from '@/components/EditCard/CreateMemoContent';
 import EditTasks from '@/components/EditCard/EditTasks';
 import EditCardLink from '@/components/EditCard/EditCardLink';
 import EditCardLabels from '@/components/EditCard/EditCardLabels';
@@ -73,11 +73,9 @@ function EditCard() {
           {/* images */}
           <EditCardImages />
           {/* title */}
-          <EditNewMemoTitle />
-          {/* content */}
-          {!isTaskList && <EditCardContent />}
-          {/* tasks */}
-          {isTaskList && <EditTasks />}
+          <CreateMemoTitle />
+          {/* tasks | content */}
+          {isTaskList ? <EditTasks /> : <CreateMemoContent />}
           {/* label */}
           {memo.labels.length > 0 && <EditCardLabels />}
           {/* updatedAt */}
