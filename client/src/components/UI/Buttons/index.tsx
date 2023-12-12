@@ -23,7 +23,7 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   variant?: Variant;
   size?: number | Size;
   color?: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   style?: CSSProperties;
   disabled?: boolean;
 }
