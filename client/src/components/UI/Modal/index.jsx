@@ -11,7 +11,7 @@ const ModalOverlay = ({ children }) => {
 const Modal = ({ showModal, closeModal, children }) => {
   return (
     <Fragment>
-      {showModal && <Backdrop onClick={closeModal} />}
+      {showModal && <Backdrop onClose={closeModal} />}
       {showModal && <ModalOverlay children={children} />}
     </Fragment>
   );
