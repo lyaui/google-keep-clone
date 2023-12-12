@@ -47,7 +47,7 @@ const memosSlice = createSlice({
     setMemo(state, action: PayloadAction<Memo>) {
       state.memo = action.payload;
     },
-    updateMemo(state, action: PayloadAction<Memo>) {
+    updateMemo(state, action: PayloadAction<Partial<Memo>>) {
       state.isMemoUpdated = true;
       state.memo = { ...state.memo, ...action.payload };
     },

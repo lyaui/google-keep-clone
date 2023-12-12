@@ -1,14 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { memosActions } from '@/store/memosSlice';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
+import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
+import { memosActions } from '@/store/memosSlice';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
 
-const EditCardCancelTaskButton = () => {
-  const dispatch = useDispatch();
-  const { memo } = useSelector((state) => state.memos);
+const EditCancelTaskButton = () => {
+  const dispatch = useAppDispatch();
+  const { memo } = useAppSelector((state) => state.memos);
   const { tasks } = memo;
 
   const content = tasks.map((task) => task.name).join('</div><div>');
@@ -27,4 +28,4 @@ const EditCardCancelTaskButton = () => {
   );
 };
 
-export default EditCardCancelTaskButton;
+export default EditCancelTaskButton;
