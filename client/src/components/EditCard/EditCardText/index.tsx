@@ -1,17 +1,25 @@
 import { useState, useEffect } from 'react';
+import type { ClipboardEvent, DragEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Autolinker from 'autolinker';
-import ContentEditable from 'react-contenteditable';
+import ContentEditable, {
+  type ContentEditableEvent,
+} from 'react-contenteditable';
 
 import { ROUTER_PATH } from '@/routes';
 import { addLinksInfo } from '@/store/memosSlice/memos-action';
 
-function EditCardText({ text, updateTextHandler }) {
+interface EditCardTextProps {
+  text: string;
+  updateTextHandler: (text: string) => void;
+}
+
+function EditCardText({ text, updateTextHandler }: EditCardTextProps) {
   const dispatch = useDispatch();
   const { search, pathname } = useLocation();
   const editQuery = !!new URLSearchParams(search).get('edit');
-  const [links, setLinks] = useState([]);
+  const [links, setLinks] = useState<string[]>([]);
 
   useEffect(() => {
     if (links.length === 0) return;
@@ -22,29 +30,32 @@ function EditCardText({ text, updateTextHandler }) {
     }
   }, [links, editQuery, pathname, dispatch]);
 
-  const textChangeHandler = (e) => {
-    const linkedText = Autolinker.link(e.target.value, {
+  const textInputHandler = (event: ContentEditableEvent) => {
+    const linkedText = Autolinker.link(event.target.value, {
       stripPrefix: false,
     });
-    const matches = Autolinker.parse(e.target.value, {
+    const matches = Autolinker.parse(event.target.value, {
       urls: true,
     });
-    setLinks((preState) => [...preState, ...matches.map((link) => link.url)]);
+
+    setLinks((preState) => [
+      ...preState,
+      // @ts-ignore
+      ...matches.map((_link) => _link.url),
+    ]);
     updateTextHandler(linkedText);
   };
 
-  const textPasteHandler = (e) => {
-    const paste = (e.clipboardData || window.clipboardData).getData(
-      'text/plain'
-    );
+  const textPasteHandler = (event: ClipboardEvent<HTMLDivElement>) => {
+    const paste = event.clipboardData.getData('text/plain');
     const selection = window.getSelection();
-    if (!selection.rangeCount) return false;
+    if (!selection?.rangeCount) return false;
     selection.deleteFromDocument();
     selection.getRangeAt(0).insertNode(document.createTextNode(paste));
-    e.preventDefault();
+    event.preventDefault();
   };
 
-  const textDropHandler = (e) => {
+  const textDropHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
 
@@ -52,7 +63,7 @@ function EditCardText({ text, updateTextHandler }) {
     <ContentEditable
       id="contentEdit"
       html={text}
-      onChange={textChangeHandler}
+      onChange={textInputHandler}
       onPaste={textPasteHandler}
       onDrop={textDropHandler}
     ></ContentEditable>

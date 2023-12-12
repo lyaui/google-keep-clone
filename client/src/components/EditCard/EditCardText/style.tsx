@@ -6,7 +6,7 @@ export const SEditCardText = styled.div`
     padding: 8px 0px;
     white-space: pre-wrap;
 
-    :focus:before {
+    &:focus:before {
       content: none;
     }
 
