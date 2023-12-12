@@ -9,12 +9,12 @@ import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
 import EditCardImages from '@/components/EditCard/EditCardImages';
-import EditCardTitle from '@/components/EditCard/EditCardTitle';
+import EditNewMemoTitle from '@/components/EditCard/EditNewMemoTitle';
 import EditCardContent from '@/components/EditCard/EditCardContent';
 import EditTasks from '@/components/EditCard/EditTasks';
 import EditCardLink from '@/components/EditCard/EditCardLink';
 import EditCardLabels from '@/components/EditCard/EditCardLabels';
-import EditNewMemoToolbar from '@/components/EditCard/EditNewMemoToolbar';
+import CreateMemoToolbar from '@/components/EditCard/CreateMemoToolbar';
 import {
   SEditCard,
   SEditCardBody,
@@ -73,7 +73,7 @@ function EditCard() {
           {/* images */}
           <EditCardImages />
           {/* title */}
-          <EditCardTitle />
+          <EditNewMemoTitle />
           {/* content */}
           {!isTaskList && <EditCardContent />}
           {/* tasks */}
@@ -98,7 +98,7 @@ function EditCard() {
           {memo.links.length > 0 && <EditCardLink />}
         </SEditCardBody>
         {/* toolbar */}
-        <EditNewMemoToolbar />
+        <CreateMemoToolbar />
       </OutsideClickHandler>
     </SEditCard>
   );
