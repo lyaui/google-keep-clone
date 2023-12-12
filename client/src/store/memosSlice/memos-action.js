@@ -102,7 +102,7 @@ export const addMemo = createAsyncThunk(
     }
   },
   {
-    condition: (memo, { getState, extra }) => {
+    condition: (memo) => {
       const pickItems = ['title', 'content', 'images', 'links', 'tasks'];
       const isEmptyMemo = isEqual(
         pick(memo, pickItems),
@@ -126,6 +126,15 @@ export const updateMemo = createAsyncThunk(
       toast(TOAST_TEXT.MEMO_UPDATE_FAIL);
       return rejectWithValue(err.response.data.message);
     }
+  },
+  {
+    condition: ({ memoId, payload }, { getState }) => {
+      const { memos } = getState().memos;
+      const foundMemo = memos.find((_memo) => _memo._id === memoId);
+      const isMemoEqual = isEqual(foundMemo, payload);
+
+      if (isMemoEqual) return false;
+    },
   }
 );
 

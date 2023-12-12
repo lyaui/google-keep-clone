@@ -14,12 +14,11 @@ import type { Memo, MemoImage, MemoLink } from '@/types';
 interface MemoState {
   isLoading: boolean;
   errorMessage: string;
-  isMemoUpdated: boolean; // TODO what is this?
   memos: Memo[];
   memo: Memo;
 }
 
-const INIT_MEMO = {
+export const INIT_MEMO = {
   title: '',
   content: '',
   images: [],
@@ -33,7 +32,6 @@ const INIT_MEMO = {
 };
 
 export const INIT_MEMOS_STATE = {
-  isMemoUpdated: false,
   isLoading: false,
   errorMessage: '',
   memos: [],
@@ -48,12 +46,10 @@ const memosSlice = createSlice({
       state.memo = action.payload;
     },
     updateMemo(state, action: PayloadAction<Partial<Memo>>) {
-      state.isMemoUpdated = true;
       state.memo = { ...state.memo, ...action.payload };
     },
     resetMemo(state) {
       state.memo = INIT_MEMOS_STATE.memo;
-      state.isMemoUpdated = false;
     },
   },
   extraReducers: {
@@ -93,6 +89,9 @@ const memosSlice = createSlice({
       state.isLoading = false;
       state.errorMessage = '';
       state.memo = action.payload;
+      if (state.memos.length === 0) {
+        state.memos = [action.payload];
+      }
     },
     [getUserMemoByMemoId.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
