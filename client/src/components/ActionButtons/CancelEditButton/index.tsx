@@ -1,5 +1,5 @@
 import { type MouseEvent } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { memosActions } from '@/store/memosSlice';
@@ -9,8 +9,9 @@ import Button from '@/components/UI/Buttons';
 function CancelEditButton() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { edit } = useParams();
-  const editQuery = !!edit;
+
+  const { search } = useLocation();
+  const editQuery = !!new URLSearchParams(search).get('edit');
 
   const cancelEditHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
