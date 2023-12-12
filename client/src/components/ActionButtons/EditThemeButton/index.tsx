@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
-import { useUI, updateUserSettings } from '@/contexts/UI-context/index.jsx';
+import { useUI, updateUserSettings } from '@/contexts/UI-context';
 import { THEME } from '@/constants/UI';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
