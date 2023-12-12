@@ -1,44 +1,41 @@
 import { useState, useEffect, useRef } from 'react';
 
+import { Memo } from '@/types';
 import { useUI } from '@/contexts/UI-context';
-import { VIEW_MODE } from '@/constants/UI';
 import Card from '@/components/UI/Card';
-import { SCards, SCardsTitle } from '@/components/MemoCards/style.js';
+import { SCards, SCardsTitle } from '@/components/MemoCards/style';
 
-const MemoCards = ({ memos, title }) => {
+interface MemoCardsProps {
+  memos: Memo[];
+  title?: string;
+}
+
+function MemoCards({ memos = [], title = '' }: MemoCardsProps) {
   const { UIState } = useUI();
   const { layout, isFixedMenu } = UIState;
-  const masonryRef = useRef();
-  const [masonryDom, setMasonryDom] = useState(null);
+
+  const masonryRef = useRef<HTMLDivElement>(null);
+  const [masonryDom, setMasonryDom] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setMasonryDom(masonryRef.current);
-  }, [setMasonryDom]);
+    return () => setMasonryDom(null);
+  }, []);
 
   return (
     <div ref={masonryRef}>
-      <SCardsTitle
-        style={{ '--justify-content': layout === VIEW_MODE.LIST && 'center' }}
-      >
-        {title}
-      </SCardsTitle>
-      <SCards
-        className="masonry"
-        style={{
-          '--gap': layout === VIEW_MODE.GRID ? '12px' : '20px',
-          '--columns':
-            layout === VIEW_MODE.GRID
-              ? 'repeat(auto-fill, minmax(230px, 1fr))'
-              : '600px',
-          '--padding': isFixedMenu ? '20px 80px' : '20px 80px 20px 100px',
-        }}
-      >
-        {memos.map((card) => (
-          <Card key={card._id} card={card} masonryDom={masonryDom} />
-        ))}
-      </SCards>
+      {masonryRef.current && (
+        <>
+          <SCardsTitle layout={layout}>{title}</SCardsTitle>
+          <SCards className="masonry" layout={layout} isFixedMenu={isFixedMenu}>
+            {memos.map((card) => (
+              <Card key={card._id} card={card} masonryDom={masonryDom} />
+            ))}
+          </SCards>
+        </>
+      )}
     </div>
   );
-};
+}
 
 export default MemoCards;
