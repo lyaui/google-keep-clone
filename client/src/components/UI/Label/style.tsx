@@ -15,7 +15,7 @@ export const SLabelButton = styled.button`
   }
 `;
 
-export const SLabel = styled.div`
+export const SLabel = styled.div<{ variant: 'round' | 'square' }>`
   padding: 3px 12px 3px 12px;
   margin: 3px 2px;
   overflow: hidden;
@@ -27,13 +27,15 @@ export const SLabel = styled.div`
   color: var(--color-text);
   background-color: var(--color-label-bg);
   border: 1px solid var(--color-border);
-  border-radius: var(--rounded);
+  border-radius: ${(props) =>
+    props.variant === 'round' ? 'var(--rounded-2xl)' : 'var(--rounded-sm)'};
   cursor: pointer;
   transition: var(--transition);
   position: relative;
 
   &:hover {
-    padding: var(--padding);
+    padding: ${(props) =>
+      props.variant === 'round' ? '3px 16px 3px 8px' : '3px 12px 3px 12px'};
   }
 
   &:hover ${SLabelButton} {
