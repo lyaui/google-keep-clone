@@ -6,7 +6,7 @@ export type MemoImage = string;
 
 // 消滅 optional
 export interface MemoLabel {
-  _id?: string;
+  _id: string;
   name: string;
 }
 export interface MemoLink {
