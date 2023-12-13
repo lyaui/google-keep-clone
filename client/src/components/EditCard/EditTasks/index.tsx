@@ -16,7 +16,7 @@ const EditTasks = () => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo();
   const [newTask, setNewTask] = useState('');
 
-  const updateTaskHandler = (handledTask) => {
+  const updateTaskHandler = (handledTask: string) => {
     setNewTask(handledTask);
 
     // if just press enter

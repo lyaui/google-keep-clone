@@ -20,14 +20,14 @@ export const SEditNewTask = styled.div`
 
   #contentEdit {
     font-size: var(--text-md);
-    :empty:before {
+    &:empty:before {
       content: '清單項目';
       color: hsla(var(--color-gray-500));
     }
   }
 `;
 
-export const STaskItem = styled.div`
+export const STaskItem = styled.div<{ isDragging: boolean }>`
   margin-left: ${(props) => props.isDragging && '-70%'};
   box-shadow: ${(props) => props.isDragging && 'var(--shadow-lg)'};
 `;
