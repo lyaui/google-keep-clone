@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { SEditCardText } from '@/components/EditCard/EditCardText/style';
 
-export const SCreateMemoContent = styled(SEditCardText)`
+export const SEditMemoContent = styled(SEditCardText)`
   #contentEdit {
     font-size: var(--text-md);
     &:empty:before {

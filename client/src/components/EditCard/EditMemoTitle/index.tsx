@@ -5,7 +5,7 @@ import { memosActions } from '@/store/memosSlice';
 import EditCardText from '@/components/EditCard/EditCardText';
 import { SEditCardText } from '@/components/EditCard/EditCardText/style';
 
-export const SCreateMemoTitle = styled(SEditCardText)`
+export const SEditMemoTitle = styled(SEditCardText)`
   #contentEdit {
     font-size: var(--text-lg);
     &:empty:before {
@@ -15,7 +15,7 @@ export const SCreateMemoTitle = styled(SEditCardText)`
   }
 `;
 
-const CreateMemoTitle = () => {
+const EditMemoTitle = () => {
   const dispatch = useAppDispatch();
   const { memo } = useAppSelector((state) => state.memos);
 
@@ -23,10 +23,10 @@ const CreateMemoTitle = () => {
     dispatch(memosActions.updateMemo({ title }));
 
   return (
-    <SCreateMemoTitle>
+    <SEditMemoTitle>
       <EditCardText text={memo.title} updateTextHandler={updateTitleHandler} />
-    </SCreateMemoTitle>
+    </SEditMemoTitle>
   );
 };
 
-export default CreateMemoTitle;
+export default EditMemoTitle;

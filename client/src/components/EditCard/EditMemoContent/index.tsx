@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { memosActions } from '@/store/memosSlice';
 import EditCardText from '@/components/EditCard/EditCardText';
-import { SCreateMemoContent } from '@/components/EditCard/CreateMemoContent/style';
+import { SEditMemoContent } from '@/components/EditCard/EditMemoContent/style';
 
-function CreateMemoContent() {
+function EditMemoContent() {
   const dispatch = useAppDispatch();
   const { memo } = useAppSelector((state) => state.memos);
 
@@ -11,13 +11,13 @@ function CreateMemoContent() {
     dispatch(memosActions.updateMemo({ content }));
 
   return (
-    <SCreateMemoContent>
+    <SEditMemoContent>
       <EditCardText
         text={memo.content}
         updateTextHandler={updateContentHandler}
       />
-    </SCreateMemoContent>
+    </SEditMemoContent>
   );
 }
 
-export default CreateMemoContent;
+export default EditMemoContent;

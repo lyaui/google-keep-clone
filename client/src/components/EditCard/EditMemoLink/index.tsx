@@ -11,9 +11,9 @@ import LinkItem from '@/components/UI/LinkItem';
 import {
   SEditCardLink,
   SEditCardLinkButton,
-} from '@/components/EditCard/CreateMemoLink/style';
+} from '@/components/EditCard/EditMemoLink/style';
 
-const CreateMemoLink = ({ id }: { id?: string }) => {
+const EditMemoLink = ({ id }: { id?: string }) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
 
   const defaultLinks = 3;
@@ -70,4 +70,4 @@ const CreateMemoLink = ({ id }: { id?: string }) => {
   );
 };
 
-export default CreateMemoLink;
+export default EditMemoLink;

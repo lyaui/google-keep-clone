@@ -10,12 +10,12 @@ import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
 import EditMemoImages from '@/components/EditCard/EditMemoImages';
-import CreateMemoTitle from '@/components/EditCard/CreateMemoTitle';
-import CreateMemoContent from '@/components/EditCard/CreateMemoContent';
+import EditMemoTitle from '@/components/EditCard/EditMemoTitle';
+import EditMemoContent from '@/components/EditCard/EditMemoContent';
 import EditTasks from '@/components/EditCard/EditTasks';
-import CreateMemoLink from '@/components/EditCard/CreateMemoLink';
-import CreateMemoLabels from '@/components/EditCard/CreateMemoLabels';
-import CreateMemoToolbar from '@/components/EditCard/CreateMemoToolbar';
+import EditMemoLink from '@/components/EditCard/EditMemoLink';
+import EditMemoLabels from '@/components/EditCard/EditMemoLabels';
+import EditMemoToolbar from '@/components/EditCard/EditMemoToolbar';
 import {
   SEditCard,
   SEditCardBody,
@@ -62,11 +62,11 @@ function EditCard() {
           {/* images */}
           <EditMemoImages />
           {/* title */}
-          <CreateMemoTitle />
+          <EditMemoTitle />
           {/* tasks | content */}
-          {isTaskList ? <EditTasks /> : <CreateMemoContent />}
+          {isTaskList ? <EditTasks /> : <EditMemoContent />}
           {/* label */}
-          {memo.labels.length > 0 && <CreateMemoLabels />}
+          {memo.labels.length > 0 && <EditMemoLabels />}
           {/* updatedAt */}
           {memo.updatedAt && (
             <SCardCreatedAt>
@@ -82,10 +82,10 @@ function EditCard() {
             </SCardCreatedAt>
           )}
           {/* links */}
-          {memo.links.length > 0 && <CreateMemoLink />}
+          {memo.links.length > 0 && <EditMemoLink />}
         </SEditCardBody>
         {/* toolbar */}
-        <CreateMemoToolbar />
+        <EditMemoToolbar />
       </OutsideClickHandler>
     </SEditCard>
   );

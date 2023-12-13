@@ -15,7 +15,7 @@ export const SEditCardToolbar = styled.div`
   align-items: center;
 `;
 
-function CreateMemoToolbar() {
+function EditMemoToolbar() {
   const { memo } = useAppSelector((state) => state.memos);
   const { isTaskList } = memo;
 
@@ -37,4 +37,4 @@ function CreateMemoToolbar() {
   );
 }
 
-export default CreateMemoToolbar;
+export default EditMemoToolbar;
