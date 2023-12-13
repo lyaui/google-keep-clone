@@ -60,7 +60,7 @@ const labelReducer = (state = INIT_LABEL_STATES, action) => {
   }
 };
 
-const SideMenuLabel = ({ label }) => {
+const EditableLabelInput = ({ label }) => {
   const dispatch = useDispatch();
   const { labels } = useSelector((state) => state.labels);
   const [inputStates, inputDispatch] = useReducer(
@@ -189,4 +189,4 @@ const SideMenuLabel = ({ label }) => {
   );
 };
 
-export default SideMenuLabel;
+export default EditableLabelInput;

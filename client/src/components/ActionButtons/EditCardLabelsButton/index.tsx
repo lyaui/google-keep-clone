@@ -6,7 +6,7 @@ import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon';
 import Button from '@/components/UI/Buttons';
-import EditLabels from '@/components/EditLabels';
+import AddLabelPopover from '@/components/EditLabels/AddLabelPopover';
 
 const EditCardLabelsButton = ({ id }: { id?: string }) => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -18,7 +18,7 @@ const EditCardLabelsButton = ({ id }: { id?: string }) => {
   return (
     <div>
       <CustomTippy
-        render={() => <EditLabels id={id} />}
+        render={() => <AddLabelPopover id={id} />}
         interactive={true}
         visible={showTooltip}
         onClickOutside={() => setShowTooltip(false)}
