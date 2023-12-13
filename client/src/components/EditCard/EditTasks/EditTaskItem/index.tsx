@@ -1,4 +1,8 @@
 import { memo } from 'react';
+import type { MouseEvent } from 'react';
+import { isNil } from 'lodash';
+
+import { MemoTask, Theme } from '@/types';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { useUI } from '@/contexts/UI-context';
 import { v4 as uuid } from 'uuid';
@@ -11,12 +15,20 @@ import {
   SEditTaskItemText,
 } from '@/components/EditCard/EditTasks/EditTaskItem/style.jsx';
 
-const EditTaskItem = ({ task, index, id }) => {
+interface EditTaskItemProps {
+  task: MemoTask;
+  index: number;
+  id?: string;
+}
+
+const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
   const { UIState } = useUI();
-  const memoColor = PALETTE_COLORS[currentMemo.color][UIState.theme];
+  const memoColor = PALETTE_COLORS[currentMemo.color][UIState.theme as Theme];
 
-  const updateTaskHandler = (handledTask) => {
+  const isNewMemo = isNil(id);
+
+  const updateTaskHandler = (handledTask: string) => {
     let updatedTasks = [...currentMemo.tasks];
     let tasksBeforeEditingTask = [...currentMemo.tasks].slice(0, index);
     let tasksAfterEditingTask = [...currentMemo.tasks].slice(index + 1);
@@ -60,8 +72,8 @@ const EditTaskItem = ({ task, index, id }) => {
     }
   };
 
-  const toggleIsCompletedHandler = (e) => {
-    e.stopPropagation();
+  const toggleIsCompletedHandler = (event: MouseEvent<SVGAElement>) => {
+    event.stopPropagation();
     let updatedTasks = [...currentMemo.tasks];
     updatedTasks[index] = { ...task, isCompleted: !task.isCompleted };
     dispatchUpdateMemo({ tasks: updatedTasks });
@@ -75,31 +87,25 @@ const EditTaskItem = ({ task, index, id }) => {
   };
 
   return (
-    <SEditTaskItem style={{ '--color': memoColor }}>
-      <SEditTaskItemIcon style={{ '--margin': id ? 0 : '-10px' }}>
-        {!id && <Icon.Drag name="drag" />}
-        {!task.isCompleted && (
+    <SEditTaskItem color={memoColor}>
+      <SEditTaskItemIcon isNewMemo={isNewMemo}>
+        {!isNewMemo && <Icon.Drag name="drag" />}
+        {task.isCompleted ? (
+          <Icon.CheckboxOutline
+            name="checkbox"
+            onClick={toggleIsCompletedHandler}
+          />
+        ) : (
           <Icon.EmptyCheckbox
             name="checkbox"
             onClick={toggleIsCompletedHandler}
           />
         )}
-        {task.isCompleted && (
-          <Icon.CheckboxOutline
-            name="checkbox"
-            onClick={toggleIsCompletedHandler}
-          />
-        )}
       </SEditTaskItemIcon>
-      <SEditTaskItemText
-        style={{
-          '--text-decoration': task.isCompleted && 'line-through',
-          '--color': task.isCompleted && 'var(--color-task-completed)',
-        }}
-      >
+      <SEditTaskItemText isComplete={task.isCompleted}>
         <EditCardText text={task.name} updateTextHandler={updateTaskHandler} />
       </SEditTaskItemText>
-      {!id && (
+      {!isNewMemo && (
         <SEditTaskItemIcon>
           <Icon.Clear name="delete" onClick={deleteTaskHandler} />
         </SEditTaskItemIcon>
