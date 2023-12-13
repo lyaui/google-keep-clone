@@ -97,7 +97,8 @@ const getUserMemoByMemoId = async (req, res, next) => {
 
     // check if memo exists
     const memo = await Memo.findById({ creator: userId, _id: memoId }).populate(
-      'labels'
+      'labels',
+      '_id name'
     );
     if (!memo)
       return next(new HttpError('Could not find memo for provided id', 404));
