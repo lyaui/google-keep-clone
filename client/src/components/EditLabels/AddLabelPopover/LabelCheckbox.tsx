@@ -1,11 +1,18 @@
 import { useEffect } from 'react';
+import type { MouseEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 
+import { MemoLabel } from '@/types';
 import * as Icon from '@/components/UI/Icon/index';
 import { SLabel, SLabelIcon, SLabelValue } from '@/components/EditLabels/style';
 
-function MemoLabel({ id, label, isSideMenu }) {
+interface LabelCheckboxProps {
+  id?: string;
+  label: MemoLabel;
+}
+
+function LabelCheckbox({ id, label }: LabelCheckboxProps) {
   const { labelName } = useParams();
 
   const {
@@ -21,8 +28,8 @@ function MemoLabel({ id, label, isSideMenu }) {
     dispatchUpdateMemo({ labels: [...labels, label] });
   }, [id, label, labelName, dispatchUpdateMemo, labels]);
 
-  const toggleLabelHandler = (e) => {
-    e.preventDefault();
+  const toggleLabelHandler = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
     const updatedLabels = isSelected
       ? labels.filter((item) => item._id !== label._id)
       : [...labels, label];
@@ -30,10 +37,7 @@ function MemoLabel({ id, label, isSideMenu }) {
   };
 
   return (
-    <SLabel
-      style={{ '--hover': !isSideMenu && 'var(--color-hover-bg)' }}
-      onClick={toggleLabelHandler}
-    >
+    <SLabel onClick={toggleLabelHandler}>
       <SLabelIcon>
         {isSelected ? <Icon.CheckboxOutline /> : <Icon.EmptyCheckbox />}
       </SLabelIcon>
@@ -42,4 +46,4 @@ function MemoLabel({ id, label, isSideMenu }) {
   );
 }
 
-export default MemoLabel;
+export default LabelCheckbox;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const SEditCardLabels = styled.div`
-  width: var(--width);
+export const SEditCardLabels = styled.div<{ isSideMenu?: boolean }>`
+  width: ${(props) => (props.isSideMenu ? '300px' : '200px')};
   padding: 12px;
   font-size: var(--text-base);
   border-radius: var(--rounded-md);
@@ -14,8 +14,8 @@ export const SEditCardLabelTitle = styled.div`
   letter-spacing: 1px;
 `;
 
-export const SLabels = styled.div`
-  max-height: var(--height);
+export const SLabels = styled.div<{ isSideMenu?: boolean }>`
+  max-height: ${(props) => (props.isSideMenu ? '300px' : '200px')};
   margin: 0 -12px;
   overflow: scroll;
   cursor: pointer;
@@ -42,7 +42,7 @@ export const SLabel = styled.div`
   align-items: start;
 
   &:hover {
-    background-color: var(--hover);
+    background-color: var(--color-hover-bg);
   }
   &:hover svg[name='label'] {
     display: none;

@@ -11,7 +11,7 @@ import {
   SLabelEditInput,
   SLabelValue,
   SLabelErrMsg,
-} from '@/components/EditLabels/style.jsx';
+} from '@/components/EditLabels/style';
 
 const INIT_LABEL_STATES = {
   isEditing: false,

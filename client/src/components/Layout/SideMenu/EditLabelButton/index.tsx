@@ -22,7 +22,7 @@ const EditLabelButton = ({ navItemStyle }) => {
         </Button>
         <SNavItemText isFixedMenu={true}>編輯標籤</SNavItemText>
       </SNavItem>
-      <Modal showModal={showEditModal} closeModal={closeEditModalHandler}>
+      <Modal isOpen={showEditModal} onClose={closeEditModalHandler}>
         <EditLabels type="sideMenu" />
       </Modal>
     </Fragment>
