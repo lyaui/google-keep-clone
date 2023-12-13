@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { VIEW_MODE } from '@/constants/UI';
+import type { ViewMode } from '@/types';
 
-export const SCardImages = styled.div`
+export const SCardImages = styled.div<{
+  isEditMode: boolean;
+  viewMode: ViewMode;
+  noCardBody: boolean;
+}>`
   display: grid;
   border-radius: ${(props) => (props.noCardBody ? '8px' : '8px 8px 0 0')};
   overflow: hidden;

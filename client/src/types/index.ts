@@ -1,6 +1,6 @@
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
-import { THEME } from '@/constants/UI';
+import { THEME, VIEW_MODE } from '@/constants/UI';
 
 export type MemoImage = string;
 
@@ -45,3 +45,5 @@ export type TooltipContent = keyof typeof TOOLTIP_TEXT;
 export type Color = keyof typeof PALETTE_COLORS;
 
 export type Theme = keyof typeof THEME;
+
+export type ViewMode = keyof typeof VIEW_MODE;

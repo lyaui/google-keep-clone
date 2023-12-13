@@ -20,8 +20,8 @@ const EditMemoImages = () => {
       {images.length > 0 && (
         <CardImages
           images={images}
-          isEditMode="true"
-          deleteImageHandler={deleteImageHandler}
+          isEditMode={true}
+          onDelete={deleteImageHandler}
         />
       )}
     </SCreateMemoImages>
