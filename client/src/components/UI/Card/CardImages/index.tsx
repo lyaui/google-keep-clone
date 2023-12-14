@@ -17,14 +17,14 @@ import {
 
 interface CardImagesProps {
   images: string[];
-  isEditMode: boolean;
+  isEditMode?: boolean;
   onDelete?: (image: string) => void;
   noCardBody?: boolean;
 }
 
 const CardImages = ({
   images,
-  isEditMode,
+  isEditMode = false,
   onDelete,
   noCardBody = false,
 }: CardImagesProps) => {
