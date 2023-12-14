@@ -1,9 +1,12 @@
 import { Fragment, useRef, useEffect, useReducer } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import type { MouseEvent, ChangeEvent } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+
+import type { MemoLabel } from '@/types';
+import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
-import { updateLabel, deleteLabel } from '@/store/labelsSlice/labels-action.js';
+import { updateLabel, deleteLabel } from '@/store/labelsSlice/labels-action';
 import * as Icon from '@/components/UI/Icon';
 import {
   SLabel,
@@ -26,9 +29,28 @@ const LABEL_ACTIONS = {
   SWITCH: 'SWITCH',
   BLUR: 'BLUR',
   ERROR: 'ERROR',
-};
+} as const;
 
-const labelReducer = (state = INIT_LABEL_STATES, action) => {
+type LabelAction =
+  | {
+      type: (typeof LABEL_ACTIONS)['INIT'];
+      textValue: string;
+      tempInputValue: string;
+    }
+  | {
+      type: (typeof LABEL_ACTIONS)['SWITCH'];
+      isEditing: boolean;
+      tempInputValue: string;
+    }
+  | {
+      type: (typeof LABEL_ACTIONS)['CHANGE'];
+      textValue: string;
+      tempInputValue: string;
+    }
+  | { type: (typeof LABEL_ACTIONS)['BLUR']; isEditing: boolean }
+  | { type: (typeof LABEL_ACTIONS)['ERROR']; errorMessage: string };
+
+const labelReducer = (state = INIT_LABEL_STATES, action: LabelAction) => {
   switch (action.type) {
     case LABEL_ACTIONS.INIT:
       return {
@@ -60,15 +82,15 @@ const labelReducer = (state = INIT_LABEL_STATES, action) => {
   }
 };
 
-const EditableLabelInput = ({ label }) => {
-  const dispatch = useDispatch();
-  const { labels } = useSelector((state) => state.labels);
+const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
+  const dispatch = useAppDispatch();
+  const { labels } = useAppSelector((state) => state.labels);
   const [inputStates, inputDispatch] = useReducer(
     labelReducer,
     INIT_LABEL_STATES
   );
   const { isEditing, textValue, tempInputValue, errorMessage } = inputStates;
-  const inputRef = useRef('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     inputDispatch({
@@ -78,13 +100,13 @@ const EditableLabelInput = ({ label }) => {
     });
   }, [label.name]);
 
-  const deleteLabelHandler = (e) => {
-    e.preventDefault();
+  const deleteLabelHandler = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
     dispatch(deleteLabel(label._id));
   };
 
-  const switchInputHandler = (e) => {
-    e.preventDefault();
+  const switchInputHandler = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
     inputDispatch({
       type: LABEL_ACTIONS.SWITCH,
       isEditing: true,
@@ -92,25 +114,25 @@ const EditableLabelInput = ({ label }) => {
     });
   };
 
-  const changeInputHandler = (e) => {
-    e.preventDefault();
+  const changeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     inputDispatch({
       type: LABEL_ACTIONS.CHANGE,
-      textValue: inputRef.current.value,
-      tempInputValue: inputRef.current.value,
+      textValue: inputRef.current?.value || '',
+      tempInputValue: inputRef.current?.value || '',
     });
   };
 
-  const blurInputHandler = (e) => {
-    e.preventDefault();
+  const blurInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     inputDispatch({
       type: LABEL_ACTIONS.BLUR,
       isEditing: false,
     });
   };
 
-  const updateLabelHandler = (e) => {
-    e.preventDefault();
+  const updateLabelHandler = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
 
     const isLabelExisted = !!labels.find(
       (label) => label.name === textValue.trim()
@@ -137,7 +159,7 @@ const EditableLabelInput = ({ label }) => {
 
   return (
     <Fragment>
-      <SLabel key={label.id}>
+      <SLabel key={label._id}>
         <SLabelIcon>
           <Icon.Label name={'label'} />
         </SLabelIcon>
@@ -147,17 +169,8 @@ const EditableLabelInput = ({ label }) => {
             <Icon.Delete name={'delete'} />
           </SLabelIcon>
         </Tippy>
-        {/* edit */}
-        {!isEditing && (
-          <SLabelValue>
-            <span onClick={switchInputHandler}>
-              {textValue || '輸入標籤名稱'}
-            </span>
-            {errorMessage && <SLabelErrMsg>{errorMessage}</SLabelErrMsg>}
-          </SLabelValue>
-        )}
 
-        {isEditing && (
+        {isEditing ? (
           <SLabelEditInput
             autoFocus
             type="text"
@@ -167,6 +180,13 @@ const EditableLabelInput = ({ label }) => {
             onBlur={blurInputHandler}
             placeholder="輸入標籤名稱"
           />
+        ) : (
+          <SLabelValue>
+            <span onClick={switchInputHandler}>
+              {textValue || '輸入標籤名稱'}
+            </span>
+            {errorMessage && <SLabelErrMsg>{errorMessage}</SLabelErrMsg>}
+          </SLabelValue>
         )}
 
         {/* switch edit / save edit */}
