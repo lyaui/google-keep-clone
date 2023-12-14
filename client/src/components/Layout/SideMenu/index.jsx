@@ -20,8 +20,7 @@ function SideMenu() {
 
   useEffect(() => {
     dispatch(getUserLabels());
-    if (errorMessage)
-      return navigate.replace(ROUTER_PATH.LOGIN, { replace: true });
+    if (errorMessage) return navigate(ROUTER_PATH.LOGIN, { replace: true });
   }, [dispatch, errorMessage, navigate]);
 
   const navItemStyle = {
