@@ -21,9 +21,8 @@ export interface MemoTask {
   name: string;
   isCompleted: boolean;
 }
-export interface Memo {
-  _id?: string; // TODO 要 omit 還是 optional?還是拆成新or from DB，直接建一個新型別，然後是 pick 這個完整版的
-  creator?: string;
+
+export interface DraftMemo {
   title: string;
   content: string;
   images: MemoImage[];
@@ -34,10 +33,14 @@ export interface Memo {
   labels: MemoLabel[];
   tasks: MemoTask[];
   color: Color;
+}
+export interface Memo extends DraftMemo {
+  _id: string;
+  creator: string;
   // TODO ts time
-  createdAt?: string;
-  updatedAt?: string;
-  __v?: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 export type TooltipContent = keyof typeof TOOLTIP_TEXT;

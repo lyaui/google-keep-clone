@@ -9,13 +9,13 @@ import {
   addLinksInfo,
   uploadMemoImage,
 } from '@/store/memosSlice/memos-action';
-import type { Memo, MemoImage, MemoLink } from '@/types';
+import type { DraftMemo, Memo, MemoImage, MemoLink } from '@/types';
 
 interface MemoState {
   isLoading: boolean;
   errorMessage: string;
   memos: Memo[];
-  memo: Memo;
+  memo: DraftMemo;
 }
 
 export const INIT_MEMO = {
@@ -42,10 +42,10 @@ const memosSlice = createSlice({
   name: 'memos',
   initialState: INIT_MEMOS_STATE,
   reducers: {
-    setMemo(state, action: PayloadAction<Memo>) {
+    setMemo(state, action: PayloadAction<DraftMemo>) {
       state.memo = action.payload;
     },
-    updateMemo(state, action: PayloadAction<Partial<Memo>>) {
+    updateMemo(state, action: PayloadAction<Partial<DraftMemo>>) {
       state.memo = { ...state.memo, ...action.payload };
     },
     resetMemo(state) {
@@ -107,7 +107,7 @@ const memosSlice = createSlice({
       state.errorMessage = '';
       // TODO ascend or descend
       state.memos = [action.payload, ...state.memos];
-      state.memo = { ...INIT_MEMO } as Memo;
+      state.memo = { ...INIT_MEMO } as DraftMemo;
     },
     [addMemo.rejected](state, action: PayloadAction<string>) {
       state.isLoading = false;
