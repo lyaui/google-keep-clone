@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SEditCardText = styled.div`
+export const SEditMemoText = styled.div`
   #contentEdit {
     width: 100%;
     padding: 8px 0px;

@@ -10,12 +10,12 @@ import ContentEditable, {
 import { ROUTER_PATH } from '@/routes';
 import { addLinksInfo } from '@/store/memosSlice/memos-action';
 
-interface EditCardTextProps {
+interface EditMemoTextProps {
   text: string;
   updateTextHandler: (text: string) => void;
 }
 
-function EditCardText({ text, updateTextHandler }: EditCardTextProps) {
+function EditMemoText({ text, updateTextHandler }: EditMemoTextProps) {
   const dispatch = useDispatch();
   const { search, pathname } = useLocation();
   const editQuery = !!new URLSearchParams(search).get('edit');
@@ -70,4 +70,4 @@ function EditCardText({ text, updateTextHandler }: EditCardTextProps) {
   );
 }
 
-export default EditCardText;
+export default EditMemoText;

@@ -12,7 +12,7 @@ export const SCardLinks = styled.div<{
 `;
 
 export const SCardLink = styled.div<{ isOnlyLinks?: boolean; index?: number }>`
-  height: ${(props) => (props.isOnlyLinks ? 88 : 56)};
+  height: ${(props) => (props.isOnlyLinks ? '90px' : '56px')};
   border-top: ${(props) =>
     !props.index && props.isOnlyLinks
       ? 'unset'

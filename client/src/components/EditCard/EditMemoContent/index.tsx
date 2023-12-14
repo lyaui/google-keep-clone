@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { memosActions } from '@/store/memosSlice';
-import EditCardText from '@/components/EditCard/EditCardText';
+import EditMemoText from '@/components/EditCard/EditMemoText';
 import { SEditMemoContent } from '@/components/EditCard/EditMemoContent/style';
 
 function EditMemoContent() {
@@ -12,7 +12,7 @@ function EditMemoContent() {
 
   return (
     <SEditMemoContent>
-      <EditCardText
+      <EditMemoText
         text={memo.content}
         updateTextHandler={updateContentHandler}
       />

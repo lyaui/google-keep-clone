@@ -8,7 +8,7 @@ import { useUI } from '@/contexts/UI-context';
 import { v4 as uuid } from 'uuid';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import * as Icon from '@/components/UI/Icon';
-import EditCardText from '@/components/EditCard/EditCardText';
+import EditMemoText from '@/components/EditCard/EditMemoText';
 import {
   SEditTaskItem,
   SEditTaskItemIcon,
@@ -103,7 +103,7 @@ const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
         )}
       </SEditTaskItemIcon>
       <SEditTaskItemText isComplete={task.isCompleted}>
-        <EditCardText text={task.name} updateTextHandler={updateTaskHandler} />
+        <EditMemoText text={task.name} updateTextHandler={updateTaskHandler} />
       </SEditTaskItemText>
       {!isNewMemo && (
         <SEditTaskItemIcon>

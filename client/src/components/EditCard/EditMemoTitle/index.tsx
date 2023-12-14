@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { memosActions } from '@/store/memosSlice';
-import EditCardText from '@/components/EditCard/EditCardText';
-import { SEditCardText } from '@/components/EditCard/EditCardText/style';
+import EditMemoText from '@/components/EditCard/EditMemoText';
+import { SEditMemoText } from '@/components/EditCard/EditMemoText/style';
 
-export const SEditMemoTitle = styled(SEditCardText)`
+export const SEditMemoTitle = styled(SEditMemoText)`
   #contentEdit {
     font-size: var(--text-lg);
     &:empty:before {
@@ -24,7 +24,7 @@ const EditMemoTitle = () => {
 
   return (
     <SEditMemoTitle>
-      <EditCardText text={memo.title} updateTextHandler={updateTitleHandler} />
+      <EditMemoText text={memo.title} updateTextHandler={updateTitleHandler} />
     </SEditMemoTitle>
   );
 };

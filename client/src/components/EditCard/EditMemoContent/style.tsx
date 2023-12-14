@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { SEditCardText } from '@/components/EditCard/EditCardText/style';
+import { SEditCardText } from '@/components/EditCard/EditMemoText/style';
 
 export const SEditMemoContent = styled(SEditCardText)`
   #contentEdit {

@@ -3,7 +3,7 @@ import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { v4 as uuid } from 'uuid';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import * as Icon from '@/components/UI/Icon';
-import EditCardText from '@/components/EditCard/EditCardText';
+import EditMemoText from '@/components/EditCard/EditMemoText';
 import EditTaskItem from '@/components/EditCard/EditTasks/EditTaskItem';
 import {
   SEditTasks,
@@ -44,7 +44,7 @@ const EditTasks = () => {
           {/* add new task */}
           <SEditNewTask>
             <Icon.Add />
-            <EditCardText
+            <EditMemoText
               text={newTask}
               updateTextHandler={updateTaskHandler}
             />
