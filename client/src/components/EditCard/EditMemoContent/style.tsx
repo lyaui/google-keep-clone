@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { SEditCardText } from '@/components/EditCard/EditMemoText/style';
+import { SEditMemoText } from '@/components/EditCard/EditMemoText/style';
 
-export const SEditMemoContent = styled(SEditCardText)`
+export const SEditMemoContent = styled(SEditMemoText)`
   #contentEdit {
     font-size: var(--text-md);
     &:empty:before {
