@@ -33,22 +33,22 @@ const LABEL_ACTIONS = {
 
 type LabelAction =
   | {
-      type: (typeof LABEL_ACTIONS)['INIT'];
+      type: typeof LABEL_ACTIONS.INIT;
       textValue: string;
       tempInputValue: string;
     }
   | {
-      type: (typeof LABEL_ACTIONS)['SWITCH'];
+      type: typeof LABEL_ACTIONS.SWITCH;
       isEditing: boolean;
       tempInputValue: string;
     }
   | {
-      type: (typeof LABEL_ACTIONS)['CHANGE'];
+      type: typeof LABEL_ACTIONS.CHANGE;
       textValue: string;
       tempInputValue: string;
     }
-  | { type: (typeof LABEL_ACTIONS)['BLUR']; isEditing: boolean }
-  | { type: (typeof LABEL_ACTIONS)['ERROR']; errorMessage: string };
+  | { type: typeof LABEL_ACTIONS.BLUR; isEditing: boolean }
+  | { type: typeof LABEL_ACTIONS.ERROR; errorMessage: string };
 
 const labelReducer = (state = INIT_LABEL_STATES, action: LabelAction) => {
   switch (action.type) {
