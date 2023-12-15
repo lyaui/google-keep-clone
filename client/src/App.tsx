@@ -1,36 +1,36 @@
 import { Suspense, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { RouterProvider } from 'react-router-dom';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 
 import { router } from '@/routes';
 import { memosActions } from '@/store/memosSlice';
 import Toast from '@/components/UI/Toast';
 import { useAuth, logout } from '@/contexts/auth-context';
 
-let logoutTimer;
+let logoutTimer: NodeJS.Timeout;
 
 function App() {
-  const dispatch = useDispatch();
-  const { memo } = useSelector((state) => state.memos);
+  const dispatch = useAppDispatch();
+  const { memo } = useAppSelector((state) => state.memos);
   const { tasks } = memo;
   const { authState, authDispatch } = useAuth();
   const { isLoggedIn, expiration } = authState;
 
   // auto logout
-  // useEffect(() => {
-  //   if (isLoggedIn && expiration) {
-  //     const expireTimestamp = new Date(expiration).getTime();
-  //     const remainingTime = expireTimestamp - new Date().getTime();
-  //     logoutTimer = setTimeout(() => {
-  //       logout(authDispatch);
-  //     }, remainingTime);
-  //   } else {
-  //     clearTimeout(logoutTimer);
-  //   }
-  // }, [isLoggedIn, authDispatch, expiration]);
+  useEffect(() => {
+    if (isLoggedIn && expiration) {
+      const expireTimestamp = new Date(expiration).getTime();
+      const remainingTime = expireTimestamp - new Date().getTime();
+      logoutTimer = setTimeout(() => {
+        logout(authDispatch);
+      }, remainingTime);
+    } else {
+      clearTimeout(logoutTimer);
+    }
+  }, [isLoggedIn, authDispatch, expiration]);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
     // if item is not in the destination scope
     if (!destination) return;
@@ -51,9 +51,8 @@ function App() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Suspense fallback={<div></div>}>
-        <RouterProvider router={router}>
-          <Toast />
-        </RouterProvider>
+        <RouterProvider router={router} />
+        <Toast />
       </Suspense>
     </DragDropContext>
   );
