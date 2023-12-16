@@ -22,6 +22,15 @@ export interface AuthState {
   expiration: string; // TODO time
 }
 
+interface AuthContext {
+  authState: AuthState;
+  authDispatch: Dispatch<AuthAction>;
+}
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
 export const INIT_AUTH_STATES: AuthState = {
   isLoading: false,
   errorMessage: '',
@@ -37,16 +46,7 @@ export const initAuthStates: AuthState = JSON.parse(
   localStorage.getItem('userInfo') || JSON.stringify(INIT_AUTH_STATES)
 );
 
-interface AuthContext {
-  authState: AuthState;
-  authDispatch: Dispatch<AuthAction>;
-}
-
 const AuthContext = createContext<AuthContext | null>(null);
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [authState, authDispatch] = useReducer(authReducer, initAuthStates);
