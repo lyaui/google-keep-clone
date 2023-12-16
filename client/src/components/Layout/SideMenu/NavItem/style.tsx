@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const SNavItem = styled.li`
-  margin-left: var(--margin);
-  padding-left: var(--padding);
+export const SNavItem = styled.li<{ isFixedMenu: boolean }>`
+  margin-left: ${(props) => (props.isFixedMenu ? '-20px' : '10px')};
+  padding-left: ${(props) => (props.isFixedMenu ? '20px' : '0px')};
   border-radius: var(--rounded-xl);
   list-style: none;
   cursor: pointer;
@@ -14,7 +14,7 @@ export const SNavItem = styled.li`
     background-color: var(--color-hover-bg);
   }
   button {
-    margin-left: var(--margin-button);
+    margin-left: ${(props) => (props.isFixedMenu ? '15px' : '5px')};
   }
   a {
     display: flex;
