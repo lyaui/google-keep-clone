@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { isNil } from 'lodash';
 
-import type { Color, Theme } from '@/types';
+import type { DraftMemo, Memo } from '@/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { memosActions } from '@/store/memosSlice';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
@@ -23,6 +22,10 @@ import {
 } from '@/components/EditCard/style';
 import OutsideClickHandler from 'react-outside-click-handler';
 
+function isExistingMemo(currentMemo: Memo | DraftMemo): currentMemo is Memo {
+  return currentMemo.hasOwnProperty('_id');
+}
+
 function EditCard() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -31,21 +34,20 @@ function EditCard() {
   const { dispatchUpdateMemo } = useUpdateMemo(memoId);
 
   const { memo, isLoading } = useAppSelector((state) => state.memos);
-  const isNewPost = isNil(memo._id);
   const { isTaskList, color } = memo;
   const { UIState } = useUI();
-  const memoColor = PALETTE_COLORS[color as Color][UIState.theme as Theme];
+  const memoColor = PALETTE_COLORS[color][UIState.theme];
 
   const clickOutsideHandler = async (event: globalThis.MouseEvent) => {
     event.stopPropagation();
     if (isLoading) return;
 
-    if (isNewPost) {
+    if (isExistingMemo(memo)) {
+      await dispatchUpdateMemo(memo);
+    } else {
       await dispatch(
         addMemo({ ...memo, labels: memo.labels.map((label) => label._id) })
       );
-    } else {
-      await dispatchUpdateMemo(memo);
     }
 
     navigate({ search: '' });
@@ -68,7 +70,7 @@ function EditCard() {
           {/* label */}
           {memo.labels.length > 0 && <EditMemoLabels />}
           {/* updatedAt */}
-          {memo.updatedAt && (
+          {isExistingMemo(memo) && (
             <SCardCreatedAt>
               {memo.isArchived && '已封存記事 • '}上次編輯時間：
               {new Date(memo.updatedAt).toLocaleTimeString([], {
