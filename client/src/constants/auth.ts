@@ -1,14 +1,3 @@
-export const INIT_AUTH_STATES = {
-  isLoading: false,
-  errorMessage: '',
-  isLoggedIn: false,
-  userId: '',
-  userName: '',
-  userEmail: '',
-  token: '',
-  expiration: '',
-};
-
 export const AUTH_TYPES = {
   // SIGNUP
   SIGNUP_REQUEST: 'SIGNUP_REQUEST',
@@ -29,4 +18,4 @@ export const AUTH_TYPES = {
   LOGOUT_REQUEST: 'LOGOUT_REQUEST',
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
   LOGOUT_FAIL: 'LOGOUT_FAIL',
-};
+} as const;
