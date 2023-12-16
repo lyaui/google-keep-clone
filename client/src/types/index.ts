@@ -40,6 +40,9 @@ export interface Memo extends DraftMemo {
   // TODO ts time
   createdAt: string;
   updatedAt: string;
+  isTaskList: boolean;
+  isPinned: boolean;
+  isArchived: boolean;
   __v: number;
 }
 

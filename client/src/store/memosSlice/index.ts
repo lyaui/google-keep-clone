@@ -15,7 +15,7 @@ interface MemoState {
   isLoading: boolean;
   errorMessage: string;
   memos: Memo[];
-  memo: DraftMemo;
+  memo: Memo | DraftMemo;
 }
 
 export const INIT_MEMO = {
