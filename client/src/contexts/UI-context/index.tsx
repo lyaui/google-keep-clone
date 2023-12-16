@@ -39,7 +39,10 @@ const initUIStates: UIState = JSON.parse(
   localStorage.getItem('userSettings') || JSON.stringify(INIT_UI_STATES)
 );
 
-const UIContext = createContext<UIContext | null>(null);
+const UIContext = createContext<UIContext>({
+  UIState: initUIStates,
+  UIDispatch: () => {},
+});
 
 export const UIProvider = ({ children }: UIProviderProps) => {
   const [UIState, UIDispatch] = useReducer(UIReducer, initUIStates);

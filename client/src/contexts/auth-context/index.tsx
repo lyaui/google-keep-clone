@@ -46,7 +46,10 @@ export const initAuthStates: AuthState = JSON.parse(
   localStorage.getItem('userInfo') || JSON.stringify(INIT_AUTH_STATES)
 );
 
-const AuthContext = createContext<AuthContext | null>(null);
+const AuthContext = createContext<AuthContext>({
+  authState: initAuthStates,
+  authDispatch: () => {},
+});
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [authState, authDispatch] = useReducer(authReducer, initAuthStates);
