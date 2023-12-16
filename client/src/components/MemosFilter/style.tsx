@@ -37,7 +37,7 @@ export const SMemosFilterContainer = styled.div`
   gap: 4px;
 `;
 
-export const SMemosFilterUnit = styled.div`
+export const SMemosFilterUnit = styled.div<{ type: string }>`
   height: 160px;
   width: calc(25% - 3px);
   display: flex;
@@ -45,13 +45,30 @@ export const SMemosFilterUnit = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  color: hsl(var(--color-gray-400));
+  color: hsl(
+    var(
+      ${(props) => {
+        if (props.type === 'type') return '--color-gray-100';
+        return '--color-gray-400';
+      }}
+    )
+  );
   font-size: var(--text-base);
   font-weight: var(--font-light);
-  background-color: hsl(var(--color), 0.1);
   cursor: pointer;
   transition: var(--transition);
-
+  background-color: hsl(
+    var(
+      ${(props) => {
+        if (props.type === 'type') return '--color-blue';
+        return '--color-gray-300';
+      }}
+    ),
+    ${(props) => {
+      if (props.type === 'type') return 0.8;
+      return 0.2;
+    }}
+  );
   div {
     width: 100%;
     text-align: center;
@@ -59,23 +76,25 @@ export const SMemosFilterUnit = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
   svg {
     width: 40px;
     height: 40px;
     margin-bottom: 8px;
   }
-  &[type='type'] {
-    background-color: hsla(var(--color), 0.8);
-    color: hsl(var(--color-gray-100));
-  }
 `;
 
-export const SMemosFilterColor = styled.div`
+export const SMemosFilterColor = styled.div<{ color: string }>`
   width: 52px;
   height: 52px;
   margin: 12px;
   border-radius: var(--rounded-full);
   border: 1px solid hsl(var(--color-gray-400));
-  background-color: hsl(var(--color));
+  background-color: hsl(${(props) => props.color});
+  opacity: 0.8;
+  transition: var(--transition);
   cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
 `;
