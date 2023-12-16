@@ -25,12 +25,3 @@ export const UI_TYPES = {
   SETTINGS_UPDATE_SUCCESS: 'LOGIN_SUCCESS',
   SETTINGS_UPDATE_FAIL: 'LOGIN_FAIL',
 } as const;
-
-export const INIT_UI_STATES = {
-  isLoading: false,
-  errorMessage: '',
-  theme: THEME.LIGHT,
-  layout: VIEW_MODE.GRID,
-  sort: SORT.DESCEND,
-  isFixedMenu: false,
-};
