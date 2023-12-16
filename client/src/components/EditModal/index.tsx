@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { useFetchMemos } from '@/hooks/fetchMemos-hook';
+import { useFetchMemos } from '@/hooks/useFetchMemos';
 import { getUserMemoByMemoId } from '@/store/memosSlice/memos-action';
 import { ROUTER_PATH } from '@/routes';
 import SkeletonEditModal from '@/skeletons/SkeletonEditModal';

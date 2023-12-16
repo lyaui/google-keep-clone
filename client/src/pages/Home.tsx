@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useFetchMemos } from '@/hooks/fetchMemos-hook';
+import { useFetchMemos } from '@/hooks/useFetchMemos';
 import { getUserMemos } from '@/store/memosSlice/memos-action';
 import * as Icon from '@/components/UI/Icon';
 import MemosPage from '@/components/MemosPage';

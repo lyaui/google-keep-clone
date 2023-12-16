@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useFetchMemos } from '@/hooks/fetchMemos-hook';
+import { useFetchMemos } from '@/hooks/useFetchMemos';
 import { useParams } from 'react-router-dom';
 
 import { getUserMemosByLabelName } from '@/store/memosSlice/memos-action';

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '@/hooks/useReduxStore';
 
 import type { Color } from '@/types';
-import { useFetchMemos } from '@/hooks/fetchMemos-hook';
+import { useFetchMemos } from '@/hooks/useFetchMemos';
 import {
   getUserMemos,
   getUserMemosByLabelName,
@@ -33,8 +33,7 @@ const Search = () => {
     if (typeQuery) return { type: typeQuery };
     if (colorQuery) return { color: colorQuery };
     if (labelQuery) return { labelName: labelQuery };
-
-    return null;
+    return {};
   }, [searchQuery, typeQuery, labelQuery, colorQuery]);
 
   const action = !params

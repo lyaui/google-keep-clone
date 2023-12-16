@@ -11,7 +11,7 @@ import {
 } from '@/store/memosSlice/memos-action';
 import type { DraftMemo, Memo, MemoImage, MemoLink } from '@/types';
 
-interface MemoState {
+export interface MemoState {
   isLoading: boolean;
   errorMessage: string;
   memos: Memo[];
