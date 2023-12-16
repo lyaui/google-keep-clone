@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { SNavItemText } from '@/components/Layout/SideMenu/NavItem/style.jsx';
-import { SNavItem } from '@/components/Layout/SideMenu/NavItem/style.jsx';
+import { SNavItemText } from '@/components/Layout/SideMenu/NavItem/style';
+import { SNavItem } from '@/components/Layout/SideMenu/NavItem/style';
 
-export const SSideMenu = styled.aside`
-  width: var(--width);
+export const SSideMenu = styled.aside<{ isFixedMenu: boolean }>`
+  width: ${(props) => (props.isFixedMenu ? '280px' : '70px')};
   height: 100%;
   padding-right: 12px;
-  position: var(--position);
+  position: ${(props) => (props.isFixedMenu ? 'relative' : 'fixed')};
   z-index: var(--zindex-sideMenu);
   background-color: var(--color-bg);
   overflow: scroll;
