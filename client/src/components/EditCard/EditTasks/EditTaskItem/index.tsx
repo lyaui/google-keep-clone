@@ -2,7 +2,7 @@ import { memo } from 'react';
 import type { MouseEvent } from 'react';
 import { isNil } from 'lodash';
 
-import { MemoTask, Theme } from '@/types';
+import { MemoTask } from '@/types';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { useUI } from '@/contexts/UI-context';
 import { v4 as uuid } from 'uuid';
@@ -24,7 +24,7 @@ interface EditTaskItemProps {
 const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
   const { UIState } = useUI();
-  const memoColor = PALETTE_COLORS[currentMemo.color][UIState.theme as Theme];
+  const memoColor = PALETTE_COLORS[currentMemo.color][UIState.theme];
 
   const isNewMemo = isNil(id);
 

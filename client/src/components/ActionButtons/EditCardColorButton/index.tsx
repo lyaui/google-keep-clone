@@ -2,7 +2,7 @@ import { useState, type MouseEvent } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-import type { Color, Theme } from '@/types';
+import type { Color } from '@/types';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
 import { useUI } from '@/contexts/UI-context';
 import CustomTippy from '@tippyjs/react/headless';
@@ -29,8 +29,7 @@ const Palette = ({ id }: { id?: string }) => {
   return (
     <SEditCardColor>
       {colorArr.map((color) => {
-        const colorValue =
-          PALETTE_COLORS[color as Color][UIState.theme as Theme];
+        const colorValue = PALETTE_COLORS[color][UIState.theme];
         const tooltipTitle = TOOLTIP_TEXT[`COLOR_${color}`] || '';
         return (
           <Tippy key={color} content={tooltipTitle}>
