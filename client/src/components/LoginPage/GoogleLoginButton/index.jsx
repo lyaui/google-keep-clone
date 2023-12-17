@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { useAuth, googleLogin } from '@/contexts/auth-context';
-import { useUI, getUserSettings } from '@/contexts/UI-context/index.jsx';
+import { useUI, getUserSettings } from '@/contexts/UI-context';
 import * as Icon from '@/components/UI/Icon';
 import { SGoogleLoginButton } from '@/components/LoginPage/GoogleLoginButton/style.jsx';
 
