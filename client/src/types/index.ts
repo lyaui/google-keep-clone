@@ -7,6 +7,8 @@ export interface ResError {
   message: string;
 }
 
+export type Params = Record<string, string>;
+
 export type MemoImage = string;
 
 export interface MemoLabel {
