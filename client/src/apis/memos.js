@@ -1,16 +1,17 @@
-import { axiosMemos } from '@/apis';
+import axiosRequest from '@/apis';
+const request = axiosRequest({ baseUrl: '/memos' });
 
 export const apiGetUserMemos = (query, { cancelToken }) =>
-  axiosMemos.get('/', { params: query, cancelToken });
+  request.get('/', { params: query, cancelToken });
 
 export const apiGetMemosByLabelName = ({ labelName, query }, { cancelToken }) =>
-  axiosMemos.get(`/label/${labelName}`, { params: query, cancelToken });
+  request.get(`/label/${labelName}`, { params: query, cancelToken });
 
 export const apiGetUserMemoByMemoId = (memoId, { cancelToken }) =>
-  axiosMemos.get(`/${memoId}`, { cancelToken });
+  request.get(`/${memoId}`, { cancelToken });
 
-export const apiCreateMemo = (data) => axiosMemos.post('/', data);
+export const apiCreateMemo = (data) => request.post('/', data);
 export const apiUpdateMemo = (memoId, data) =>
-  axiosMemos.patch(`/${memoId}`, data);
-export const apiDeleteMemo = (memoId) => axiosMemos.delete(`/${memoId}`);
-export const apiGetLinksInfo = (data) => axiosMemos.post('/linksInfo', data);
+  request.patch(`/${memoId}`, data);
+export const apiDeleteMemo = (memoId) => request.delete(`/${memoId}`);
+export const apiGetLinksInfo = (data) => request.post('/linksInfo', data);

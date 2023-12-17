@@ -1,3 +1,7 @@
-import { axiosUpload } from '@/apis';
+import axiosRequest from '@/apis';
+const request = axiosRequest({
+  baseUrl: '/upload',
+  contentType: 'multipart/form-data',
+});
 
-export const apiUploadImage = (data) => axiosUpload.post('/image', data);
+export const apiUploadImage = (data) => request.post('/image', data);
