@@ -9,7 +9,7 @@ import {
   addLinksInfo,
   uploadMemoImage,
 } from '@/store/memosSlice/memos-action';
-import type { DraftMemo, Memo, MemoImage, MemoLink } from '@/types';
+import type { DraftMemo, Memo } from '@/types';
 
 export interface MemoState {
   isLoading: boolean;
@@ -52,132 +52,147 @@ const memosSlice = createSlice({
       state.memo = INIT_MEMOS_STATE.memo;
     },
   },
-  extraReducers: {
-    // getUserMemos
-    [getUserMemos.pending](state) {
-      state.isLoading = true;
-    },
-    [getUserMemos.fulfilled](state, action: PayloadAction<Memo[]>) {
-      state.isLoading = false;
-      state.errorMessage = '';
-      state.memos = action.payload;
-    },
-    [getUserMemos.rejected](state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.errorMessage = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      // getUserMemos
+      .addCase(getUserMemos.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserMemos.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.errorMessage = '';
+        state.memos = action.payload;
+      })
+      .addCase(getUserMemos.rejected, (state, action) => {
+        state.isLoading = false;
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
+        }
+      })
+      // getUserMemosByLabelName
+      .addCase(getUserMemosByLabelName.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserMemosByLabelName.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.errorMessage = '';
+        state.memos = action.payload;
+      })
+      .addCase(getUserMemosByLabelName.rejected, (state, action) => {
+        state.isLoading = false;
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
+        }
+      })
+      // getUserMemoByMemoId
+      .addCase(getUserMemoByMemoId.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserMemoByMemoId.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.errorMessage = '';
+        state.memo = action.payload;
+        if (state.memos.length === 0) {
+          state.memos = [action.payload];
+        }
+      })
+      .addCase(getUserMemoByMemoId.rejected, (state, action) => {
+        state.isLoading = false;
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
+        }
+      })
+      // addMemo
+      .addCase(addMemo.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addMemo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.errorMessage = '';
+        // TODO ascend or descend
+        state.memos = [action.payload, ...state.memos];
+        state.memo = { ...INIT_MEMO } as DraftMemo;
+      })
+      .addCase(addMemo.rejected, (state, action) => {
+        state.isLoading = false;
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
+        }
+      })
 
-    // getUserMemosByLabelName
-    [getUserMemosByLabelName.pending](state) {
-      state.isLoading = true;
-    },
-    [getUserMemosByLabelName.fulfilled](state, action: PayloadAction<Memo[]>) {
-      state.isLoading = false;
-      state.errorMessage = '';
-      state.memos = action.payload;
-    },
-    [getUserMemosByLabelName.rejected](state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.errorMessage = action.payload;
-    },
-
-    // getUserMemoByMemoId
-    [getUserMemoByMemoId.pending](state) {
-      state.isLoading = true;
-    },
-    [getUserMemoByMemoId.fulfilled](state, action: PayloadAction<Memo>) {
-      state.isLoading = false;
-      state.errorMessage = '';
-      state.memo = action.payload;
-      if (state.memos.length === 0) {
-        state.memos = [action.payload];
-      }
-    },
-    [getUserMemoByMemoId.rejected](state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.errorMessage = action.payload;
-    },
-
-    // addMemo
-    [addMemo.pending](state) {
-      state.isLoading = true;
-    },
-    [addMemo.fulfilled](state, action: PayloadAction<Memo>) {
-      state.isLoading = false;
-      state.errorMessage = '';
-      // TODO ascend or descend
-      state.memos = [action.payload, ...state.memos];
-      state.memo = { ...INIT_MEMO } as DraftMemo;
-    },
-    [addMemo.rejected](state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.errorMessage = action.payload;
-    },
-
-    // updateMemo
-    [updateMemo.pending](state) {
-      state.isLoading = true;
-    },
-    [updateMemo.fulfilled](state, action: PayloadAction<Memo>) {
-      const updatedMemo = action.payload;
-      state.isLoading = false;
-      state.errorMessage = '';
-      const memoIndex = state.memos.findIndex(
-        (memo) => memo._id === updatedMemo._id
-      );
-      state.memos[memoIndex] = updatedMemo;
-      state.memos = state.memos.sort((a, b) =>
-        (a.updatedAt || '') > (b.updatedAt || '') ? -1 : 1
-      );
-    },
-    [updateMemo.rejected](state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.errorMessage = action.payload;
-    },
-
-    // delete memo
-    [deleteMemo.pending](state) {
-      state.isLoading = true;
-    },
-    [deleteMemo.fulfilled](state, action: PayloadAction<string>) {
-      const memoId = action.payload;
-      state.isLoading = false;
-      state.errorMessage = '';
-      state.memos = state.memos.filter((memo) => memo._id !== memoId);
-    },
-    [deleteMemo.rejected](state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.errorMessage = action.payload;
-    },
-
-    // addLinksInfo
-    [addLinksInfo.pending]() {},
-    [addLinksInfo.fulfilled](state, action: PayloadAction<MemoLink[]>) {
-      const links = action.payload;
-      const currentLinks = [...state.memo.links];
-      links.forEach((link) => {
-        if (!state.memo.links.find((stateLink) => stateLink.url === link.url)) {
-          currentLinks.push(link);
+      // updateMemo
+      .addCase(updateMemo.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateMemo.fulfilled, (state, action) => {
+        const updatedMemo = action.payload;
+        state.isLoading = false;
+        state.errorMessage = '';
+        const memoIndex = state.memos.findIndex(
+          (memo) => memo._id === updatedMemo._id
+        );
+        state.memos[memoIndex] = updatedMemo;
+        state.memos = state.memos.sort((a, b) =>
+          (a.updatedAt || '') > (b.updatedAt || '') ? -1 : 1
+        );
+      })
+      .addCase(updateMemo.rejected, (state, action) => {
+        state.isLoading = false;
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
+        }
+      })
+      // delete memo
+      .addCase(deleteMemo.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteMemo.fulfilled, (state, action) => {
+        const memoId = action.payload;
+        state.isLoading = false;
+        state.errorMessage = '';
+        state.memos = state.memos.filter((memo) => memo._id !== memoId);
+      })
+      .addCase(deleteMemo.rejected, (state, action) => {
+        state.isLoading = false;
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
+        }
+      })
+      // addLinksInfo
+      .addCase(addLinksInfo.pending, () => {})
+      .addCase(addLinksInfo.fulfilled, (state, action) => {
+        const links = action.payload;
+        const currentLinks = [...state.memo.links];
+        links.forEach((_link) => {
+          if (
+            !state.memo.links.find((stateLink) => stateLink.url === _link.url)
+          ) {
+            currentLinks.push(_link);
+          }
+        });
+        state.memo.links = currentLinks;
+        state.errorMessage = '';
+      })
+      .addCase(addLinksInfo.rejected, (state, action) => {
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
+        }
+      })
+      // uploadMemoImage
+      .addCase(uploadMemoImage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(uploadMemoImage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.errorMessage = '';
+        state.memo.images = [...state.memo.images, action.payload];
+      })
+      .addCase(uploadMemoImage.rejected, (state, action) => {
+        state.isLoading = false;
+        if (typeof action.payload === 'string') {
+          state.errorMessage = action.payload;
         }
       });
-      state.memo.links = currentLinks;
-      state.errorMessage = '';
-    },
-    [addLinksInfo.rejected](state, action: PayloadAction<string>) {
-      state.errorMessage = action.payload;
-    },
-    [uploadMemoImage.pending](state) {
-      state.isLoading = true;
-    },
-    [uploadMemoImage.fulfilled](state, action: PayloadAction<MemoImage>) {
-      state.isLoading = false;
-      state.errorMessage = '';
-      state.memo.images = [...state.memo.images, action.payload];
-    },
-    [uploadMemoImage.rejected](state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.errorMessage = action.payload;
-    },
   },
 });
 
