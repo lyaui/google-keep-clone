@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { Memo } from '@/types';
 import { ROUTER_PATH } from '@/routes';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import { useUI } from '@/contexts/UI-context';
@@ -8,19 +9,23 @@ import EditCardPinButton from '@/components/ActionButtons/EditCardPinButton';
 import CardImages from '@/components/UI/Card/CardImages';
 import CardHeader from '@/components/UI/Card/CardHeader';
 import CardBody from '@/components/UI/Card/CardBody';
-import EditCardText from '@/components/EditCard/EditCardText';
+import EditMemoText from '@/components/EditCard/EditMemoText';
 import EditTaskItem from '@/components/EditCard/EditTasks/EditTaskItem';
 import CardLabels from '@/components/UI/Card/CardLabels';
 import CardFooter from '@/components/UI/Card/CardFooter';
 import CardLinks from '@/components/UI/Card/CardLinks';
 import { SCard, SEmptyText } from '@/components/UI/Card/style';
-import { SEditCardText } from '@/components/EditCard/EditCardText/style';
+import { SEditMemoText } from '@/components/EditCard/EditMemoText/style';
 
-function Card({ card, masonryDom }) {
+interface MemoCardProps {
+  card: Memo;
+  masonryDom: HTMLDivElement | null;
+}
+
+function MemoCard({ card, masonryDom }: MemoCardProps) {
   const navigate = useNavigate();
-  const { memoId } = useParams();
 
-  const cardRef = useRef();
+  const cardRef = useRef<HTMLDivElement>(null);
   const [gridRowSpan, setGridRowSpan] = useState(0);
   const {
     _id: id,
@@ -40,7 +45,6 @@ function Card({ card, masonryDom }) {
 
   const openEditModalHandler = () => navigate(ROUTER_PATH.BUILD_MEMO_PATH(id));
 
-  // calculate card spans
   const getRowSpan = () => {
     const cardRefDOM = cardRef.current;
     const grid = masonryDom;
@@ -48,18 +52,18 @@ function Card({ card, masonryDom }) {
 
     const rowGap = parseInt(
       window
-        .getComputedStyle(grid.querySelector('.masonry'))
+        .getComputedStyle(grid.querySelector('.masonry')!)
         .getPropertyValue('grid-row-gap')
         .replace('px', '')
     );
     const rowHeight = parseInt(
       window
-        .getComputedStyle(grid.querySelector('.masonry'))
+        .getComputedStyle(grid.querySelector('.masonry')!)
         .getPropertyValue('grid-auto-rows')
         .replace('px', '')
     );
     const rowSpan = Math.ceil(
-      (cardRefDOM.querySelector('.growing-content').getBoundingClientRect()
+      (cardRefDOM.querySelector('.growing-content')!.getBoundingClientRect()
         .height +
         rowGap) /
         (rowHeight + rowGap)
@@ -78,32 +82,23 @@ function Card({ card, masonryDom }) {
 
   const noCardBody =
     !title &&
-    (!content || content === '<br>') &&
+    (!content.trim() || content === '<br>') &&
     tasks.length === 0 &&
     labels.length === 0;
   const isOnlyImages = noCardBody && links.length === 0 && images.length > 0;
   const isOnlyLinks = noCardBody && images.length === 0 && links.length > 0;
   const isOnlyImagesAndLinks =
     noCardBody && images.length > 0 && links.length > 0;
-  const showEmptyText = noCardBody && images.length === 0 && links.length === 0;
 
-  const borderColor =
-    memoColor === PALETTE_COLORS.DEFAULT.LIGHT
-      ? 'var(--color-gray-200)'
-      : memoColor === PALETTE_COLORS.DEFAULT.DARK
-        ? 'var(--color-gray-600)'
-        : memoColor;
+  const showEmptyText = noCardBody && images.length === 0 && links.length === 0;
 
   return (
     <SCard
       className="card"
       ref={cardRef}
-      style={{
-        '--color': memoColor,
-        '--border-color': borderColor,
-        '--opacity': memoId === id ? 0 : 1,
-        '--rowSpan': gridRowSpan,
-      }}
+      gridRowSpan={gridRowSpan}
+      color={memoColor}
+      style={{ gridRow: `span ${gridRowSpan}` }}
     >
       <div className="growing-content" onClick={openEditModalHandler}>
         {/* pin */}
@@ -119,9 +114,9 @@ function Card({ card, masonryDom }) {
           <CardBody>
             {/* content */}
             {!isTaskList && content && (
-              <SEditCardText>
-                <EditCardText text={content} updateTextHandler={() => {}} />
-              </SEditCardText>
+              <SEditMemoText>
+                <EditMemoText text={content} updateTextHandler={() => {}} />
+              </SEditMemoText>
             )}
             {/* tasks */}
             {isTaskList &&
@@ -152,4 +147,4 @@ function Card({ card, masonryDom }) {
   );
 }
 
-export default Card;
+export default MemoCard;

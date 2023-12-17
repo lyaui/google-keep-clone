@@ -5,12 +5,19 @@ import EditMemoArchiveButton from '@/components/ActionButtons/EditMemoArchiveBut
 import DeleteMemoButton from '@/components/ActionButtons/DeleteMemoButton';
 import { SCardFooter } from '@/components/UI/Card/CardFooter/style.jsx';
 
-const CardFooter = ({
+interface CardFooter {
+  id: string;
+  isOnlyImages: boolean;
+  isOnlyLinks: boolean;
+  isOnlyImagesAndLinks: boolean;
+}
+
+function CardFooter({
   id,
   isOnlyImages,
   isOnlyLinks,
   isOnlyImagesAndLinks,
-}) => {
+}: CardFooter) {
   const isOnlyImagesOrLinks = isOnlyImages || isOnlyLinks;
   return (
     <SCardFooter
@@ -37,6 +44,6 @@ const CardFooter = ({
       <DeleteMemoButton id={id} />
     </SCardFooter>
   );
-};
+}
 
 export default CardFooter;

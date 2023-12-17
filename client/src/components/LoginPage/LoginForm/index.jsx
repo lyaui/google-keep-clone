@@ -74,7 +74,7 @@ function LoginForm() {
         <Input
           validFormHandler={validFormHandler}
           name="name"
-          label="用戶名稱"
+          placeholder="請輸入用戶名稱"
           type="text"
           validate={[VALIDATOR_TYPES.REQUIRE]}
         />
@@ -82,18 +82,19 @@ function LoginForm() {
       <Input
         name="email"
         validFormHandler={validFormHandler}
-        label="電子信箱"
+        placeholder="請輸入電子信箱"
         type="text"
         validate={[VALIDATOR_TYPES.REQUIRE, VALIDATOR_TYPES.EMAIL]}
       />
       <Input
         name="password"
         validFormHandler={validFormHandler}
-        label="密碼"
+        placeholder="請輸入密碼"
         type="password"
         validate={[VALIDATOR_TYPES.REQUIRE, VALIDATOR_TYPES.MINLENGTH]}
       />
 
+      {/* TODO disabled */}
       {/* submit button */}
       <LoginButton
         type="submit"

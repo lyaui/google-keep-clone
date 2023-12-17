@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SCard } from '@/components/UI/Card/style.jsx';
+import { SCard } from '@/components/UI/Card/style';
 
 export const SCardFooter = styled.div`
   width: 100%;

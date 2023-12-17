@@ -1,4 +1,11 @@
-import { useRef, useEffect, useReducer } from 'react';
+import {
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandler,
+  useReducer,
+} from 'react';
+import type { ComponentPropsWithRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { validator } from '@/utils/validator';
 import {
@@ -18,9 +25,23 @@ const INPUT_ACTIONS = {
   BLUR: 'BLUR',
   CHANGE: 'CHANGE',
   RESET: 'RESET',
-};
+} as const;
 
-function inputReducer(state = INIT_INPUT_STATES, action) {
+type InputAction =
+  | {
+      type: typeof INPUT_ACTIONS.BLUR;
+      isValid: boolean;
+      errorMessage: string;
+    }
+  | {
+      type: typeof INPUT_ACTIONS.CHANGE;
+      value: string;
+      isValid: boolean;
+      errorMessage: string;
+    }
+  | { type: typeof INPUT_ACTIONS.RESET };
+
+function inputReducer(state = INIT_INPUT_STATES, action: InputAction) {
   switch (action.type) {
     case INPUT_ACTIONS.BLUR:
       return {
@@ -43,20 +64,28 @@ function inputReducer(state = INIT_INPUT_STATES, action) {
   }
 }
 
-function Input({ name, label, type, validate, validFormHandler }) {
+export interface InputProps extends ComponentPropsWithRef<'input'> {
+  validate: any;
+  validFormHandler: any;
+}
+
+const Input = forwardRef<any, InputProps>(function Input(
+  { validate, validFormHandler, ...others },
+  ref
+) {
   const { pathname } = useLocation();
   const [inputState, inputDispatch] = useReducer(
     inputReducer,
     INIT_INPUT_STATES
   );
   const { isTouched, isValid, value, errorMessage } = inputState;
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => resetInputHandle(), [pathname]);
 
   const blurInputHandler = () => {
     const { isValid, errorMessage } = validator(
-      inputRef.current.value,
+      inputRef.current?.value,
       validate
     );
     inputDispatch({
@@ -68,16 +97,16 @@ function Input({ name, label, type, validate, validFormHandler }) {
 
   const changeInputHandler = () => {
     const { isValid, errorMessage } = validator(
-      inputRef.current.value,
+      inputRef.current?.value,
       validate
     );
     inputDispatch({
       type: INPUT_ACTIONS.CHANGE,
-      value: inputRef.current.value,
+      value: inputRef.current?.value || '',
       isValid,
       errorMessage,
     });
-    validFormHandler({ name, value: inputRef.current.value, isValid });
+    validFormHandler({ name, value: inputRef.current?.value || '', isValid });
   };
 
   const resetInputHandle = () => inputDispatch({ type: INPUT_ACTIONS.RESET });
@@ -86,30 +115,17 @@ function Input({ name, label, type, validate, validFormHandler }) {
     <SInputControl>
       <SInput
         ref={inputRef}
-        type={type}
-        placeholder={label}
         onBlur={blurInputHandler}
         onChange={changeInputHandler}
-        style={{
-          '--border':
-            !isValid && isTouched
-              ? 'hsl(var(--color-red))'
-              : 'hsla(var(--color-gray-400),.5)',
-          '--border-focus':
-            !isValid && isTouched ? 'var(--color-red)' : 'var(--color-blue)',
-          '--color':
-            !isValid && isTouched
-              ? 'var(--color-red-lighter)'
-              : 'var(--color-transparent)',
-        }}
         isInValid={(!isValid && isTouched) || false}
         value={value}
+        {...others}
       />
       {errorMessage && isTouched && (
         <SInputMessage>{errorMessage}</SInputMessage>
       )}
     </SInputControl>
   );
-}
+});
 
 export default Input;

@@ -8,17 +8,27 @@ export const SInputControl = styled.div`
   margin-bottom: 12px;
 `;
 
-export const SInput = styled.input`
+export const SInput = styled.input<{ isInValid: boolean }>`
   height: 40px;
   padding: 8px;
   font-size: var(--text-base);
-  border: 1px solid var(--border);
+  border: 1px solid
+    hsl(
+      var(${(props) => (props.isInValid ? '--color-red' : '--color-gray-300')})
+    );
   border-radius: var(--rounded-sm);
-  background-color: hsla(var(--color), 0.2);
-  :focus {
-    border: 2px solid hsl(var(--border-focus));
+  background-color: hsla(
+    var(
+      ${(props) =>
+        props.isInValid ? '--color-red-lighter' : '--color-transparent'}
+    ),
+    0.2
+  );
+  &:focus {
+    border: 2px solid
+      hsl(var(${(props) => (props.isInValid ? '--color-red' : '--color-blue')}));
   }
-  ::placeholder {
+  &::placeholder {
     font-weight: var(--font-light);
     color: hsla(var(--color-gray-400));
     font-size: var(--text-base);
