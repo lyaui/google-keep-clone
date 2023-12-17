@@ -46,7 +46,7 @@ function SideMenu() {
   ];
 
   useEffect(() => {
-    dispatch(getUserLabels());
+    dispatch(getUserLabels(null));
     if (errorMessage) return navigate(ROUTER_PATH.LOGIN, { replace: true });
   }, [dispatch, errorMessage, navigate]);
 
