@@ -2,9 +2,13 @@ import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import { THEME, VIEW_MODE, SORT } from '@/constants/UI';
 
+export interface ResError {
+  success: false;
+  message: string;
+}
+
 export type MemoImage = string;
 
-// 消滅 optional
 export interface MemoLabel {
   _id: string;
   name: string;
@@ -37,7 +41,6 @@ export interface DraftMemo {
 export interface Memo extends DraftMemo {
   _id: string;
   creator: string;
-  // TODO ts time
   createdAt: string;
   updatedAt: string;
   isTaskList: boolean;
