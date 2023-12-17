@@ -50,7 +50,7 @@ const createLabel = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      labels: { name: createdLabel.name, _id: createdLabel._id },
+      label: { name: createdLabel.name, _id: createdLabel._id },
       message: 'Create new label successfully.',
     });
   } catch (err) {
@@ -90,7 +90,7 @@ const updateLabel = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      labels: label,
+      label: label,
       message: 'Update label successfully.',
     });
   } catch (err) {
