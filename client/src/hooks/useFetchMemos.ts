@@ -4,26 +4,22 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 
 import { type MemoState } from '@/store/memosSlice';
 
-interface UseFetchMemos<T> {
-  action: AsyncThunk<MemoState, T, {}>;
-  params: T;
+interface UseFetchMemos {
+  action: AsyncThunk<MemoState, Record<string, string>, {}>;
+  params: Record<string, string>;
 }
 
-export function useFetchMemos<T extends Object>({
-  action,
-  params,
-}: UseFetchMemos<T>) {
+export function useFetchMemos({ action, params }: UseFetchMemos) {
   const dispatch = useAppDispatch();
   const { memo, memos, isLoading } = useAppSelector((state) => state.memos);
 
-  const fetchMemos = () => {
-    const promise = dispatch(action(params));
-    return async () => promise.abort();
-  };
-
   useEffect(() => {
     if (!action) return;
-    fetchMemos();
+    const promise = dispatch(action(params));
+
+    return () => {
+      promise.abort();
+    };
   }, [action, dispatch, params]);
 
   const pinnedMemo = memos.filter((memo) => memo.isPinned);
