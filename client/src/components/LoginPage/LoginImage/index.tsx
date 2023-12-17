@@ -28,12 +28,11 @@ function LoginImage() {
 
   return (
     <SLoginImage
-      style={{
-        '--image':
-          pathname === ROUTER_PATH.LOGIN
-            ? `url(${loginBackgroundImage})`
-            : `url(${signupBackgroundImage})`,
-      }}
+      imgUrl={
+        pathname === ROUTER_PATH.LOGIN
+          ? `url(${loginBackgroundImage})`
+          : `url(${signupBackgroundImage})`
+      }
     >
       <div>
         <SLoginImageTitle>記下每一個想法</SLoginImageTitle>

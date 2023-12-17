@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const SLoginImage = styled.div`
+export const SLoginImage = styled.div<{ imgUrl: string }>`
   flex: 1;
   padding: 50px;
-  background-image: var(--image);
+  background-image: ${(props) => props.imgUrl};
   background-repeat: no-repeat;
   background-position: center;
-
+  background-size: cover;
   > div {
     position: absolute;
     top: 50%;

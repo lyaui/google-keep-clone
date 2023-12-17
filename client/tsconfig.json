@@ -23,7 +23,8 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["vite/client"]
   },
   "include": ["src", "public/assets"],
   "references": [{ "path": "./tsconfig.node.json" }]
