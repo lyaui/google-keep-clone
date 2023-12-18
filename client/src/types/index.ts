@@ -7,7 +7,7 @@ export interface ResError {
   message: string;
 }
 
-export type Params = Record<string, string>;
+export type Params = Record<string, any>;
 
 export type MemoImage = string;
 
