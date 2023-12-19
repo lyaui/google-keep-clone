@@ -24,16 +24,12 @@ function MemoCards({ memos = [], title = '' }: MemoCardsProps) {
 
   return (
     <div ref={masonryRef}>
-      {masonryRef.current && (
-        <>
-          <SCardsTitle layout={layout}>{title}</SCardsTitle>
-          <SCards className="masonry" layout={layout} isFixedMenu={isFixedMenu}>
-            {memos.map((card) => (
-              <Card key={card._id} card={card} masonryDom={masonryDom} />
-            ))}
-          </SCards>
-        </>
-      )}
+      <SCardsTitle layout={layout}>{title}</SCardsTitle>
+      <SCards className="masonry" layout={layout} isFixedMenu={isFixedMenu}>
+        {memos.map((card) => (
+          <Card key={card._id} card={card} masonryDom={masonryDom} />
+        ))}
+      </SCards>
     </div>
   );
 }

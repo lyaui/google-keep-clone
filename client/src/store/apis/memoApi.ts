@@ -8,7 +8,7 @@ import type {
   Params,
 } from '@/types';
 
-export const memosApi = createApi({
+const memosApi = createApi({
   reducerPath: '_memos',
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.REACT_APP_SERVER_BASE_URL}/api/memos`,
@@ -25,14 +25,27 @@ export const memosApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    fetchUserMemos: builder.query<Memo[], Params>({
+    fetchUserMemos: builder.query<
+      { pinnedMemo: Memo[]; unpinnedMemo: Memo[] },
+      Params
+    >({
+      // TODO 拆成二個 request
+      // providesTags:(result,error,params)=>result.memos.map((_memo)=>({type:'memoId',_memo._id})),
       query: (params) => ({
         url: '/',
         params,
         method: 'GET',
       }),
+      transformResponse: (rawResult: { success: true; memos: Memo[] }) => {
+        return {
+          pinnedMemo: rawResult.memos.filter((_memo) => _memo.isPinned),
+          unpinnedMemo: rawResult.memos.filter((_memo) => !_memo.isPinned),
+        };
+      },
     }),
   }),
 });
 
 export const { useFetchUserMemosQuery } = memosApi;
+
+export default memosApi;
