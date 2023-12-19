@@ -49,7 +49,7 @@ const CardImages = ({
       >
         {images.slice(0, imgNum).map((_image, index) => (
           <SCardImage key={_image} className={`img-${index}`}>
-            <img draggable="false" src={_image} alt="" />
+            <img draggable="false" src={_image} alt="" loading="lazy" />
             {isEditMode && (
               <Tippy content={TOOLTIP_TEXT.REMOVE}>
                 <Button
