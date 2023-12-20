@@ -1,13 +1,12 @@
-import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useAppSelector } from '@/hooks/useReduxStore';
+import { isEmpty } from 'lodash';
 
+import { useAppSelector } from '@/hooks/useReduxStore';
 import type { Color } from '@/types';
-import { useFetchMemos } from '@/hooks/useFetchMemos';
 import {
-  getUserMemos,
-  getUserMemosByLabelName,
-} from '@/store/memosSlice/memos-action';
+  useFetchMemosQuery,
+  useFetchMemosByLabelNameQuery,
+} from '@/store/apis/memoApi';
 import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import * as Icon from '@/components/UI/Icon';
@@ -22,26 +21,27 @@ const Search = () => {
   const { theme } = UIState;
 
   const { search } = useLocation();
-
   const searchQuery = new URLSearchParams(search).get('q');
   const typeQuery = new URLSearchParams(search).get('type');
   const labelQuery = new URLSearchParams(search).get('label');
   const colorQuery = new URLSearchParams(search).get('color');
 
-  const params = useMemo(() => {
+  const params = (() => {
     if (searchQuery) return { q: searchQuery };
     if (typeQuery) return { type: typeQuery };
     if (colorQuery) return { color: colorQuery };
     if (labelQuery) return { labelName: labelQuery };
     return {};
-  }, [searchQuery, typeQuery, labelQuery, colorQuery]);
+  })();
 
-  const action = !params
-    ? null
-    : labelQuery
-      ? getUserMemosByLabelName
-      : getUserMemos;
-  const { memos, isLoading } = useFetchMemos({ action, params });
+  const { data, isFetching } = labelQuery
+    ? useFetchMemosByLabelNameQuery(
+        { labelName: labelQuery, params },
+        { skip: isEmpty(params) }
+      )
+    : useFetchMemosQuery(params, { skip: isEmpty(params) });
+
+  const memos = data ? data.memos : [];
 
   const typesFilter = [
     { name: '清單', icon: <Icon.FilterList />, value: 'tasks' },
@@ -66,7 +66,7 @@ const Search = () => {
     { title: '顏色', type: 'color', filter: colorsFilter },
   ];
 
-  if (isLoading) return <SkeletonCards />;
+  if (isFetching) return <SkeletonCards />;
 
   return (
     <div>
