@@ -8,8 +8,19 @@ import type {
   Params,
 } from '@/types';
 
+const providesTags = (result, error, params) => {
+  if (result?.success) {
+    return result.memos.map((_memo) => ({
+      type: 'MEMO_ID',
+      id: _memo._id,
+    }));
+  }
+  return [];
+};
+
 const memosApi = createApi({
   reducerPath: '_memos',
+  tagTypes: ['MEMO_ID'],
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.REACT_APP_SERVER_BASE_URL}/api/memos`,
     prepareHeaders: (headers) => {
@@ -24,28 +35,28 @@ const memosApi = createApi({
     },
   }),
 
+  // TODO toast & error handling & condition
   endpoints: (builder) => ({
-    fetchUserMemos: builder.query<
-      { pinnedMemo: Memo[]; unpinnedMemo: Memo[] },
-      Params
-    >({
-      // TODO 拆成二個 request
-      // providesTags:(result,error,params)=>result.memos.map((_memo)=>({type:'memoId',_memo._id})),
+    fetchMemos: builder.query<{ success: true; memos: Memo[] }, Params>({
       query: (params) => ({
         url: '/',
         params,
-        method: 'GET',
       }),
-      transformResponse: (rawResult: { success: true; memos: Memo[] }) => {
-        return {
-          pinnedMemo: rawResult.memos.filter((_memo) => _memo.isPinned),
-          unpinnedMemo: rawResult.memos.filter((_memo) => !_memo.isPinned),
-        };
-      },
+      providesTags,
+    }),
+    fetchMemosByLabelName: builder.query<
+      { success: true; memos: Memo[] },
+      Params
+    >({
+      query: ({ labelName, params }) => ({
+        url: `/label/${labelName}`,
+        params,
+      }),
+      providesTags,
     }),
   }),
 });
 
-export const { useFetchUserMemosQuery } = memosApi;
+export const { useFetchMemosQuery, useFetchMemosByLabelNameQuery } = memosApi;
 
 export default memosApi;
