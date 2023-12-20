@@ -1,5 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react';
-import { useLocation } from 'react-router-dom';
+import { type ReactNode } from 'react';
 
 import type { Memo } from '@/types';
 import SkeletonEditor from '@/skeletons/SkeletonEditor';
@@ -24,9 +23,6 @@ function MemosPage({
   unpinnedMemo = [],
   hintConfig,
 }: MemosPageProps) {
-  const { pathname } = useLocation();
-  const ref = useRef<HTMLDivElement>(null);
-
   const showHint = pinnedMemo.length === 0 && unpinnedMemo.length === 0;
   const sections = [
     { title: '已固定', memos: pinnedMemo },
@@ -36,13 +32,8 @@ function MemosPage({
     },
   ].filter((_section) => _section.memos.length > 0);
 
-  useEffect(() => {
-    if (!ref.current) return;
-    ref.current.scrollTo({ top: 0 });
-  }, [pathname]);
-
   return (
-    <main ref={ref} style={{ overflow: 'auto' }}>
+    <div>
       {isLoading ? (
         <>
           <SkeletonEditor />
@@ -57,7 +48,7 @@ function MemosPage({
           {showHint && <Hint {...hintConfig} />}
         </>
       )}
-    </main>
+    </div>
   );
 }
 
