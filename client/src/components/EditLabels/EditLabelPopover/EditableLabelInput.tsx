@@ -1,4 +1,4 @@
-import { Fragment, useRef, useEffect, useReducer } from 'react';
+import { Fragment, useRef, useEffect, useReducer, memo } from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Tippy from '@tippyjs/react';
@@ -166,7 +166,7 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
 
     updateLabel({
       labelId: label._id,
-      payload: { name: tempInputValue.trim() },
+      body: { name: tempInputValue.trim() },
     });
   };
 
@@ -237,4 +237,4 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
   );
 };
 
-export default EditableLabelInput;
+export default memo(EditableLabelInput);
