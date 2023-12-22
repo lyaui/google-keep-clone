@@ -89,7 +89,7 @@ const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
   return (
     <SEditTaskItem color={memoColor}>
       <SEditTaskItemIcon isNewMemo={isNewMemo}>
-        {!isNewMemo && <Icon.Drag name="drag" />}
+        <Icon.Drag name="drag" />
         {task.isCompleted ? (
           <Icon.CheckboxOutline
             name="checkbox"

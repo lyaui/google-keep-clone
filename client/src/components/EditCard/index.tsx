@@ -1,4 +1,6 @@
+import { memo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 
 import type { DraftMemo, Memo } from '@/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
@@ -38,6 +40,8 @@ function EditCard() {
   const { UIState } = useUI();
   const memoColor = PALETTE_COLORS[color][UIState.theme];
 
+  const { tasks } = memo;
+
   const clickOutsideHandler = async (event: globalThis.MouseEvent) => {
     event.stopPropagation();
     if (isLoading) return;
@@ -55,42 +59,63 @@ function EditCard() {
     return;
   };
 
+  const onDragEnd = (result: DropResult) => {
+    console.log(result);
+    const { source, destination } = result;
+    // if item is not in the destination scope
+    if (!destination) return;
+
+    // if item is in the same position
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    )
+      return;
+
+    let arr = [...tasks];
+    const [remove] = arr.splice(source.index, 1);
+    arr.splice(destination.index, 0, remove);
+    dispatch(memosActions.updateMemo({ tasks: arr }));
+  };
+
   return (
-    <SEditCard color={memoColor} eventTypes="click">
-      <OutsideClickHandler onOutsideClick={clickOutsideHandler}>
-        <SEditCardBody>
-          {/* pin */}
-          <EditCardPinButton />
-          {/* images */}
-          <EditMemoImages />
-          {/* title */}
-          <EditMemoTitle />
-          {/* tasks | content */}
-          {isTaskList ? <EditTasks /> : <EditMemoContent />}
-          {/* label */}
-          {memo.labels.length > 0 && <EditMemoLabels />}
-          {/* updatedAt */}
-          {isExistingMemo(memo) && (
-            <SCardCreatedAt>
-              {memo.isArchived && '已封存記事 • '}上次編輯時間：
-              {new Date(memo.updatedAt).toLocaleTimeString([], {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-              })}
-            </SCardCreatedAt>
-          )}
-          {/* links */}
-          {memo.links.length > 0 && <EditMemoLink />}
-        </SEditCardBody>
-        {/* toolbar */}
-        <EditMemoToolbar />
-      </OutsideClickHandler>
-    </SEditCard>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <SEditCard color={memoColor} eventTypes="click">
+        <OutsideClickHandler onOutsideClick={clickOutsideHandler}>
+          <SEditCardBody>
+            {/* pin */}
+            <EditCardPinButton />
+            {/* images */}
+            <EditMemoImages />
+            {/* title */}
+            <EditMemoTitle />
+            {/* tasks | content */}
+            {isTaskList ? <EditTasks /> : <EditMemoContent />}
+            {/* label */}
+            {memo.labels.length > 0 && <EditMemoLabels />}
+            {/* updatedAt */}
+            {isExistingMemo(memo) && (
+              <SCardCreatedAt>
+                {memo.isArchived && '已封存記事 • '}上次編輯時間：
+                {new Date(memo.updatedAt).toLocaleTimeString([], {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: false,
+                })}
+              </SCardCreatedAt>
+            )}
+            {/* links */}
+            {memo.links.length > 0 && <EditMemoLink />}
+          </SEditCardBody>
+          {/* toolbar */}
+          <EditMemoToolbar />
+        </OutsideClickHandler>
+      </SEditCard>
+    </DragDropContext>
   );
 }
 
-export default EditCard;
+export default memo(EditCard);
