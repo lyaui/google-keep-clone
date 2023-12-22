@@ -1,6 +1,5 @@
 import { Fragment, useRef, useEffect, useReducer, memo } from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
@@ -19,6 +18,7 @@ import {
   SLabelValue,
   SLabelErrMsg,
 } from '@/components/EditLabels/style';
+import SkeletonLabelInput from '@/skeletons/SkeletonLabelInput';
 
 const INIT_LABEL_STATES = {
   isEditing: false,
@@ -114,6 +114,7 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
   }, [label.name]);
 
   const deleteLabelHandler = (event: MouseEvent<HTMLDivElement>) => {
+    if (isLoading) return;
     event.preventDefault();
     deleteLabel(label._id);
     inputDispatch({
@@ -172,20 +173,7 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
 
   const isSameValue = textValue.trim() === label.name;
 
-  if (isLoading)
-    return (
-      <SkeletonTheme
-        baseColor="var(--color-skeleton-bg)"
-        highlightColor="var(--color-skeleton-highlight-bg)"
-      >
-        <Skeleton
-          height={30}
-          count={1}
-          width={'calc(100% - 30px)'}
-          style={{ margin: '0 15px' }}
-        />
-      </SkeletonTheme>
-    );
+  if (isLoading) return <SkeletonLabelInput />;
 
   return (
     <Fragment>

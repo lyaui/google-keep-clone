@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
 
-import { useAppDispatch } from '@/hooks/useReduxStore';
-import { useFetchLabelsQuery } from '@/store/apis/labelApi';
+import {
+  useFetchLabelsQuery,
+  useCreateLabelMutation,
+} from '@/store/apis/labelApi';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
 import * as Icon from '@/components/UI/Icon';
-import { addLabel } from '@/store/labelsSlice/labels-action';
 import EditableLabelInput from '@/components/EditLabels/EditLabelPopover/EditableLabelInput';
 import {
   SEditCardLabels,
@@ -17,21 +18,25 @@ import {
   SLabelErrMsg,
 } from '@/components/EditLabels/style.jsx';
 import { SLabelIcon, SLabelEditInput } from '@/components/EditLabels/style';
+import SkeletonLabelInput from '@/skeletons/SkeletonLabelInput';
 
 const EditLabelPopover = () => {
-  const dispatch = useAppDispatch();
   const { data } = useFetchLabelsQuery();
   const labels = data?.labels || [];
+
+  const [addNewLabel, addedResult] = useCreateLabelMutation();
 
   const [keyword, setKeyword] = useState('');
   const [enteredLabel, setEnteredLabel] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const filtered = keyword
-    ? labels.filter((_label) =>
-        _label.name.toLowerCase().includes(keyword.toLowerCase())
-      )
-    : labels;
+  const filtered = useMemo(() => {
+    return keyword
+      ? labels.filter((_label) =>
+          _label.name.toLowerCase().includes(keyword.toLowerCase())
+        )
+      : labels;
+  }, [keyword, labels]);
 
   const stopPropagationHandler = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -56,7 +61,7 @@ const EditLabelPopover = () => {
         (_label) => _label.name === enteredVal.trim()
       );
       if (isLabelExisted) return setErrorMessage('已經有同名的標籤');
-      dispatch(addLabel({ name: enteredVal.trim() }));
+      addNewLabel({ name: enteredVal.trim() });
       setKeyword('');
       setEnteredLabel('');
     };
@@ -94,6 +99,8 @@ const EditLabelPopover = () => {
         {filtered.map((label) => (
           <EditableLabelInput key={label._id} label={label} />
         ))}
+
+        {addedResult.isLoading && <SkeletonLabelInput />}
       </SLabels>
     </SEditCardLabels>
   );
