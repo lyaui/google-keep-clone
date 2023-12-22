@@ -15,7 +15,7 @@ export const SEditCardLabelTitle = styled.div`
 `;
 
 export const SLabels = styled.div<{ isSideMenu?: boolean }>`
-  max-height: ${(props) => (props.isSideMenu ? '300px' : '200px')};
+  max-height: ${(props) => (props.isSideMenu ? '300px' : '185px')};
   margin: 0 -12px;
   overflow: scroll;
   cursor: pointer;
