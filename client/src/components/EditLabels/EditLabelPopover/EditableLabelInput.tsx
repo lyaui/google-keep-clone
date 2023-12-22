@@ -200,7 +200,7 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
           />
         ) : (
           <SLabelValue>
-            <span onClick={switchInputHandler}>{textValue}</span>
+            <SLabelValue onClick={switchInputHandler}>{textValue}</SLabelValue>
             {errorMessage && <SLabelErrMsg>{errorMessage}</SLabelErrMsg>}
           </SLabelValue>
         )}

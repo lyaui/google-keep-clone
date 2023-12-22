@@ -82,10 +82,13 @@ export const SLabelIcon = styled.div`
 `;
 export const SLabelValue = styled.div`
   width: 100%;
-  margin-right: 2px;
+  margin-right: 6px;
   margin-left: 12px;
-  display: flex;
+  display: block;
   flex-direction: column;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const SLabelErrMsg = styled.div`
