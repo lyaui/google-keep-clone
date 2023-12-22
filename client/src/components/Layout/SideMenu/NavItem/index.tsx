@@ -1,4 +1,4 @@
-import type { MouseEventHandler } from 'react';
+import { memo, type MouseEventHandler } from 'react';
 import { NavLink } from 'react-router-dom';
 import * as Icon from '@/components/UI/Icon';
 
@@ -43,4 +43,4 @@ function NavItem({ toRoute, label, type = 'tag', onClick }: NavItemProps) {
   );
 }
 
-export default NavItem;
+export default memo(NavItem);
