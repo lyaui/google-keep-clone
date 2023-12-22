@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import type { MouseEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
@@ -46,4 +46,4 @@ function LabelCheckbox({ id, label }: LabelCheckboxProps) {
   );
 }
 
-export default LabelCheckbox;
+export default memo(LabelCheckbox);
