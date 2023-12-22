@@ -1,12 +1,14 @@
 import { Fragment, useRef, useEffect, useReducer } from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import type { MemoLabel } from '@/types';
 import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
-import { updateLabel, deleteLabel } from '@/store/labelsSlice/labels-action';
+import { deleteLabel } from '@/store/labelsSlice/labels-action';
+import { usePatchLabelNameMutation } from '@/store/apis/labelApi';
 import * as Icon from '@/components/UI/Icon';
 import {
   SLabel,
@@ -85,12 +87,15 @@ const labelReducer = (state = INIT_LABEL_STATES, action: LabelAction) => {
 const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
   const dispatch = useAppDispatch();
   const { labels } = useAppSelector((state) => state.labels);
-  const [inputStates, inputDispatch] = useReducer(
-    labelReducer,
-    INIT_LABEL_STATES
-  );
+  const [inputStates, inputDispatch] = useReducer(labelReducer, {
+    ...INIT_LABEL_STATES,
+    textValue: label?.name || '',
+  });
   const { isEditing, textValue, tempInputValue, errorMessage } = inputStates;
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const [updateLabel, result] = usePatchLabelNameMutation();
+  const { isLoading } = result;
 
   useEffect(() => {
     inputDispatch({
@@ -147,15 +152,29 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
         type: LABEL_ACTIONS.ERROR,
         errorMessage: '標籤已存在',
       });
-    dispatch(
-      updateLabel({
-        labelId: label._id,
-        payload: { name: tempInputValue.trim() },
-      })
-    );
+
+    updateLabel({
+      labelId: label._id,
+      payload: { name: tempInputValue.trim() },
+    });
   };
 
   const isSameValue = textValue.trim() === label.name;
+
+  if (isLoading)
+    return (
+      <SkeletonTheme
+        baseColor="var(--color-skeleton-bg)"
+        highlightColor="var(--color-skeleton-highlight-bg)"
+      >
+        <Skeleton
+          height={20}
+          count={1}
+          width={'calc(100% - 30px)'}
+          style={{ margin: '0 15px' }}
+        />
+      </SkeletonTheme>
+    );
 
   return (
     <Fragment>
@@ -182,9 +201,7 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
           />
         ) : (
           <SLabelValue>
-            <span onClick={switchInputHandler}>
-              {textValue || '輸入標籤名稱'}
-            </span>
+            <span onClick={switchInputHandler}>{textValue}</span>
             {errorMessage && <SLabelErrMsg>{errorMessage}</SLabelErrMsg>}
           </SLabelValue>
         )}
