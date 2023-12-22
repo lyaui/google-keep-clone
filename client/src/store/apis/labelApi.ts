@@ -11,10 +11,13 @@ import type {
 
 const providesTags = (result) => {
   if (result?.success) {
-    return result.labels.map((_label: MemoLabel) => ({
-      type: 'LABEL_ID',
-      id: _label._id,
-    }));
+    return [
+      { type: 'LABEL_ID' },
+      ...result.labels.map((_label: MemoLabel) => ({
+        type: 'LABEL_ID',
+        id: _label._id,
+      })),
+    ];
   }
   return [];
 };
@@ -43,13 +46,24 @@ const labelApi = createApi({
       }),
       providesTags,
     }),
+    createLabel: builder.mutation<
+      { success: true; label: MemoLabel; message: string },
+      { name: string }
+    >({
+      query: (body) => ({
+        url: `/`,
+        body,
+        method: 'POST',
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'LABEL_ID' }],
+    }),
     patchLabelName: builder.mutation<
       { success: true; label: MemoLabel; message: string },
-      { labelId: string; payload: { name: string } }
+      { labelId: string; body: { name: string } }
     >({
-      query: ({ labelId, payload }) => ({
+      query: ({ labelId, body }) => ({
         url: `/${labelId}`,
-        body: payload,
+        body,
         method: 'PATCH',
       }),
       invalidatesTags: (result, error, arg) => [
@@ -71,6 +85,7 @@ const labelApi = createApi({
 
 export const {
   useFetchLabelsQuery,
+  useCreateLabelMutation,
   usePatchLabelNameMutation,
   useDeleteLabelMutation,
 } = labelApi;
