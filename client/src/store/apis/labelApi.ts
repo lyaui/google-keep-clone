@@ -43,9 +43,22 @@ const labelApi = createApi({
       }),
       providesTags,
     }),
+    patchLabelName: builder.mutation<
+      { success: true; label: MemoLabel; message: string },
+      { labelId: string; payload: { name: string } }
+    >({
+      query: ({ labelId, payload }) => ({
+        url: `/${labelId}`,
+        body: payload,
+        method: 'PATCH',
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: 'LABEL_ID', id: arg.labelId },
+      ],
+    }),
   }),
 });
 
-export const { useFetchLabelsQuery } = labelApi;
+export const { useFetchLabelsQuery, usePatchLabelNameMutation } = labelApi;
 
 export default labelApi;
