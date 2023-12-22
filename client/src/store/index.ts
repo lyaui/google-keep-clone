@@ -3,15 +3,19 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import labelsReducer from '@/store/labelsSlice';
 import memosReducer from '@/store/memosSlice';
 import memosApi from '@/store/apis/memoApi';
+import labelApi from '@/store/apis/labelApi';
 
 const store = configureStore({
   reducer: {
     labels: labelsReducer,
     memos: memosReducer,
     [memosApi.reducerPath]: memosApi.reducer,
+    [labelApi.reducerPath]: labelApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(memosApi.middleware);
+    return getDefaultMiddleware()
+      .concat(memosApi.middleware)
+      .concat(labelApi.middleware);
   },
 });
 

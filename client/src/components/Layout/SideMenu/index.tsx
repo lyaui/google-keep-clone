@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { ROUTER_PATH } from '@/routes';
-import { getUserLabels } from '@/store/labelsSlice/labels-action';
+import { useFetchLabelsQuery } from '@/store/apis/labelApi';
 import { useUI } from '@/contexts/UI-context';
 import SkeletonMenuItem from '@/skeletons/SkeletonMenuItem';
 import NavItem, {
@@ -15,13 +13,11 @@ import Modal from '@/components/UI/Modal';
 import EditLabelPopover from '@/components/EditLabels/EditLabelPopover';
 
 function SideMenu() {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { labels, errorMessage, isLoading } = useAppSelector(
-    (state) => state.labels
-  );
   const { UIState } = useUI();
   const [showEditModal, setShowEditModal] = useState(false);
+
+  const { data, isLoading } = useFetchLabelsQuery();
+  const labels = data?.labels || [];
 
   const openEditModalHandler = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -44,11 +40,6 @@ function SideMenu() {
     },
     { toRoute: ROUTER_PATH.ARCHIVE, label: '封存', type: 'archive' },
   ];
-
-  useEffect(() => {
-    dispatch(getUserLabels(null));
-    if (errorMessage) return navigate(ROUTER_PATH.LOGIN, { replace: true });
-  }, [dispatch, errorMessage, navigate]);
 
   return (
     <SSideMenu isFixedMenu={UIState.isFixedMenu}>

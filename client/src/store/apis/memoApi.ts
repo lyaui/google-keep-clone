@@ -8,9 +8,9 @@ import type {
   Params,
 } from '@/types';
 
-const providesTags = (result, error, params) => {
+const providesTags = (result) => {
   if (result?.success) {
-    return result.memos.map((_memo) => ({
+    return result.memos.map((_memo: Memo) => ({
       type: 'MEMO_ID',
       id: _memo._id,
     }));
