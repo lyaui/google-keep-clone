@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
-
-import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import 'tippy.js/dist/tippy.css';
+
 import * as Icon from '@/components/UI/Icon';
-import { addLabel } from '@/store/labelsSlice/labels-action';
+import {
+  useFetchLabelsQuery,
+  useCreateLabelMutation,
+} from '@/store/apis/labelApi';
 import LabelCheckbox from '@/components/EditLabels/AddLabelPopover/LabelCheckbox';
 import {
   SEditCardLabels,
@@ -15,15 +17,20 @@ import {
 } from '@/components/EditLabels/style';
 
 function AddLabelPopover({ id }: { id?: string }) {
-  const dispatch = useAppDispatch();
-  const { labels: allLabels } = useAppSelector((state) => state.labels);
+  const { data } = useFetchLabelsQuery();
+  const labels = data?.labels || [];
+
+  const [addNewLabel, addedResult] = useCreateLabelMutation();
+
   const [keyword, setKeyword] = useState('');
 
-  const labels = keyword
-    ? allLabels.filter((label) =>
-        label.name.toLowerCase().includes(keyword.toLowerCase())
-      )
-    : allLabels;
+  const filtered = useMemo(() => {
+    return keyword
+      ? labels.filter((_label) =>
+          _label.name.toLowerCase().includes(keyword.toLowerCase())
+        )
+      : labels;
+  }, [keyword, labels]);
 
   const stopPropagationHandler = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -38,11 +45,11 @@ function AddLabelPopover({ id }: { id?: string }) {
       event.preventDefault();
       if (!enteredVal.trim()) return;
 
-      dispatch(addLabel({ name: enteredVal.trim() }));
+      addNewLabel({ name: enteredVal.trim() });
       setKeyword('');
     };
 
-  const noMatchResults = keyword && labels.length === 0;
+  const noMatchResults = keyword && filtered.length === 0;
 
   return (
     <SEditCardLabels onClick={stopPropagationHandler}>
@@ -59,7 +66,7 @@ function AddLabelPopover({ id }: { id?: string }) {
         <Icon.Search />
       </SLabelInput>
       <SLabels>
-        {labels.map((label) => (
+        {filtered.map((label) => (
           <LabelCheckbox id={id} key={label._id} label={label} />
         ))}
       </SLabels>
