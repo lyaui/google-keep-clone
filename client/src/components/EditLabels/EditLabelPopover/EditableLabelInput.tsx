@@ -5,10 +5,12 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import type { MemoLabel } from '@/types';
-import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
-import { deleteLabel } from '@/store/labelsSlice/labels-action';
-import { usePatchLabelNameMutation } from '@/store/apis/labelApi';
+import {
+  useFetchLabelsQuery,
+  usePatchLabelNameMutation,
+  useDeleteLabelMutation,
+} from '@/store/apis/labelApi';
 import * as Icon from '@/components/UI/Icon';
 import {
   SLabel,
@@ -31,6 +33,7 @@ const LABEL_ACTIONS = {
   SWITCH: 'SWITCH',
   BLUR: 'BLUR',
   ERROR: 'ERROR',
+  RESET: 'RESET',
 } as const;
 
 type LabelAction =
@@ -50,7 +53,8 @@ type LabelAction =
       tempInputValue: string;
     }
   | { type: typeof LABEL_ACTIONS.BLUR; isEditing: boolean }
-  | { type: typeof LABEL_ACTIONS.ERROR; errorMessage: string };
+  | { type: typeof LABEL_ACTIONS.ERROR; errorMessage: string }
+  | { type: typeof LABEL_ACTIONS.RESET };
 
 const labelReducer = (state = INIT_LABEL_STATES, action: LabelAction) => {
   switch (action.type) {
@@ -79,14 +83,14 @@ const labelReducer = (state = INIT_LABEL_STATES, action: LabelAction) => {
       return { ...state, isEditing: action.isEditing, errorMessage: '' };
     case LABEL_ACTIONS.ERROR:
       return { ...state, errorMessage: action.errorMessage };
+    case LABEL_ACTIONS.RESET:
+      return INIT_LABEL_STATES;
     default:
       return state;
   }
 };
 
 const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
-  const dispatch = useAppDispatch();
-  const { labels } = useAppSelector((state) => state.labels);
   const [inputStates, inputDispatch] = useReducer(labelReducer, {
     ...INIT_LABEL_STATES,
     textValue: label?.name || '',
@@ -94,8 +98,12 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
   const { isEditing, textValue, tempInputValue, errorMessage } = inputStates;
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [updateLabel, result] = usePatchLabelNameMutation();
-  const { isLoading } = result;
+  const { data } = useFetchLabelsQuery();
+  const labels = data?.labels || [];
+
+  const [updateLabel, updateResult] = usePatchLabelNameMutation();
+  const [deleteLabel, deleteResult] = useDeleteLabelMutation();
+  const isLoading = updateResult.isLoading || deleteResult.isLoading;
 
   useEffect(() => {
     inputDispatch({
@@ -107,7 +115,10 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
 
   const deleteLabelHandler = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    dispatch(deleteLabel(label._id));
+    deleteLabel(label._id);
+    inputDispatch({
+      type: LABEL_ACTIONS.RESET,
+    });
   };
 
   const switchInputHandler = (event: MouseEvent<HTMLDivElement>) => {
@@ -168,7 +179,7 @@ const EditableLabelInput = ({ label }: { label: MemoLabel }) => {
         highlightColor="var(--color-skeleton-highlight-bg)"
       >
         <Skeleton
-          height={20}
+          height={30}
           count={1}
           width={'calc(100% - 30px)'}
           style={{ margin: '0 15px' }}

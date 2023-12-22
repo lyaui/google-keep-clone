@@ -56,9 +56,23 @@ const labelApi = createApi({
         { type: 'LABEL_ID', id: arg.labelId },
       ],
     }),
+    deleteLabel: builder.mutation<
+      { success: true; label: MemoLabel; message: string },
+      string
+    >({
+      query: (labelId) => ({
+        url: `/${labelId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'LABEL_ID', id: arg }],
+    }),
   }),
 });
 
-export const { useFetchLabelsQuery, usePatchLabelNameMutation } = labelApi;
+export const {
+  useFetchLabelsQuery,
+  usePatchLabelNameMutation,
+  useDeleteLabelMutation,
+} = labelApi;
 
 export default labelApi;
