@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/useReduxStore';
+import { useAppDispatch } from '@/hooks/useReduxStore';
+import { useFetchLabelsQuery } from '@/store/apis/labelApi';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { TOOLTIP_TEXT } from '@/constants/tooltipText';
@@ -19,16 +20,18 @@ import { SLabelIcon, SLabelEditInput } from '@/components/EditLabels/style';
 
 const EditLabelPopover = () => {
   const dispatch = useAppDispatch();
-  const { labels: allLabels } = useAppSelector((state) => state.labels);
+  const { data } = useFetchLabelsQuery();
+  const labels = data?.labels || [];
+
   const [keyword, setKeyword] = useState('');
   const [enteredLabel, setEnteredLabel] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const labels = keyword
-    ? allLabels.filter((label) =>
-        label.name.toLowerCase().includes(keyword.toLowerCase())
+  const filtered = keyword
+    ? labels.filter((_label) =>
+        _label.name.toLowerCase().includes(keyword.toLowerCase())
       )
-    : allLabels;
+    : labels;
 
   const stopPropagationHandler = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -49,8 +52,8 @@ const EditLabelPopover = () => {
       event.preventDefault();
       if (!enteredVal.trim()) return;
 
-      const isLabelExisted = !!allLabels.find(
-        (label) => label.name === enteredVal.trim()
+      const isLabelExisted = !!labels.find(
+        (_label) => _label.name === enteredVal.trim()
       );
       if (isLabelExisted) return setErrorMessage('已經有同名的標籤');
       dispatch(addLabel({ name: enteredVal.trim() }));
@@ -87,8 +90,8 @@ const EditLabelPopover = () => {
         </SLabelErrMsg>
       )}
       <SLabels isSideMenu={true}>
-        {/* edit labels */}
-        {labels.map((label) => (
+        {/* edit filtered */}
+        {filtered.map((label) => (
           <EditableLabelInput key={label._id} label={label} />
         ))}
       </SLabels>
