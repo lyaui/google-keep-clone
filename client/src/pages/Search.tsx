@@ -1,12 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import { isEmpty } from 'lodash';
-
-import { useAppSelector } from '@/hooks/useReduxStore';
 import type { Color } from '@/types';
 import {
   useFetchMemosQuery,
   useFetchMemosByLabelNameQuery,
 } from '@/store/apis/memoApi';
+import { useFetchLabelsQuery } from '@/store/apis/labelApi';
 import { useUI } from '@/contexts/UI-context';
 import { PALETTE_COLORS } from '@/constants/paletteColors';
 import * as Icon from '@/components/UI/Icon';
@@ -16,9 +15,11 @@ import MemosFilter, { type MemosFilterProps } from '@/components/MemosFilter';
 import Hint from '@/components/UI/Hint';
 
 const Search = () => {
-  const { labels } = useAppSelector((state) => state.labels);
   const { UIState } = useUI();
   const { theme } = UIState;
+
+  const { data: labelData } = useFetchLabelsQuery();
+  const labels = labelData?.labels || [];
 
   const { search } = useLocation();
   const searchQuery = new URLSearchParams(search).get('q');
@@ -34,14 +35,14 @@ const Search = () => {
     return {};
   })();
 
-  const { data, isFetching } = labelQuery
+  const { data: memoData, isFetching } = labelQuery
     ? useFetchMemosByLabelNameQuery(
         { labelName: labelQuery, params },
         { skip: isEmpty(params) }
       )
     : useFetchMemosQuery(params, { skip: isEmpty(params) });
 
-  const memos = data ? data.memos : [];
+  const memos = memoData ? memoData.memos : [];
 
   const typesFilter = [
     { name: '清單', icon: <Icon.FilterList />, value: 'tasks' },
