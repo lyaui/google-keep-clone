@@ -1,4 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import axiosBaseQuery from '@/apis';
 import type {
   ResError,
   DraftMemo,
@@ -8,32 +9,12 @@ import type {
   Params,
 } from '@/types';
 
-const providesTags = (result) => {
-  if (result?.success) {
-    return result.memos.map((_memo: Memo) => ({
-      type: 'MEMO_ID',
-      id: _memo._id,
-    }));
-  }
-  return [];
-};
+const TAG_TYPE = 'MEMO_ID' as const;
 
 const memosApi = createApi({
   reducerPath: '_memos',
-  tagTypes: ['MEMO_ID'],
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.REACT_APP_SERVER_BASE_URL}/api/memos`,
-    prepareHeaders: (headers) => {
-      const userInfoStr = localStorage.getItem('userInfo');
-      const { token } = userInfoStr ? JSON.parse(userInfoStr) : '';
-
-      if (token) {
-        headers.set('authorization', `JWT ${token}`);
-      }
-
-      return headers;
-    },
-  }),
+  tagTypes: [TAG_TYPE],
+  baseQuery: axiosBaseQuery({ baseUrl: '/memos' }),
 
   // TODO toast & error handling & condition
   endpoints: (builder) => ({
@@ -42,7 +23,15 @@ const memosApi = createApi({
         url: '/',
         params,
       }),
-      providesTags,
+      providesTags: (result) => {
+        if (result?.success) {
+          return result.memos.map((_memo: Memo) => ({
+            type: TAG_TYPE,
+            id: _memo._id,
+          }));
+        }
+        return [];
+      },
     }),
     fetchMemosByLabelName: builder.query<
       { success: true; memos: Memo[] },
@@ -52,11 +41,34 @@ const memosApi = createApi({
         url: `/label/${labelName}`,
         params,
       }),
-      providesTags,
+      providesTags: (result) => {
+        if (result?.success) {
+          return result.memos.map((_memo: Memo) => ({
+            type: TAG_TYPE,
+            id: _memo._id,
+          }));
+        }
+        return [];
+      },
+    }),
+    fetchMemoByMemoId: builder.query<{ success: true; memo: Memo }, string>({
+      query: (memoId) => ({
+        url: `/${memoId}`,
+      }),
+      providesTags: (result) => {
+        if (result?.success) {
+          return [{ type: TAG_TYPE, id: result.memo._id }];
+        }
+        return [];
+      },
     }),
   }),
 });
 
-export const { useFetchMemosQuery, useFetchMemosByLabelNameQuery } = memosApi;
+export const {
+  useFetchMemosQuery,
+  useFetchMemosByLabelNameQuery,
+  useFetchMemoByMemoIdQuery,
+} = memosApi;
 
 export default memosApi;
