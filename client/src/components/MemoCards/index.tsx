@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 
 import { Memo } from '@/types';
 import { useUI } from '@/contexts/UI-context';
@@ -17,7 +17,7 @@ function MemoCards({ memos = [], title = '' }: MemoCardsProps) {
   const masonryRef = useRef<HTMLDivElement>(null);
   const [masonryDom, setMasonryDom] = useState<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMasonryDom(masonryRef.current);
     return () => setMasonryDom(null);
   }, []);

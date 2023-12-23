@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Memo } from '@/types';
@@ -72,7 +72,7 @@ function MemoCard({ card, masonryDom }: MemoCardProps) {
     setGridRowSpan(rowSpan);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener('resize', getRowSpan);
     getRowSpan();
     return () => {
