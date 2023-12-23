@@ -18,7 +18,7 @@ export interface MemoState {
   memo: Memo | DraftMemo;
 }
 
-export const INIT_MEMO = {
+export const INIT_MEMO: DraftMemo = {
   title: '',
   content: '',
   images: [],
