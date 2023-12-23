@@ -35,6 +35,7 @@ function SearchInput() {
   const clearInputHandler = (e) => {
     e.preventDefault();
     setKeyword('');
+    navigate({});
   };
 
   return (
