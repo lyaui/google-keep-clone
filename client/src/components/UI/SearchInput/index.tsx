@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import type { MouseEvent, FocusEvent, ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { debounce } from 'lodash';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -13,6 +13,7 @@ import Button from '@/components/UI/Buttons';
 
 function SearchInput() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isTouched, setIsTouched] = useState(false);
   const [keyword, setKeyword] = useState('');
@@ -20,8 +21,10 @@ function SearchInput() {
 
   const focusInputHandler = (event: FocusEvent<HTMLInputElement>) => {
     event.preventDefault();
-    navigate(ROUTER_PATH.SEARCH);
     setIsTouched(true);
+
+    if (location.pathname === ROUTER_PATH.SEARCH) return;
+    navigate(ROUTER_PATH.SEARCH);
   };
 
   const blurInputHandler = () => setIsTouched(false);
