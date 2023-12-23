@@ -1,50 +1,30 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type {
-  ResError,
-  DraftMemo,
-  Memo,
-  MemoLink,
-  MemoImage,
-  MemoLabel,
-  Params,
-} from '@/types';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import axiosBaseQuery from '@/apis';
+import type { MemoLabel } from '@/types';
 
-const providesTags = (result) => {
-  if (result?.success) {
-    return [
-      { type: 'LABEL_ID' },
-      ...result.labels.map((_label: MemoLabel) => ({
-        type: 'LABEL_ID',
-        id: _label._id,
-      })),
-    ];
-  }
-  return [];
-};
+const TAG_TYPE = 'LABEL_ID' as const;
 
 const labelApi = createApi({
   reducerPath: '_labels',
-  tagTypes: ['LABEL_ID'],
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.REACT_APP_SERVER_BASE_URL}/api/labels`,
-    prepareHeaders: (headers) => {
-      const userInfoStr = localStorage.getItem('userInfo');
-      const { token } = userInfoStr ? JSON.parse(userInfoStr) : '';
-
-      if (token) {
-        headers.set('authorization', `JWT ${token}`);
-      }
-
-      return headers;
-    },
-  }),
-
+  tagTypes: [TAG_TYPE],
+  baseQuery: axiosBaseQuery({ baseUrl: '/labels' }),
   endpoints: (builder) => ({
     fetchLabels: builder.query<{ success: true; labels: MemoLabel[] }, void>({
       query: () => ({
         url: '/',
       }),
-      providesTags,
+      providesTags: (result) => {
+        if (result?.success) {
+          return [
+            { type: TAG_TYPE },
+            ...result.labels.map((_label: MemoLabel) => ({
+              type: TAG_TYPE,
+              id: _label._id,
+            })),
+          ];
+        }
+        return [];
+      },
     }),
     createLabel: builder.mutation<
       { success: true; label: MemoLabel; message: string },
@@ -55,7 +35,7 @@ const labelApi = createApi({
         body,
         method: 'POST',
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'LABEL_ID' }],
+      invalidatesTags: () => [{ type: TAG_TYPE }],
     }),
     patchLabelName: builder.mutation<
       { success: true; label: MemoLabel; message: string },
@@ -63,11 +43,11 @@ const labelApi = createApi({
     >({
       query: ({ labelId, body }) => ({
         url: `/${labelId}`,
-        body,
+        data: body,
         method: 'PATCH',
       }),
       invalidatesTags: (result, error, arg) => [
-        { type: 'LABEL_ID', id: arg.labelId },
+        { type: TAG_TYPE, id: arg.labelId },
       ],
     }),
     deleteLabel: builder.mutation<
@@ -78,7 +58,7 @@ const labelApi = createApi({
         url: `/${labelId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'LABEL_ID', id: arg }],
+      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPE, id: arg }],
     }),
   }),
 });
