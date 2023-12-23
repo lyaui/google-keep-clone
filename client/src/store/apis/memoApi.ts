@@ -62,6 +62,24 @@ const memosApi = createApi({
         return [];
       },
     }),
+    createMemo: builder.mutation<
+      { success: true; memo: Memo; message: string },
+      DraftMemo
+    >({
+      query: (body) => ({
+        url: `/`,
+        body,
+        method: 'POST',
+      }),
+      invalidatesTags: () => [{ type: TAG_TYPE }],
+    }),
+    deleteMemo: builder.mutation<{ success: true; message: string }, string>({
+      query: (memoId) => ({
+        url: `/${memoId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: TAG_TYPE, id: arg }],
+    }),
   }),
 });
 
@@ -69,6 +87,8 @@ export const {
   useFetchMemosQuery,
   useFetchMemosByLabelNameQuery,
   useFetchMemoByMemoIdQuery,
+  useCreateMemoMutation,
+  useDeleteMemoMutation,
 } = memosApi;
 
 export default memosApi;
