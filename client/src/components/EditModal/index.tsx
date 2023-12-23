@@ -1,8 +1,7 @@
+import { type MouseEvent } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { useFetchMemos } from '@/hooks/useFetchMemos';
-import { getUserMemoByMemoId } from '@/store/memosSlice/memos-action';
-import { ROUTER_PATH } from '@/routes';
+import { useFetchMemoByMemoIdQuery } from '@/store/apis/memoApi';
 import SkeletonEditModal from '@/skeletons/SkeletonEditModal';
 import Modal from '@/components/UI/Modal';
 import EditCard from '@/components/EditCard';
@@ -11,14 +10,13 @@ function EditModal() {
   const navigate = useNavigate();
   const { memoId } = useParams();
 
-  const { isLoading } = useFetchMemos({
-    action: getUserMemoByMemoId,
-    params: memoId,
+  const { isLoading } = useFetchMemoByMemoIdQuery(memoId || '', {
+    skip: !memoId,
   });
 
-  const closeEditModalHandler = (e) => {
-    e.preventDefault();
-    navigate(ROUTER_PATH.HOME);
+  const closeEditModalHandler = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    navigate(-1);
   };
 
   return (

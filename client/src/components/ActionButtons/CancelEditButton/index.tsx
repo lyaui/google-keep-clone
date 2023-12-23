@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { memosActions } from '@/store/memosSlice';
-import { ROUTER_PATH } from '@/routes';
 import Button from '@/components/UI/Buttons';
 
 function CancelEditButton() {
@@ -18,7 +17,7 @@ function CancelEditButton() {
     if (editQuery) {
       navigate({});
     } else {
-      navigate(ROUTER_PATH.HOME);
+      navigate(-1);
     }
     dispatch(memosActions.resetMemo());
   };
