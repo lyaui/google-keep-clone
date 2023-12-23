@@ -121,7 +121,13 @@ function MemoCard({ card, masonryDom }: MemoCardProps) {
             {/* tasks */}
             {isTaskList &&
               tasks.map((task, index) => (
-                <EditTaskItem key={task.id} task={task} index={index} id={id} />
+                <EditTaskItem
+                  key={task.id}
+                  task={task}
+                  index={index}
+                  id={id}
+                  color={memoColor}
+                />
               ))}
 
             {/* labels */}

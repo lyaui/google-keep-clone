@@ -1,6 +1,4 @@
 import { memo } from 'react';
-import type { MouseEvent } from 'react';
-import { isNil } from 'lodash';
 
 import { MemoTask } from '@/types';
 import { useUpdateMemo } from '@/hooks/useUpdateMemo';
@@ -19,16 +17,23 @@ interface EditTaskItemProps {
   task: MemoTask;
   index: number;
   id?: string;
+  color?: string;
+  isEditable?: boolean;
 }
 
-const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
+const EditTaskItem = ({
+  task,
+  index,
+  id,
+  color,
+  isEditable = false,
+}: EditTaskItemProps) => {
   const { currentMemo, dispatchUpdateMemo } = useUpdateMemo(id);
   const { UIState } = useUI();
   const memoColor = PALETTE_COLORS[currentMemo.color][UIState.theme];
 
-  const isNewMemo = isNil(id);
-
   const updateTaskHandler = (handledTask: string) => {
+    if (!isEditable) return;
     let updatedTasks = [...currentMemo.tasks];
     let tasksBeforeEditingTask = [...currentMemo.tasks].slice(0, index);
     let tasksAfterEditingTask = [...currentMemo.tasks].slice(index + 1);
@@ -72,14 +77,15 @@ const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
     }
   };
 
-  const toggleIsCompletedHandler = (event: MouseEvent<SVGAElement>) => {
-    event.stopPropagation();
+  const toggleIsCompletedHandler = () => {
+    if (!isEditable) return;
     let updatedTasks = [...currentMemo.tasks];
     updatedTasks[index] = { ...task, isCompleted: !task.isCompleted };
     dispatchUpdateMemo({ tasks: updatedTasks });
   };
 
   const deleteTaskHandler = () => {
+    if (!isEditable) return;
     const updatedTasks = currentMemo.tasks.filter(
       (item) => item.id !== task.id
     );
@@ -87,9 +93,9 @@ const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
   };
 
   return (
-    <SEditTaskItem color={memoColor}>
-      <SEditTaskItemIcon isNewMemo={isNewMemo}>
-        <Icon.Drag name="drag" />
+    <SEditTaskItem color={color || memoColor}>
+      <SEditTaskItemIcon>
+        {isEditable && <Icon.Drag name="drag" />}
         {task.isCompleted ? (
           <Icon.CheckboxOutline
             name="checkbox"
@@ -105,7 +111,7 @@ const EditTaskItem = ({ task, index, id }: EditTaskItemProps) => {
       <SEditTaskItemText isComplete={task.isCompleted}>
         <EditMemoText text={task.name} updateTextHandler={updateTaskHandler} />
       </SEditTaskItemText>
-      {!isNewMemo && (
+      {isEditable && (
         <SEditTaskItemIcon>
           <Icon.Clear name="delete" onClick={deleteTaskHandler} />
         </SEditTaskItemIcon>

@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 
-import { PALETTE_COLORS } from '@/constants/paletteColors';
-
-export const SEditTaskItem = styled.div`
+export const SEditTaskItem = styled.div<{ color: string }>`
   display: flex;
   align-items: start;
   padding: 6px 0;
   line-height: 1.5em;
-  background-color: ${(props) =>
-    `hsl(${props.color})` || `hsl(${PALETTE_COLORS.DEFAULT.LIGHT})`};
+  background-color: ${(props) => `hsl(${props.color})`};
   transition: var(--transition);
   &:hover [name='drag'] {
     opacity: 1;
@@ -18,9 +15,8 @@ export const SEditTaskItem = styled.div`
   }
 `;
 
-export const SEditTaskItemIcon = styled.div<{ isNewMemo?: boolean }>`
+export const SEditTaskItemIcon = styled.div`
   display: flex;
-  margin-left: ${(props) => (props.isNewMemo ? 0 : -10)};
   cursor: pointer;
   svg {
     width: 20px;

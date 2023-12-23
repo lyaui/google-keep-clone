@@ -36,7 +36,12 @@ const TaskList = () => {
                     top: 'auto !important',
                   }}
                 >
-                  <EditTaskItem key={index} task={task} index={index} />
+                  <EditTaskItem
+                    key={index}
+                    task={task}
+                    index={index}
+                    isEditable={true}
+                  />
                 </STaskItem>
               )}
             </Draggable>
