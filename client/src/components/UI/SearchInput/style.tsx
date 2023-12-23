@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
-export const SSearch = styled.form`
+export const SSearch = styled.form<{ isTouched: boolean }>`
   display: flex;
   height: 100%;
   width: 600px;
   margin-right: auto;
   border-radius: var(--rounded-lg);
-  background-color: var(--color);
+  background-color: var(
+    ${(props) =>
+      props.isTouched ? '--color-input-focus-bg' : '--color-input-bg'}
+  );
   overflow: hidden;
   transition: var(--transition);
-  box-shadow: var(--shadow);
+  box-shadow: ${(props) => props.isTouched && 'var(--shadow-sm)'};
 `;
 
 export const SSreachInput = styled.input`

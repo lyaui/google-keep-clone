@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import type { MouseEvent, FocusEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -14,40 +15,35 @@ function SearchInput() {
 
   const [isTouched, setIsTouched] = useState(false);
   const [keyword, setKeyword] = useState('');
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const focusInputHandler = (e) => {
-    e.preventDefault();
+  const focusInputHandler = (event: FocusEvent<HTMLInputElement>) => {
+    event.preventDefault();
     navigate(ROUTER_PATH.SEARCH);
     setIsTouched(true);
   };
 
   const blurInputHandler = () => setIsTouched(false);
 
-  const changeInputHandler = (e) => {
-    e.preventDefault();
-    const enteredValue = inputRef.current.value;
+  const changeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const enteredValue = inputRef.current?.value || '';
     setKeyword(enteredValue);
-    if (!enteredValue.trim()) return navigate({ search: null });
+    if (!enteredValue.trim()) {
+      navigate({});
+      return;
+    }
     navigate({ search: `?q=${enteredValue}` });
   };
 
-  const clearInputHandler = (e) => {
-    e.preventDefault();
+  const clearInputHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setKeyword('');
     navigate({});
   };
 
   return (
-    <SSearch
-      style={{
-        '--shadow': isTouched && 'var(--shadow-sm)',
-        '--color': isTouched
-          ? 'var(--color-input-focus-bg)'
-          : 'var(--color-input-bg)',
-      }}
-      onSubmit={(e) => e.preventDefault()}
-    >
+    <SSearch isTouched={isTouched} onSubmit={(e) => e.preventDefault()}>
       <Tippy content={TOOLTIP_TEXT.SEARCH}>
         <Button size="large">
           <Icon.Search />
