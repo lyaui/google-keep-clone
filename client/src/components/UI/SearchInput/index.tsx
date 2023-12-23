@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import type { MouseEvent, FocusEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { debounce } from 'lodash';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
@@ -29,12 +30,19 @@ function SearchInput() {
     event.preventDefault();
     const enteredValue = inputRef.current?.value || '';
     setKeyword(enteredValue);
-    if (!enteredValue.trim()) {
-      navigate({});
-      return;
-    }
-    navigate({ search: `?q=${enteredValue}` });
+    changeParamsHandler(enteredValue);
   };
+
+  const changeParamsHandler = useCallback(
+    debounce((enteredValue: string) => {
+      if (enteredValue.trim()) {
+        navigate({ search: `?q=${enteredValue}` });
+      } else {
+        navigate({});
+      }
+    }, 1000),
+    []
+  );
 
   const clearInputHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
