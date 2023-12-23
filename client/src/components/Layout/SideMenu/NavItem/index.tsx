@@ -1,7 +1,8 @@
-import { memo, type MouseEventHandler } from 'react';
-import { NavLink } from 'react-router-dom';
-import * as Icon from '@/components/UI/Icon';
+import { memo } from 'react';
+import type { MouseEvent, MouseEventHandler } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
+import * as Icon from '@/components/UI/Icon';
 import { useUI } from '@/contexts/UI-context';
 import {
   SNavItem,
@@ -17,6 +18,7 @@ export interface NavItemProps {
 }
 
 function NavItem({ toRoute, label, type = 'tag', onClick }: NavItemProps) {
+  const location = useLocation();
   const { UIState } = useUI();
 
   const icon = (() => {
@@ -26,6 +28,15 @@ function NavItem({ toRoute, label, type = 'tag', onClick }: NavItemProps) {
     return <Icon.LabelOutline />;
   })();
 
+  const preventSameRouteClickHandler = (
+    event: MouseEvent<HTMLAnchorElement>
+  ) => {
+    if (decodeURI(location.pathname) === toRoute) {
+      event.preventDefault();
+    }
+    onClick && onClick(event);
+  };
+
   return (
     <SNavItem isFixedMenu={UIState.isFixedMenu}>
       <NavLink
@@ -34,7 +45,7 @@ function NavItem({ toRoute, label, type = 'tag', onClick }: NavItemProps) {
           backgroundColor: isActive ? 'var(--color-menu-active-bg)' : '',
         })}
         end
-        onClick={onClick && onClick}
+        onClick={preventSameRouteClickHandler}
       >
         <Button size="large">{icon}</Button>
         <SNavItemText>{label}</SNavItemText>
